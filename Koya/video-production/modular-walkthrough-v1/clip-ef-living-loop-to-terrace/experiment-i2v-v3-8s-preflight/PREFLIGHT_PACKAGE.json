@@ -1,0 +1,32 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "mode": "first_frame_image_to_video",
+  "task_count": 1,
+  "output_count": 1,
+  "prompt_file": "PROMPT.txt",
+  "inputs": [
+    {
+      "path": "inputs/00-first-frame.png",
+      "role": "first_frame",
+      "provenance": "Apartment 106 V7 plan-rebuild storyboard frame 05; exact visible Living-to-Terrace opening composition",
+      "same_scene_id": "koya-106-public-zone-v7-frame-05-single-visible-scene"
+    }
+  ],
+  "parameters": {
+    "duration": 8,
+    "ratio": "inherit_first_frame_1672x941_effectively_16_9",
+    "resolution": "1080p",
+    "generate_audio": true,
+    "watermark": false,
+    "seed": null,
+    "return_last_frame": true
+  },
+  "price": {
+    "status": "unavailable",
+    "source": "live account pricing read-back on 2026-08-29 returned V2V and NV2V charge items but no I2V, FLF2V or T2V charge item",
+    "unit_price": null,
+    "unit": "unavailable"
+  },
+  "output_directory": "outputs"
+}

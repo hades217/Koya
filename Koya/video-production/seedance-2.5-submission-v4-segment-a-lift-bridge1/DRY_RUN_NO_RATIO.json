@@ -1,0 +1,66 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "生成一条5秒、16:9、720p、带原生环境声音的高端写实房地产销售影片。single uninterrupted take; zero edits。这不是独立蒙太奇，而是Koya一镜到底影片中从foyer走进同一台电梯的连续桥接镜头。\n\n@图片1是强制首帧，必须精确从这一个画面、同一摄影机位置、同一35–40mm自然视角和同一向前动量开始。画面中只有同一名运动型白人女性：深棕马尾、鼠尾草绿色长袖运动上衣、哑光黑色全长legging、白灰跑鞋、黑色运动手表；左手始终只有一只不锈钢水瓶。保持人物身份、身体比例、服装、左手水瓶、foyer材质、光线和屏幕方向不变。\n\n人物继续快速而自然地向正前方同一台电梯走去。电梯门在她接近时完全打开，必须看到门洞、金属门槛以及foyer石材地面与轿厢地面连续相接。人物先跨过金属门槛。摄影机紧跟她右后方继续向前，亲自跨过同一条金属门槛并完全进入同一轿厢；左右门框和门槛向摄影机后方移出画面，证明摄影机不再位于foyer。\n\n摄影机进入后继续向前约一步，在人物后方稳定。左右出现同一轿厢的浅木墙和黑色扶手。只有人物和摄影机都完全进入后，正前方同一扇金属门才关闭。门关闭只表示电梯即将上行，绝不能用门板遮挡偷换摄影机位置。\n\n@图片2是强制末帧，必须精确到达：摄影机和人物都完全位于同一电梯内部；人物面向已经关闭的金属门；左右浅木墙和黑色扶手包围摄影机；foyer、走廊和门槛全部不可见。保持人物左手水瓶、衣服和身份完全一致。\n\n禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、architecture morph、人物突然出现、人物换脸换衣、左右手交换、静态图片Ken Burns放大、门板遮满画面后偷换位置、摄影机留在电梯外、从foyer直接跳进轿厢。必须在连续运动中清楚看到人物和摄影机依次跨过同一金属门槛。\n\n全程保持晴朗Brisbane晚上午、5200–5600K中性日光和一致白平衡；禁止黄昏、夜景、橙青电影色、塑料CG感、字幕、Logo、水印、旁白、对白和歌词。原生声音连续：石材上的快速跑鞋脚步、紧凑foyer轻微混响、电梯到达提示音、鞋底跨过金属门槛、轿厢内声场和最后的滑轨关门声；不得用音频断点掩盖画面切换。",
+            "type": "text"
+          },
+          {
+            "reference": "first_frame:https://blocking-surname-seats-pricing.trycloudflare.com/references/01-foyer-lift-approach-start-frame-16x9.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "last_frame:https://blocking-surname-seats-pricing.trycloudflare.com/references/02-inside-lift-end-frame-16x9.png",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": 5,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "priority": 0,
+        "resolution": "720p",
+        "return_last_frame": true
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "生成一条5秒、16:9、720p、带原生环境声音的高端写实房地产销售影片。single uninterrupted take; zero edits。这不是独立蒙太奇，而是Koya一镜到底影片中从foyer走进同一台电梯的连续桥接镜头。\n\n@图片1是强制首帧，必须精确从这一个画面、同一摄影机位置、同一35–40mm自然视角和同一向前动量开始。画面中只有同一名运动型白人女性：深棕马尾、鼠尾草绿色长袖运动上衣、哑光黑色全长legging、白灰跑鞋、黑色运动手表；左手始终只有一只不锈钢水瓶。保持人物身份、身体比例、服装、左手水瓶、foyer材质、光线和屏幕方向不变。\n\n人物继续快速而自然地向正前方同一台电梯走去。电梯门在她接近时完全打开，必须看到门洞、金属门槛以及foyer石材地面与轿厢地面连续相接。人物先跨过金属门槛。摄影机紧跟她右后方继续向前，亲自跨过同一条金属门槛并完全进入同一轿厢；左右门框和门槛向摄影机后方移出画面，证明摄影机不再位于foyer。\n\n摄影机进入后继续向前约一步，在人物后方稳定。左右出现同一轿厢的浅木墙和黑色扶手。只有人物和摄影机都完全进入后，正前方同一扇金属门才关闭。门关闭只表示电梯即将上行，绝不能用门板遮挡偷换摄影机位置。\n\n@图片2是强制末帧，必须精确到达：摄影机和人物都完全位于同一电梯内部；人物面向已经关闭的金属门；左右浅木墙和黑色扶手包围摄影机；foyer、走廊和门槛全部不可见。保持人物左手水瓶、衣服和身份完全一致。\n\n禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、architecture morph、人物突然出现、人物换脸换衣、左右手交换、静态图片Ken Burns放大、门板遮满画面后偷换位置、摄影机留在电梯外、从foyer直接跳进轿厢。必须在连续运动中清楚看到人物和摄影机依次跨过同一金属门槛。\n\n全程保持晴朗Brisbane晚上午、5200–5600K中性日光和一致白平衡；禁止黄昏、夜景、橙青电影色、塑料CG感、字幕、Logo、水印、旁白、对白和歌词。原生声音连续：石材上的快速跑鞋脚步、紧凑foyer轻微混响、电梯到达提示音、鞋底跨过金属门槛、轿厢内声场和最后的滑轨关门声；不得用音频断点掩盖画面切换。"
+  }
+}

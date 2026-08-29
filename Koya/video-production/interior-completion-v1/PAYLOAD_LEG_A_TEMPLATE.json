@@ -1,0 +1,30 @@
+{
+  "model": "ep-20260812221158-hb576",
+  "content": [
+    {
+      "type": "text",
+      "text": "{GLOBAL_LOCK_UNCHANGED_THEN_LEG_A_UNCHANGED_FROM_PROMPTS_MD}"
+    },
+    {
+      "type": "image_url",
+      "role": "first_frame",
+      "image_url": {
+        "url": "{PUBLIC_HTTPS_URL_FOR_ACTUAL_21_047S_FINAL_FRAME}"
+      }
+    },
+    {
+      "type": "image_url",
+      "role": "last_frame",
+      "image_url": {
+        "url": "{PUBLIC_HTTPS_URL_FOR_K03_BEDROOM2_THRESHOLD_V3}"
+      }
+    }
+  ],
+  "duration": 10,
+  "ratio": "adaptive",
+  "resolution": "720p",
+  "generate_audio": true,
+  "return_last_frame": true,
+  "watermark": false,
+  "priority": 0
+}

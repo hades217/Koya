@@ -1,0 +1,64 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "Photorealistic cinematic property walkthrough, first-person camera, one single uninterrupted forward take with zero edits. Preserve the supplied Apartment 106 first and last frames as two viewpoints inside the same compact apartment, with identical warm off-white walls, light-oak joinery, pale stone, daylight, furniture scale and proportions.\n\nOrdered physical route and timing for exactly 5 seconds:\n\n- 0.0–0.6s: begin at the locked Living/Dining hub, facing north/northwest. Move immediately at a brisk natural walking pace; do not hold the opening frame.\n- 0.6–2.2s: travel diagonally northwest along the real Dining edge toward the hall opening on the west/left side of the single kitchen island. Curve around furniture and the island; never move through the table, island, cabinetry or wall. The apartment remains compact.\n- 2.2–3.2s: physically enter the short north-south hall west of the kitchen. Continue north. Laundry and the main Bath are two distinct adjacent rooms on camera-right/east; Bedroom 2 remains behind to the southwest and is never entered.\n- 3.2–4.2s: turn right/east through the open main-Bath doorway. The separate Laundry doorway remains immediately adjacent and briefly readable outside the Bath. The camera visibly crosses the real door threshold; no dissolve, no wipe and no architecture replacement.\n- 4.2–5.0s: stop just inside the compact main Bath on the supplied final frame. Establish the correctly scaled vanity, WC and bathing area, with a narrow truthful glimpse back toward the separate Laundry outside. Hold the last composition stable for the final 0.35 seconds.\n\nCamera: eye height 1.58m, natural full-frame 32–35mm property-film perspective, stabilized human walking with subtle organic body motion, level verticals, realistic parallax and depth. Maintain the same bright Brisbane daytime exposure and warm neutral colour grade from first to last frame. Native synchronized sound only: light footsteps on timber then tile, quiet interior room tone and subtle daytime ambience; no music and no speech.\n\nApartment 106 topology lock: exactly one kitchen island; compact Living/Dining hub southeast of the hall; short hall west of kitchen; Laundry and main Bath are separate adjacent rooms east of the hall; this is the main Bath, not the Ensuite; do not show or enter Bedroom 1, Bedroom 2, MPR, WIR, Ensuite or Terrace.\n\nHard prohibitions: no cut, no dissolve, no crossfade, no teleport, no time-lapse, no speed-ramp, no hidden architecture replacement, no wall pass-through, no door wipe, no camera-angle switch, no person, no hands, no mirror reflection of an operator, no duplicated island, no merged Bath/Laundry, no extra door, no oversized spa bathroom, no hotel corridor, no wide-angle showroom stretching, no fisheye, no game-render look, no sunset or night, no text or logo.\n\nThe camera must physically traverse the described connected route and finish only inside the supplied main-Bath final frame.",
+            "type": "text"
+          },
+          {
+            "reference": "first_frame:@Koya/video-production/modular-walkthrough-v1/clip-b-hub-to-bath/references/01-first-hub-north.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "last_frame:@Koya/video-production/modular-walkthrough-v1/clip-b-hub-to-bath/references/03-last-main-bath.png",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": 5,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "resolution": "720p"
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "Photorealistic cinematic property walkthrough, first-person camera, one single uninterrupted forward take with zero edits. Preserve the supplied Apartment 106 first and last frames as two viewpoints inside the same compact apartment, with identical warm off-white walls, light-oak joinery, pale stone, daylight, furniture scale and proportions.\n\nOrdered physical route and timing for exactly 5 seconds:\n\n- 0.0–0.6s: begin at the locked Living/Dining hub, facing north/northwest. Move immediately at a brisk natural walking pace; do not hold the opening frame.\n- 0.6–2.2s: travel diagonally northwest along the real Dining edge toward the hall opening on the west/left side of the single kitchen island. Curve around furniture and the island; never move through the table, island, cabinetry or wall. The apartment remains compact.\n- 2.2–3.2s: physically enter the short north-south hall west of the kitchen. Continue north. Laundry and the main Bath are two distinct adjacent rooms on camera-right/east; Bedroom 2 remains behind to the southwest and is never entered.\n- 3.2–4.2s: turn right/east through the open main-Bath doorway. The separate Laundry doorway remains immediately adjacent and briefly readable outside the Bath. The camera visibly crosses the real door threshold; no dissolve, no wipe and no architecture replacement.\n- 4.2–5.0s: stop just inside the compact main Bath on the supplied final frame. Establish the correctly scaled vanity, WC and bathing area, with a narrow truthful glimpse back toward the separate Laundry outside. Hold the last composition stable for the final 0.35 seconds.\n\nCamera: eye height 1.58m, natural full-frame 32–35mm property-film perspective, stabilized human walking with subtle organic body motion, level verticals, realistic parallax and depth. Maintain the same bright Brisbane daytime exposure and warm neutral colour grade from first to last frame. Native synchronized sound only: light footsteps on timber then tile, quiet interior room tone and subtle daytime ambience; no music and no speech.\n\nApartment 106 topology lock: exactly one kitchen island; compact Living/Dining hub southeast of the hall; short hall west of kitchen; Laundry and main Bath are separate adjacent rooms east of the hall; this is the main Bath, not the Ensuite; do not show or enter Bedroom 1, Bedroom 2, MPR, WIR, Ensuite or Terrace.\n\nHard prohibitions: no cut, no dissolve, no crossfade, no teleport, no time-lapse, no speed-ramp, no hidden architecture replacement, no wall pass-through, no door wipe, no camera-angle switch, no person, no hands, no mirror reflection of an operator, no duplicated island, no merged Bath/Laundry, no extra door, no oversized spa bathroom, no hotel corridor, no wide-angle showroom stretching, no fisheye, no game-render look, no sunset or night, no text or logo.\n\nThe camera must physically traverse the described connected route and finish only inside the supplied main-Bath final frame."
+  }
+}

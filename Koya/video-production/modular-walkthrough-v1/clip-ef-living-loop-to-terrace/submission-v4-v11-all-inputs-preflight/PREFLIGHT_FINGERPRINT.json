@@ -1,0 +1,40 @@
+{
+  "schema_version": "seedance-preflight-fingerprint.v1",
+  "reviewed_at": "2026-08-29T21:28:09+10:00",
+  "package_fingerprint_sha256": "e50b3093d6be85c1645c8459bc300292bf37ed10c51141892279bed318b305c1",
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "mode": "multimodal_to_video",
+  "task_count": 1,
+  "output_count": 1,
+  "prompt_sha256": "5e9a8150f00d52df139475857112a9631f4148f3ba24abbc7976d8e87b722377",
+  "manifest_sha256": "dba8371abae6092ce9544fb341315c2d48d3d025e3dd1208ef7a78ef344b5f96",
+  "dry_run_sha256": "13b774a73155826f9be0d2363b9574a697c4e7b213b040dfbf87c3508f728395",
+  "inputs": [
+    {"path":"inputs/00-reference-video.mp4","role":"reference_video","sha256":"0693dcc7cf4040465b6ab5ea4fce68d73af713f9f6f42b46b14a353fb9b2a4d1"},
+    {"path":"inputs/00-master-public-zone-lock.png","role":"reference_image","sha256":"7c7e32ea154100a1dc8ba891b6bbe15b3a3d98b6175409e70f636bbfa09f4215"},
+    {"path":"inputs/01-mpr-dining-opening.png","role":"reference_image","sha256":"bbcc062237718b052ae746d6a828a08f5f9bf688cbe1939c28dbd018f343e31e"},
+    {"path":"inputs/02-dining-single-island-kitchen.png","role":"reference_image","sha256":"8e23b68b9c782a827581bb1b4647854d4f7d9b03e520bcf2fb5db5723c72c7e4"},
+    {"path":"inputs/03-tv-wall-living-width.png","role":"reference_image","sha256":"d7cac55298cb7464b2a3d2aa975523466af99d70526efa0357255995df57b1b3"},
+    {"path":"inputs/04-wrap-glazing-sliding-bay.png","role":"reference_image","sha256":"818e85e32ccd7a00546ae0de2a2d763a5e63fafd55a432e41ffca81cf740df5d"},
+    {"path":"inputs/05-align-east-sliding-bay.png","role":"reference_image","sha256":"ece6e45c5045f8906abe5bc3881512e258e3f8d27e4c305e4cac6a11904eac55"},
+    {"path":"inputs/06-threshold-approach.png","role":"reference_image","sha256":"5153f7526be5ed71bf2bbedc3c823c996b89be2273895b23a0cb2dbf57d7a681"},
+    {"path":"inputs/07-cross-east-threshold.png","role":"reference_image","sha256":"f2057bff4f0268357b15794b0f02db08ee24df2e9f311ba86478646a08797e77"},
+    {"path":"inputs/08-terrace-arrival.png","role":"reference_image","sha256":"99411967ada9add57a81d8df13dd11ee138f1fc60e301fb5d51944e5f4b7f55c"},
+    {"path":"inputs/09-terrace-lookback-endpoint.png","role":"reference_image","sha256":"5ff979687d6379a467bcd2db36eda657a27b41f43ce74f8446b0b160c96ab202"}
+  ],
+  "parameters": {
+    "omni_reference_task_type": "reference",
+    "duration": 8,
+    "ratio": "16:9",
+    "resolution": "1080p",
+    "generate_audio": true,
+    "return_last_frame": true,
+    "watermark": false,
+    "output_format": "mp4"
+  },
+  "price": {
+    "unit_price_cny_per_1000_v2v1080_completion_tokens": 0.03312,
+    "exact_total": "unavailable"
+  }
+}

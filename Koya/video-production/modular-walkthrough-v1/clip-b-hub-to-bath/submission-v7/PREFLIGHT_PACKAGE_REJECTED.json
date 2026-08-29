@@ -1,0 +1,47 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "mode": "video_editing",
+  "task_count": 1,
+  "output_count": 1,
+  "prompt_file": "PROMPT.md",
+  "inputs": [
+    {
+      "path": "inputs/00-reference-motion.mp4",
+      "role": "reference_video",
+      "provenance": "simplified WebGL shell",
+      "same_scene_id": "clip-b-v7-whitebox"
+    },
+    {
+      "path": "inputs/01-style-kitchen-start.jpg",
+      "role": "reference_image",
+      "provenance": "independently generated whole-room image",
+      "same_scene_id": "unavailable"
+    },
+    {
+      "path": "inputs/02-style-threshold.jpg",
+      "role": "reference_image",
+      "provenance": "independently generated whole-room image",
+      "same_scene_id": "unavailable"
+    },
+    {
+      "path": "inputs/03-style-main-bath.jpg",
+      "role": "reference_image",
+      "provenance": "independently generated whole-room image",
+      "same_scene_id": "unavailable"
+    }
+  ],
+  "parameters": {
+    "duration": -1,
+    "ratio": "adaptive",
+    "resolution": "1080p",
+    "generate_audio": true
+  },
+  "price": {
+    "status": "available",
+    "source": "2026-08-26 account pricing read-back",
+    "unit_price": 0.03312,
+    "unit": "CNY per thousand V2V1080 completion tokens"
+  },
+  "output_directory": "outputs"
+}

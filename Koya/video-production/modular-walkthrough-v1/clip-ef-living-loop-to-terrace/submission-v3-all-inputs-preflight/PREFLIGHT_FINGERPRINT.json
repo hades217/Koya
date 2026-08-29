@@ -1,0 +1,355 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 4093739,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "8.000000",
+            "format_name": "mov,mp4,m4a,3gp,3g2,mj2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "codec_type": "video",
+              "height": 1080,
+              "r_frame_rate": "30/1",
+              "width": 1920
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-reference-video.mp4",
+      "provenance": "V10 continuous first-person camera motion reference; user rejects its final 3D appearance",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/00-reference-video.mp4",
+      "role": "reference_video",
+      "same_scene_id": "unavailable",
+      "sha256": "0ffc88e8ae20fe5ea7782f00faf4415aca20132ef80bbaf21cc0367fc5b6f868"
+    },
+    {
+      "bytes": 2164345,
+      "index": 1,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-master-public-zone-lock.png",
+      "provenance": "approved rendered public-zone master visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/00-master-public-zone-lock.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "7c7e32ea154100a1dc8ba891b6bbe15b3a3d98b6175409e70f636bbfa09f4215"
+    },
+    {
+      "bytes": 1859116,
+      "index": 2,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/01-mpr-dining-opening.png",
+      "provenance": "approved rendered MPR and Dining visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/01-mpr-dining-opening.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "bbcc062237718b052ae746d6a828a08f5f9bf688cbe1939c28dbd018f343e31e"
+    },
+    {
+      "bytes": 1797057,
+      "index": 3,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/02-dining-single-island-kitchen.png",
+      "provenance": "approved rendered Dining and Kitchen visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/02-dining-single-island-kitchen.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "8e23b68b9c782a827581bb1b4647854d4f7d9b03e520bcf2fb5db5723c72c7e4"
+    },
+    {
+      "bytes": 2160526,
+      "index": 4,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/03-tv-wall-living-width.png",
+      "provenance": "approved rendered TV wall and Living-width visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/03-tv-wall-living-width.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "d7cac55298cb7464b2a3d2aa975523466af99d70526efa0357255995df57b1b3"
+    },
+    {
+      "bytes": 2340770,
+      "index": 5,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/04-wrap-glazing-sliding-bay.png",
+      "provenance": "approved rendered sofa and two-face glazing visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/04-wrap-glazing-sliding-bay.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "818e85e32ccd7a00546ae0de2a2d763a5e63fafd55a432e41ffca81cf740df5d"
+    },
+    {
+      "bytes": 2065853,
+      "index": 6,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/05-align-east-sliding-bay.png",
+      "provenance": "approved rendered east-door alignment visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/05-align-east-sliding-bay.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "ece6e45c5045f8906abe5bc3881512e258e3f8d27e4c305e4cac6a11904eac55"
+    },
+    {
+      "bytes": 1926191,
+      "index": 7,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/06-threshold-approach.png",
+      "provenance": "approved rendered threshold-approach visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/06-threshold-approach.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "5153f7526be5ed71bf2bbedc3c823c996b89be2273895b23a0cb2dbf57d7a681"
+    },
+    {
+      "bytes": 2047942,
+      "index": 8,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/07-cross-east-threshold.png",
+      "provenance": "approved rendered threshold-crossing visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/07-cross-east-threshold.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "f2057bff4f0268357b15794b0f02db08ee24df2e9f311ba86478646a08797e77"
+    },
+    {
+      "bytes": 2189923,
+      "index": 9,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/08-terrace-arrival.png",
+      "provenance": "approved rendered terrace-arrival visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/08-terrace-arrival.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "99411967ada9add57a81d8df13dd11ee138f1fc60e301fb5d51944e5f4b7f55c"
+    },
+    {
+      "bytes": 2072972,
+      "index": 10,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/09-terrace-lookback-endpoint.png",
+      "provenance": "approved rendered terrace-lookback endpoint visual",
+      "provider_url": "https://vegetarian-lectures-ports-aim.trycloudflare.com/09-terrace-lookback-endpoint.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "5ff979687d6379a467bcd2db36eda657a27b41f43ce74f8446b0b160c96ab202"
+    }
+  ],
+  "mode": "multimodal_to_video",
+  "output_count": 1,
+  "output_directory": "outputs/clip-ef-all-inputs-v1",
+  "package_sha256": "092b613d6b8c48a6f5a3160d58bfe0ba545de679837bb01fa13ec3861452078d",
+  "parameters": {
+    "duration": 8,
+    "generate_audio": true,
+    "omni_reference_task_type": "reference",
+    "output_format": "mp4",
+    "ratio": "16:9",
+    "resolution": "1080p",
+    "return_last_frame": true,
+    "watermark": false
+  },
+  "price": {
+    "exact_total": "unavailable before provider returns completion token usage",
+    "original_unit_price": 0.046,
+    "source": "live account pricing read-back 2026-08-29",
+    "status": "unit_price_available_total_unavailable",
+    "unit": "CNY per 1000 V2V1080 completion tokens",
+    "unit_price": 0.03312
+  },
+  "prompt": {
+    "bytes": 4437,
+    "path": "PROMPT_ZH.txt",
+    "sha256": "235b10d503bcd96060e6d4357e7a4fa866f24e330663dad80b230aec53e7ad00"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

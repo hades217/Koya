@@ -1,0 +1,6 @@
+{
+  "duration": 5,
+  "assertions": [
+    { "kind": "staysInFrame", "selector": "#world-canvas" }
+  ]
+}

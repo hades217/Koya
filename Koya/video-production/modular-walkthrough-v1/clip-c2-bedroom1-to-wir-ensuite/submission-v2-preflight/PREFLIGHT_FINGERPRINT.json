@@ -1,0 +1,65 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 2144135,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "5.000000",
+            "format_name": "mov,mp4,m4a,3gp,3g2,mj2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "codec_type": "video",
+              "height": 1080,
+              "r_frame_rate": "30/1",
+              "width": 1920
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-reference-motion-v4.mp4",
+      "provenance": "continuous 5.000-second V4 render from the Apartment 106 Bedroom 1-WIR-Ensuite fixed WebGL shell and forward camera path; all 150 frames inspected",
+      "provider_url": "https://package-particle-red-pressure.trycloudflare.com/00-reference-motion-v4.mp4",
+      "role": "reference_video",
+      "same_scene_id": "koya-106-master-suite-fixed-shell-v4",
+      "sha256": "63c058d7b90d1511dc2835bce7e903033a0eeada84f3e945b94c8c77c8ef6522"
+    }
+  ],
+  "mode": "video_editing",
+  "output_count": 1,
+  "output_directory": "outputs",
+  "package_sha256": "bbd377b8bcb7d3048953d577e7e8b5e20807cd36f1c1cc7a9a09d130e6da48bc",
+  "parameters": {
+    "duration": -1,
+    "generate_audio": true,
+    "ratio": "adaptive",
+    "resolution": "1080p",
+    "seed": "unavailable",
+    "watermark": false
+  },
+  "price": {
+    "estimated_completion_tokens": 471825,
+    "estimated_total_cny": 15.626844,
+    "exact_total_before_generation": "unavailable",
+    "failure_billing_status": "unavailable",
+    "source": "live account pricing read-back on 2026-08-27 plus the prior same-endpoint five-second 1080p generated-audio V2V task",
+    "status": "available_unit_price_estimated_total",
+    "unit": "CNY per thousand V2V1080 completion tokens",
+    "unit_price": 0.03312
+  },
+  "prompt": {
+    "bytes": 4355,
+    "path": "PROMPT.txt",
+    "sha256": "da62718626dade09bd1c634f06baa45db3dcc20820da996b8a2cd51f4e9c7907"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

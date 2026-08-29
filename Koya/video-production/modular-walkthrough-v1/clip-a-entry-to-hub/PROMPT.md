@@ -1,0 +1,20 @@
+# Clip A — Entry to Living Hub
+
+## Exact Seedance prompt
+
+Photorealistic cinematic property walkthrough, first-person camera, one single uninterrupted forward take with zero edits. Preserve the supplied Apartment 106 reference images as the same physical apartment, with identical warm off-white walls, light-oak joinery, stone surfaces, daylight, furniture and proportions.
+
+Ordered action and timing for exactly 10 seconds:
+
+- 0.0–1.5s: begin just inside the north apartment entry door, camera facing south. Move forward immediately through the short compact hall. The west wall on camera-right stays solid and blank; storage, Laundry and main Bath remain as separate doors only on camera-left/east.
+- 1.5–3.2s: continue briskly to the real end of the short hall. Do not open or enter Laundry or Bath. The public room is not visible straight ahead.
+- 3.2–4.5s: make one smooth physical 90-degree left turn around the solid corner into the kitchen circulation. Reveal the single linear kitchen along the north wall and exactly one stone island on camera-right/south.
+- 4.5–7.2s: move east at a brisk natural walking speed through the real clear passage between the linear kitchen on camera-left and the single island on camera-right. No collision, no object morphing and no second island.
+- 7.2–8.5s: visibly clear the east end of the island, then make one smooth right turn south into Dining/Living. The island stays behind on camera-right; Dining appears first and Living appears beyond/east.
+- 8.5–10.0s: arrive at the locked Living/Dining hub position and settle facing east/southeast on the supplied final frame: truthful compact Living, Dining edge and terrace glazing. End stable for the final half-second.
+
+Camera: eye height 1.58m, natural full-frame 32–35mm perspective, stabilized human walking with subtle organic body motion, brisk pace, level verticals, realistic parallax and depth. Daytime remains constant from first to last frame. Native synchronized sound only: soft footsteps on timber, quiet interior room tone and subtle Brisbane daytime ambience; no music, no speech.
+
+Hard prohibitions: no cut, no dissolve, no crossfade, no teleport, no time-lapse, no hidden architecture replacement, no wall pass-through, no door wipe, no camera-angle switch, no person, no hands, no reflection of operator, no grand foyer, no long hotel corridor, no doors on the solid west wall, no direct view from entry to terrace, no duplicated island, no moving cabinets, no bathroom shortcut, no entering Bedroom 1, Bedroom 2, MPR, Laundry or Bath, no sunset or night, no high-rise panorama, no game-render look, no fisheye or ultra-wide distortion, no text or logo.
+
+The camera must physically traverse every metre of the described route and stop only at the supplied final Living hub frame.

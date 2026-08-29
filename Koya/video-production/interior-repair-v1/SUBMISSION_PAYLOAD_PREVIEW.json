@@ -1,0 +1,39 @@
+{
+  "model": "ep-20260812221158-hb576",
+  "content": [
+    {
+      "type": "text",
+      "text": "生成一条10秒、16:9、720p、带连续原生环境声音的高端写实房地产销售影片。single uninterrupted physical camera take; zero edits。它无缝接在Koya现有21.047秒影片之后，只修复Apartment 106室内入口到Bedroom 2门口这一段。\n\n@图片1是强制首帧和最高连续性权威。第一帧必须保持同一摄影机高度、35–40mm自然视角、人物比例、前进动量、白天曝光、暖中性色材料和空间方向。同一位运动型白人女性已经在画面内向前走，绝不能突然生成第二个人或重新入场。她保持深棕马尾、鼠尾草绿色修身长袖运动上衣、哑光黑色全长legging、白灰运动鞋和黑色运动手表。不锈钢水瓶从头到尾只在她的解剖学左手；解剖学右手只负责邀请手势和开门。\n\n开始后，她自然放慢半步，只做一次轻微回头和克制、真实、温暖的邀请表情，右手做一个很小的“请进”手势；不要原地转身、不要摆拍、不要身体重影、不要脸部复制。随后她顺势继续向前，摄影机以约1.6米人眼高度稳定跟随，保持真实脚步起伏、家具遮挡变化和近远景视差，不能像游戏引擎匀速滑行。\n\n@图片2控制短入口转折及两个不同功能开口。摄影机通过真实转弯逐渐到达该关系，图片本身绝不能成为切换画面。必须清楚读出：一个开口是紧凑laundry，能看到洗衣机和柜体；旁边另一个开口才是main bathroom，能看到淋浴区和浴室台盆。不得把它们做成两个浴室，不进入任何一个湿区，不增加第三扇门、第二个走廊或酒店式空间。\n\n她不停留，沿Apartment 106户型中很短的真实连接继续前进。@图片3控制从湿区门口到Bedroom 2门口的相邻关系和末段构图。绝不能生成狭长走廊。她用右手伸向Bedroom 2门把手，但本段不要进入卧室。最后一秒仍保持轻微向前动量，摄影机位于卧室门外，人物、门、前一段短连接方向都清楚可读，给下一段留下可连续的真实末帧。\n\n全程必须是一台摄影机在一个连续三维空间中的物理移动。禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、wall wipe、body wipe、door wipe、architecture morph、穿墙、穿门、穿过家具、静态图片Ken Burns放大、长走廊、两个浴室、重复人物、突然出现人物、换脸、换衣、左右手交换、水瓶消失、游戏CG质感、过度广角、过度景深、橙青调色、黄昏、夜景、字幕、Logo、水印、旁白、对白和歌词。\n\n色彩固定为Brisbane晴朗晚上午的5200–5600K中性日光，柔和高光、真实皮肤与材料，不要塑料感。声音连续：木地板运动鞋脚步、轻微衣料声、短入口空间的自然混响、远处很轻的城市底噪、右手碰门把手的细小金属声；不得用声音断点掩盖画面跳转。\n"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "{PUBLIC_BASE}/preserved-apartment-entry-final-frame.png"
+      },
+      "role": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "{PUBLIC_BASE}/01-turn-to-separate-laundry-bath-corrected-v2.png"
+      },
+      "role": "reference_image"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "{PUBLIC_BASE}/02-wet-area-to-bedroom2-corrected-v1.png"
+      },
+      "role": "reference_image"
+    }
+  ],
+  "duration": 10,
+  "ratio": "16:9",
+  "resolution": "720p",
+  "generate_audio": true,
+  "return_last_frame": true,
+  "watermark": false,
+  "output_format": "mp4",
+  "priority": 0,
+  "omni_reference_task_type": "reference"
+}

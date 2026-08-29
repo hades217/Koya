@@ -1,0 +1,17 @@
+{
+  "id": "cgt-20260817211010-bstpl",
+  "model": "doubao-seedance-2-5-260628",
+  "status": {
+    "phase": "succeeded"
+  },
+  "output_url": "https://ark-acg-cn-beijing.tos-cn-beijing.volces.com/doubao-seedance-2-5/2129380310/Video/lptsb-01011271806202-tgc_656f58786e41caffff00000000000000000000882212279687120/cgt-20260817211010-bstpl.mp4?X-Tos-Algorithm=TOS4-HMAC-SHA256&X-Tos-Credential=AKLTYWJkZTExNjA1ZDUyNDc3YzhjNTM5OGIyNjBhNDcyOTQ%2F20260817%2Fcn-beijing%2Ftos%2Frequest&X-Tos-Date=20260817T131425Z&X-Tos-Expires=86400&X-Tos-Max-Requests=100&X-Tos-Signature=2463e68b5806a5211e3174f31c49eb1a73cd16ff153cf4f1a9c75259d0a13afb&X-Tos-SignedHeaders=host",
+  "local_path": "/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v4-segment-a-retry1/outputs/cgt-20260817211010-bstpl.mp4",
+  "ratio": "9:16",
+  "resolution": "720p",
+  "duration": 30,
+  "generate_audio": true,
+  "usage": {
+    "completion_tokens": 648900,
+    "total_tokens": 648900
+  }
+}

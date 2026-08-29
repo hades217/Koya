@@ -1,0 +1,22 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "model": "ep-20260812221158-hb576",
+  "modality": "video",
+  "input": "first_frame:@inputs/00-first-frame.png",
+  "duration": 5,
+  "ratio": "16:9",
+  "resolution": "1080p",
+  "generate_audio": true,
+  "watermark": false,
+  "return_last_frame": true,
+  "save_to": "outputs",
+  "fidelity": "partial",
+  "unresolved": [
+    "execution parses the explicit input role and materializes the local image",
+    "execution resolves the authenticated data-plane route"
+  ],
+  "generation_task_created": false
+}

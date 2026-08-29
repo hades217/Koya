@@ -1,0 +1,22 @@
+# Clip C2 V2 Seedance task record
+
+- Package fingerprint: `bbd377b8bcb7d3048953d577e7e8b5e20807cd36f1c1cc7a9a09d130e6da48bc`
+- User approval: `确认提交主卧 C2 V2，单任务单输出，参考估算 CNY 15.626844，实际按完成 tokens 结算`
+- Submitted at: 2026-08-27 (Australia/Brisbane)
+- Task ID: `cgt-20260827112126-cvjvw`
+- Initial status: `queued`
+- Task count: 1
+- Output count: 1
+- Endpoint: `ep-20260812221158-hb576`
+- Resolved model: `doubao-seedance-2-5-260628`
+- Mode: `video_editing`
+- Input: one explicit `reference_video`, delivered through the verified byte-identical HTTPS URL in `PREFLIGHT_PACKAGE.json`
+- Requested parameters: inherited five-second duration; adaptive ratio; 1080p; generated audio; no watermark
+- Retry authorisation: none
+- Terminal status: `succeeded`
+- Completion tokens: `488025`
+- Actual calculated cost: `CNY 16.163388` (`488025 / 1000 × CNY 0.03312`)
+- Output: `outputs/cgt-20260827112126-cvjvw.mp4`
+- Output SHA-256: `0e93618d4cf07991df22b69a7d846e5b7465bd3e51fda8cae271c2845e8dca88`
+- Output technical state: 1920×1080, 16:9, 24 fps, 121 frames, 5.056 seconds, HEVC Main 10, AAC stereo
+- Review state: `PASS`; inspected all 121 decoded frames plus dense contact sheets and reverse playback. Not stitched into the master yet.

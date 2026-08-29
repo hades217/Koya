@@ -1,0 +1,9 @@
+{
+  "id": "cgt-20260826212744-nn77h",
+  "model": "doubao-seedance-2-5-260628",
+  "status": {
+    "phase": "running"
+  },
+  "generate_audio": true,
+  "usage": {}
+}

@@ -1,0 +1,16 @@
+veadk-python[extensions]==1.0.10
+google-adk==2.2.0
+agentkit-sdk-python==0.8.1
+urllib3<2.0.0
+volcengine-python-sdk>=4.0.33
+litellm==1.83.14
+fastapi
+uvicorn[standard]
+fastmcp
+json-repair
+openai==2.24.0
+aiohttp>=3.11.0
+playwright==1.55.0
+lxml[html_clean]
+bs4
+requests>=2.31,<3

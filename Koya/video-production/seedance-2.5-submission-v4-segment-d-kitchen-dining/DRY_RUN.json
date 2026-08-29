@@ -1,0 +1,30 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "network_effect": "blocked",
+  "paid_task_created": false,
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "request": {
+    "duration": 5,
+    "resolution": "720p",
+    "generate_audio": true,
+    "return_last_frame": true,
+    "priority": 0,
+    "ratio": null,
+    "ratio_note": "Inherited as 16:9 from the 1280x720 first frame.",
+    "first_frame": "references/01-inside-entry-hall-start-16x9.png",
+    "last_frame": "references/02-open-plan-kitchen-dining-end-16x9.png",
+    "prompt_source": "APPROVAL_GATE.md#exact-prompt"
+  },
+  "provider_payload_validation": {
+    "method": "POST",
+    "endpoint": "/contents/generations/tasks",
+    "content_roles": ["text", "first_frame", "last_frame"],
+    "unsupported_combination_detected": false
+  },
+  "cost_gate": {
+    "estimated_cny": 4.5738
+  },
+  "authorization": "Awaiting explicit user approval before paid Segment D submission."
+}

@@ -1,0 +1,41 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "mode": "multimodal_to_video",
+  "task_count": 1,
+  "output_count": 1,
+  "prompt_file": "PROMPT_ZH.txt",
+  "inputs": [
+    {"path":"inputs/00-reference-video.mp4","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/00-reference-video.mp4","role":"reference_video","provenance":"V11 fixed-scene continuous first-person route rebuilt against the accepted V7 storyboard"},
+    {"path":"inputs/00-master-public-zone-lock.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/00-master-public-zone-lock.png","role":"reference_image","provenance":"approved rendered public-zone master visual"},
+    {"path":"inputs/01-mpr-dining-opening.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/01-mpr-dining-opening.png","role":"reference_image","provenance":"approved rendered MPR and Dining visual"},
+    {"path":"inputs/02-dining-single-island-kitchen.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/02-dining-single-island-kitchen.png","role":"reference_image","provenance":"approved rendered Dining and Kitchen visual"},
+    {"path":"inputs/03-tv-wall-living-width.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/03-tv-wall-living-width.png","role":"reference_image","provenance":"approved rendered TV wall and Living-width visual"},
+    {"path":"inputs/04-wrap-glazing-sliding-bay.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/04-wrap-glazing-sliding-bay.png","role":"reference_image","provenance":"approved rendered sofa and two-face glazing visual"},
+    {"path":"inputs/05-align-east-sliding-bay.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/05-align-east-sliding-bay.png","role":"reference_image","provenance":"approved rendered east-door alignment visual"},
+    {"path":"inputs/06-threshold-approach.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/06-threshold-approach.png","role":"reference_image","provenance":"approved rendered threshold-approach visual"},
+    {"path":"inputs/07-cross-east-threshold.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/07-cross-east-threshold.png","role":"reference_image","provenance":"approved rendered threshold-crossing visual"},
+    {"path":"inputs/08-terrace-arrival.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/08-terrace-arrival.png","role":"reference_image","provenance":"approved rendered terrace-arrival visual"},
+    {"path":"inputs/09-terrace-lookback-endpoint.png","provider_url":"https://fibre-affect-lafayette-lease.trycloudflare.com/09-terrace-lookback-endpoint.png","role":"reference_image","provenance":"approved rendered terrace-lookback endpoint visual"}
+  ],
+  "parameters": {
+    "omni_reference_task_type": "reference",
+    "duration": 8,
+    "ratio": "16:9",
+    "resolution": "1080p",
+    "generate_audio": true,
+    "return_last_frame": true,
+    "watermark": false,
+    "output_format": "mp4"
+  },
+  "price": {
+    "status": "unit_price_available_total_unavailable",
+    "source": "live account pricing read-back 2026-08-29",
+    "unit_price": 0.03312,
+    "original_unit_price": 0.046,
+    "discount_end": "2026-09-17T14:00:00+08:00",
+    "unit": "CNY per 1000 V2V1080 completion tokens",
+    "exact_total": "unavailable before provider returns completion token usage"
+  },
+  "output_directory": "outputs/clip-ef-v11-all-inputs-v1"
+}

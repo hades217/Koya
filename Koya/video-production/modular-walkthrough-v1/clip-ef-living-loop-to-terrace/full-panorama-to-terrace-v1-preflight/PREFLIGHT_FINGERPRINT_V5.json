@@ -1,0 +1,63 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 7274432,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "8.000000",
+            "format_name": "mov,mp4,m4a,3gp,3g2,mj2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "codec_type": "video",
+              "height": 1080,
+              "r_frame_rate": "30/1",
+              "width": 1920
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../reference-video-v1-hyperframes/renders/koya-106-full-route-fixedscene-v5-8s.mp4",
+      "provenance": "rendered from the plan-locked Apartment 106 fixed public-zone shell and audited at 4 fps plus 12 fps around the east sliding-door threshold",
+      "provider_url": "https://downloading-surface-march-just.trycloudflare.com/koya-106-full-route-fixedscene-v5-8s.mp4",
+      "role": "reference_video",
+      "same_scene_id": "koya-apartment-106-public-zone-fixedscene-v5",
+      "sha256": "45a65bef376fabefed57ec64e37e677a6b3f99c1e81a8631b00502120eabfdae"
+    }
+  ],
+  "mode": "video_editing",
+  "output_count": 1,
+  "output_directory": "outputs/clip-ef-i2v-v5",
+  "package_sha256": "e315aeb3441ea9d7090f88504a7faeb1b27ca7877901f5a7698a74f9868b8dce",
+  "parameters": {
+    "duration": 8,
+    "generate_audio": true,
+    "ratio": "inherit_reference_16:9",
+    "resolution": "1080p",
+    "return_last_frame": true,
+    "watermark": false
+  },
+  "price": {
+    "account_overdue": true,
+    "charge_item": "V2V1080Completion",
+    "source": "live provider account pricing read-back 2026-08-29",
+    "status": "available",
+    "unit": "CNY per 1000 completion tokens",
+    "unit_price": 0.03312
+  },
+  "prompt": {
+    "bytes": 4612,
+    "path": "PROMPT_ZH_DRAFT.txt",
+    "sha256": "13fe012aa87e5dc9930aec7628c4a3c60118adaa1971f70bef23f626600c9c32"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

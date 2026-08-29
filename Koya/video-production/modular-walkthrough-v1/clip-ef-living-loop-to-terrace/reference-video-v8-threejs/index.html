@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="node_modules/gsap/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #d8d1c6; }
+      #root, #scene { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #world { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; }
+      #lens { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 46%, transparent 72%, rgba(48,34,24,.10) 100%); }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-gxr6" id="root" data-composition-id="main" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-0kyv" id="scene" class="clip" data-start="0" data-duration="8" data-track-index="1">
+        <canvas data-hf-id="hf-p99z" id="world" width="1920" height="1080" aria-label="Apartment 106 V8 fixed three-dimensional public-zone reference"></canvas>
+        <div data-hf-id="hf-un31" id="lens"></div>
+      </div>
+    </div>
+    <script>window.__timelines = window.__timelines || {};</script>
+    <script type="module">
+      import * as THREE from "./node_modules/three/build/three.module.js";
+
+      const canvas = document.getElementById("world");
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+      renderer.setSize(1920, 1080, false);
+      renderer.setPixelRatio(1);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.06;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xcfdce0);
+      scene.fog = new THREE.Fog(0xcfdce0, 16, 36);
+
+      // A calmer rectilinear lens. The earlier 55-degree vertical FOV exaggerated the near
+      // sofa and compressed the far public room, making the Living read much smaller.
+      const camera = new THREE.PerspectiveCamera(64, 1920 / 1080, 0.06, 50);
+      camera.up.set(0, 1, 0);
+
+      const hemi = new THREE.HemisphereLight(0xe7f0f4, 0x8e765d, 2.15);
+      scene.add(hemi);
+      scene.add(new THREE.AmbientLight(0xfffbf2, 1.25));
+      const sun = new THREE.DirectionalLight(0xfff3dd, 3.2);
+      sun.position.set(-6, 10, 4);
+      sun.castShadow = true;
+      sun.shadow.mapSize.set(2048, 2048);
+      sun.shadow.camera.left = -14;
+      sun.shadow.camera.right = 14;
+      sun.shadow.camera.top = 12;
+      sun.shadow.camera.bottom = -12;
+      scene.add(sun);
+
+      let noiseSeed=0x106ef5;
+      const seededRandom=()=>{ noiseSeed|=0; noiseSeed=noiseSeed+0x6D2B79F5|0; let t=Math.imul(noiseSeed^noiseSeed>>>15,1|noiseSeed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; };
+      const makeNoiseTexture = (base, fleck, size=256, count=4200) => {
+        const c=document.createElement("canvas"); c.width=c.height=size;
+        const g=c.getContext("2d"); g.fillStyle=base; g.fillRect(0,0,size,size);
+        g.fillStyle=fleck;
+        for(let i=0;i<count;i++) {
+          const a=.018+seededRandom()*.055; g.globalAlpha=a;
+          const r=.3+seededRandom()*1.5; g.fillRect(seededRandom()*size,seededRandom()*size,r,r);
+        }
+        g.globalAlpha=1;
+        const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace;
+        t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(3,3); return t;
+      };
+      const material = (color, roughness=.74, metalness=0, map=null) => new THREE.MeshStandardMaterial({ color, roughness, metalness, map });
+      const wallTex=makeNoiseTexture("#eee8df","#b9afa2",256,5200);
+      const oakTex=makeNoiseTexture("#ba916b","#6f4a31",256,2600); oakTex.repeat.set(5,1);
+      const stoneTex=makeNoiseTexture("#d8d1c7","#8f877d",256,6200); stoneTex.repeat.set(2,2);
+      const glass = new THREE.MeshPhysicalMaterial({ color:0xaecbd0, roughness:.08, transmission:.72, transparent:true, opacity:.34, metalness:0, side:THREE.DoubleSide, clearcoat:.35 });
+      const wall = material(0xf0ebe3, .90, 0, wallTex);
+      const warmWall = material(0xe9e2d8, .92, 0, wallTex);
+      const oak = material(0xb18460, .70, 0, oakTex);
+      const paleOak = material(0xc8a881, .76, 0, oakTex);
+      const stone = material(0xd9d2c8, .70, 0, stoneTex);
+      const linen = material(0xe7dfd3, .96);
+      const cocoa = material(0x5a4032, .92);
+      const black = material(0x151515, .44, .28);
+      const bronze = material(0x433b35, .50, .36);
+      const green = material(0x496b3f, .98);
+      const terraceTile = material(0xd7d2c9, .90);
+      const ceilingMat = new THREE.MeshStandardMaterial({ color:0xf2eee7, roughness:1, emissive:0x37332e, emissiveIntensity:.22, side:THREE.DoubleSide });
+
+      const root = new THREE.Group();
+      scene.add(root);
+      const box = (name, x, y, z, w, h, d, mat, parent=root) => {
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat);
+        mesh.name = name;
+        mesh.position.set(x,y,z);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        parent.add(mesh);
+        return mesh;
+      };
+      const cylinder = (name,x,y,z,r,h,mat,parent=root,segments=24) => {
+        const mesh = new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,segments),mat);
+        mesh.name=name; mesh.position.set(x,y,z); mesh.castShadow=true; mesh.receiveShadow=true; parent.add(mesh); return mesh;
+      };
+
+      // Public-zone floor and ceiling. Coordinates are plan-proportional, not claimed dimensions.
+      box("public-oak-floor",6,-.055,3.25,12,.11,4.50,paleOak);
+      for(let z=1.05;z<5.50;z+=.18) box("oak-joint",6,.004,z,11.96,.009,.012,oak);
+      box("public-ceiling",6,2.76,3.25,12,.12,4.50,ceilingMat);
+
+      // MPR west of Dining: compact room with one broad retracted public opening at its east edge.
+      // O08 is intentionally represented as a large opening; there is no invented freestanding column.
+      box("mpr-west-wall",.04,1.35,3.76,.08,2.70,3.48,warmWall);
+      box("mpr-north-wall",1.10,1.35,2.02,2.12,2.70,.10,warmWall);
+      box("mpr-east-curved-return",2.16,1.35,2.42,.12,2.70,.72,warmWall);
+      box("mpr-opening-lintel",2.16,2.62,4.20,.12,.16,2.78,warmWall);
+      box("mpr-opening-south-jamb",2.16,1.35,5.43,.12,2.70,.10,warmWall);
+      const mprCurvePath=new THREE.QuadraticBezierCurve3(
+        new THREE.Vector3(2.16,2.28,2.78),
+        new THREE.Vector3(2.16,2.62,2.78),
+        new THREE.Vector3(2.16,2.62,3.12)
+      );
+      const mprCurve=new THREE.Mesh(new THREE.TubeGeometry(mprCurvePath,18,.065,10,false),warmWall);
+      mprCurve.name="mpr-rounded-opening-return"; root.add(mprCurve);
+      box("mpr-south-head",1.10,2.62,5.48,2.10,.10,.12,black);
+      box("mpr-south-sill",1.10,.06,5.48,2.10,.08,.12,black);
+      for(const x of[.08,.62,1.18,1.72,2.12]) box("mpr-glazing-frame",x,1.35,5.48,.045,2.62,.10,black);
+      for(const x of[.35,.90,1.45,1.92]) box("mpr-glass",x,1.35,5.48,.48,2.48,.025,glass);
+      box("mpr-rug",.98,.025,4.23,1.45,.035,1.16,material(0xa89e91,.98));
+      box("mpr-desk",.42,.73,4.22,.55,.08,1.05,paleOak);
+      box("mpr-desk-leg",.42,.36,4.22,.08,.72,.88,oak);
+      box("mpr-chair-seat",1.16,.48,4.20,.46,.10,.46,linen);
+      box("mpr-chair-back",1.36,.78,4.20,.08,.62,.46,linen);
+      box("mpr-art",.085,1.56,4.20,.03,1.04,.94,material(0x8b8175,.88));
+      cylinder("mpr-vase",.48,.88,4.62,.09,.26,stone,root,24);
+      for(let i=0;i<5;i++) {
+        const stem=cylinder("mpr-plant-stem",.48+(i-2)*.025,1.13,4.62,.008,.42,green,root,10);
+        stem.rotation.z=(i-2)*.12;
+      }
+
+      // North Kitchen line, one island only.
+      box("kitchen-north-wall",4.55,1.36,1.02,4.72,2.72,.10,warmWall);
+      box("kitchen-tall-left",2.58,1.30,1.18,.76,2.52,.52,oak);
+      box("kitchen-tall-right",6.72,1.30,1.18,.78,2.52,.52,oak);
+      box("kitchen-base",4.64,.52,1.18,3.36,1.04,.54,oak);
+      box("kitchen-counter",4.64,1.07,1.18,3.48,.10,.64,stone);
+      for(const x of[3.12,3.74,4.36,4.98,5.60,6.20]) box("kitchen-upper",x,2.04,1.18,.56,.92,.48,linen);
+      box("fridge",6.72,1.36,1.47,.60,2.34,.08,bronze);
+      box("kitchen-splashback",4.64,1.50,1.125,3.40,.72,.025,stone);
+      box("cooktop",4.70,1.135,1.20,.78,.025,.42,black);
+      box("sink",3.52,1.13,1.20,.64,.025,.36,bronze);
+      const tap=cylinder("kitchen-tap",3.52,1.43,1.18,.026,.58,black,root,18); tap.rotation.z=Math.PI/2;
+      box("island-base",4.62,.46,2.03,2.46,.92,.82,oak);
+      box("island-stone",4.62,.96,2.03,2.62,.11,.96,stone);
+      box("island-waterfall-west",3.34,.48,2.03,.10,.96,.94,stone);
+      box("island-waterfall-east",5.90,.48,2.03,.10,.96,.94,stone);
+      for(const x of[3.90,4.62,5.34]) {
+        box("stool-seat",x,.48,2.65,.46,.10,.40,cocoa);
+        cylinder("stool-leg",x,.24,2.65,.035,.48,bronze);
+      }
+
+      // Compact four-seat Dining between MPR and Living.
+      box("dining-top",4.20,.76,4.04,1.48,.10,.94,paleOak);
+      box("dining-pedestal",4.20,.39,4.04,.46,.74,.46,oak);
+      cylinder("dining-vase",4.20,.91,4.04,.10,.24,stone,root,24);
+      for(const [x,z,yaw] of [[3.24,4.04,Math.PI/2],[5.16,4.04,-Math.PI/2],[4.20,3.37,0],[4.20,4.71,Math.PI]]) {
+        const chair = new THREE.Group(); chair.position.set(x,0,z); chair.rotation.y=yaw; root.add(chair);
+        box("dining-chair-seat",0,.48,0,.48,.10,.46,linen,chair);
+        box("dining-chair-back",0,.79,.20,.48,.64,.08,paleOak,chair);
+        for(const lx of[-.18,.18]) for(const lz of[-.16,.16]) cylinder("chair-leg",lx,.24,lz,.025,.48,bronze,chair,12);
+      }
+
+      // Solid north TV wall below Bedroom 1; TV never sits on glazing.
+      box("living-tv-wall",9.22,1.36,2.02,5.34,2.72,.12,warmWall);
+      box("tv-console",9.36,.32,2.18,1.84,.52,.38,oak);
+      box("tv-screen",9.36,1.38,2.095,1.42,.76,.045,black);
+      box("tv-soundbar",9.36,.72,2.10,.88,.06,.07,black);
+      cylinder("tv-vase",10.10,.70,2.06,.085,.24,stone,root,22);
+
+      // Broad Living zone, sofa facing north TV wall.
+      const sofa = new THREE.Group(); sofa.position.set(9.48,0,4.54); root.add(sofa);
+      box("sofa-base",0,.25,0,2.16,.44,.70,linen,sofa);
+      box("sofa-back",0,.64,.28,2.16,.50,.16,linen,sofa);
+      for(const x of[-.68,0,.68]) box("sofa-cushion",x,.54,-.04,.58,.18,.48,linen,sofa);
+      box("sofa-left-return",-.86,.27,-.48,.40,.48,.92,linen,sofa);
+      box("sofa-arm-right",1.04,.50,0,.12,.54,.70,linen,sofa);
+      box("sofa-cocoa-cushion",.55,.82,.16,.46,.42,.14,cocoa,sofa);
+      box("living-rug",9.38,.018,3.78,4.20,.035,1.72,material(0xbdb5aa,.98));
+      box("coffee-table",9.14,.30,3.56,1.16,.10,.62,stone);
+      box("coffee-base",9.14,.16,3.56,.48,.26,.32,oak);
+      box("coffee-book",8.94,.43,3.46,.36,.035,.24,material(0x887b6b,.92));
+
+      // Architectural ceiling detail and warm practicals make the reference visually explicit,
+      // reducing the amount of missing information Seedance would otherwise invent.
+      box("linear-air-slot",5.35,2.695,1.72,4.20,.018,.10,black);
+      for(const [x,z] of [[2.80,3.02],[4.20,3.02],[5.62,3.02],[7.20,3.02],[8.90,3.02],[10.55,3.02],[3.05,4.82],[5.35,4.82],[7.55,4.82],[9.55,4.82],[11.20,4.82]]) {
+        cylinder("downlight",x,2.69,z,.045,.018,material(0xfff1d3,.30),root,20);
+        const point=new THREE.PointLight(0xffe8c8,.16,3.2,2); point.position.set(x,2.60,z); root.add(point);
+      }
+
+      // South continuous glazing across Dining and Living.
+      box("south-head",7.10,2.62,5.49,9.72,.10,.14,black);
+      box("south-track",7.10,.06,5.49,9.72,.08,.14,black);
+      for(const x of[2.24,3.18,4.12,5.06,6.15,7.25,8.35,9.45,10.55,11.65,11.94]) box("south-frame",x,1.35,5.49,.055,2.62,.10,black);
+      for(const [x,w] of[[2.70,.86],[3.65,.86],[4.59,.86],[5.60,.98],[6.70,1.02],[7.80,1.02],[8.90,1.02],[10.00,1.02],[11.10,1.02],[11.80,.24]]) box("south-glass",x,1.35,5.49,w,2.48,.025,glass);
+
+      // East glazing with one broad physically empty/retracted sliding group. The approved
+      // V7 anchors and plan arrows require a generous opening, not a narrow single-door slot.
+      box("east-head",11.98,2.62,3.84,.14,.10,3.02,black);
+      box("east-track",11.98,.055,3.84,.14,.08,3.02,black);
+      for(const z of[2.36,2.96,5.24,5.34]) box("east-frame",11.98,1.35,z,.10,2.62,.055,black);
+      box("east-fixed-glass-north",11.98,1.35,2.66,.025,2.48,.52,glass);
+      box("east-stacked-leaf",11.94,1.35,5.14,.10,2.48,.18,glass);
+
+      // Wrap Terrace with open walking path and restrained separate planters.
+      box("east-terrace-floor",13.48,-.06,4.12,2.96,.12,4.88,terraceTile);
+      box("south-terrace-floor",9.48,-.06,6.72,10.98,.12,2.46,terraceTile);
+      for(let z=1.82;z<6.52;z+=.46) box("east-tile-joint",13.48,.008,z,2.90,.012,.014,material(0xaaa49a,.98));
+      for(let x=4.05;x<14.96;x+=.46) box("south-tile-joint",x,.008,6.72,.014,.012,2.38,material(0xaaa49a,.98));
+      box("east-rail-top",14.94,1.08,4.12,.08,.08,4.72,black);
+      box("east-rail-glass",14.92,.64,4.12,.025,.82,4.58,glass);
+      box("south-rail-top",9.50,1.08,7.88,10.86,.08,.08,black);
+      box("south-rail-glass",9.50,.64,7.86,10.72,.82,.025,glass);
+      for(const z of[2.55,3.55,4.55,5.55]) {
+        cylinder("east-pot",14.55,.19,z,.16,.38,stone,root,18);
+        cylinder("east-plant",14.55,.46,z,.21,.22,green,root,14);
+      }
+      for(const x of[5.35,6.75,8.15,9.55,10.95,12.35,13.75]) {
+        cylinder("south-pot",x,.19,7.52,.16,.38,stone,root,18);
+        cylinder("south-plant",x,.46,7.52,.21,.22,green,root,14);
+      }
+
+      // Abstract leafy suburban depth only; no claimed skyline or landmark.
+      const treeGeo = new THREE.DodecahedronGeometry(.52,1);
+      for(let i=0;i<16;i++) {
+        const tree = new THREE.Mesh(treeGeo, material(i%2?0x53794d:0x68855b,.98));
+        tree.position.set(17.2+(i%4)*1.6,.70+(i%3)*.18,.4+(i*1.43)%9.2);
+        tree.scale.set(1.0+(i%3)*.18,.9+(i%4)*.10,1.0+(i%2)*.16);
+        tree.castShadow=true; tree.receiveShadow=true; scene.add(tree);
+      }
+
+      // Exact V7 storyboard timing. The camera translates throughout the panorama instead of
+      // spinning in place, stays north of the sofa, and crosses the empty east sliding bay.
+      const eyeKeys = [
+        {t:0.00,v:[6.18,1.55,5.02]},
+        {t:.80,v:[6.04,1.55,4.76]},
+        {t:1.60,v:[5.42,1.55,5.12]},
+        {t:2.40,v:[7.00,1.55,4.20]},
+        {t:2.78,v:[8.00,1.55,3.50]},
+        {t:3.20,v:[9.18,1.55,3.20]},
+        {t:4.00,v:[10.62,1.55,3.24]},
+        {t:4.40,v:[11.22,1.55,3.48]},
+        {t:4.80,v:[12.10,1.55,3.72]},
+        {t:6.00,v:[12.92,1.55,4.30]},
+        {t:7.00,v:[13.48,1.55,4.74]},
+        {t:8.00,v:[13.58,1.55,4.52]}
+      ];
+      const targetKeys = [
+        {t:0.00,v:[1.22,1.22,4.10]},
+        {t:.80,v:[4.48,1.16,1.28]},
+        {t:1.60,v:[8.64,1.16,3.02]},
+        {t:2.40,v:[10.05,1.06,4.34]},
+        {t:2.78,v:[11.20,1.14,4.32]},
+        {t:3.20,v:[12.02,1.20,4.08]},
+        {t:4.00,v:[12.70,1.18,4.04]},
+        {t:4.40,v:[13.68,1.16,4.04]},
+        {t:4.80,v:[14.20,1.15,4.08]},
+        {t:6.00,v:[13.74,.92,6.72]},
+        {t:7.00,v:[12.02,1.06,6.78]},
+        {t:8.00,v:[7.60,1.22,3.60]}
+      ];
+      const lerp = (a,b,t) => a+(b-a)*t;
+      const smooth = t => t*t*(3-2*t);
+      function sample(keys,time,eased=false) {
+        let i=0; while(i<keys.length-2 && time>keys[i+1].t) i++;
+        const a=keys[i], b=keys[i+1], span=Math.max(.001,b.t-a.t);
+        let u=Math.max(0,Math.min(1,(time-a.t)/span)); if(eased) u=smooth(u);
+        return [lerp(a.v[0],b.v[0],u),lerp(a.v[1],b.v[1],u),lerp(a.v[2],b.v[2],u)];
+      }
+      function draw(time) {
+        const eye=sample(eyeKeys,time,false), target=sample(targetKeys,time,true);
+        const moving=time>.08 && time<7.35;
+        const bob=moving?.010*Math.sin((time-.08)*Math.PI*3.9):0;
+        camera.position.set(eye[0],eye[1]+bob,eye[2]);
+        camera.lookAt(target[0],target[1]+bob*.30,target[2]);
+        renderer.render(scene,camera);
+      }
+
+      const state={time:0};
+      draw(0);
+      const timeline=gsap.timeline({paused:true});
+      timeline.to(state,{time:8,duration:8,ease:"none",onUpdate:()=>draw(state.time)},0);
+      window.__timelines.main=timeline;
+      window.__koyaV8={scene,camera,renderer,draw};
+    </script>
+  </body>
+</html>

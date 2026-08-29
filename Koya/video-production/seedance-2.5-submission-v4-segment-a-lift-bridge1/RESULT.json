@@ -1,0 +1,17 @@
+{
+  "id": "cgt-20260817213439-7cgx2",
+  "model": "doubao-seedance-2-5-260628",
+  "status": {
+    "phase": "succeeded"
+  },
+  "output_url": "https://ark-acg-cn-beijing.tos-cn-beijing.volces.com/doubao-seedance-2-5/2129380310/Video/2xgc7-93431271806202-tgc_3565e2475471caffff00000000000000000000385386379687120/cgt-20260817213439-7cgx2.mp4?X-Tos-Algorithm=TOS4-HMAC-SHA256&X-Tos-Credential=AKLTYWJkZTExNjA1ZDUyNDc3YzhjNTM5OGIyNjBhNDcyOTQ%2F20260817%2Fcn-beijing%2Ftos%2Frequest&X-Tos-Date=20260817T133638Z&X-Tos-Expires=86400&X-Tos-Max-Requests=100&X-Tos-Signature=5c65d292cd1b6f82e74c20bf070237f6924015ce1f78106a1f3bc7c689a31b41&X-Tos-SignedHeaders=host",
+  "local_path": "/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v4-segment-a-lift-bridge1/outputs/cgt-20260817213439-7cgx2.mp4",
+  "ratio": "16:9",
+  "resolution": "720p",
+  "duration": 5,
+  "generate_audio": true,
+  "usage": {
+    "completion_tokens": 108900,
+    "total_tokens": 108900
+  }
+}

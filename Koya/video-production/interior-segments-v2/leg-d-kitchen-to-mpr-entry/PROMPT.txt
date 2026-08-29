@@ -1,0 +1,19 @@
+Generate a 5-second, 16:9, 720p photorealistic cinematic property walkthrough with native synchronized room tone, footsteps and one quiet timber-door movement.
+
+single uninterrupted take; zero edits. Continue literally from Image 1, the exact final frame of the accepted 41-second Koya master. The same athletic white woman is walking east at the start of Apartment 106's compact kitchen circulation. The just-exited Bedroom 2 and its same open timber door remain behind-left. The linear warm-timber kitchen cabinets remain on north/camera-left and the single modest pale-stone island remains south/camera-right. Preserve this exact geometry and late-morning daylight.
+
+Ordered physical movement:
+
+0.0-1.5 seconds: the resident walks briskly only a short distance east between the existing linear kitchen and the single island. The camera follows 1.2-1.5 metres behind with real floor and cabinet parallax. No room or doorway changes around her.
+
+1.5-3.1 seconds: she turns anatomical right/south to the MPR's one northeast timber door. This is a normal hinged door, not a pocket or sliding door. The hinges stay on the east/right jamb; her anatomical right hand depresses the same handle and swings the same door inward into the compact MPR. Her stainless bottle remains only in her anatomical left hand.
+
+3.1-5.0 seconds: she physically crosses the threshold first and the same camera follows through the same doorway behind her. Clearly show the frame and threshold moving past both sides with real parallax; camera and resident finish fully inside the MPR. Image 2 is the mandatory final composition: built-in light-timber desk and one chair west/camera-left, narrow daybed east/camera-right, one modest south-facing window ahead, clear narrow walking strip, same open door at the near rear/right edge, and only a narrow glimpse of the kitchen outside.
+
+camera physically crosses every doorway behind the resident. Maintain one eye-level 28-32mm full-frame-equivalent lens, continuous gimbal inertia, authentic walking pace, realistic material texture and candid human performance. Preserve the identical resident face, body, ponytail, sage long-sleeve athletic top, black leggings, white trainers, black smartwatch and bottle in anatomical left hand.
+
+The MPR is a compact flexible room, not another bedroom, lounge or large office. It has one desk, one chair, one narrow daybed/bench, one window and one inward-hinged northeast door only. Do not add a wardrobe, bathroom, second door, second window, second island or oversized furniture. Do not leave the camera outside the room.
+
+Strictly forbid cut, edit, jump cut, alternate angle, teleport, dissolve, crossfade, opacity blend, ghosting, architecture morph, wall passage, door wipe, body wipe, camera passing through the resident, door or island, room expansion, mirrored plan, pocket door, sliding door, duplicated door, duplicated handle, duplicated island, bottle disappearance, hand swap, clothing/face change, game-render look, static Ken Burns zoom, text, logo or watermark.
+
+Image 1 controls the exact start, kitchen and character. Image 2 controls the physically reachable endpoint only. Every intermediate frame must show the literal continuous route between them.

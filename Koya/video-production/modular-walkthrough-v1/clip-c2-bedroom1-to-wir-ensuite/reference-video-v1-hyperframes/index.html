@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="node_modules/gsap/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #d7cdbc; }
+      #root, #route-reference { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #world-canvas { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; }
+      #lens-finish { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 43%, transparent 61%, rgba(38,28,20,.13) 100%), linear-gradient(to bottom, rgba(255,246,225,.035), rgba(67,49,35,.04)); }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-c2-root" id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-c2-route" id="route-reference" class="clip" data-start="0" data-duration="5" data-track-index="1">
+        <canvas data-hf-id="hf-c2-canvas" id="world-canvas" width="1920" height="1080" aria-label="Apartment 106 Bedroom 1 through WIR to Ensuite continuous route reference"></canvas>
+        <div data-hf-id="hf-c2-lens" id="lens-finish"></div>
+      </div>
+    </div>
+    <script>
+      const canvas=document.getElementById("world-canvas");
+      const gl=canvas.getContext("webgl",{antialias:true,alpha:false,preserveDrawingBuffer:true});
+      if(!gl) throw new Error("WebGL is required for this deterministic reference scene");
+      const vertexSource=`attribute vec3 aPosition;attribute vec3 aColor;attribute vec3 aNormal;uniform mat4 uViewProjection;varying vec3 vColor;varying vec3 vNormal;varying float vDepth;void main(){vec4 clip=uViewProjection*vec4(aPosition,1.0);gl_Position=clip;vColor=aColor;vNormal=aNormal;vDepth=clip.z/clip.w;}`;
+      const fragmentSource=`precision mediump float;varying vec3 vColor;varying vec3 vNormal;varying float vDepth;void main(){vec3 light=normalize(vec3(.55,.92,.40));float diffuse=max(dot(normalize(vNormal),light),0.0);float shade=.66+diffuse*.48;float fog=smoothstep(.82,1.0,vDepth);vec3 daylight=vec3(.86,.84,.79);gl_FragColor=vec4(mix(vColor*shade,daylight,fog*.27),1.0);}`;
+      function compileShader(type,source){const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));return shader;}
+      const program=gl.createProgram();gl.attachShader(program,compileShader(gl.VERTEX_SHADER,vertexSource));gl.attachShader(program,compileShader(gl.FRAGMENT_SHADER,fragmentSource));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+      const vertices=[],colors=[],normals=[];const tone=(c,m)=>c.map(v=>Math.max(0,Math.min(1,v*m)));
+      function triangle(a,b,c,color,normal){vertices.push(...a,...b,...c);colors.push(...color,...color,...color);normals.push(...normal,...normal,...normal);}
+      function quad(a,b,c,d,color,normal){triangle(a,b,c,color,normal);triangle(a,c,d,color,normal);}
+      function box(cx,cy,cz,sx,sy,sz,base){const x0=cx-sx/2,x1=cx+sx/2,y0=cy-sy/2,y1=cy+sy/2,z0=cz-sz/2,z1=cz+sz/2;quad([x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1],tone(base,.98),[0,0,1]);quad([x1,y0,z0],[x0,y0,z0],[x0,y1,z0],[x1,y1,z0],tone(base,.90),[0,0,-1]);quad([x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0],tone(base,.84),[-1,0,0]);quad([x1,y0,z1],[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],tone(base,.92),[1,0,0]);quad([x0,y1,z1],[x1,y1,z1],[x1,y1,z0],[x0,y1,z0],tone(base,1.06),[0,1,0]);quad([x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],tone(base,.72),[0,-1,0]);}
+      function cylinder(cx,cy,cz,radius,height,segments,base){
+        const y0=cy-height/2,y1=cy+height/2;
+        for(let i=0;i<segments;i++){
+          const a=i*Math.PI*2/segments,b=(i+1)*Math.PI*2/segments;
+          const p0=[cx+Math.cos(a)*radius,y0,cz+Math.sin(a)*radius],p1=[cx+Math.cos(b)*radius,y0,cz+Math.sin(b)*radius];
+          const p2=[p1[0],y1,p1[2]],p3=[p0[0],y1,p0[2]],normal=[Math.cos((a+b)/2),0,Math.sin((a+b)/2)];
+          quad(p0,p1,p2,p3,tone(base,.96),normal);triangle([cx,y1,cz],p3,p2,tone(base,1.04),[0,1,0]);triangle([cx,y0,cz],p1,p0,tone(base,.78),[0,-1,0]);
+        }
+      }
+      function ellipseCylinder(cx,cy,cz,rx,rz,height,segments,base){
+        const y0=cy-height/2,y1=cy+height/2;
+        for(let i=0;i<segments;i++){
+          const a=i*Math.PI*2/segments,b=(i+1)*Math.PI*2/segments;
+          const p0=[cx+Math.cos(a)*rx,y0,cz+Math.sin(a)*rz],p1=[cx+Math.cos(b)*rx,y0,cz+Math.sin(b)*rz];
+          const p2=[p1[0],y1,p1[2]],p3=[p0[0],y1,p0[2]],normal=[Math.cos((a+b)/2),0,Math.sin((a+b)/2)];
+          quad(p0,p1,p2,p3,tone(base,.96),normal);triangle([cx,y1,cz],p3,p2,tone(base,1.04),[0,1,0]);triangle([cx,y0,cz],p1,p0,tone(base,.78),[0,-1,0]);
+        }
+      }
+      function recessedBasin(cx,cz){
+        const rimY=1.035,outerW=.48,outerD=.34,rim=.055;
+        box(cx,rimY,cz-outerD/2+rim/2,outerW,.045,rim,porcelain);
+        box(cx,rimY,cz+outerD/2-rim/2,outerW,.045,rim,porcelain);
+        box(cx-outerW/2+rim/2,rimY,cz,rim,.045,outerD-rim*2,porcelain);
+        box(cx+outerW/2-rim/2,rimY,cz,rim,.045,outerD-rim*2,porcelain);
+        box(cx,1.005,cz,outerW-rim*2,.025,outerD-rim*2,tone(porcelain,.80));
+        cylinder(cx,1.023,cz+.015,.027,.012,18,metal);
+      }
+      function hangingGarment(cx,bottomY,z,w,h,color,normalZ){
+        const top=bottomY+h,shoulder=top-h*.17,frontZ=z+normalZ*.075,backZ=z-normalZ*.045;
+        const front=[[cx-w*.14,top,frontZ],[cx+w*.14,top,frontZ],[cx+w*.50,shoulder,frontZ],[cx+w*.34,bottomY,frontZ],[cx-w*.34,bottomY,frontZ],[cx-w*.50,shoulder,frontZ]];
+        const back=front.map(p=>[p[0],p[1],backZ]),center=[cx,(top+bottomY)*.5,frontZ],n=[0,0,normalZ];
+        for(let i=0;i<6;i++)triangle(center,front[i],front[(i+1)%6],color,n);
+        for(let i=0;i<6;i++){const j=(i+1)%6;quad(front[i],back[i],back[j],front[j],tone(color,.82),[i<3?1:-1,0,0]);}
+        box(cx,top+.045,z,.035,.09,.16,metal);
+      }
+      const wall=[.90,.87,.81],wallWarm=[.84,.79,.70],oak=[.56,.40,.27],paleOak=[.73,.62,.47],linen=[.86,.82,.73],cream=[.94,.91,.84],cocoa=[.40,.27,.21],charcoal=[.18,.17,.16],glass=[.42,.64,.72],stone=[.76,.72,.65],porcelain=[.91,.90,.86],metal=[.36,.38,.38],green=[.25,.38,.22];
+
+      // One immutable shell, scaled from the official Apartment 106 drawing's 5 m graphic bar.
+      // Plan-derived approximate internal sizes: Bedroom 1 3.06 x 2.91 m, WIR 2.03 x 1.68 m, Ensuite 3.26 x 1.68 m.
+      box(-2.04,-.05,-3.47,8.35,.10,2.91,paleOak);for(let z=-4.78;z<=-2.04;z+=.22)box(-2.04,.008,z,8.35,.016,.014,[.43,.31,.21]);box(-2.04,2.76,-3.47,8.35,.08,2.91,wall);box(-2.04,1.38,-4.92,8.35,2.76,.16,wall);
+      // Bedroom 1 is east of the WIR and keeps the narrow circulation aisle west of the bed.
+      box(.61,1.38,-2.01,3.06,2.76,.14,wall);box(2.14,1.38,-3.47,.09,2.70,2.91,glass);for(const z of[-4.72,-3.47,-2.06])box(2.08,1.38,z,.16,2.75,.08,charcoal);
+      // Bedroom/WIR boundary: north pier, 0.94 m opening, then the wall continuing south of the WIR.
+      box(-.92,1.38,-4.55,.16,2.76,.74,wall);box(-.92,1.38,-2.625,.16,2.76,1.23,wall);box(-.92,2.45,-3.71,.18,.62,.94,wall);box(-.92,1.18,-4.18,.18,2.36,.10,cocoa);box(-.92,1.18,-3.24,.18,2.36,.10,cocoa);box(-.92,2.34,-3.71,.18,.10,1.04,cocoa);
+      // A plan-scale queen bed sits east of the aisle; the C2 camera never crosses its footprint.
+      box(.60,.30,-3.83,1.76,.58,1.98,linen);box(.60,.72,-4.70,1.90,.88,.18,cream);box(.60,.72,-3.83,1.62,.22,1.62,cream);box(.60,.87,-3.50,1.58,.08,.96,[.55,.35,.29]);box(.18,.94,-4.25,.64,.24,.48,cream);box(1.02,.94,-4.25,.64,.24,.48,cream);box(1.76,.34,-4.31,.42,.66,.50,oak);box(.60,1.72,-4.80,1.62,.92,.035,[.68,.50,.42]);
+      // WIR is a 2.03 x 1.68 m connector with one 0.62 m-deep wardrobe bank on the north wall.
+      // User-directed concept: the south/camera-left wall has one shallow entrance-side recess. Exact construction dimensions are unavailable.
+      box(-2.815,1.38,-3.24,.27,2.76,.14,wallWarm);box(-1.32,1.38,-3.24,.80,2.76,.14,wallWarm);
+      // The south/left recess is real geometry: a darker set-back plane plus two full-depth return walls.
+      box(-2.20,1.38,-2.90,.96,2.76,.14,tone(wallWarm,.58));box(-2.68,1.38,-3.07,.14,2.76,.34,tone(wallWarm,.91));box(-1.72,1.38,-3.07,.14,2.76,.34,tone(wallWarm,.91));
+      box(-2.20,.045,-3.07,.96,.025,.34,paleOak);for(let z=-3.22;z<=-2.92;z+=.10)box(-2.20,.06,z,.94,.018,.012,[.43,.31,.21]);
+      box(-1.935,1.62,-4.84,1.91,2.16,.12,[.78,.73,.65]);
+      for(const x of[-2.88,-1.94,-1.00])box(x,1.62,-4.53,.045,2.18,.62,[.88,.85,.79]);box(-1.935,.24,-4.53,1.91,.035,.56,[.68,.62,.53]);
+      // Open rail, illuminated shelf, drawers and distinct hanging garments make the single wardrobe bank readable.
+      box(-1.935,2.28,-4.37,1.86,.055,.06,metal);box(-1.935,2.52,-4.62,1.89,.07,.42,paleOak);box(-1.935,2.42,-4.39,1.82,.025,.025,[1,.82,.47]);
+      const garmentColors=[[.88,.84,.76],[.25,.24,.23],[.61,.56,.49],[.38,.44,.39],[.52,.34,.29]];
+      const garmentXs=[-2.69,-2.45,-2.21,-1.69,-1.45,-1.21];
+      garmentXs.forEach((x,i)=>{const h=.66+(i%3)*.10,bottom=1.08-(i%2)*.05;hangingGarment(x,bottom,-4.28,.28,h,garmentColors[i%garmentColors.length],1);});
+      for(const x of[-2.63,-2.17,-1.71,-1.25]){box(x,.48,-4.56,.38,.72,.40,paleOak);box(x,.76,-4.34,.32,.022,.022,metal);}
+      for(const x of[-2.62,-2.14,-1.66,-1.18])box(x,2.34,-4.47,.31,.10,.24,garmentColors[Math.abs(Math.round((x+3)*10))%garmentColors.length]);
+      // Ensuite east wall split around its only doorway from the WIR.
+      box(-2.95,1.38,-4.52,.16,2.76,.80,wall);box(-2.95,1.38,-3.28,.16,2.76,.08,wall);box(-2.95,2.45,-3.72,.18,.62,.80,wall);box(-2.95,1.18,-4.12,.18,2.36,.10,cocoa);box(-2.95,1.18,-3.32,.18,2.36,.10,cocoa);box(-2.95,2.34,-3.72,.18,.10,.90,cocoa);
+      // Ensuite envelope and official-plan-relative north run: shower west, toilet middle, double vanity east.
+      box(-4.58,.015,-4.08,3.26,.03,1.68,[.72,.70,.65]);for(let x=-6.05;x<=-3.10;x+=.32)box(x,.035,-4.08,.012,.025,1.63,[.50,.49,.47]);for(let z=-4.76;z<=-3.38;z+=.28)box(-4.58,.036,z,3.20,.025,.012,[.50,.49,.47]);
+      box(-6.21,1.38,-4.08,.16,2.76,1.68,wall);box(-4.58,1.38,-3.24,3.26,2.76,.16,wall);
+      // West shower zone: tray and hardware stay visible through an outlined fixed-glass return.
+      // Solid opaque panes are deliberately avoided in this structural reference because they hide the usable enclosure.
+      box(-5.75,.06,-4.43,.88,.12,.82,stone);
+      box(-5.31,1.10,-4.02,.035,2.10,.035,glass);box(-5.31,1.10,-4.84,.035,2.10,.035,glass);box(-5.31,2.14,-4.43,.035,.035,.82,glass);
+      // Oversized structural cues keep the shower function legible in the fast reference move.
+      box(-5.70,2.18,-4.66,.30,.045,.24,metal);box(-5.70,1.92,-4.76,.045,.52,.045,metal);
+      box(-5.70,1.18,-4.77,.20,.26,.035,metal);box(-5.70,.82,-4.76,.045,.50,.045,metal);
+      box(-5.75,.135,-4.43,.32,.025,.08,metal);
+      // Middle toilet: an elongated pan, readable seat opening and separate cistern remain clear of the vanity.
+      box(-4.74,.67,-4.70,.42,.66,.28,porcelain);box(-4.74,.27,-4.48,.34,.42,.40,porcelain);
+      ellipseCylinder(-4.74,.52,-4.40,.29,.36,.16,24,porcelain);ellipseCylinder(-4.74,.615,-4.40,.17,.23,.025,24,charcoal);
+      // East double vanity: one wall-hung cabinet, recessed usable bowls, drains and wall-mounted spouts.
+      // The fixtures face the clear south aisle and do not overlap the separate toilet zone.
+      box(-3.72,.62,-4.62,1.26,.66,.42,paleOak);box(-3.72,.985,-4.58,1.32,.07,.52,stone);
+      box(-4.03,.62,-4.395,.56,.025,.025,tone(paleOak,.72));box(-3.41,.62,-4.395,.56,.025,.025,tone(paleOak,.72));
+      for(const x of[-4.03,-3.41])for(const y of[.48,.65,.82])box(x,y,-4.397,.49,.016,.016,metal);
+      recessedBasin(-4.03,-4.55);recessedBasin(-3.41,-4.55);
+      // Wall plates, horizontal spouts and small paired controls replace the unusable vertical blocks.
+      for(const x of[-4.03,-3.41]){
+        box(x,1.30,-4.825,.15,.15,.025,metal);box(x,1.27,-4.67,.045,.045,.30,metal);box(x,1.25,-4.50,.09,.035,.07,metal);
+        cylinder(x-.13,1.27,-4.805,.026,.035,16,metal);cylinder(x+.13,1.27,-4.805,.026,.035,16,metal);
+      }
+      // One continuous mirror matches the official Koya ensuite language and keeps both stations visually coherent.
+      box(-3.72,1.79,-4.825,1.28,1.00,.025,[.48,.52,.53]);
+      for(const x of[-5.75,-4.70,-3.55])box(x,2.70,-4.05,.20,.025,.20,[1,.94,.77]);
+
+      function makeBuffer(values,name){const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW);const location=gl.getAttribLocation(program,name);gl.enableVertexAttribArray(location);gl.vertexAttribPointer(location,3,gl.FLOAT,false,0,0);}
+      makeBuffer(vertices,"aPosition");makeBuffer(colors,"aColor");makeBuffer(normals,"aNormal");const matrixLocation=gl.getUniformLocation(program,"uViewProjection");
+      function perspective(fov,aspect,near,far){const f=1/Math.tan(fov/2),nf=1/(near-far);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0]);}
+      function normalize(v){const n=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/n,v[1]/n,v[2]/n];}function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}function lookAt(eye,target){const z=normalize([eye[0]-target[0],eye[1]-target[1],eye[2]-target[2]]),x=normalize(cross([0,1,0],z)),y=cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-(x[0]*eye[0]+x[1]*eye[1]+x[2]*eye[2]),-(y[0]*eye[0]+y[1]*eye[1]+y[2]*eye[2]),-(z[0]*eye[0]+z[1]*eye[1]+z[2]*eye[2]),1]);}function multiply(a,b){const out=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)out[c*4+r]=a[r]*b[c*4]+a[4+r]*b[c*4+1]+a[8+r]*b[c*4+2]+a[12+r]*b[c*4+3];return out;}
+      const lerp=(a,b,t)=>a+(b-a)*t,smooth=t=>t*t*(3-2*t);function linearSegment(v,a,b){return Math.max(0,Math.min(1,(v-a)/(b-a)));}function easedSegment(v,a,b){return smooth(linearSegment(v,a,b));}const projection=perspective(58*Math.PI/180,1920/1080,.06,30);
+      function cameraAt(progress){
+        let x,z,yaw;
+        // Start in Bedroom 1's foot-side circulation aisle, with the bed readable on camera-right
+        // and the only WIR opening ahead-left. The path then bends around the bed's west corner.
+        if(progress<.04){
+          const move=easedSegment(progress,0,.04);
+          x=lerp(.30,.28,move);z=lerp(-2.35,-2.37,move);yaw=lerp(-.65,-.66,move);
+        }else if(progress<.13){
+          const s=linearSegment(progress,.04,.13);
+          x=lerp(.28,-.45,s);z=lerp(-2.37,-2.65,s);yaw=lerp(-.66,-.42,easedSegment(progress,.04,.13));
+        }else if(progress<.24){
+          const s=linearSegment(progress,.13,.24);
+          x=lerp(-.45,-.65,s);z=lerp(-2.65,-3.35,s);yaw=lerp(-.42,-.75,easedSegment(progress,.13,.24));
+        }else if(progress<.34){
+          const s=linearSegment(progress,.24,.34);
+          x=lerp(-.65,-1.45,s);z=lerp(-3.35,-3.70,s);yaw=lerp(-.75,-1.50,easedSegment(progress,.24,.34));
+        }else if(progress<.46){
+          const s=linearSegment(progress,.34,.46);
+          x=lerp(-1.45,-2.62,s);z=lerp(-3.70,-3.72,s);yaw=lerp(-1.50,-1.54,easedSegment(progress,.34,.46));
+        }else if(progress<.58){
+          const s=linearSegment(progress,.46,.58);
+          x=lerp(-2.62,-3.36,s);z=lerp(-3.72,-3.68,s);yaw=lerp(-1.54,-1.38,easedSegment(progress,.46,.58));
+        }else if(progress<.70){
+          const s=linearSegment(progress,.58,.70);
+          x=lerp(-3.36,-3.68,s);z=lerp(-3.68,-3.42,s);yaw=lerp(-1.38,-.18,easedSegment(progress,.58,.70));
+        }else if(progress<.82){
+          const s=linearSegment(progress,.70,.82);
+          x=lerp(-3.68,-4.55,s);z=lerp(-3.42,-3.42,s);yaw=lerp(-.18,-.08,easedSegment(progress,.70,.82));
+        }else if(progress<.90){
+          const s=linearSegment(progress,.82,.90);
+          x=lerp(-4.55,-4.45,s);z=lerp(-3.42,-3.40,s);yaw=lerp(-.08,-.90,easedSegment(progress,.82,.90));
+        }else{
+          const s=easedSegment(progress,.90,1);
+          x=lerp(-4.45,-4.45,s);z=lerp(-3.40,-3.39,s);yaw=-.90;
+        }
+        const moving=progress<.90,time=progress*5,stepPhase=time*Math.PI*4.1;
+        const verticalBob=moving?.016*Math.sin(stepPhase):0;
+        const lateralSway=moving?.012*Math.sin(stepPhase*.5):0;
+        const yawSway=moving?.006*Math.sin(stepPhase*.5):0;
+        x+=Math.cos(yaw)*lateralSway;z+=Math.sin(yaw)*lateralSway;yaw+=yawSway;
+        const eye=[x,1.58+verticalBob,z],direction=[Math.sin(yaw),-.025,-Math.cos(yaw)];
+        let inspectionPitch;
+        if(progress<.58)inspectionPitch=1.49;
+        else if(progress<.70)inspectionPitch=lerp(1.49,1.20,easedSegment(progress,.58,.70));
+        else if(progress<.82)inspectionPitch=1.20;
+        else inspectionPitch=lerp(1.20,1.05,easedSegment(progress,.82,.90));
+        return{eye,target:[x+direction[0]*2.8,inspectionPitch,z+direction[2]*2.8]};
+      }
+      function draw(progress){gl.viewport(0,0,canvas.width,canvas.height);gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.clearColor(.84,.81,.74,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const camera=cameraAt(progress);gl.uniformMatrix4fv(matrixLocation,false,multiply(projection,lookAt(camera.eye,camera.target)));gl.drawArrays(gl.TRIANGLES,0,vertices.length/3);}
+      const state={progress:0};draw(0);const timeline=gsap.timeline({paused:true});timeline.to(state,{progress:1,duration:5,ease:"none",onUpdate:()=>draw(state.progress)},0);timeline.fromTo("#lens-finish",{x:-2},{x:2,duration:5,ease:"none"},0);window.__timelines["main"]=timeline;
+    </script>
+  </body>
+</html>

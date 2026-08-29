@@ -1,0 +1,13 @@
+{
+  "name": "koya-106-public-zone-reference-v9-planlocked",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.17 preview",
+    "check": "npx --yes hyperframes@0.8.17 check",
+    "snapshot": "npx --yes hyperframes@0.8.17 snapshot"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  }
+}

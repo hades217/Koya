@@ -1,0 +1,17 @@
+Generate a 5-second, 16:9, 720p photorealistic cinematic property walkthrough with native synchronized room tone and footsteps.
+
+single uninterrupted take; zero edits. Continue literally from Image 1, the exact final frame of the accepted 36-second Koya master. The same athletic white woman is already inside compact Apartment 106 Bedroom 2, walking away from the camera. The camera is just inside the same northwest bedroom doorway. The fixed light-timber robe remains on camera-left/west, the bed remains camera-right/east, the narrow window remains ahead, and the same open timber door remains at the near camera-right edge.
+
+Ordered physical movement, with no omitted space:
+
+0.0-1.0 seconds: without stopping or disappearing, the resident naturally pivots around inside the bedroom to return toward the same open door. The camera simultaneously eases backward while maintaining the exact room geometry. Her stainless-steel bottle stays only in her anatomical left hand.
+
+1.0-3.4 seconds: she walks briskly back toward the camera and through the exact same northwest Bedroom 2 doorway. The camera physically backs through that same doorway before her, continuously showing the timber door, frame, threshold, bedroom floor and hall floor moving past with real parallax. The camera never passes through her body, door or wall.
+
+3.4-5.0 seconds: once both resident and camera are outside Bedroom 2, the camera makes one smooth physical yaw and settles behind her as she heads east toward the kitchen. Image 2 is the mandatory final composition: the just-exited Bedroom 2 and its same open door remain clearly behind-left, while only the beginning of the compact linear kitchen appears ahead, with warm timber cabinets on the north/left and one modest pale-stone island on the south/right. Do not reach, reveal or enter the MPR yet.
+
+Camera physically crosses every doorway with the resident. Maintain one eye-level 28-32mm full-frame-equivalent lens, natural gimbal inertia, real depth parallax, subtle human footstep motion and consistent late-morning daylight. Preserve the identical resident face, body, ponytail, sage long-sleeve athletic top, black leggings, white trainers, black smartwatch, and bottle in the anatomical left hand. Keep the performance candid and human, not posed or game-like.
+
+Strictly forbid cut, edit, jump cut, alternate angle, teleport, dissolve, crossfade, opacity blend, ghosting, architecture morph, hidden wall transition, body wipe, door wipe, camera passing through the resident, camera passing through furniture, duplicated person, duplicated door, mirrored room, robe relocation, bed relocation, new corridor, bathroom reveal, MPR reveal, oversized hall, oversized island, bottle disappearance, hand swap, clothing change, face change, static Ken Burns zoom, text, logo or watermark.
+
+Image 1 controls the exact start and all existing Bedroom 2 geometry. Image 2 controls only the physically reachable final viewpoint after exiting the same door and turning toward the kitchen. Every intermediate frame must be a real continuous camera path between them.

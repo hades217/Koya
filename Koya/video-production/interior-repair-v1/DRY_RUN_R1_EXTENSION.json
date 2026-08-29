@@ -1,0 +1,73 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "将@视频1从真实末帧继续延长10秒，输出16:9、720p、带连续原生环境声音的高端写实房地产销售影片。single uninterrupted physical camera take; zero edits。@视频1中已经通过质检的21.047秒外景、入口、同一电梯、目标楼层、Apartment 106开门和进入室内内容全部是连续性最高权威；不要重新演绎、缩短或改写@视频1，只从它的最后一帧、同一摄影机位置和同一前进动量继续。\n\n延长段开始时，同一位运动型白人女性已经在画面内向前走，绝不能突然生成第二个人或重新入场。她保持深棕马尾、鼠尾草绿色修身长袖运动上衣、哑光黑色全长legging、白灰运动鞋和黑色运动手表。不锈钢水瓶从头到尾只在她的解剖学左手；解剖学右手只负责邀请手势和开门。第一帧必须自然延续@视频1末帧的摄影机高度、35–40mm自然视角、人物比例、白天曝光、暖中性色材料与空间方向，不得停顿或画面重置。\n\n开始后，她自然放慢半步，只做一次轻微回头和克制、真实、温暖的邀请表情，右手做一个很小的“请进”手势；不要原地转身、不要摆拍、不要身体重影、不要脸部复制。随后她顺势继续向前，摄影机以约1.6米人眼高度稳定跟随，保持真实脚步起伏、家具遮挡变化和近远景视差，不能像游戏引擎匀速滑行。\n\n@图片1控制短入口转折及两个不同功能开口。摄影机必须通过真实转弯逐渐到达该关系，图片本身绝不能成为切换画面。必须清楚读出：一个开口是紧凑laundry，能看到洗衣机和柜体；旁边另一个开口才是main bathroom，能看到淋浴区和浴室台盆。不得把它们做成两个浴室，不进入任何一个湿区，不增加第三扇门、第二个走廊或酒店式空间。\n\n她不停留，沿Apartment 106户型中很短的真实连接继续前进。@图片2控制从湿区门口到Bedroom 2门口的相邻关系和末段构图。绝不能生成狭长走廊。她用右手伸向Bedroom 2门把手，但本段不要进入卧室。最后一秒仍保持轻微向前动量，摄影机位于卧室门外，人物、门、前一段短连接方向都清楚可读，给下一段留下可连续的真实末帧。\n\n全程必须是一台摄影机在一个连续三维空间中的物理移动。禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、wall wipe、body wipe、door wipe、architecture morph、穿墙、穿门、穿过家具、静态图片Ken Burns放大、长走廊、两个浴室、重复人物、突然出现人物、换脸、换衣、左右手交换、水瓶消失、游戏CG质感、过度广角、过度景深、橙青调色、黄昏、夜景、字幕、Logo、水印、旁白、对白和歌词。\n\n色彩固定为Brisbane晴朗晚上午的5200–5600K中性日光，柔和高光、真实皮肤与材料，不要塑料感。声音必须从@视频1末尾无缝延续：木地板运动鞋脚步、轻微衣料声、短入口空间的自然混响、远处很轻的城市底噪、右手碰门把手的细小金属声；不得用声音断点掩盖画面跳转。",
+            "type": "text"
+          },
+          {
+            "reference": "reference_video:@Koya/video-production/seedance-2.5-submission-v4-segment-c-retry1/outputs/koya-continuous-preview-through-apartment-entry-21s.mp4",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@Koya/video-production/interior-repair-v1/references/01-turn-to-separate-laundry-bath-corrected-v2.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@Koya/video-production/interior-repair-v1/references/02-wet-area-to-bedroom2-corrected-v1.png",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": 10,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "omni_reference_task_type": "extend",
+        "priority": 0,
+        "ratio": "adaptive",
+        "resolution": "720p",
+        "return_last_frame": true,
+        "watermark": false
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "将@视频1从真实末帧继续延长10秒，输出16:9、720p、带连续原生环境声音的高端写实房地产销售影片。single uninterrupted physical camera take; zero edits。@视频1中已经通过质检的21.047秒外景、入口、同一电梯、目标楼层、Apartment 106开门和进入室内内容全部是连续性最高权威；不要重新演绎、缩短或改写@视频1，只从它的最后一帧、同一摄影机位置和同一前进动量继续。\n\n延长段开始时，同一位运动型白人女性已经在画面内向前走，绝不能突然生成第二个人或重新入场。她保持深棕马尾、鼠尾草绿色修身长袖运动上衣、哑光黑色全长legging、白灰运动鞋和黑色运动手表。不锈钢水瓶从头到尾只在她的解剖学左手；解剖学右手只负责邀请手势和开门。第一帧必须自然延续@视频1末帧的摄影机高度、35–40mm自然视角、人物比例、白天曝光、暖中性色材料与空间方向，不得停顿或画面重置。\n\n开始后，她自然放慢半步，只做一次轻微回头和克制、真实、温暖的邀请表情，右手做一个很小的“请进”手势；不要原地转身、不要摆拍、不要身体重影、不要脸部复制。随后她顺势继续向前，摄影机以约1.6米人眼高度稳定跟随，保持真实脚步起伏、家具遮挡变化和近远景视差，不能像游戏引擎匀速滑行。\n\n@图片1控制短入口转折及两个不同功能开口。摄影机必须通过真实转弯逐渐到达该关系，图片本身绝不能成为切换画面。必须清楚读出：一个开口是紧凑laundry，能看到洗衣机和柜体；旁边另一个开口才是main bathroom，能看到淋浴区和浴室台盆。不得把它们做成两个浴室，不进入任何一个湿区，不增加第三扇门、第二个走廊或酒店式空间。\n\n她不停留，沿Apartment 106户型中很短的真实连接继续前进。@图片2控制从湿区门口到Bedroom 2门口的相邻关系和末段构图。绝不能生成狭长走廊。她用右手伸向Bedroom 2门把手，但本段不要进入卧室。最后一秒仍保持轻微向前动量，摄影机位于卧室门外，人物、门、前一段短连接方向都清楚可读，给下一段留下可连续的真实末帧。\n\n全程必须是一台摄影机在一个连续三维空间中的物理移动。禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、wall wipe、body wipe、door wipe、architecture morph、穿墙、穿门、穿过家具、静态图片Ken Burns放大、长走廊、两个浴室、重复人物、突然出现人物、换脸、换衣、左右手交换、水瓶消失、游戏CG质感、过度广角、过度景深、橙青调色、黄昏、夜景、字幕、Logo、水印、旁白、对白和歌词。\n\n色彩固定为Brisbane晴朗晚上午的5200–5600K中性日光，柔和高光、真实皮肤与材料，不要塑料感。声音必须从@视频1末尾无缝延续：木地板运动鞋脚步、轻微衣料声、短入口空间的自然混响、远处很轻的城市底噪、右手碰门把手的细小金属声；不得用声音断点掩盖画面跳转。"
+  }
+}

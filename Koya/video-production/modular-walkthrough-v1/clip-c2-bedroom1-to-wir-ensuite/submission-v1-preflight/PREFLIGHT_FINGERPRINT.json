@@ -1,0 +1,65 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 2810490,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "5.000000",
+            "format_name": "mov,mp4,m4a,3gp,3g2,mj2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "codec_type": "video",
+              "height": 1080,
+              "r_frame_rate": "24/1",
+              "width": 1920
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-reference-motion.mp4",
+      "provenance": "continuous 5.000-second render from the Apartment 106 master-suite fixed WebGL shell and camera path; local and remote bytes verified identical on 2026-08-26",
+      "provider_url": "https://dealers-catherine-hull-police.trycloudflare.com/00-reference-motion.mp4",
+      "role": "reference_video",
+      "same_scene_id": "koya-106-master-suite-fixed-shell-v1",
+      "sha256": "274b1bad6cee5f4205041942e840cd97a4c118d306ec978466743894f3f4c248"
+    }
+  ],
+  "mode": "video_editing",
+  "output_count": 1,
+  "output_directory": "outputs",
+  "package_sha256": "1c1b07e95fd00727742741800e1f8ac78c9dcfb413965e2cb93c4c7b1140cac9",
+  "parameters": {
+    "duration": -1,
+    "generate_audio": true,
+    "ratio": "adaptive",
+    "resolution": "1080p",
+    "seed": "unavailable",
+    "watermark": false
+  },
+  "price": {
+    "estimated_completion_tokens": 488025,
+    "estimated_total_cny": 16.163388,
+    "exact_total_before_generation": "unavailable",
+    "failure_billing_status": "unavailable",
+    "source": "live account pricing read-back on 2026-08-26 plus prior same-endpoint five-second 1080p V2V usage",
+    "status": "available_unit_price_estimated_total",
+    "unit": "CNY per thousand V2V1080 completion tokens",
+    "unit_price": 0.03312
+  },
+  "prompt": {
+    "bytes": 4049,
+    "path": "PROMPT.txt",
+    "sha256": "3c071363f6a7ab7db073f62ca01c273690473d5a6a2985f79a75916477998306"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

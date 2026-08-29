@@ -1,0 +1,145 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 1412712,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "5.000000",
+            "format_name": "mov,mp4,m4a,3gp,3g2,mj2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "codec_type": "video",
+              "height": 1080,
+              "r_frame_rate": "24/1",
+              "width": 1920
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-reference-motion.mp4",
+      "provenance": "simplified WebGL shell",
+      "role": "reference_video",
+      "same_scene_id": "clip-b-v7-whitebox",
+      "sha256": "a30da9c7d856cc732ef0d56b1242874248fbce59adc01ec7ec05c86b6b52fcf1"
+    },
+    {
+      "bytes": 149614,
+      "index": 1,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "0.040000",
+            "format_name": "image2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mjpeg",
+              "codec_type": "video",
+              "height": 720,
+              "r_frame_rate": "25/1",
+              "width": 1280
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/01-style-kitchen-start.jpg",
+      "provenance": "independently generated whole-room image",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "1394febe4709ca6c455b8b8267a7f6b77577c6c6a9f540ed65245592f9ec8c3e"
+    },
+    {
+      "bytes": 136586,
+      "index": 2,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "0.040000",
+            "format_name": "image2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mjpeg",
+              "codec_type": "video",
+              "height": 720,
+              "r_frame_rate": "25/1",
+              "width": 1280
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/02-style-threshold.jpg",
+      "provenance": "independently generated whole-room image",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "2468acdfeeba3eab5d8625759e8090b9cd07eb1abe8f7576febb17ec2bc09066"
+    },
+    {
+      "bytes": 104082,
+      "index": 3,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "0.040000",
+            "format_name": "image2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mjpeg",
+              "codec_type": "video",
+              "height": 720,
+              "r_frame_rate": "25/1",
+              "width": 1280
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/03-style-main-bath.jpg",
+      "provenance": "independently generated whole-room image",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "7ec7be67b25c6c99218249892500990e136e77c7bd756306cbf975bf7911d173"
+    }
+  ],
+  "mode": "video_editing",
+  "output_count": 1,
+  "output_directory": "outputs",
+  "package_sha256": "72d6085a7dbd5dbecd610f44c3b5f7e3796092fdaac1397f09be6de503410156",
+  "parameters": {
+    "duration": -1,
+    "generate_audio": true,
+    "ratio": "adaptive",
+    "resolution": "1080p"
+  },
+  "price": {
+    "source": "2026-08-26 account pricing read-back",
+    "status": "available",
+    "unit": "CNY per thousand V2V1080 completion tokens",
+    "unit_price": 0.03312
+  },
+  "prompt": {
+    "bytes": 3308,
+    "path": "PROMPT.md",
+    "sha256": "939e434185157038a1c6a7ef17e14513f16a76307a9be926d1b880a31df709a3"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v1",
+  "task_count": 1
+}

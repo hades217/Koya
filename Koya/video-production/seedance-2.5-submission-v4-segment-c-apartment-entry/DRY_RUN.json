@@ -1,0 +1,31 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "network_effect": "blocked",
+  "paid_task_created": false,
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "request": {
+    "duration": 5,
+    "resolution": "720p",
+    "generate_audio": true,
+    "return_last_frame": true,
+    "priority": 0,
+    "ratio": null,
+    "ratio_note": "Inherited as 16:9 from the 1280x720 first frame.",
+    "first_frame": "references/01-apartment-106-closed-door-start-16x9.png",
+    "last_frame": "references/02-inside-compact-entry-hall-end-16x9.png",
+    "prompt_source": "APPROVAL_GATE.md#exact-prompt"
+  },
+  "provider_payload_validation": {
+    "method": "POST",
+    "endpoint": "/contents/generations/tasks",
+    "content_roles": ["text", "first_frame", "last_frame"],
+    "unsupported_combination_detected": false
+  },
+  "cost_gate": {
+    "estimated_cny": 4.5738,
+    "basis": "Two immediately preceding like-for-like 5-second first-last-frame tasks each used 108900 completion tokens at CNY 0.042 per 1000 tokens."
+  },
+  "authorization": "Awaiting explicit user approval before paid submission."
+}

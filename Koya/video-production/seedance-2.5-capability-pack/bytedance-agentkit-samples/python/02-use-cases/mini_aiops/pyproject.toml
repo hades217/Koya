@@ -1,0 +1,18 @@
+[project]
+name = "mini-aiops"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "veadk-python==1.0.10",
+  "google-adk==2.2.0",
+  "agentkit-sdk-python==0.8.1",
+  "urllib3<2.0.0",
+  "volcengine-python-sdk>=4.0.33",
+  "litellm==1.83.14",
+  "mcp-server-ccapi",
+]
+
+[tool.uv.sources]
+mcp-server-ccapi = { path = "mcp_server_ccapi", editable = true }

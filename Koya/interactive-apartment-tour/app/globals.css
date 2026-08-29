@@ -1,0 +1,136 @@
+@import 'tailwindcss';
+
+:root { --ivory: #f3efe5; --ink: #241f1a; --line: rgba(255,255,255,.32); }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #17130f; }
+body { color: white; font-family: Arial, Helvetica, sans-serif; }
+button { font: inherit; }
+
+.tour-shell { position: relative; width: 100vw; height: 100svh; overflow: hidden; background: #17130f; isolation: isolate; }
+.scene { position: absolute; inset: 0; overflow: hidden; cursor: grab; touch-action: none; }
+.scene.dragging { cursor: grabbing; }
+.scene-image { position: absolute; inset: -4%; background-position: center; background-size: cover; background-repeat: no-repeat; animation: reveal .75s cubic-bezier(.22,.72,.18,1) both; transition: transform .12s ease-out; will-change: transform; }
+.scene-image.scene-image-native { inset: 0; }
+.panorama-webgl { position: absolute; inset: 0; overflow: hidden; background-position: center; background-size: cover; }
+.panorama-webgl canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity .35s ease; }
+.panorama-webgl.ready canvas { opacity: 1; }
+.panorama-webgl > span { position: absolute; z-index: 1; left: 50%; top: 50%; padding: 10px 14px; border-radius: 999px; color: white; background: rgba(20,16,13,.52); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transform: translate(-50%, -50%); }
+.panorama-webgl.ready > span { display: none; }
+.scrub-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #16120f; }
+.video-guided .scene { cursor: ns-resize; }
+.video-loading { position: absolute; z-index: 2; left: 50%; top: 50%; padding: 12px 16px; border: 1px solid rgba(255,255,255,.26); border-radius: 999px; background: rgba(20,16,13,.58); backdrop-filter: blur(14px); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transform: translate(-50%, -50%); }
+.scene-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,11,8,.42), transparent 30%, transparent 58%, rgba(12,9,7,.65)), linear-gradient(90deg, rgba(12,9,7,.2), transparent 28%, transparent 70%, rgba(12,9,7,.18)); pointer-events: none; }
+@keyframes reveal { from { opacity: .2; filter: blur(8px); } to { opacity: 1; filter: blur(0); } }
+
+.topbar { position: absolute; z-index: 5; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 24px 28px; }
+.brand { display: flex; align-items: center; gap: 14px; text-shadow: 0 2px 20px rgba(0,0,0,.4); }
+.brand-mark { font-family: Georgia, 'Times New Roman', serif; font-size: 40px; line-height: .8; letter-spacing: -.08em; }
+.brand-rule { width: 1px; height: 28px; background: rgba(255,255,255,.5); }
+.brand-subtitle { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.top-actions { display: flex; gap: 10px; }
+.glass-button { border: 1px solid var(--line); border-radius: 999px; padding: 11px 16px; color: white; background: rgba(24,20,16,.38); backdrop-filter: blur(16px); cursor: pointer; transition: background .2s, border-color .2s; }
+.glass-button:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.65); }
+.mode-toggle.active { color: #2b251f; border-color: rgba(255,255,255,.75); background: rgba(245,241,232,.9); }
+
+.scroll-status { position: absolute; z-index: 7; top: 142px; right: 31px; display: grid; justify-items: center; gap: 8px; width: 48px; color: white; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+.scroll-status > span { position: absolute; right: 32px; top: 61px; width: 120px; font-size: 9px; font-weight: 700; letter-spacing: .14em; text-align: right; text-transform: uppercase; transform: rotate(-90deg); transform-origin: right top; }
+.scroll-status > div { position: relative; width: 2px; height: min(34vh, 280px); overflow: hidden; border-radius: 2px; background: rgba(255,255,255,.28); }
+.scroll-status > div i { position: absolute; left: 0; right: 0; top: 0; display: block; background: white; transition: height .45s cubic-bezier(.2,.8,.2,1); }
+.scroll-status strong { font: 600 10px/1 monospace; }
+.scroll-status small { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .72; }
+.video-route-selector { position: absolute; z-index: 8; top: 92px; left: 50%; display: flex; gap: 6px; max-width: min(720px, calc(100vw - 180px)); padding: 6px; overflow-x: auto; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; background: rgba(22,18,14,.42); box-shadow: 0 8px 32px rgba(0,0,0,.16); backdrop-filter: blur(16px); scrollbar-width: none; transform: translateX(-50%); }
+.video-route-selector::-webkit-scrollbar { display: none; }
+.video-route-selector button { display: flex; align-items: center; gap: 8px; flex: none; padding: 9px 12px; border: 0; border-radius: 999px; color: rgba(255,255,255,.68); background: transparent; cursor: pointer; }
+.video-route-selector button:hover { color: white; background: rgba(255,255,255,.1); }
+.video-route-selector button.active { color: #2b251f; background: rgba(245,241,232,.93); }
+.video-route-selector button.rejected { color: #ffd0c2; }
+.video-route-selector button.rejected.active { color: white; background: rgba(139,62,47,.94); }
+.video-route-selector span { font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+.video-route-selector small { font: 600 9px/1 monospace; opacity: .65; }
+
+.room-title { position: absolute; z-index: 4; left: 30px; top: 46%; transform: translateY(-50%); max-width: 420px; text-shadow: 0 3px 28px rgba(0,0,0,.55); pointer-events: none; }
+.room-title span { display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.room-title h1 { margin: 0; max-width: 380px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(42px, 5.3vw, 76px); font-weight: 400; line-height: .95; letter-spacing: -.045em; }
+.room-title p { margin: 18px 0 0; font-size: 13px; letter-spacing: .04em; opacity: .8; }
+
+.view-switcher { position: absolute; z-index: 7; top: 92px; left: 50%; display: grid; grid-template-columns: 36px auto auto 36px; align-items: center; gap: 12px; min-width: 250px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; background: rgba(22,18,14,.4); box-shadow: 0 8px 32px rgba(0,0,0,.16); backdrop-filter: blur(16px); transform: translateX(-50%); }
+.view-switcher > button { display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 50%; color: white; background: rgba(255,255,255,.1); font-family: Georgia, serif; font-size: 27px; line-height: 1; cursor: pointer; }
+.view-switcher > button:hover { background: rgba(255,255,255,.22); }
+.view-switcher > div { display: flex; gap: 6px; }
+.view-switcher > div button { width: 6px; height: 6px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.38); cursor: pointer; transition: width .18s, background .18s; }
+.view-switcher > div button.active { width: 18px; border-radius: 5px; background: white; }
+.view-switcher > span { min-width: 72px; overflow: hidden; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-align: center; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.panorama-controls { position: absolute; z-index: 7; right: 30px; top: 50%; display: grid; grid-template-columns: 34px 48px 34px; align-items: center; overflow: hidden; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: white; background: rgba(22,18,14,.42); box-shadow: 0 8px 30px rgba(0,0,0,.18); backdrop-filter: blur(14px); transform: translateY(-50%); }
+.panorama-controls button { width: 34px; height: 34px; border: 0; color: white; background: transparent; font-size: 20px; cursor: pointer; }
+.panorama-controls button:hover { background: rgba(255,255,255,.14); }
+.panorama-controls span { font: 700 10px/1 monospace; text-align: center; opacity: .82; }
+
+.wayfinding { position: absolute; z-index: 6; left: 50%; bottom: 98px; display: flex; gap: clamp(12px, 3vw, 42px); transform: translateX(-50%); }
+.wayfinding button { display: grid; place-items: center; gap: 8px; width: 94px; border: 0; color: white; background: transparent; cursor: pointer; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+.wayfinding-arrow { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.62); border-radius: 50%; background: rgba(22,18,14,.28); backdrop-filter: blur(10px); font-size: 24px; transition: transform .2s, background .2s; }
+.wayfinding button:hover .wayfinding-arrow { transform: translateY(-4px); background: rgba(255,255,255,.2); }
+.wayfinding button > span:last-child { max-width: 100px; font-size: 11px; font-weight: 600; line-height: 1.2; }
+
+.plan-card { position: absolute; z-index: 8; right: 24px; bottom: 92px; width: min(410px, calc(100vw - 48px)); padding: 16px; border: 1px solid rgba(255,255,255,.34); border-radius: 18px; color: var(--ink); background: rgba(245,241,232,.94); box-shadow: 0 20px 70px rgba(0,0,0,.28); backdrop-filter: blur(18px); transform: translateX(calc(100% + 40px)); opacity: 0; transition: transform .4s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+.plan-card.open { transform: translateX(0); opacity: 1; }
+.plan-heading { display: flex; align-items: start; justify-content: space-between; margin-bottom: 10px; }
+.plan-heading div { display: grid; gap: 2px; }
+.plan-heading span { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; opacity: .55; }
+.plan-heading strong { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; font-weight: 400; }
+.plan-heading button, .info-card button { border: 0; color: inherit; background: transparent; font-size: 24px; cursor: pointer; }
+.plan-canvas { position: relative; overflow: hidden; aspect-ratio: 1.76; border-radius: 10px; background: #e9e2d6; }
+.plan-canvas img { width: 100%; height: 100%; object-fit: cover; }
+.plan-dot { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; padding: 0; border: 2px solid white; border-radius: 50%; background: #817d76; box-shadow: 0 2px 10px rgba(0,0,0,.38); cursor: pointer; transition: transform .18s, background .18s; }
+.plan-dot span { position: absolute; inset: -8px; }
+.plan-dot:hover { transform: scale(1.22); }
+.plan-dot.visited { background: #5f7567; }
+.plan-dot.active { background: #a96d45; transform: scale(1.32); box-shadow: 0 0 0 6px rgba(169,109,69,.2), 0 2px 12px rgba(0,0,0,.35); }
+.plan-footer { display: flex; gap: 10px; margin-top: 11px; color: rgba(36,31,26,.65); font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.plan-footer span + span::before { content: '·'; margin-right: 10px; }
+
+.info-card { position: absolute; z-index: 9; top: 86px; right: 28px; width: min(360px, calc(100vw - 40px)); padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: rgba(27,23,19,.74); box-shadow: 0 20px 60px rgba(0,0,0,.24); backdrop-filter: blur(20px); }
+.info-card button { position: absolute; top: 10px; right: 12px; color: white; }
+.info-card > span { display: block; padding-right: 25px; font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; opacity: .72; }
+.info-card p { margin: 16px 0 10px; font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1.28; }
+.info-card small { display: block; color: rgba(255,255,255,.67); font-size: 11px; line-height: 1.5; }
+
+.tour-footer { position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 20px; height: 70px; padding: 0 28px; border-top: 1px solid rgba(255,255,255,.2); background: rgba(16,13,10,.6); backdrop-filter: blur(18px); }
+.progress { min-width: 46px; font: 600 11px/1 monospace; letter-spacing: .08em; opacity: .7; }
+.room-strip { display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.room-strip::-webkit-scrollbar { display: none; }
+.room-strip button { flex: none; border: 0; border-radius: 999px; padding: 8px 12px; color: rgba(255,255,255,.62); background: transparent; font-size: 11px; cursor: pointer; white-space: nowrap; }
+.room-strip button:hover, .room-strip button.active { color: white; background: rgba(255,255,255,.13); }
+.room-strip button i { display: inline-block; width: 5px; height: 5px; margin-right: 7px; border-radius: 50%; background: #9db3a2; vertical-align: 1px; }
+.scroll-hint { position: absolute; z-index: 9; left: 50%; bottom: 82px; display: flex; align-items: center; gap: 12px; padding: 9px 15px; border: 1px solid rgba(255,255,255,.26); border-radius: 999px; color: rgba(255,255,255,.82); background: rgba(20,16,13,.48); box-shadow: 0 8px 30px rgba(0,0,0,.18); backdrop-filter: blur(14px); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; transform: translateX(-50%); pointer-events: none; }
+.scroll-hint span { font-size: 16px; animation: scrollCue 1.5s ease-in-out infinite; }
+@keyframes scrollCue { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+.guided .wayfinding { opacity: .32; transition: opacity .2s; }
+.guided .wayfinding:hover { opacity: 1; }
+
+@media (max-width: 760px) {
+  .topbar { padding: 18px; }
+  .brand-rule, .brand-subtitle, .top-actions .glass-button:not(.plan-toggle):not(.mode-toggle) { display: none; }
+  .brand-mark { font-size: 36px; }
+  .top-actions { gap: 6px; }
+  .glass-button { padding: 9px 11px; font-size: 11px; }
+  .room-title { top: 37%; left: 20px; }
+  .room-title h1 { font-size: 44px; }
+  .view-switcher { top: 74px; min-width: 220px; padding: 6px 8px; }
+  .wayfinding { left: 18px; right: 18px; bottom: 84px; justify-content: center; transform: none; gap: 4px; }
+  .wayfinding button { width: 76px; }
+  .wayfinding button:nth-child(n+4) { display: none; }
+  .wayfinding-arrow { width: 42px; height: 42px; }
+  .plan-card { right: 12px; bottom: 80px; width: calc(100vw - 24px); }
+  .tour-footer { height: 64px; padding: 0 16px; }
+  .scene-image { inset: -8%; }
+  .scene-image.scene-image-native { inset: 0; }
+  .scroll-status { top: 128px; right: 12px; }
+  .scroll-status > div { height: 24vh; }
+  .scroll-status > span { display: none; }
+  .scroll-hint { bottom: 76px; width: max-content; max-width: calc(100vw - 28px); font-size: 9px; }
+  .video-route-selector { top: 70px; left: 12px; right: 12px; max-width: none; transform: none; }
+  .panorama-controls { top: 148px; right: 12px; transform: none; }
+  .video-guided .room-title { top: 40%; }
+}
+
+@media (prefers-reduced-motion: reduce) { .scene-image, .plan-card, .wayfinding-arrow { animation: none; transition: none; } }

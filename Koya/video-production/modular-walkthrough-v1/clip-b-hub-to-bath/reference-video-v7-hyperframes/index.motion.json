@@ -1,0 +1,7 @@
+{
+  "duration": 5,
+  "maxStaticSec": 0.35,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#world-canvas", "bySec": 0.01 }
+  ]
+}

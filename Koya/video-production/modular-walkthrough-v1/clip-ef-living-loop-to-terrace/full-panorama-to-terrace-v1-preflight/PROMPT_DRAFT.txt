@@ -1,0 +1,28 @@
+SOURCE OF TRUTH
+Use the submitted eight-second continuous reference video as the sole temporal camera and architectural geometry controller. The video must already be rendered from one fixed Apartment 106 public-zone scene that agrees with the official floor plan. Preserve one uninterrupted physical first-person camera take through the same Living, Dining, Kitchen, MPR opening, glazing bay and Terrace. Zero edits.
+
+COMPLETE CAMERA PATH AND TIMING — TOTAL 8.0 SECONDS
+0.00–0.55 seconds: start at the locked Living/Dining hub, east of Dining and northwest of the sofa. Make one short glance toward the MPR's correct broad public opening while keeping the compact four-seat Dining setting in the foreground. Do not enter MPR and do not turn the opening into a small hinged door.
+0.55–1.65 seconds: translate shallowly around the Living side of Dining while panning clockwise toward the Kitchen. Keep Dining and exactly one Kitchen island visible together long enough to prove they belong to one continuous open-plan room.
+1.65–2.55 seconds: continue across the fixed north Kitchen line and the same single island. Maintain a clear walking aisle and real parallax. Do not duplicate the island or pass through cabinetry.
+2.55–3.35 seconds: continue the same clockwise move to the internal north TV wall. Keep the TV on the internal solid wall below Bedroom 1. Do not place a television on exterior glazing. Reveal the true width of the Living room.
+3.35–4.30 seconds: continue across the sofa and the full-height south and east wrap glazing. Keep the sofa orientation, broad Living proportions, continuous glass rhythm and the same Terrace beyond.
+4.30–5.35 seconds: align the camera with the same existing open east sliding bay along the clear path north of the sofa. Keep the same folded/sliding frames, jambs and opening continuously visible.
+5.35–6.35 seconds: walk briskly toward the threshold. Show genuine forward translation: the same jambs and black track grow through parallax while interior oak floor, track and pale Terrace tile remain readable together.
+6.35–7.15 seconds: physically cross through empty air in the same open bay from oak flooring over the same black track onto the same pale Terrace tiles. Never cross glass, a frame, wall or furniture.
+7.15–8.00 seconds: settle on the same Terrace, show its usable outdoor depth and retain a readable connection through the same opening to Living, Dining and Kitchen. Decelerate once without a snap or camera reset.
+
+IMMUTABLE APARTMENT 106 GEOMETRY
+Keep the compact MPR and its correct broad public opening, compact four-seat Dining, exactly one Kitchen island, fixed north Kitchen cabinetry, internal north TV wall, broad Living proportions, sofa orientation, continuous south/east full-height glazing, one open east sliding bay, black threshold track and wrap Terrace. Every wall, opening, frame, floor transition, fixed furnishing and landmark remains in the same physical position.
+
+VISUAL TREATMENT
+Create photorealistic premium Brisbane residential cinematography with restrained Koya interior language: warm off-white walls, natural oak flooring, pale timber joinery, light stone benchtops, neutral tactile upholstery, slim dark glazing frames and pale Terrace tiles. Use stable bright neutral daytime, soft directional daylight, realistic glass reflections and subtle stabilized first-person walking micro-motion. Preserve buyer-readable depth and room width. Do not make it resemble a game, a glossy synthetic CGI preview or a static image being enlarged.
+
+AUDIO
+Generate continuous understated natural audio: soft footsteps on oak, a subtle change over the metal track, footsteps on Terrace tile, quiet interior room tone, faint HVAC, then restrained Brisbane daytime breeze and birds. No speech, narration, music or dramatic effects.
+
+FORBIDDEN EVENTS
+No cut, dissolve, crossfade, morph, teleport, time jump, alternate camera, room replacement, static push-in, crop-only animation, moving wall, moving glazing, moving furniture, duplicated room, duplicated island, extra door, extra opening, invented column, wall penetration, glass penetration, furniture penetration, closed threshold, MPR entry, oversized third-bedroom-like MPR, narrow corridor-like Living room, solid south/east exterior wall, TV on glazing, fisheye, ultra-wide distortion, floating game-camera movement, daylight change, night transition, flicker, people, hands, text, logo or watermark.
+
+ENDPOINT
+Finish physically outside on the same Terrace after crossing the same east Living opening. Hold a stable buyer-facing view that retains the same opening and a readable connection to Living, Dining and Kitchen.

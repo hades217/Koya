@@ -1,0 +1,68 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "生成一条10秒、16:9、720p、带原生环境声音的高端写实房地产销售影片。single uninterrupted take; zero edits。它是Koya完整30秒一镜到底看房影片的第一段。\n\n@视频1是本次开头、首帧、建筑、人物、空间和摄影机运动的最高权威。前约8秒尽量逐帧保持@视频1已经通过质检的Brisbane/Toowong高空俯冲、Koya持续接近、同一名运动女性、中央玻璃入口、紧凑foyer、写实质感、中性白天色温、空间方向与摄影机动量。不要重新设计、替换或静态放大这些内容。@视频1在人物到达电梯前结束；绝不能复制旧版本中“人物进入但摄影机留在电梯外”的错误。\n\n摄影机从@视频1的高空开头沿固定目标轴快速向前下方飞行，河流、CBD、街区和道路产生真实三维视差；同一栋Koya已经存在于目标地块并在接近过程中持续变大，不得消失、替换或突然生成。约3秒到达街面，建筑外观和层数与@视频1保持一致。\n\n运动型白人女性在街面构图形成时已经自然存在，与@视频1保持同一身份：深棕马尾、鼠尾草绿色长袖运动上衣、哑光黑色全长legging、白灰跑鞋、黑色运动手表；左手始终只有一只不锈钢水瓶，右手开门。摄影机以35–40mm自然视角连续跟随，但不要贴着人物后背。\n\n她右手打开中央玻璃门，摄影机亲自跨过门外地面、金属门槛和门内石材地面；门框连续经过画面两侧，不遮满画面。进入同一个紧凑foyer后快速走到同一台电梯。\n\n最后2.0秒是本次最高优先级动作，必须严格完成：电梯门保持完全打开；人物先跨过电梯金属门槛。摄影机紧跟在她右后方，画面清楚看见foyer地面、金属门槛和轿厢地面连续相接。然后摄影机也实际向前跨过金属门槛并完全进入同一轿厢，左右门框和门槛必须向后移出镜头，证明摄影机不再位于foyer。摄影机进入后继续向前约一步并稳定在人物后方，左右两侧出现轿厢内的浅木墙和黑色扶手。只有当人物和摄影机都已完全在轿厢内后，同一扇金属门才在前方关闭。\n\n@图片1是强制末帧，必须精确到达：摄影机已完全位于同一电梯内部，人物也在轿厢内面向已经完全关闭的同一扇门；左右浅木墙和黑色扶手包围摄影机，foyer、走廊和门槛均不可见。这个末帧将作为下一段电梯上行的第一帧。\n\n禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、architecture morph、人物突然出现、静态图片Ken Burns放大、树叶擦镜、柱子擦镜、门板遮满画面偷换位置、人物后背遮满画面和过度运动模糊。尤其禁止人物进入电梯而摄影机留在外面；禁止在镜头跨过门槛之前关门；禁止从foyer视角直接跳到轿厢视角。\n\n全程保持晴朗Brisbane晚上午、5200–5600K中性日光和一致白平衡；禁止黄昏、夜景、橙青电影色、塑料CG感、字幕、Logo、水印、旁白、对白和歌词。原生音频无缝连续：高空风声收窄为街道车辆与城市底噪，随后是跑鞋脚步、玻璃门五金、石材脚步、foyer混响、电梯提示音、脚步跨过金属门槛和最后的滑轨关门声；不得用音频断点掩盖画面切换。",
+            "type": "text"
+          },
+          {
+            "reference": "reference_video:https://pets-releases-petition-guests.trycloudflare.com/segment-a-passed-motion-0-8s.mp4",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "last_frame:https://pets-releases-petition-guests.trycloudflare.com/references/06-locked-inside-lift-end-frame-16x9.png",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": 10,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "omni_reference_task_type": "reference",
+        "priority": 0,
+        "ratio": "16:9",
+        "resolution": "720p",
+        "return_last_frame": true
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "生成一条10秒、16:9、720p、带原生环境声音的高端写实房地产销售影片。single uninterrupted take; zero edits。它是Koya完整30秒一镜到底看房影片的第一段。\n\n@视频1是本次开头、首帧、建筑、人物、空间和摄影机运动的最高权威。前约8秒尽量逐帧保持@视频1已经通过质检的Brisbane/Toowong高空俯冲、Koya持续接近、同一名运动女性、中央玻璃入口、紧凑foyer、写实质感、中性白天色温、空间方向与摄影机动量。不要重新设计、替换或静态放大这些内容。@视频1在人物到达电梯前结束；绝不能复制旧版本中“人物进入但摄影机留在电梯外”的错误。\n\n摄影机从@视频1的高空开头沿固定目标轴快速向前下方飞行，河流、CBD、街区和道路产生真实三维视差；同一栋Koya已经存在于目标地块并在接近过程中持续变大，不得消失、替换或突然生成。约3秒到达街面，建筑外观和层数与@视频1保持一致。\n\n运动型白人女性在街面构图形成时已经自然存在，与@视频1保持同一身份：深棕马尾、鼠尾草绿色长袖运动上衣、哑光黑色全长legging、白灰跑鞋、黑色运动手表；左手始终只有一只不锈钢水瓶，右手开门。摄影机以35–40mm自然视角连续跟随，但不要贴着人物后背。\n\n她右手打开中央玻璃门，摄影机亲自跨过门外地面、金属门槛和门内石材地面；门框连续经过画面两侧，不遮满画面。进入同一个紧凑foyer后快速走到同一台电梯。\n\n最后2.0秒是本次最高优先级动作，必须严格完成：电梯门保持完全打开；人物先跨过电梯金属门槛。摄影机紧跟在她右后方，画面清楚看见foyer地面、金属门槛和轿厢地面连续相接。然后摄影机也实际向前跨过金属门槛并完全进入同一轿厢，左右门框和门槛必须向后移出镜头，证明摄影机不再位于foyer。摄影机进入后继续向前约一步并稳定在人物后方，左右两侧出现轿厢内的浅木墙和黑色扶手。只有当人物和摄影机都已完全在轿厢内后，同一扇金属门才在前方关闭。\n\n@图片1是强制末帧，必须精确到达：摄影机已完全位于同一电梯内部，人物也在轿厢内面向已经完全关闭的同一扇门；左右浅木墙和黑色扶手包围摄影机，foyer、走廊和门槛均不可见。这个末帧将作为下一段电梯上行的第一帧。\n\n禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、architecture morph、人物突然出现、静态图片Ken Burns放大、树叶擦镜、柱子擦镜、门板遮满画面偷换位置、人物后背遮满画面和过度运动模糊。尤其禁止人物进入电梯而摄影机留在外面；禁止在镜头跨过门槛之前关门；禁止从foyer视角直接跳到轿厢视角。\n\n全程保持晴朗Brisbane晚上午、5200–5600K中性日光和一致白平衡；禁止黄昏、夜景、橙青电影色、塑料CG感、字幕、Logo、水印、旁白、对白和歌词。原生音频无缝连续：高空风声收窄为街道车辆与城市底噪，随后是跑鞋脚步、玻璃门五金、石材脚步、foyer混响、电梯提示音、脚步跨过金属门槛和最后的滑轨关门声；不得用音频断点掩盖画面切换。"
+  }
+}

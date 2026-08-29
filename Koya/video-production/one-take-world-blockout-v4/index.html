@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Koya literal one-take world blockout v4</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #cfe3ef; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      .clip { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+      #world-canvas { display: block; width: 1920px; height: 1080px; }
+      #seek-probe {
+        position: absolute; left: 0; top: 0; width: 1px; height: 1px;
+        background: #cfe3ef;
+      }
+      #timecode {
+        display: none; position: absolute; left: 32px; bottom: 28px; padding: 9px 13px;
+        border-radius: 8px; color: #29343a; background: rgba(255,255,255,.78);
+        font: 600 22px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      #legend {
+        display: none; position: absolute; right: 32px; bottom: 28px; padding: 10px 14px;
+        border-radius: 8px; color: #29343a; background: rgba(255,255,255,.78);
+        font: 600 18px/1.15 system-ui, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-q5fu" id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+      <section data-hf-id="hf-48ix" id="world-shot" class="clip" data-start="0" data-duration="30" data-track-index="1">
+        <canvas data-hf-id="hf-fmht" id="world-canvas" width="1920" height="1080"></canvas>
+        <div data-hf-id="hf-qt47" id="seek-probe" aria-hidden="true"></div>
+        <div data-hf-id="hf-z63h" id="timecode">00.00</div>
+        <div data-hf-id="hf-ogkz" id="legend">CONTINUOUS 3D CAMERA BLOCKOUT · NOT FINAL ART</div>
+      </section>
+    </div>
+
+    <script src="./assets/vendor/gsap.min.js"></script>
+    <script type="module">
+      import * as THREE from './assets/vendor/three.module.js';
+
+      window.__timelines = window.__timelines || {};
+      const seekTimeline = gsap.timeline({ paused: true });
+      seekTimeline.to('#seek-probe', { x: 30, duration: 30, ease: 'none' });
+      window.__timelines['main'] = seekTimeline;
+
+      const W = 1920, H = 1080;
+      const canvas = document.getElementById('world-canvas');
+      const timecode = document.getElementById('timecode');
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+      renderer.setSize(W, H, false);
+      renderer.setPixelRatio(1);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xcfe3ef);
+      scene.fog = new THREE.Fog(0xcfe3ef, 120, 360);
+      const camera = new THREE.PerspectiveCamera(42, W / H, 0.08, 600);
+
+      const hemi = new THREE.HemisphereLight(0xf7fbff, 0x7d877a, 2.4);
+      scene.add(hemi);
+      const sun = new THREE.DirectionalLight(0xfff5df, 4.0);
+      sun.position.set(80, 130, 90);
+      sun.castShadow = true;
+      sun.shadow.mapSize.set(2048, 2048);
+      sun.shadow.camera.left = -100; sun.shadow.camera.right = 100;
+      sun.shadow.camera.top = 100; sun.shadow.camera.bottom = -100;
+      scene.add(sun);
+
+      const MAT = {
+        ground: new THREE.MeshStandardMaterial({ color: 0xbec9b5, roughness: 1 }),
+        road: new THREE.MeshStandardMaterial({ color: 0x596164, roughness: .95 }),
+        white: new THREE.MeshStandardMaterial({ color: 0xe9e4da, roughness: .88 }),
+        stone: new THREE.MeshStandardMaterial({ color: 0xcfc4af, roughness: .82 }),
+        wood: new THREE.MeshStandardMaterial({ color: 0x8c6545, roughness: .78 }),
+        dark: new THREE.MeshStandardMaterial({ color: 0x2f3536, roughness: .7 }),
+        glass: new THREE.MeshPhysicalMaterial({ color: 0xa9d2df, transparent: true, opacity: .32, roughness: .08, transmission: .25 }),
+        green: new THREE.MeshStandardMaterial({ color: 0x4f7958, roughness: .95 }),
+        sage: new THREE.MeshStandardMaterial({ color: 0x78877a, roughness: .85 }),
+        black: new THREE.MeshStandardMaterial({ color: 0x17191a, roughness: .82 }),
+        skin: new THREE.MeshStandardMaterial({ color: 0xc98e6d, roughness: .9 }),
+        metal: new THREE.MeshStandardMaterial({ color: 0x9da4a3, metalness: .8, roughness: .25 }),
+        carpet: new THREE.MeshStandardMaterial({ color: 0x8c8174, roughness: 1 }),
+        blue: new THREE.MeshStandardMaterial({ color: 0x739db1, roughness: .55 })
+      };
+
+      function mesh(geometry, material, position, cast = true, receive = true) {
+        const m = new THREE.Mesh(geometry, material);
+        m.position.copy(position); m.castShadow = cast; m.receiveShadow = receive;
+        scene.add(m); return m;
+      }
+      function box(size, material, position, parent = scene) {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(size.x, size.y, size.z), material);
+        m.position.copy(position); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m;
+      }
+      function v(x,y,z) { return new THREE.Vector3(x,y,z); }
+      function clamp01(n) { return Math.max(0, Math.min(1, n)); }
+      function smooth(n) { n = clamp01(n); return n*n*(3-2*n); }
+      function seg(t, a, b) { return smooth((t-a)/(b-a)); }
+
+      // One continuous ground/world. Koya is present from frame one.
+      mesh(new THREE.PlaneGeometry(500, 500), MAT.ground, v(0,-.08,0), false, true).rotation.x = -Math.PI/2;
+      mesh(new THREE.PlaneGeometry(55, 280), MAT.road, v(0,.01,110), false, true).rotation.x = -Math.PI/2;
+      // A simple river and distant CBD provide real parallax during the dive.
+      const river = mesh(new THREE.PlaneGeometry(85, 360), MAT.blue, v(-115,.02,-35), false, true);
+      river.rotation.x = -Math.PI/2; river.rotation.z = -.18;
+      for (let i=0;i<46;i++) {
+        const side = i % 2 ? -1 : 1;
+        const x = side * (38 + (i%7)*9) + Math.sin(i*1.7)*7;
+        const z = 145 - Math.floor(i/2)*13;
+        const h = 5 + (i*7)%14;
+        box(v(8+(i%3)*2,h,8+(i%4)), i%5===0?MAT.wood:MAT.white, v(x,h/2,z));
+      }
+      for (let i=0;i<11;i++) {
+        const h = 24 + (i*11)%48;
+        box(v(9,h,9), i%3===0?MAT.dark:MAT.white, v(-15+i*7,h/2,-150-(i%3)*7));
+      }
+
+      // Koya: five-level massing, paired curved balcony rhythm, timber battens and central entry.
+      const building = new THREE.Group(); scene.add(building);
+      box(v(34,.35,22), MAT.stone, v(0,.18,-5), building);
+      for (let floor=0; floor<5; floor++) {
+        const y = 1.5 + floor*3.15;
+        if (floor===0) {
+          box(v(11,2.8,18), MAT.white, v(-11.5,y,-5), building);
+          box(v(11,2.8,18), MAT.white, v(11.5,y,-5), building);
+        } else {
+          // Level 1 is a traversable shell, not a solid block. Higher levels can
+          // remain massing because the camera never enters them.
+          if (floor===1) {
+            box(v(32,2.55,.45), MAT.white, v(0,y,3.25), building);
+            box(v(.45,2.55,16.5), MAT.white, v(-15.78,y,-5), building);
+            box(v(.45,2.55,16.5), MAT.white, v(15.78,y,-5), building);
+          } else {
+            box(v(32,2.55,17), MAT.white, v(0,y,-5), building);
+          }
+          box(v(14,.35,3.4), MAT.stone, v(-8,y-.8,4.1), building);
+          box(v(14,.35,3.4), MAT.stone, v(8,y-.8,4.1), building);
+          for (let j=0;j<12;j++) {
+            box(v(.14,1.55,.2), MAT.dark, v(-14+j*1.05,y-.1,5.85), building);
+            box(v(.14,1.55,.2), MAT.dark, v(2+j*1.05,y-.1,5.85), building);
+          }
+          for (const side of [-1,1]) for (let j=0;j<8;j++) {
+            box(v(.13,2.1,.25), MAT.wood, v(side*5.2 + (j-3.5)*.42,y+.05,5.2), building);
+          }
+        }
+      }
+      for (const x of [-14.8,14.8]) box(v(.7,15.4,.7), MAT.white, v(x,7.7,4.8), building);
+      // Rooftop planting.
+      for (const x of [-10,0,10]) {
+        box(v(3,.7,3), MAT.stone, v(x,16.1,-3), building);
+        const crown = new THREE.Mesh(new THREE.SphereGeometry(2.1,16,10), MAT.green);
+        crown.position.set(x,18,-3); crown.castShadow = true; building.add(crown);
+      }
+
+      // Entrance and compact straight foyer, all in the same geometry.
+      const entryLeft = box(v(2.1,3.1,.16), MAT.glass, v(-1.08,1.55,5.25));
+      const entryRight = box(v(2.1,3.1,.16), MAT.glass, v(1.08,1.55,5.25));
+      box(v(.18,3.4,.22), MAT.dark, v(-2.2,1.7,5.25)); box(v(.18,3.4,.22), MAT.dark, v(2.2,1.7,5.25));
+      box(v(4.6,.2,.22), MAT.dark, v(0,3.35,5.25));
+      box(v(9,.16,19), MAT.stone, v(0,.08,-4.2));
+      box(v(9,.16,19), MAT.white, v(0,3.22,-4.2));
+      box(v(.22,3.2,19), MAT.white, v(-4.5,1.6,-4.2));
+      box(v(.22,3.2,19), MAT.white, v(4.5,1.6,-4.2));
+      box(v(1.2,1.0,4), MAT.stone, v(3.75,.5,-5));
+      const planter = new THREE.Mesh(new THREE.CylinderGeometry(.9,1.1,1.2,24), MAT.stone);
+      planter.position.set(-3.5,.6,-4); scene.add(planter);
+      const plant = new THREE.Mesh(new THREE.SphereGeometry(1.3,16,10), MAT.green);
+      plant.position.set(-3.5,2,-4); scene.add(plant);
+
+      // One lift cabin. The cabin, woman and camera travel together only 3.2m to Level 1.
+      const lift = new THREE.Group(); lift.position.set(0,0,-15); scene.add(lift);
+      box(v(5,.18,5), MAT.stone, v(0,.09,-2.2), lift);
+      box(v(5,.18,5), MAT.white, v(0,3.18,-2.2), lift);
+      box(v(5,3.25,.18), MAT.wood, v(0,1.62,-4.6), lift);
+      box(v(.18,3.25,5), MAT.wood, v(-2.4,1.62,-2.2), lift);
+      box(v(.18,3.25,5), MAT.wood, v(2.4,1.62,-2.2), lift);
+      const liftDoorL = box(v(2.1,3,.18), MAT.dark, v(-1.08,1.5,.35), lift);
+      const liftDoorR = box(v(2.1,3,.18), MAT.dark, v(1.08,1.5,.35), lift);
+      box(v(5,.22,.3), MAT.dark, v(0,3.15,.35), lift);
+
+      // Level 1 corridor and Apartment 106 route. The lift uses the same front
+      // doors at both levels: camera turns inside, then exits back through them.
+      const levelY = 3.2;
+      box(v(10,.16,5), MAT.carpet, v(3,levelY+.08,-11.5));
+      box(v(10,.16,5), MAT.white, v(3,levelY+3.02,-11.5));
+      // Lift opening in the rear corridor wall; never fly through solid geometry.
+      box(v(.9,3,.2), MAT.white, v(-1.55,levelY+1.5,-14));
+      box(v(6.9,3,.2), MAT.white, v(4.55,levelY+1.5,-14));
+      box(v(2.2,.25,.2), MAT.white, v(0,levelY+2.88,-14));
+      box(v(10,3,.2), MAT.white, v(3,levelY+1.5,-9));
+      // End wall around the Apartment 106 door, which sits only a few steps from the lift.
+      box(v(.2,3,1.25), MAT.white, v(8,levelY+1.5,-13.38));
+      box(v(.2,3,1.25), MAT.white, v(8,levelY+1.5,-9.62));
+      box(v(.2,.25,2.5), MAT.white, v(8,levelY+2.88,-11.5));
+      const aptDoorPivot = new THREE.Group(); aptDoorPivot.position.set(8,levelY,-10.25); scene.add(aptDoorPivot);
+      box(v(.18,2.8,2.5), MAT.wood, v(0,1.4,-1.25), aptDoorPivot);
+      const plaque = box(v(.08,.42,.72), MAT.dark, v(7.86,levelY+1.72,-9.72));
+      plaque.name = 'Apartment 106 plaque';
+      const plaqueCanvas = document.createElement('canvas');
+      plaqueCanvas.width=384; plaqueCanvas.height=224;
+      const plaqueCtx=plaqueCanvas.getContext('2d');
+      plaqueCtx.fillStyle='#2f3536'; plaqueCtx.fillRect(0,0,384,224);
+      plaqueCtx.fillStyle='#f3eee4'; plaqueCtx.font='700 112px system-ui'; plaqueCtx.textAlign='center'; plaqueCtx.textBaseline='middle';
+      plaqueCtx.fillText('106',192,112);
+      const plaqueTexture=new THREE.CanvasTexture(plaqueCanvas); plaqueTexture.colorSpace=THREE.SRGBColorSpace;
+      const plaqueLabel=new THREE.Mesh(new THREE.PlaneGeometry(.68,.38),new THREE.MeshBasicMaterial({map:plaqueTexture}));
+      plaqueLabel.position.set(7.81,levelY+1.72,-9.72); plaqueLabel.rotation.y=-Math.PI/2; scene.add(plaqueLabel);
+      // Compact apartment turns toward the facade, keeping the whole route
+      // inside Koya's footprint instead of inventing an oversized room.
+      box(v(4,.14,4), MAT.wood, v(10,levelY+.07,-11.5));
+      box(v(4,.14,4), MAT.white, v(10,levelY+3.02,-11.5));
+      box(v(10,.14,9), MAT.wood, v(12,levelY+.07,-5));
+      box(v(10,.14,9), MAT.white, v(12,levelY+3.02,-5));
+      box(v(.2,3,9), MAT.white, v(7,levelY+1.5,-5));
+      box(v(10,.2,3.8), MAT.glass, v(12,levelY+1.5,-.5));
+      // Compact kitchen, island, dining and lounge sized to the apartment footprint.
+      box(v(.75,2.4,4.6), MAT.wood, v(7.45,levelY+1.2,-5.2));
+      box(v(1.6,1.0,3.4), MAT.stone, v(9.3,levelY+.5,-5.2));
+      box(v(2.5,.22,1.5), MAT.wood, v(12.8,levelY+.78,-4));
+      for (const dx of [-.9,.9]) for (const dz of [-.5,.5]) box(v(.14,.75,.14), MAT.wood, v(12.8+dx,levelY+.38,-4+dz));
+      box(v(3.2,.85,1.8), MAT.white, v(15,levelY+.43,-6.8));
+      box(v(2,.3,1.1), MAT.stone, v(15,levelY+.22,-3.8));
+      // The Level 1 balcony is a compact continuation of the living zone, not
+      // a second invented room. It provides a legible daylight finish.
+      box(v(10,.16,4.6), MAT.stone, v(12,levelY+.08,2.1));
+      for (let j=0;j<12;j++) box(v(.12,1.15,.12),MAT.dark,v(7.1+j*.9,levelY+.65,4.25));
+      box(v(10,.12,.12),MAT.dark,v(12,levelY+1.18,4.25));
+      box(v(2.2,.55,.8),MAT.stone,v(15.2,levelY+.28,2.65));
+      const balconyPlant=new THREE.Mesh(new THREE.SphereGeometry(.75,14,9),MAT.green);
+      balconyPlant.position.set(15.2,levelY+1.05,2.65); scene.add(balconyPlant);
+
+      // Simple locked resident used only to prove continuity and handedness.
+      const resident = new THREE.Group(); resident.scale.setScalar(.68); scene.add(resident);
+      const hips = box(v(.78,.52,.45), MAT.black, v(0,1.05,0), resident);
+      const torso = new THREE.Mesh(new THREE.CapsuleGeometry(.46,.72,8,16), MAT.sage);
+      torso.position.set(0,1.75,0); torso.castShadow=true; resident.add(torso);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(.32,20,14), MAT.skin);
+      head.position.set(0,2.55,0); head.castShadow=true; resident.add(head);
+      const hair = new THREE.Mesh(new THREE.SphereGeometry(.34,16,12), MAT.wood);
+      hair.scale.set(1,.9,.75); hair.position.set(0,2.63,.1); resident.add(hair);
+      const pony = new THREE.Mesh(new THREE.CapsuleGeometry(.13,.45,6,10), MAT.wood);
+      pony.position.set(0,2.25,.28); pony.rotation.x=.35; resident.add(pony);
+      function limb(mat, x, y, z, len, radius=.12) {
+        const g = new THREE.Group(); g.position.set(x,y,z); resident.add(g);
+        const m = new THREE.Mesh(new THREE.CapsuleGeometry(radius,len,6,10), mat); m.position.y=-len/2; m.castShadow=true; g.add(m); return g;
+      }
+      const legL=limb(MAT.black,-.22,1.0,0,.86,.15), legR=limb(MAT.black,.22,1.0,0,.86,.15);
+      const armL=limb(MAT.sage,-.54,2.05,0,.72,.11), armR=limb(MAT.sage,.54,2.05,0,.72,.11);
+      const bottle = new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,.45,12), MAT.metal);
+      bottle.position.set(-.54,1.0,.03); resident.add(bottle);
+
+      const camKeys = [
+        {t:0,p:v(0,150,240),q:v(0,6,0)}, {t:3,p:v(0,2.3,70),q:v(0,5,0)},
+        {t:4,p:v(0,2.0,52),q:v(0,2.2,34)}, {t:5.5,p:v(0,1.8,30),q:v(0,1.8,15)},
+        {t:7.2,p:v(0,1.8,8),q:v(0,1.8,-3)}, {t:8.4,p:v(0,1.8,-7),q:v(0,1.8,-14)},
+        {t:9.35,p:v(.7,1.8,-17.8),q:v(-.5,1.8,-16.2)},
+        // Safe inherited seam A: camera and resident are inside the same closed lift.
+        {t:10,p:v(.7,1.8,-18.2),q:v(-.5,1.8,-15.8)}, {t:11.65,p:v(.7,5.0,-18.2),q:v(-.5,5.0,-15.8)},
+        {t:12.5,p:v(.5,5.0,-17.8),q:v(0,5.0,-13)}, {t:13.7,p:v(0,5.0,-13.2),q:v(3.5,5.0,-11.5)},
+        {t:15,p:v(1.8,5.0,-13.5),q:v(7.2,5.0,-11.5)}, {t:16.1,p:v(3.0,5.0,-14.0),q:v(7.9,5.0,-11.25)},
+        {t:17.2,p:v(4.8,5.0,-13.55),q:v(8.8,5.0,-11.05)}, {t:18.5,p:v(8.3,5.0,-11.8),q:v(10.7,5.0,-8.8)},
+        // Safe inherited seam B: already across the Apartment 106 threshold.
+        {t:20,p:v(9.6,5.0,-10.2),q:v(11.6,5.0,-6.2)}, {t:22,p:v(10.35,5.0,-8.5),q:v(12.3,5.0,-4.8)},
+        {t:24,p:v(10.9,5.0,-7),q:v(13.4,5.0,-3.6)}, {t:27,p:v(11.7,5.0,-5.4),q:v(14.3,4.9,-1.2)},
+        {t:30,p:v(12.3,5.0,-4.2),q:v(13.4,4.8,2.0)}
+      ];
+      const resKeys = [
+        {t:3,p:v(0,0,54)}, {t:4,p:v(0,0,36)}, {t:5.5,p:v(0,0,17)},
+        {t:7.2,p:v(0,0,1)}, {t:8.4,p:v(0,0,-12)}, {t:9.35,p:v(-.5,0,-16.2)},
+        {t:10,p:v(-.5,0,-16.2)}, {t:11.65,p:v(-.5,3.2,-16.2)}, {t:12.5,p:v(0,3.2,-13.8)},
+        {t:13.7,p:v(3.2,3.2,-11.5)}, {t:15,p:v(6.2,3.2,-11.5)}, {t:16.1,p:v(7.2,3.2,-11.5)},
+        {t:17.2,p:v(8.5,3.2,-11.3)}, {t:18.5,p:v(10.2,3.2,-9.2)}, {t:20,p:v(11.3,3.2,-7)},
+        {t:22,p:v(12.6,3.2,-5.5)}, {t:24,p:v(13.8,3.2,-3.5)}, {t:27,p:v(14.6,3.2,-1.4)},
+        {t:30,p:v(14.8,3.2,.8)}
+      ];
+
+      function sample(keys,t) {
+        if (t<=keys[0].t) return keys[0].p.clone();
+        if (t>=keys[keys.length-1].t) return keys[keys.length-1].p.clone();
+        for (let i=0;i<keys.length-1;i++) if (t>=keys[i].t && t<=keys[i+1].t) {
+          const u=smooth((t-keys[i].t)/(keys[i+1].t-keys[i].t));
+          return keys[i].p.clone().lerp(keys[i+1].p,u);
+        }
+      }
+      function sampleLook(keys,t) {
+        if (t<=keys[0].t) return keys[0].q.clone();
+        if (t>=keys[keys.length-1].t) return keys[keys.length-1].q.clone();
+        for (let i=0;i<keys.length-1;i++) if (t>=keys[i].t && t<=keys[i+1].t) {
+          const u=smooth((t-keys[i].t)/(keys[i+1].t-keys[i].t));
+          return keys[i].q.clone().lerp(keys[i+1].q,u);
+        }
+      }
+
+      function renderAt(rawTime) {
+        const t = Math.max(0, Math.min(30, Number(rawTime)||0));
+        camera.position.copy(sample(camKeys,t));
+        camera.lookAt(sampleLook(camKeys,t));
+
+        // The same resident is already in the resolving street shot; no pop-in.
+        resident.visible = t >= 2.55;
+        if (resident.visible) {
+          const p=sample(resKeys,t), p2=sample(resKeys,Math.min(30,t+.06));
+          resident.position.copy(p);
+          const dir=p2.clone().sub(p); if (dir.lengthSq()>.0001) resident.rotation.y=Math.atan2(dir.x,dir.z);
+          const gait=Math.sin(t*8.2)*.38;
+          legL.rotation.x=gait; legR.rotation.x=-gait; armL.rotation.x=-gait*.65; armR.rotation.x=gait*.65;
+          bottle.position.y=1.0+Math.abs(Math.sin(t*8.2))*.035;
+        }
+
+        // The same glass entrance opens; no full-frame wipe.
+        const eOpen = seg(t,5.9,6.75) * (1-seg(t,8.1,8.8));
+        entryLeft.position.x=-1.08-eOpen*1.0; entryRight.position.x=1.08+eOpen*1.0;
+
+        // The same lift cabin rises to Level 1 while camera and resident are inside.
+        const liftRise = seg(t,10.05,11.55)*levelY;
+        lift.position.y=liftRise;
+        const dOpenBefore = 1-seg(t,9.25,9.95);
+        const dOpenAfter = seg(t,11.65,12.35);
+        const liftOpen=Math.max(dOpenBefore,dOpenAfter);
+        liftDoorL.position.x=-1.08-liftOpen*1.0; liftDoorR.position.x=1.08+liftOpen*1.0;
+
+        // Apartment door opens in its real hinge position.
+        aptDoorPivot.rotation.y=seg(t,15.65,16.85)*Math.PI*.47;
+
+        timecode.textContent=t.toFixed(2).padStart(5,'0');
+        renderer.render(scene,camera);
+      }
+
+      window.addEventListener('hf-seek', e => renderAt(e.detail.time));
+      renderAt(window.__hfThreeTime || 0);
+    </script>
+  </body>
+</html>

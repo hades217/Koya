@@ -1,0 +1,36 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "mode": "video_editing",
+  "task_count": 1,
+  "output_count": 1,
+  "prompt_file": "PROMPT.txt",
+  "inputs": [
+    {
+      "path": "inputs/00-reference-motion-v4.mp4",
+      "provider_url": "https://package-particle-red-pressure.trycloudflare.com/00-reference-motion-v4.mp4",
+      "role": "reference_video",
+      "provenance": "continuous 5.000-second V4 render from the Apartment 106 Bedroom 1-WIR-Ensuite fixed WebGL shell and forward camera path; all 150 frames inspected",
+      "same_scene_id": "koya-106-master-suite-fixed-shell-v4"
+    }
+  ],
+  "parameters": {
+    "duration": -1,
+    "ratio": "adaptive",
+    "resolution": "1080p",
+    "generate_audio": true,
+    "watermark": false,
+    "seed": "unavailable"
+  },
+  "price": {
+    "status": "available_unit_price_estimated_total",
+    "source": "live account pricing read-back on 2026-08-27 plus the prior same-endpoint five-second 1080p generated-audio V2V task",
+    "unit_price": 0.03312,
+    "unit": "CNY per thousand V2V1080 completion tokens",
+    "estimated_completion_tokens": 471825,
+    "estimated_total_cny": 15.626844,
+    "exact_total_before_generation": "unavailable",
+    "failure_billing_status": "unavailable"
+  },
+  "output_directory": "outputs"
+}

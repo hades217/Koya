@@ -1,0 +1,17 @@
+{
+  "id": "cgt-20260829150142-w8bqq",
+  "model": "doubao-seedance-2-5-260628",
+  "status": {
+    "phase": "succeeded"
+  },
+  "output_url": "https://ark-acg-cn-beijing.tos-cn-beijing.volces.com/doubao-seedance-2-5/2129380310/Video/qqb8w-24105192806202-tgc_49cb0850e771caffff00000000000000000000218719689787120/cgt-20260829150142-w8bqq.mp4?X-Tos-Algorithm=TOS4-HMAC-SHA256&X-Tos-Credential=AKLTYWJkZTExNjA1ZDUyNDc3YzhjNTM5OGIyNjBhNDcyOTQ%2F20260829%2Fcn-beijing%2Ftos%2Frequest&X-Tos-Date=20260829T070727Z&X-Tos-Expires=86400&X-Tos-Max-Requests=100&X-Tos-Signature=22bf4ef173202a5dd2a5cbe434023a5dfcebcbbcf5acbc2a4da1058894be1c73&X-Tos-SignedHeaders=host",
+  "local_path": "/Users/lightman/Documents/sites/Koya/Koya/video-production/modular-walkthrough-v1/clip-ef-living-loop-to-terrace/full-panorama-to-terrace-v1-preflight/outputs/clip-ef-all-images-v3/cgt-20260829150142-w8bqq-1.mp4",
+  "ratio": "16:9",
+  "resolution": "1080p",
+  "duration": 8,
+  "generate_audio": true,
+  "usage": {
+    "completion_tokens": 390825,
+    "total_tokens": 390825
+  }
+}

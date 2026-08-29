@@ -1,0 +1,13 @@
+{
+  "name": "koya-106-clip-b-reference-video-v7",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.14 preview",
+    "check": "npx --yes hyperframes@0.8.14 check",
+    "render": "npx --yes hyperframes@0.8.14 render"
+  },
+  "dependencies": {
+    "gsap": "3.14.2"
+  }
+}

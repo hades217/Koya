@@ -1,0 +1,65 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 4093739,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "8.000000",
+            "format_name": "mov,mp4,m4a,3gp,3g2,mj2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "codec_type": "video",
+              "height": 1080,
+              "r_frame_rate": "30/1",
+              "width": 1920
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-apartment-106-ef-v10-reference.mp4",
+      "provenance": "continuous 8.000-second 1920x1080 render from the plan-locked Apartment 106 V10 public-zone and Terrace fixed Three.js shell; one physical camera; all 240 encoded frames reviewed",
+      "provider_url": "https://fine-increase-friendship-templates.trycloudflare.com/00-apartment-106-ef-v10-reference.mp4",
+      "role": "reference_video",
+      "same_scene_id": "koya-106-ef-v10-planlocked-single-scene",
+      "sha256": "0ffc88e8ae20fe5ea7782f00faf4415aca20132ef80bbaf21cc0367fc5b6f868"
+    }
+  ],
+  "mode": "video_editing",
+  "output_count": 1,
+  "output_directory": "outputs",
+  "package_sha256": "378668769e2a88b219222131f36df2f3164017615cf084d800174154bc666fda",
+  "parameters": {
+    "duration": -1,
+    "generate_audio": true,
+    "ratio": "adaptive",
+    "resolution": "1080p",
+    "seed": "unavailable",
+    "watermark": false
+  },
+  "price": {
+    "exact_total_before_generation": "unavailable",
+    "failure_billing_status": "unavailable",
+    "reference_completion_tokens": 779625,
+    "reference_estimated_total_cny": 25.82118,
+    "source": "live account pricing read-back on 2026-08-29; reference estimate uses the prior same-endpoint 8-second 1080p generated-audio V2V task actual usage",
+    "status": "available_unit_price_reference_estimate_only",
+    "unit": "CNY per thousand V2V1080 completion tokens",
+    "unit_price": 0.03312
+  },
+  "prompt": {
+    "bytes": 4658,
+    "path": "PROMPT.txt",
+    "sha256": "6cf8f38b48a9830bd27581bbdd417bbfceef3f56f6540d7cc1006e62ef0a0521"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

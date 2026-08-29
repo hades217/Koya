@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="./node_modules/gsap/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #cfd9dc; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #apartment-106-scene { display: block; width: 1920px; height: 1080px; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-urd9" id="root" data-composition-id="apartment-106-ef-v10" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+      <canvas data-hf-id="hf-kl39" id="apartment-106-scene" class="clip" data-start="0" data-duration="8" data-track-index="1"></canvas>
+    </div>
+
+    <script type="module">
+      import * as THREE from "./node_modules/three/build/three.module.js";
+
+      const W = 1920;
+      const H = 1080;
+      const canvas = document.getElementById("apartment-106-scene");
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, preserveDrawingBuffer: true });
+      renderer.setSize(W, H, false);
+      renderer.setPixelRatio(1);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xc9d9dd);
+      scene.fog = new THREE.Fog(0xc9d9dd, 22, 46);
+      const camera = new THREE.PerspectiveCamera(46, W / H, 0.08, 80);
+      camera.rotation.order = "YXZ";
+
+      const materials = {
+        plaster: new THREE.MeshStandardMaterial({ color: 0xeee9df, roughness: 0.88 }),
+        plasterWarm: new THREE.MeshStandardMaterial({ color: 0xded2c1, roughness: 0.9 }),
+        oak: new THREE.MeshStandardMaterial({ color: 0xb47d4d, roughness: 0.68 }),
+        oakDark: new THREE.MeshStandardMaterial({ color: 0x7d5134, roughness: 0.72 }),
+        limestone: new THREE.MeshStandardMaterial({ color: 0xcfc5b4, roughness: 0.82 }),
+        tile: new THREE.MeshStandardMaterial({ color: 0xbeb8ac, roughness: 0.9 }),
+        black: new THREE.MeshStandardMaterial({ color: 0x171a1a, roughness: 0.42, metalness: 0.62 }),
+        tv: new THREE.MeshStandardMaterial({ color: 0x080909, roughness: 0.2, metalness: 0.22 }),
+        fabric: new THREE.MeshStandardMaterial({ color: 0xe2ddd4, roughness: 0.98 }),
+        fabricSage: new THREE.MeshStandardMaterial({ color: 0x7f8d78, roughness: 0.96 }),
+        glass: new THREE.MeshPhysicalMaterial({ color: 0xb9d5d7, roughness: 0.1, transmission: 0.62, transparent: true, opacity: 0.32, side: THREE.DoubleSide, depthWrite: false }),
+        planter: new THREE.MeshStandardMaterial({ color: 0x4b4b43, roughness: 0.9 }),
+        leaf: new THREE.MeshStandardMaterial({ color: 0x48684b, roughness: 0.92 }),
+        leafLight: new THREE.MeshStandardMaterial({ color: 0x71836a, roughness: 0.92 }),
+        horizon: new THREE.MeshStandardMaterial({ color: 0x94a789, roughness: 1.0 }),
+      };
+
+      const world = new THREE.Group();
+      scene.add(world);
+
+      function box(name, size, position, material, rotationY = 0, cast = true, receive = true) {
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(size[0], size[1], size[2]), material);
+        mesh.name = name;
+        mesh.position.set(position[0], position[1], position[2]);
+        mesh.rotation.y = rotationY;
+        mesh.castShadow = cast;
+        mesh.receiveShadow = receive;
+        world.add(mesh);
+        return mesh;
+      }
+
+      function cylinder(name, radius, height, position, material, segments = 32) {
+        const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, height, segments), material);
+        mesh.name = name;
+        mesh.position.set(position[0], position[1], position[2]);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        world.add(mesh);
+        return mesh;
+      }
+
+      function leg(x, z, height = 0.72, material = materials.oakDark) {
+        return box("furniture-leg", [0.08, height, 0.08], [x, height / 2, z], material);
+      }
+
+      function chair(name, x, z, rotationY = 0, outdoor = false) {
+        const group = new THREE.Group();
+        group.name = name;
+        const frame = outdoor ? materials.oakDark : materials.oak;
+        const seatMat = outdoor ? materials.fabric : materials.fabricSage;
+        const seat = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.11, 0.53), seatMat);
+        seat.position.set(0, 0.52, 0);
+        seat.castShadow = true;
+        group.add(seat);
+        const back = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.62, 0.09), seatMat);
+        back.position.set(0, 0.83, 0.25);
+        back.rotation.x = -0.1;
+        back.castShadow = true;
+        group.add(back);
+        for (const lx of [-0.21, 0.21]) {
+          for (const lz of [-0.19, 0.19]) {
+            const chairLeg = new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.5, 0.055), frame);
+            chairLeg.position.set(lx, 0.25, lz);
+            chairLeg.castShadow = true;
+            group.add(chairLeg);
+          }
+        }
+        group.position.set(x, 0, z);
+        group.rotation.y = rotationY;
+        world.add(group);
+        return group;
+      }
+
+      function plant(name, x, z, scale = 1) {
+        cylinder(`${name}-pot`, 0.23 * scale, 0.42 * scale, [x, 0.21 * scale, z], materials.planter, 24);
+        const stem = cylinder(`${name}-stem`, 0.028 * scale, 0.82 * scale, [x, 0.78 * scale, z], materials.oakDark, 12);
+        stem.rotation.z = 0.08;
+        for (let i = 0; i < 7; i += 1) {
+          const angle = (i / 7) * Math.PI * 2;
+          const radius = (0.19 + (i % 3) * 0.055) * scale;
+          const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.17 * scale, 14, 10), i % 2 === 0 ? materials.leaf : materials.leafLight);
+          leaf.scale.set(1.5, 0.58, 0.72);
+          leaf.position.set(x + Math.cos(angle) * radius, 0.85 * scale + (i % 3) * 0.11 * scale, z + Math.sin(angle) * radius);
+          leaf.rotation.y = angle;
+          leaf.castShadow = true;
+          world.add(leaf);
+        }
+      }
+
+      // Plan-proportional fixed shell. Exact construction dimensions are unavailable.
+      box("interior-oak-floor", [16.8, 0.12, 8.4], [0.4, -0.06, 0], materials.oak, 0, false, true);
+      box("sheet-up-plaster-wall", [16.8, 2.95, 0.18], [0.4, 1.475, -4.12], materials.plaster);
+      box("sheet-left-wall", [0.18, 2.95, 8.4], [-8.0, 1.475, 0], materials.plaster);
+      box("ceiling", [16.8, 0.12, 8.4], [0.4, 2.95, 0], materials.plaster, 0, false, false);
+
+      // Compact MPR with one broad opening and no invented column.
+      box("mpr-north-partition", [0.16, 2.95, 2.15], [-3.75, 1.475, -3.0], materials.plaster);
+      box("mpr-south-return", [0.16, 2.95, 0.55], [-3.75, 1.475, 3.85], materials.plaster);
+      box("mpr-desk", [2.25, 0.10, 0.62], [-5.55, 0.76, 1.38], materials.oak);
+      leg(-6.5, 1.15); leg(-4.6, 1.15); leg(-6.5, 1.61); leg(-4.6, 1.61);
+      box("mpr-low-storage", [2.6, 0.68, 0.45], [-5.55, 0.34, -3.72], materials.oakDark);
+      box("mpr-rug", [2.75, 0.025, 2.55], [-5.55, 0.02, 1.55], materials.fabricSage, 0, false, true);
+      box("mpr-wall-shelf-one", [1.55, 0.08, 0.24], [-6.1, 1.55, -3.74], materials.oak);
+      box("mpr-wall-shelf-two", [1.55, 0.08, 0.24], [-6.1, 1.92, -3.74], materials.oak);
+      chair("mpr-task-chair", -5.55, 2.18, Math.PI);
+
+      // Kitchen wall and exactly one island.
+      for (let i = 0; i < 6; i += 1) {
+        box(`kitchen-base-${i}`, [1.15, 0.86, 0.56], [-1.8 + i * 1.18, 0.43, -3.72], i === 5 ? materials.oakDark : materials.plasterWarm);
+        box(`kitchen-upper-${i}`, [1.15, 0.78, 0.42], [-1.8 + i * 1.18, 2.0, -3.82], i === 1 ? materials.oakDark : materials.plasterWarm);
+      }
+      box("kitchen-bench", [7.15, 0.09, 0.7], [1.15, 0.91, -3.62], materials.limestone);
+      box("single-kitchen-island", [4.3, 0.88, 1.2], [1.25, 0.44, -1.45], materials.limestone);
+      box("single-kitchen-island-oak-face", [4.08, 0.72, 0.07], [1.25, 0.39, -0.83], materials.oakDark);
+      box("island-sink", [0.82, 0.035, 0.44], [1.86, 0.905, -1.45], materials.black);
+      for (const stoolX of [-0.05, 1.25, 2.55]) {
+        cylinder("island-stool-seat", 0.22, 0.10, [stoolX, 0.66, -0.62], materials.oak, 24);
+        cylinder("island-stool-leg", 0.045, 0.62, [stoolX, 0.31, -0.62], materials.black, 12);
+      }
+
+      // Compact four-seat Dining between MPR and Living.
+      box("dining-table-top", [1.65, 0.10, 1.3], [-1.15, 0.76, 1.55], materials.oak);
+      leg(-1.85, 1.05); leg(-0.45, 1.05); leg(-1.85, 2.05); leg(-0.45, 2.05);
+      chair("dining-chair-n", -1.15, 0.58, 0);
+      chair("dining-chair-s", -1.15, 2.55, Math.PI);
+      chair("dining-chair-w", -2.23, 1.55, -Math.PI / 2);
+      chair("dining-chair-e", -0.07, 1.55, Math.PI / 2);
+
+      // Broad Living with the TV on the internal wall.
+      box("tv-console", [2.8, 0.52, 0.5], [5.1, 0.26, -3.72], materials.oakDark);
+      box("tv-screen", [2.45, 1.32, 0.10], [5.1, 1.63, -4.0], materials.tv);
+      box("sofa-base", [3.45, 0.48, 1.02], [5.2, 0.34, 2.25], materials.fabric);
+      box("sofa-back", [3.45, 0.76, 0.30], [5.2, 0.76, 2.68], materials.fabric);
+      box("sofa-left-arm", [0.26, 0.68, 1.02], [3.58, 0.56, 2.25], materials.fabric);
+      box("sofa-right-arm", [0.26, 0.68, 1.02], [6.82, 0.56, 2.25], materials.fabric);
+      for (const cushionX of [4.28, 5.2, 6.12]) {
+        box("sofa-seat-cushion", [0.84, 0.16, 0.78], [cushionX, 0.62, 2.12], materials.fabric);
+      }
+      box("coffee-table", [1.72, 0.10, 0.82], [5.15, 0.43, 0.82], materials.limestone);
+      cylinder("coffee-table-leg", 0.26, 0.42, [5.15, 0.21, 0.82], materials.oakDark, 28);
+
+      // Continuous sheet-down glazing.
+      const southStart = -3.75;
+      const southEnd = 8.75;
+      box("south-glazing-head", [southEnd - southStart, 0.10, 0.10], [(southStart + southEnd) / 2, 2.83, 4.1], materials.black);
+      box("south-glazing-track", [southEnd - southStart, 0.08, 0.20], [(southStart + southEnd) / 2, 0.04, 4.1], materials.black);
+      for (let x = southStart; x <= southEnd + 0.01; x += 2.08) box("south-glazing-mullion", [0.075, 2.78, 0.09], [x, 1.43, 4.1], materials.black);
+      for (let x = southStart + 1.04; x < southEnd; x += 2.08) box("south-glass-panel", [1.94, 2.68, 0.035], [x, 1.42, 4.1], materials.glass, 0, false, false);
+
+      // Sheet-right glazing; the middle bay is physically empty.
+      box("east-glazing-head", [0.10, 0.10, 8.2], [8.75, 2.83, -0.02], materials.black);
+      box("east-glazing-track-n", [0.20, 0.08, 3.45], [8.75, 0.04, -2.28], materials.black);
+      box("east-glazing-track-s", [0.20, 0.08, 1.12], [8.75, 0.04, 3.54], materials.black);
+      for (const z of [-4.0, -2.25, -0.52, 2.96, 4.08]) box("east-glazing-jamb", [0.10, 2.78, 0.10], [8.75, 1.43, z], materials.black);
+      box("east-glass-north-1", [0.035, 2.68, 1.62], [8.75, 1.42, -3.13], materials.glass, 0, false, false);
+      box("east-glass-north-2", [0.035, 2.68, 1.62], [8.75, 1.42, -1.38], materials.glass, 0, false, false);
+      box("east-glass-south", [0.035, 2.68, 1.02], [8.75, 1.42, 3.53], materials.glass, 0, false, false);
+      box("open-bay-black-threshold", [0.32, 0.055, 3.48], [8.75, 0.032, 1.22], materials.black);
+
+      // One connected wrap Terrace.
+      box("east-terrace-tile", [5.6, 0.10, 8.4], [11.55, -0.05, 0], materials.tile, 0, false, true);
+      box("south-terrace-tile", [22.4, 0.10, 4.2], [3.2, -0.05, 6.2], materials.tile, 0, false, true);
+      for (let x = -7.7; x <= 14.1; x += 0.72) box("south-tile-joint", [0.018, 0.012, 4.1], [x, 0.008, 6.2], materials.plasterWarm, 0, false, false);
+      for (let z = -4.0; z <= 8.2; z += 0.72) box("east-tile-joint", [5.4, 0.012, 0.018], [11.55, 0.008, z], materials.plasterWarm, 0, false, false);
+
+      // Approved Terrace furnishing logic with a clear walking path.
+      cylinder("outdoor-dining-top", 0.76, 0.09, [11.65, 0.74, -1.65], materials.limestone, 48);
+      cylinder("outdoor-dining-pedestal", 0.16, 0.72, [11.65, 0.36, -1.65], materials.oakDark, 28);
+      chair("outdoor-dining-w", 10.55, -1.65, -Math.PI / 2, true);
+      chair("outdoor-dining-e", 12.75, -1.65, Math.PI / 2, true);
+      chair("outdoor-dining-n", 11.65, -2.75, 0, true);
+      chair("outdoor-dining-s", 11.65, -0.55, Math.PI, true);
+      chair("terrace-lounge-one", 11.05, 3.25, -2.45, true).scale.set(1.25, 1.05, 1.35);
+      chair("terrace-lounge-two", 12.72, 2.55, 2.2, true).scale.set(1.25, 1.05, 1.35);
+      cylinder("terrace-side-table", 0.42, 0.48, [12.05, 0.24, 3.35], materials.limestone, 38);
+      plant("planter-near-south", 10.0, 3.7, 1.0);
+      plant("planter-east-one", 13.55, 0.25, 0.88);
+      plant("planter-east-two", 13.45, 3.45, 1.12);
+      plant("planter-south-two", 8.1, 6.7, 1.2);
+
+      // Abstract horizon; no specific external view is claimed.
+      box("east-balustrade-glass", [0.035, 1.02, 12.1], [14.25, 0.55, 1.95], materials.glass, 0, false, false);
+      box("east-balustrade-rail", [0.10, 0.08, 12.1], [14.25, 1.08, 1.95], materials.black);
+      box("south-balustrade-glass", [21.9, 1.02, 0.035], [3.25, 0.55, 8.28], materials.glass, 0, false, false);
+      box("south-balustrade-rail", [21.9, 0.08, 0.10], [3.25, 1.08, 8.28], materials.black);
+      box("distant-green-horizon", [58, 2.8, 2.0], [4, 0.2, 22], materials.horizon, 0, false, false);
+
+      const hemi = new THREE.HemisphereLight(0xf7f4eb, 0x66715f, 2.15);
+      scene.add(hemi);
+      const sun = new THREE.DirectionalLight(0xfff3db, 4.1);
+      sun.position.set(-5, 12, 9);
+      sun.castShadow = true;
+      sun.shadow.mapSize.set(2048, 2048);
+      sun.shadow.camera.left = -18;
+      sun.shadow.camera.right = 18;
+      sun.shadow.camera.top = 16;
+      sun.shadow.camera.bottom = -16;
+      sun.shadow.camera.near = 0.1;
+      sun.shadow.camera.far = 42;
+      scene.add(sun);
+      const interiorFill = new THREE.PointLight(0xffe1bd, 1.7, 15, 2);
+      interiorFill.position.set(1.2, 2.4, -0.8);
+      scene.add(interiorFill);
+      const ceilingFill = new THREE.DirectionalLight(0xfff8ec, 1.35);
+      ceilingFill.position.set(2, 0.8, 2);
+      ceilingFill.target.position.set(2, 3.0, 0);
+      scene.add(ceilingFill);
+      scene.add(ceilingFill.target);
+
+      const cameraPoses = [
+        { t: 0.00, p: [3.00, 1.58, 0.55], yaw: 1.56, pitch: -0.02 },
+        { t: 0.75, p: [2.78, 1.58, 0.82], yaw: 0.74, pitch: -0.015 },
+        { t: 1.65, p: [2.20, 1.58, 2.18], yaw: 0.06, pitch: -0.01 },
+        { t: 2.55, p: [3.22, 1.58, 1.32], yaw: -0.50, pitch: -0.02 },
+        { t: 3.35, p: [4.35, 1.58, 1.05], yaw: -1.24, pitch: -0.01 },
+        { t: 4.45, p: [7.55, 1.58, 1.25], yaw: -1.52, pitch: -0.025 },
+        { t: 5.35, p: [9.75, 1.58, 1.35], yaw: -1.58, pitch: -0.01 },
+        { t: 6.25, p: [11.25, 1.58, 1.55], yaw: -2.22, pitch: -0.035 },
+        { t: 7.30, p: [12.05, 1.58, 2.05], yaw: -4.42, pitch: -0.015 },
+        { t: 8.00, p: [12.05, 1.58, 2.05], yaw: -4.62, pitch: -0.015 },
+      ];
+
+      function smoothstep(value) {
+        const v = Math.min(1, Math.max(0, value));
+        return v * v * (3 - 2 * v);
+      }
+
+      function poseAt(time) {
+        const clamped = Math.min(8, Math.max(0, time));
+        let a = cameraPoses[0];
+        let b = cameraPoses[cameraPoses.length - 1];
+        for (let i = 0; i < cameraPoses.length - 1; i += 1) {
+          if (clamped >= cameraPoses[i].t && clamped <= cameraPoses[i + 1].t) {
+            a = cameraPoses[i];
+            b = cameraPoses[i + 1];
+            break;
+          }
+        }
+        const span = Math.max(0.0001, b.t - a.t);
+        const mix = smoothstep((clamped - a.t) / span);
+        const px = THREE.MathUtils.lerp(a.p[0], b.p[0], mix);
+        const py = THREE.MathUtils.lerp(a.p[1], b.p[1], mix);
+        const pz = THREE.MathUtils.lerp(a.p[2], b.p[2], mix);
+        const walking = clamped >= 3.35 && clamped <= 6.25;
+        const bob = walking ? Math.sin((clamped - 3.35) * Math.PI * 4.2) * 0.012 : 0;
+        return { position: [px, py + bob, pz], yaw: THREE.MathUtils.lerp(a.yaw, b.yaw, mix), pitch: THREE.MathUtils.lerp(a.pitch, b.pitch, mix) };
+      }
+
+      function renderAt(time) {
+        const pose = poseAt(time);
+        camera.position.set(pose.position[0], pose.position[1], pose.position[2]);
+        camera.rotation.set(pose.pitch, pose.yaw, 0, "YXZ");
+        renderer.render(scene, camera);
+      }
+
+      const cameraClock = { time: 0 };
+      const timeline = gsap.timeline({ paused: true });
+      timeline.to(cameraClock, {
+        time: 8,
+        duration: 8,
+        ease: "none",
+        onUpdate: () => renderAt(cameraClock.time),
+      });
+      window.__timelines["apartment-106-ef-v10"] = timeline;
+      window.addEventListener("hf-seek", (event) => renderAt(event.detail.time));
+      renderAt(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "id": "cgt-20260829175719-2hwhz",
+  "model": "doubao-seedance-2-5-260628",
+  "status": "succeeded",
+  "ratio": "16:9",
+  "resolution": "1080p",
+  "provider_duration_field": 7,
+  "generate_audio": true,
+  "usage": {
+    "completion_tokens": 763425,
+    "total_tokens": 763425
+  },
+  "local_output": "outputs/cgt-20260829175719-2hwhz.mp4",
+  "local_sha256": "dfecc7954781d23ee42bb0870d49d3c57efc00a9254d6796a0ef15a583d8a6ff"
+}

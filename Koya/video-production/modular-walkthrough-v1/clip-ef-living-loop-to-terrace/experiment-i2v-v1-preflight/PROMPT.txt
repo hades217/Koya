@@ -1,0 +1,14 @@
+Use the supplied first frame as the exact opening composition and preserve the same Apartment 106 Living room throughout. One continuous photorealistic first-person camera take, zero edits.
+
+Camera path and timing, total 5.0 seconds:
+0.0–0.8 seconds: hold the exact opening composition long enough to read the broad Living room, sofa, timber floor and continuous black-framed glazing.
+0.8–4.3 seconds: walk forward approximately 1.2 metres at a calm human pace along the clear timber-floor path toward the already visible open east sliding bay on frame-right. Maintain almost the same heading; maximum yaw change five degrees. The sofa moves gradually out of the left foreground through real parallax while the same mullions and open bay grow naturally larger.
+4.3–5.0 seconds: decelerate and stop just inside the existing threshold, with interior timber floor, the black sliding track and Terrace tile simultaneously visible. Do not cross onto the Terrace.
+
+Immutable scene: keep the same broad Living proportions, the same sofa, the same continuous grouped south/east glazing, the same black mullions, the same single open east bay, the same timber floor, the same Terrace tiles, the same daylight direction and the same exterior planting. Keep every wall, opening, frame and furniture item fixed.
+
+Allowed changes: natural stabilized walking micro-motion, subtle daylight response on glass, restrained leaf movement outside, realistic photographic texture, quiet interior room tone with a soft distant Brisbane daytime breeze. No music and no speech.
+
+Forbidden: no cut, dissolve, morph, teleport, time jump, camera switch, room replacement, wall or glass crossing, extra door, hinged door, duplicated opening, moving mullion, moving sofa, widening or narrowing the room, fisheye, zoom-only animation, night transition, people, text, logo or watermark. Do not invent any unseen room or turn around a corner.
+
+Endpoint: stop inside the Living room immediately before the same visible open east sliding threshold, ready for a separately approved continuation.

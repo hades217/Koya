@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920,height=1080">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}html,body,#root{width:1920px;height:1080px;overflow:hidden;background:#cdd9dc}
+    canvas{display:block;width:1920px;height:1080px}
+  </style>
+</head>
+<body>
+<div id="root" data-hf-id="hf-shell-root" data-composition-id="apartment-106-endpoint-shell-v2" data-start="0" data-duration="1" data-width="1920" data-height="1080">
+  <canvas id="scene" class="clip" data-hf-id="hf-shell-canvas" data-start="0" data-duration="1" data-track-index="1"></canvas>
+</div>
+<script type="module">
+import * as THREE from './node_modules/three/build/three.module.js';
+
+const W=1920,H=1080,world=new THREE.Group();
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('scene'),antialias:true,preserveDrawingBuffer:true});
+renderer.setSize(W,H,false);renderer.shadowMap.enabled=true;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+const scene=new THREE.Scene();scene.background=new THREE.Color(0xcdd9dc);scene.add(world);
+const camera=new THREE.PerspectiveCamera(42,W/H,0.08,60);camera.rotation.order='YXZ';
+const m={wall:new THREE.MeshStandardMaterial({color:0xeee9df,roughness:.9}),warm:new THREE.MeshStandardMaterial({color:0xd8cbbb,roughness:.88}),oak:new THREE.MeshStandardMaterial({color:0xb27a4c,roughness:.72}),dark:new THREE.MeshStandardMaterial({color:0x785036,roughness:.72}),stone:new THREE.MeshStandardMaterial({color:0xd2c8b8,roughness:.84}),black:new THREE.MeshStandardMaterial({color:0x151818,roughness:.38,metalness:.58}),tv:new THREE.MeshStandardMaterial({color:0x060707,roughness:.2}),fabric:new THREE.MeshStandardMaterial({color:0xe4ded4,roughness:.98}),sage:new THREE.MeshStandardMaterial({color:0x7f8c77,roughness:.96}),glass:new THREE.MeshPhysicalMaterial({color:0xb8d4d7,roughness:.08,transmission:.68,transparent:true,opacity:.30,side:THREE.DoubleSide,depthWrite:false}),tile:new THREE.MeshStandardMaterial({color:0xbdb7ab,roughness:.92})};
+function box(name,s,p,mat,ry=0){const q=new THREE.Mesh(new THREE.BoxGeometry(...s),mat);q.name=name;q.position.set(...p);q.rotation.y=ry;q.castShadow=true;q.receiveShadow=true;world.add(q);return q}
+function cyl(name,r,h,p,mat){const q=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,28),mat);q.name=name;q.position.set(...p);q.castShadow=true;world.add(q);return q}
+function chair(name,x,z,ry=0){const g=new THREE.Group();g.name=name;const seat=new THREE.Mesh(new THREE.BoxGeometry(.5,.11,.5),m.sage);seat.position.y=.51;g.add(seat);const back=new THREE.Mesh(new THREE.BoxGeometry(.5,.57,.09),m.sage);back.position.set(0,.8,.23);g.add(back);for(const a of[-.19,.19])for(const b of[-.18,.18]){const l=new THREE.Mesh(new THREE.BoxGeometry(.05,.48,.05),m.oak);l.position.set(a,.24,b);g.add(l)}g.position.set(x,0,z);g.rotation.y=ry;world.add(g);return g}
+function arcWall(cx,cz,r,a0,a1,n){for(let i=0;i<n;i++){const a=a0+(a1-a0)*(i+.5)/n;const da=(a1-a0)/n;const len=Math.abs(r*da)*1.08;box('mpr-curved-wall',[len,2.8,.14],[cx+Math.cos(a)*r,1.4,cz+Math.sin(a)*r],m.wall,-a)}}
+
+// Compact plan-locked shell. Units are conceptual proportions, not construction dimensions.
+box('floor',[12.4,.1,7.2],[0,-.05,0],m.oak);box('ceiling',[12.4,.1,7.2],[0,2.82,0],m.wall);
+box('left-boundary',[.16,2.8,7.2],[-6.2,1.4,0],m.wall);
+
+// MPR at image-left: curved upper/right boundary and broad opening toward Dining.
+box('mpr-back-wall',[2.15,2.8,.16],[-5.1,1.4,-3.5],m.wall);
+arcWall(-4.05,-2.5,1.05,-Math.PI/2,0,7);
+box('mpr-short-return',[.16,2.8,.72],[-3.0,1.4,-1.38],m.wall);
+box('mpr-desk',[1.8,.1,.55],[-5.05,.73,-1.45],m.oak);chair('mpr-chair',-5.05,-.65,Math.PI);
+
+// Kitchen back line ends with black fridge. Bedroom 1 door starts immediately after it.
+for(let i=0;i<4;i++){box('kitchen-base',[1.02,.84,.54],[-2.35+i*1.04,.42,-3.25],m.warm);box('kitchen-upper',[1.02,.72,.4],[-2.35+i*1.04,1.95,-3.34],i===1?m.oak:m.warm)}
+box('kitchen-bench',[4.18,.09,.66],[-.78,.89,-3.17],m.stone);
+box('fridge',[.78,2.25,.58],[1.72,1.125,-3.19],m.black);
+// Door opening from x=2.16 to 3.08; open leaf is tucked inward into Bedroom 1.
+box('bedroom-door-left-jamb',[.12,2.8,.18],[2.10,1.4,-3.48],m.wall);
+box('bedroom-door-right-jamb',[.12,2.8,.18],[3.14,1.4,-3.48],m.wall);
+box('bedroom-door-head',[1.16,.22,.18],[2.62,2.69,-3.48],m.wall);
+box('bedroom-door-leaf',[.08,2.46,.92],[2.18,1.23,-3.95],m.warm,Math.PI/2);
+// Short wall between door and TV zone.
+box('short-wall-after-bedroom-door',[1.25,2.8,.16],[3.83,1.4,-3.48],m.wall);
+
+// Exactly one island and compact Dining.
+box('island',[3.15,.86,1.03],[-.15,.43,-1.15],m.stone);box('island-oak-face',[3.0,.7,.06],[-.15,.38,-.60],m.dark);
+for(const x of[-1.0,0,.98])cyl('stool',.19,.62,[x,.31,-.36],m.oak);
+box('dining-top',[1.45,.1,1.12],[-1.75,.74,1.38],m.oak);chair('dining-n',-1.75,.55,0);chair('dining-s',-1.75,2.2,Math.PI);chair('dining-w',-2.62,1.38,-Math.PI/2);chair('dining-e',-.88,1.38,Math.PI/2);
+
+// Compact Living. TV/console sits at far-right beside/in front of right glazing, not on a broad feature wall.
+box('tv-console',[1.72,.48,.45],[5.05,.24,-2.82],m.dark);box('tv-screen',[1.48,1.02,.09],[5.05,1.35,-3.02],m.tv);
+box('sofa-base',[2.75,.44,.96],[4.15,.3,1.72],m.fabric);box('sofa-back',[2.75,.7,.28],[4.15,.72,2.12],m.fabric);box('coffee-table',[1.25,.1,.72],[4.1,.4,.42],m.stone);
+
+// Two and only two glazed exterior faces: sheet-down and sheet-right.
+box('south-track',[9.25,.08,.17],[1.57,.04,3.55],m.black);box('south-head',[9.25,.1,.1],[1.57,2.7,3.55],m.black);
+for(let x=-3.0;x<=6.2;x+=1.84){box('south-mullion',[.07,2.68,.08],[x,1.38,3.55],m.black);if(x<5.9)box('south-glass',[1.7,2.58,.035],[x+.91,1.35,3.55],m.glass)}
+box('right-track',[.17,.08,7.05],[6.2,.04,0],m.black);box('right-head',[.1,.1,7.05],[6.2,2.7,0],m.black);
+for(let z=-3.5;z<=3.55;z+=1.76){box('right-mullion',[.08,2.68,.08],[6.2,1.38,z],m.black);if(z<3.2)box('right-glass',[.035,2.58,1.62],[6.2,1.35,z+.87],m.glass)}
+// Terrace visible around the two glazed faces.
+box('south-terrace',[14,.08,2.8],[1.0,-.04,4.95],m.tile);box('right-terrace',[2.8,.08,9],[7.6,-.04,.8],m.tile);
+
+scene.add(new THREE.HemisphereLight(0xf8f3e9,0x687465,2.1));const sun=new THREE.DirectionalLight(0xfff1d7,3.7);sun.position.set(-4,11,8);sun.castShadow=true;scene.add(sun);const fill=new THREE.PointLight(0xffe2c0,1.5,16);fill.position.set(0,2.3,0);scene.add(fill);
+
+camera.position.set(1.58,1.58,5.55);camera.rotation.set(-.025,0,0,'YXZ');renderer.render(scene,camera);
+window.__timelines=window.__timelines||{};window.__timelines['apartment-106-endpoint-shell-v2']={duration:()=>1,seek:()=>renderer.render(scene,camera),pause:()=>{}};
+window.addEventListener('hf-seek',()=>renderer.render(scene,camera));
+</script>
+</body>
+</html>

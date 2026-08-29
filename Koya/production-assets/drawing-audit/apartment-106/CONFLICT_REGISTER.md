@@ -1,0 +1,11 @@
+# Apartment 106 Conflict Register
+
+| ID | Official evidence | Conflicting asset/assumption | Impact | Decision | Affected assets |
+| --- | --- | --- | --- | --- | --- |
+| C01 | FLP-106 shows sheet-down and sheet-right Living edges opening to wrap Terrace through grouped glazing | Render storyboard V1 introduced long decorated solid walls | buyer misreads Living orientation and loses wraparound glazing | reject entire V1 set; forbidden as input | `living-panorama-storyboard-v1/rendered-bridge-v1/**` |
+| C02 | FLP-106 shows a single kitchen island | Early materialization turned sofa/threshold foreground into a second sink island | impossible circulation and duplicate kitchen | reject intermediate candidate; retain only final reviewed V2 contact sheet | intermediate generated image outside active manifest |
+| C03 | FLP-106 includes Dining-facing sheet-down glazing | Earlier white-box shell modelled only part of the public south facade | generative model could invent walls/openings | fixed shell updated to include the missing span; previous MP4 superseded | earlier local reference MP4 and snapshots |
+| C04 | FLP-106 places TV/display on solid internal wall below Bedroom 1 | V1 moved console/art onto an exterior side | wrong sofa orientation and facade | north/internal TV wall locked; exterior sides forbidden | V1 renders and prompts |
+| C05 | Official living/kitchen renders are not explicitly mapped to Apartment 106 | treating them as Apartment 106 geometry | hidden room relocation and dimension drift | material/style reference only | all photorealistic concepts |
+| C06 | Small orientation marker is not sufficiently legible in current raster | production shorthand called sheet-up geographic north | unsupported orientation claim | use sheet-coordinate terms until verified | documents using north/east as factual geography |
+| C07 | FLP-106 shows a curved enclosed MPR upper/right boundary and the public opening at the lower-right beside Dining | prior audits, route contracts and white-box shell placed a conventional MPR door at the upper-right/kitchen side | opening shot, route and MPR geometry were physically wrong | supersede prior Clip EF route and shell; rebuild from Living/Dining hub with a lower-right MPR glance | Clip EF V1-V4 routes, prior structural snapshots, V2 render storyboard |

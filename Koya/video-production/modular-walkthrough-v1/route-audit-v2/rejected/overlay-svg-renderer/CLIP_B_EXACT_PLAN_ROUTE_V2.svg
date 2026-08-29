@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2934" height="1800" viewBox="0 0 2934 1800">
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <!-- Untouched 200 dpi render of the official Apartment 106 PDF. -->
+  <image href="apartment-106-plan-untouched-crop.png" x="0" y="0" width="2934" height="1800"/>
+
+  <!-- Exact clear-floor route: north of Living/Dining, north of the single island, then north through the Bath door. -->
+  <path d="M1850 1050 C1810 1010 1760 970 1710 950 L1160 950 C950 950 760 950 625 950 C615 900 615 850 625 800 L700 680"
+        fill="none" stroke="#ffffff" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" opacity="0.86"/>
+  <path d="M1850 1050 C1810 1010 1760 970 1710 950 L1160 950 C950 950 760 950 625 950 C615 900 615 850 625 800 L700 680"
+        fill="none" stroke="#0877e8" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Camera positions are centered only on clear floor visible in the official plan. -->
+  <g font-family="Verdana" font-size="27" font-weight="700" text-anchor="middle">
+    <g><circle cx="1850" cy="1050" r="36" fill="#fff" stroke="#0877e8" stroke-width="10"/><text x="1850" y="1060" fill="#0877e8">B0</text></g>
+    <g><circle cx="1710" cy="950" r="36" fill="#fff" stroke="#0877e8" stroke-width="10"/><text x="1710" y="960" fill="#0877e8">B1</text></g>
+    <g><circle cx="1160" cy="950" r="36" fill="#fff" stroke="#0877e8" stroke-width="10"/><text x="1160" y="960" fill="#0877e8">B2</text></g>
+    <g><circle cx="625" cy="950" r="36" fill="#fff" stroke="#0877e8" stroke-width="10"/><text x="625" y="960" fill="#0877e8">B3</text></g>
+    <g><circle cx="625" cy="800" r="36" fill="#fff" stroke="#0877e8" stroke-width="10"/><text x="625" y="810" fill="#0877e8">B4</text></g>
+    <g><circle cx="700" cy="680" r="36" fill="#fff" stroke="#0877e8" stroke-width="10"/><text x="700" y="690" fill="#0877e8">B5</text></g>
+  </g>
+
+  <rect x="1280" y="72" width="1520" height="245" rx="24" fill="#ffffff" fill-opacity="0.95" stroke="#2d2925" stroke-width="3"/>
+  <g font-family="Verdana" fill="#161616">
+    <text x="1330" y="132" font-size="37" font-weight="700">Apartment 106 - Clip B exact 2D route</text>
+    <text x="1330" y="184" font-size="26">B0-B2: stay in the clear strip north of Dining and north of the single island</text>
+    <text x="1330" y="225" font-size="26">B3: stop south of the real Bath door; Laundry remains a separate room to the west</text>
+    <text x="1330" y="266" font-size="26">B4-B5: cross the fixed Bath threshold and finish fully inside Bath</text>
+  </g>
+</svg>

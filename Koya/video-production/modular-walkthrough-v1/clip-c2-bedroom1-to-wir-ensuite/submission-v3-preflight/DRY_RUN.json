@@ -1,0 +1,61 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "SOURCE OF TRUTH\nUse the submitted five-second V6 reference video as the sole temporal camera and architectural geometry controller. Preserve its one fixed Apartment 106 Bedroom 1, WIR and Ensuite shell, both existing thresholds, camera height, rectilinear lens, brisk forward walking rhythm and exact endpoint. Produce one uninterrupted physically continuous take. The official Apartment 106 floor plan controls topology. Official Koya renders control only the restrained finish language; no whole-room still image is attached to this provider request.\n\nCAMERA PATH AND TIMING\n0.00-0.25 seconds: begin from the composed first-person Bedroom 1 pose with the bed readable on camera-right and the existing WIR opening already visible ahead-left. Take the first accelerating step. Do not introduce a person, whip-pan or large initial rotation.\n0.25-1.00 seconds: briskly approach and physically cross the existing Bedroom 1-to-WIR opening. Keep the opening continuously visible. The same floor, walls and both jambs must translate with real parallax.\n1.00-1.90 seconds: continue straight through the compact WIR without stopping and without turning toward the south/camera-left wall. Keep one fitted wardrobe bank on the north/camera-right side. A shallow entrance-side recess on the south/camera-left wall exists as a fixed back plane with two return walls; let it pass peripherally and do not feature it.\n1.90-2.50 seconds: physically cross the only WIR-to-Ensuite doorway. Both jambs enlarge and pass behind the camera; do not cross a wall, cabinet or fixture.\n2.50-3.00 seconds: after clearing the threshold, step into the same compact Ensuite and turn toward the double vanity.\n3.00-4.20 seconds: walk west along the clear south-side bathroom aisle while looking north at the fixed fixture run, passing the double vanity, central toilet and west-end shower in that physical order.\n4.20-5.00 seconds: decelerate once and hold on the shower end of the same fixture run. Do not snap back or end on black.\n\nIMMUTABLE GEOMETRY\nBedroom 1 remains east/right of WIR. WIR remains the only connector. Ensuite remains west/left of WIR. Keep exactly one Bedroom-to-WIR opening, one WIR-to-Ensuite doorway and one north/camera-right fitted wardrobe bank. Keep the shallow south/camera-left WIR recess fixed and physically recessed, but visually secondary. Keep the Bedroom 1 bed, compact room proportions, narrow WIR, clear walking aisle, bathroom walls, shower, toilet and double vanity fixed throughout. Do not enlarge any space.\n\nALLOWED VISUAL TRANSFORMATION\nReplace only the simplified blockout surfaces with highly photorealistic premium Brisbane apartment finishes consistent with Koya's official interior language: warm off-white walls, warm natural oak flooring in Bedroom 1 and WIR, refined pale-timber wardrobe joinery with an open rail, shelving, drawers and restrained clothing, neutral residential textiles, light stone-look porcelain bathroom finishes, clear shower glazing, brushed metal fittings, a realistic functional double vanity, mirrors and sanitary fixtures. Use stable neutral Brisbane daytime, soft directional daylight, physically credible shadows, natural exposure and subtle stabilised first-person walking micro-motion. The result must resemble real residential cinematography, not a game render, design-board animation or glossy synthetic CGI.\n\nAUDIO\nGenerate continuous understated natural interior audio: soft first-person footsteps aligned to travel, subtle room tone and faint daytime ambience. No speech, narration, music, dramatic effects or audible edit.\n\nFORBIDDEN EVENTS\nZero cuts, dissolves, crossfades, morphs, teleports, scene replacements, room swaps, static-image push-ins, duplicated rooms, wall penetration, door wipes, alternate camera angles, extra doors, direct Bedroom-to-Ensuite shortcut, missing WIR, a second wardrobe bank, a flat replacement for the left recess, a camera turn toward the left recess, widened corridor, moving walls, moving fixtures, fisheye, ultra-wide distortion, day/night change, flicker, exposure jump or game-like floating motion. Do not add a person, hands, operator reflection, text, logo or watermark.\n\nENDPOINT CONTRACT\nThe final camera remains physically inside the same Ensuite near the west shower end after moving through both real thresholds. The preceding vanity and toilet inspection must remain spatially continuous. Motion eases into one stable useful sales view without a cut, dissolve, snap-back or black frame.",
+            "type": "text"
+          },
+          {
+            "reference": "reference_video:https://relatives-simple-incentive-lewis.trycloudflare.com/00-reference-motion-v6.mp4",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": -1,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "ratio": "adaptive",
+        "resolution": "1080p"
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "SOURCE OF TRUTH\nUse the submitted five-second V6 reference video as the sole temporal camera and architectural geometry controller. Preserve its one fixed Apartment 106 Bedroom 1, WIR and Ensuite shell, both existing thresholds, camera height, rectilinear lens, brisk forward walking rhythm and exact endpoint. Produce one uninterrupted physically continuous take. The official Apartment 106 floor plan controls topology. Official Koya renders control only the restrained finish language; no whole-room still image is attached to this provider request.\n\nCAMERA PATH AND TIMING\n0.00-0.25 seconds: begin from the composed first-person Bedroom 1 pose with the bed readable on camera-right and the existing WIR opening already visible ahead-left. Take the first accelerating step. Do not introduce a person, whip-pan or large initial rotation.\n0.25-1.00 seconds: briskly approach and physically cross the existing Bedroom 1-to-WIR opening. Keep the opening continuously visible. The same floor, walls and both jambs must translate with real parallax.\n1.00-1.90 seconds: continue straight through the compact WIR without stopping and without turning toward the south/camera-left wall. Keep one fitted wardrobe bank on the north/camera-right side. A shallow entrance-side recess on the south/camera-left wall exists as a fixed back plane with two return walls; let it pass peripherally and do not feature it.\n1.90-2.50 seconds: physically cross the only WIR-to-Ensuite doorway. Both jambs enlarge and pass behind the camera; do not cross a wall, cabinet or fixture.\n2.50-3.00 seconds: after clearing the threshold, step into the same compact Ensuite and turn toward the double vanity.\n3.00-4.20 seconds: walk west along the clear south-side bathroom aisle while looking north at the fixed fixture run, passing the double vanity, central toilet and west-end shower in that physical order.\n4.20-5.00 seconds: decelerate once and hold on the shower end of the same fixture run. Do not snap back or end on black.\n\nIMMUTABLE GEOMETRY\nBedroom 1 remains east/right of WIR. WIR remains the only connector. Ensuite remains west/left of WIR. Keep exactly one Bedroom-to-WIR opening, one WIR-to-Ensuite doorway and one north/camera-right fitted wardrobe bank. Keep the shallow south/camera-left WIR recess fixed and physically recessed, but visually secondary. Keep the Bedroom 1 bed, compact room proportions, narrow WIR, clear walking aisle, bathroom walls, shower, toilet and double vanity fixed throughout. Do not enlarge any space.\n\nALLOWED VISUAL TRANSFORMATION\nReplace only the simplified blockout surfaces with highly photorealistic premium Brisbane apartment finishes consistent with Koya's official interior language: warm off-white walls, warm natural oak flooring in Bedroom 1 and WIR, refined pale-timber wardrobe joinery with an open rail, shelving, drawers and restrained clothing, neutral residential textiles, light stone-look porcelain bathroom finishes, clear shower glazing, brushed metal fittings, a realistic functional double vanity, mirrors and sanitary fixtures. Use stable neutral Brisbane daytime, soft directional daylight, physically credible shadows, natural exposure and subtle stabilised first-person walking micro-motion. The result must resemble real residential cinematography, not a game render, design-board animation or glossy synthetic CGI.\n\nAUDIO\nGenerate continuous understated natural interior audio: soft first-person footsteps aligned to travel, subtle room tone and faint daytime ambience. No speech, narration, music, dramatic effects or audible edit.\n\nFORBIDDEN EVENTS\nZero cuts, dissolves, crossfades, morphs, teleports, scene replacements, room swaps, static-image push-ins, duplicated rooms, wall penetration, door wipes, alternate camera angles, extra doors, direct Bedroom-to-Ensuite shortcut, missing WIR, a second wardrobe bank, a flat replacement for the left recess, a camera turn toward the left recess, widened corridor, moving walls, moving fixtures, fisheye, ultra-wide distortion, day/night change, flicker, exposure jump or game-like floating motion. Do not add a person, hands, operator reflection, text, logo or watermark.\n\nENDPOINT CONTRACT\nThe final camera remains physically inside the same Ensuite near the west shower end after moving through both real thresholds. The preceding vanity and toilet inspection must remain spatially continuous. Motion eases into one stable useful sales view without a cut, dissolve, snap-back or black frame."
+  }
+}

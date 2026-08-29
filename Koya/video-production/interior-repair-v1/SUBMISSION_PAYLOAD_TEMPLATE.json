@@ -1,0 +1,39 @@
+{
+  "model": "ep-20260812221158-hb576",
+  "content": [
+    {
+      "type": "text",
+      "text": "{EXACT_CONTENT_OF_PROMPT_R1_TXT}"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "{PUBLIC_BASE}/preserved-apartment-entry-final-frame.png"
+      },
+      "role": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "{PUBLIC_BASE}/01-turn-to-separate-laundry-bath-corrected-v2.png"
+      },
+      "role": "reference_image"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "{PUBLIC_BASE}/02-wet-area-to-bedroom2-corrected-v1.png"
+      },
+      "role": "reference_image"
+    }
+  ],
+  "duration": 10,
+  "ratio": "16:9",
+  "resolution": "720p",
+  "generate_audio": true,
+  "return_last_frame": true,
+  "watermark": false,
+  "output_format": "mp4",
+  "priority": 0,
+  "omni_reference_task_type": "reference"
+}

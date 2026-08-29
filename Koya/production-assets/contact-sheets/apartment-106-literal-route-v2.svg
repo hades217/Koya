@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3508 2481" width="3508" height="2481">
+  <image x="0" y="0" width="3508" height="2481" xlink:href="../assets/official/floorplans/apartment-106.png" opacity="0.86"/>
+  <rect x="980" y="405" width="2150" height="1180" rx="28" fill="none" stroke="#0d2235" stroke-width="8" opacity="0.2"/>
+
+  <g style="stroke:#1479d1;stroke-width:24;stroke-linecap:round;opacity:0.82">
+    <line x1="1140" y1="555" x2="1140" y2="1000" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1140" y1="1000" x2="1430" y2="905" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1430" y1="905" x2="1140" y2="1000" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1140" y1="1000" x2="1220" y2="1100" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1220" y1="1100" x2="1350" y2="1260" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1350" y1="1260" x2="1220" y2="1100" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1220" y1="1100" x2="1650" y2="1080" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1650" y1="1080" x2="1660" y2="1270" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1660" y1="1270" x2="1650" y2="1080" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1650" y1="1080" x2="1930" y2="1070" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="1930" y1="1070" x2="2300" y2="1040" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="2300" y1="1040" x2="2380" y2="900" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="2380" y1="900" x2="2240" y2="860" style="stroke:#1479d1;stroke-width:24"/>
+    <line x1="2240" y1="860" x2="1900" y2="850" style="stroke:#1479d1;stroke-width:24"/>
+  </g>
+  <g style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22;stroke-linecap:round;opacity:0.88">
+    <line x1="1900" y1="850" x2="2240" y2="860" style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22"/>
+    <line x1="2240" y1="860" x2="2380" y2="900" style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22"/>
+    <line x1="2380" y1="900" x2="2300" y2="1040" style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22"/>
+    <line x1="2300" y1="1040" x2="2000" y2="1120" style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22"/>
+    <line x1="2000" y1="1120" x2="2020" y2="1240" style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22"/>
+    <line x1="2020" y1="1240" x2="2360" y2="1260" style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22"/>
+    <line x1="2360" y1="1260" x2="2820" y2="1360" style="stroke:#d66a1f;stroke-width:24;stroke-dasharray:34 22"/>
+  </g>
+
+  <g font-family="Verdana" font-size="34" font-weight="700" text-anchor="middle" dominant-baseline="central">
+    <g fill="#1479d1" stroke="#fff" stroke-width="8">
+      <circle cx="1140" cy="555" r="42"/><circle cx="1430" cy="905" r="42"/><circle cx="1350" cy="1260" r="42"/>
+      <circle cx="1640" cy="1085" r="42"/><circle cx="1660" cy="1270" r="42"/><circle cx="1930" cy="1070" r="42"/>
+      <circle cx="2380" cy="1040" r="42"/><circle cx="2240" cy="860" r="42"/><circle cx="1900" cy="850" r="42"/>
+    </g>
+    <g fill="#fff" stroke="none">
+      <text x="1140" y="555">1</text><text x="1430" y="905">2</text><text x="1350" y="1260">3</text>
+      <text x="1640" y="1085">4</text><text x="1660" y="1270">5</text><text x="1930" y="1070">6</text>
+      <text x="2380" y="1040">7</text><text x="2240" y="860">8</text><text x="1900" y="850">9</text>
+    </g>
+    <g fill="#d66a1f" stroke="#fff" stroke-width="8">
+      <circle cx="2020" cy="1240" r="42"/><circle cx="2360" cy="1260" r="42"/><circle cx="2820" cy="1360" r="42"/>
+    </g>
+    <g fill="#fff" stroke="none">
+      <text x="2020" y="1240">10</text><text x="2360" y="1260">11</text><text x="2820" y="1360">12</text>
+    </g>
+  </g>
+
+  <g font-family="Verdana" font-size="34" fill="#12202c">
+    <rect x="1010" y="1640" width="2130" height="360" rx="28" fill="#fff" fill-opacity="0.94" stroke="#d8d2c5" stroke-width="5"/>
+    <text x="1080" y="1710" font-size="48" font-weight="700">Apartment 106 — literal one-camera route</text>
+    <text x="1080" y="1780" font-size="30" font-weight="700" fill="#1479d1">BLUE 1–9: Entry → bath/laundry → Bedroom 2 → kitchen axis → MPR → kitchen → Bedroom 1 → WIR → ensuite</text>
+    <text x="1080" y="1845" font-size="30" font-weight="700" fill="#d66a1f">ORANGE RETURN: ensuite → WIR → Bedroom 1 → kitchen</text>
+    <text x="1080" y="1910" font-size="30" font-weight="700" fill="#d66a1f">ORANGE 10–12: dining/invitation → living → private terrace</text>
+    <text x="1080" y="1965" font-size="28" fill="#5d6266">Blue solid = outward inspection. Orange dashed = physical return and public-space payoff. Same doors are reused.</text>
+  </g>
+</svg>

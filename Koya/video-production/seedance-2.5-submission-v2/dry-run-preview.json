@@ -1,0 +1,132 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "时长：30秒\n比例：16:9\n分辨率：720p\n画风：高端写实房地产销售影片，色彩自然、清晰克制、真实住宅尺度\n连续性模式：严格字面一镜到底，摄影机从Brisbane上空到Apartment 106客厅全程只有一个连续机位，不得剪辑、溶解、闪白、黑帧、树叶擦镜、人物贴镜遮挡或利用运动模糊偷换空间。\n\n参考职责：\n@视频1只控制完整30秒摄影机路线、速度和门槛时序，不控制建筑外观。\n@图片1是Koya官方正立面的唯一建筑几何真相；所有远近视角必须保持同一栋建筑、相同楼层、阳台、木格栅、入口、车道和屋顶。\n@图片2是0秒高空构图；@图片3是同一栋楼的中空位置；@图片4是同一栋楼的低空位置；@图片5是同一栋楼的街面正立面。\n@图片6锁定唯一主角的身份、体型、棕色马尾、鼠尾草灰绿色长袖运动上衣、哑光黑色legging、白色跑鞋、黑色运动手表和左手不锈钢水瓶。\n@图片7锁定人物从街面走向入口的比例和方向。\n@图片8锁定官方入口到明亮foyer的同一玻璃门槛。\n@图片9锁定白天foyer、电梯位置和直线运动轴。\n@图片10锁定人物和摄影机跨入同一轿厢的门槛。\n@图片11锁定同一轿厢、同一机位和关闭的同一扇门。\n@图片12锁定同一轿厢重新开门并跨出到目标层。\n@图片13锁定短走廊和住宅门。\n@图片14锁定住宅门外地毯、门槛与门内木地板的连续关系。\n@图片15锁定Apartment 106紧凑入口hall的真实住宅尺度，采用自然35–40mm视角，不得放大。\n@图片16锁定Apartment 106厨房、餐厅、客厅和露台的合理尺度与白天材质。\n@图片17是Apartment 106官方平面图，是住宅内部邻接关系、入口、hall、厨房、餐厅、客厅与露台位置的最高优先级依据。\n\n0.0–3.0秒：\n运镜：高空广角镜头沿固定目标轴快速向前下方俯冲，同时平滑减小俯角，在3秒内自然落到街道人眼高度；全程无旋转、无绕飞、无遮挡。\n景别：Brisbane/Toowong高空大远景连续变为Koya低空全景和街面全景。\n主体：@图片1中的完整Koya从第0秒已经在画面中心可辨认，依次严格经过@图片2、@图片3、@图片4和@图片5的距离关系；建筑只变大，不消失、不变形、不换楼。\n动作：快速俯冲后自然刹车并抬平视线，中央入口始终是运动轴线。\n光影：晴朗Brisbane晚上午，5200–5600K中性日光、浅蓝天空、同一太阳方向，不得转为黄昏或夜晚。\n音效：高空风声快速收窄为街道远处车辆和城市环境声；一条极轻、现代、无歌词的高级氛围音乐从低频开始。\n\n3.0–4.5秒：\n运镜：眼平稳定向前轻推，不停机、不切镜头。\n景别：Koya完整正立面全景。\n主体：严格保持@图片1和@图片5的官方建筑几何，正门居中，Koya标识自然可见但不切特写。\n动作：短暂减速，让买家看清建筑后立即继续前进。\n光影：与前段完全相同的白天与白平衡。\n音效：风声降低，街道环境和近处脚步空间逐渐建立。\n\n4.5–7.0秒：\n运镜：摄影机快速稳定跟随，不必始终贴着人物，建筑与入口仍是画面主轴。\n景别：全景逐渐变为人物背面中全景。\n主体：@图片6中的唯一运动女性按@图片7的比例从画面前方进入，快步走向同一中央入口。\n动作：左手始终拿一只不锈钢水瓶，右手自由；人物不回头、不换衣、不换脸、不换手。\n光影：白天日光和建筑阴影方向连续。\n音效：白色跑鞋脚步、轻微衣料声和自然呼吸加入；音乐保持克制。\n\n7.0–9.5秒：\n运镜：同一摄影机紧随人物上台阶并亲自跨过玻璃入口门槛，不得利用门框遮满画面换空间。\n景别：人物背面中全景。\n主体：严格按@图片8的玻璃门、门框、地坪和明亮foyer关系。\n动作：人物右手推门，左手水瓶不换手；人物先跨过门槛，摄影机随后跨过，同一门框从镜头前方移动到两侧再移动到身后。\n光影：室外自然日光真实流入foyer深处；室内灯仅作4000–4500K中性补光，不得暗黄。\n音效：玻璃门五金声、脚步由室外硬地转为石材，并出现轻微室内混响。\n\n9.5–11.0秒：\n运镜：沿@图片9中央轴快速前推到电梯，速度略快于人物但不越过门槛。\n景别：foyer中全景。\n主体：同一人物、同一foyer、同一部电梯。\n动作：人物快步到达并用右手呼梯，电梯门立即自然打开，删除无意义等待。\n光影：入口日光仍从身后可感知，明确是白天。\n音效：石材脚步、呼梯按键轻响、电梯到达提示音和开门滑轨声。\n\n11.0–12.0秒：\n运镜：人物与摄影机连续跨入同一部电梯，严格参考@图片10。\n景别：中全景。\n主体：同一人物、同一金属门槛、浅色石材地面、浅暖木侧墙、黑色扶手和深铜色门。\n动作：必须同时看见foyer地面、门框、金属门槛和轿厢地面，证明摄影机亲自进入。\n光影：轿厢保持明亮中性色温，不进入夜景。\n音效：门槛脚步材质变化和轿厢短混响。\n\n12.0–14.0秒：\n运镜：摄影机已在同一轿厢、人物身后、面对同一扇门，机位不变。\n景别：轿厢内中全景。\n主体：严格参考@图片11的轿厢、人物和扶手位置。\n动作：门在0.7秒内关闭；随后约1.3秒只用轻微身体重心和低频机械声表达上行，压缩等待时间；不得换轿厢、换人物方向或换相机。\n光影：中性灯光稳定，不闪黑。\n音效：关门滑轨声、短促低频上行声和目的层提示音。\n\n14.0–15.0秒：\n运镜：从同一轿厢机位看同一扇门打开，人物和摄影机立即向前跨出，严格参考@图片12。\n景别：从轿厢内看目标层中全景。\n主体：画面两侧保留同一轿厢木墙与扶手，同时看见门框、门槛和目标层走廊。\n动作：人物先跨出，摄影机紧随，不得在门关闭期间跳到走廊。\n光影：目标层为明亮白天平衡照明，不得突然变暗。\n音效：开门声、提示音，脚步由石材转为短走廊地毯。\n\n15.0–17.0秒：\n运镜：同一摄影机在1.6米高度快速跟随，走廊很短，不做酒店式慢走。\n景别：人物背面中全景逐渐靠近住宅门。\n主体：参考@图片13的紧凑走廊和同一住宅门。\n动作：人物在两秒内抵达门口并自然用右手握住门把，左手水瓶不变。\n光影：明亮中性照明、浅暖木和米白墙面。\n音效：短促地毯脚步和门锁轻响。\n\n17.0–19.0秒：\n运镜：人物开门，摄影机继续前进并亲自跨过住宅门槛，不切镜头。\n景别：人物背面中全景。\n主体：严格参考@图片14的门外地毯、门框、金属门槛、门内浅暖木地板和窄entry/hall。\n动作：右手推门，左手持瓶；门外和门内地面必须同框，门框沿画面边缘后移。\n光影：住宅内部有清晰的晚上午自然光，不得直接跳到巨大客厅。\n音效：门锁与合页声、脚步由地毯转为木地板，室内环境更安静。\n\n19.0–22.0秒：\n运镜：采用自然35–40mm视角，在紧凑entry/hall内快速前推，摄影机距离人物较近。\n景别：人物背面中景。\n主体：严格参考@图片15并服从@图片17官方平面图；hall只够正常住宅通行，左右储物及湿区门紧凑排列，厨房在短距离后开始出现。\n动作：人物继续快步，岛台前缘逐渐出现；不得出现虚构玄关柜、超宽走廊、巨大MPR或额外房间。\n光影：自然日光从客厅与露台方向引导前进。\n音效：木地板脚步、轻微衣料和室内安静底噪。\n\n22.0–30.0秒：\n运镜：同一摄影机从hall自然进入开放式厨房、餐厅与客厅，速度逐渐放缓并轻微向露台方向推进，不环绕、不切镜头。\n景别：中全景自然展开为客餐厅全景。\n主体：严格参考@图片16并服从@图片17平面图：紧凑线性厨房在内墙，合理尺寸石材岛台最多三至四张吧椅，餐桌最多六座，普通公寓尺度沙发与茶几，客厅和露台玻璃在外侧；不得做成顶层豪宅宴会厅。\n动作：人物走到客厅与露台之间，逐渐变为画面次要元素；空间和白天生活感成为主角，最后稳定在厨房—餐厅—客厅—露台的可信连续关系。\n光影：明亮柔和的晚上午自然光、浅橡木、暖白、浅石材和自然绿色；不夸张城市天际线，不转黄昏。\n音效：脚步渐慢，室内空气感、远处城市环境与极轻氛围音乐自然展开，在30秒稳定收束，不做预告片重击。\n\n全局强制约束：\n全片只有一个连续摄影机和一名女性。不得剪辑、拼接、跳切、闪白、黑帧、溶解、树叶擦镜、柱子遮挡、贴脸遮挡或运动模糊掩盖空间替换。建筑从第0秒起始终是@图片1中的同一Koya，不增加或减少楼层、阳台、格栅、入口或屋顶。人物全程保持@图片6身份与服装，人体正常、两只手两条手臂、左手一只水瓶、右手负责开门和按钮、始终穿白色跑鞋，不复制人物、不变脸、不换衣、不换手。所有门槛必须由摄影机亲自跨过。电梯关门只压缩上行时间，摄影机始终留在同一轿厢。Apartment 106内部必须服从@图片17官方平面图与99平方米内部面积的可信住宅尺度，不放大hall、厨房、餐厅、客厅或MPR。全程白天、同一白平衡、无夜景、无黄昏、无强橙青、无塑料CG感。禁止任何字幕、价格、门牌号、乱码、Logo特写和水印。无旁白、无对白、无歌词；原生音频必须连续匹配高空、街道、入口、foyer、电梯、走廊和住宅的空间变化。",
+            "type": "text"
+          },
+          {
+            "reference": "reference_video:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v2/stage-01-camera-blockout-30s-v2.mp4",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/production-assets/assets/official/exterior/koya-building-hero.jpg",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-01-HIGH-AERIAL-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-02-MID-AERIAL-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-03-LOW-AERIAL-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-04-STREET-FRONT-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/production-assets/assets/generated/character/sports-female/master-panels-v2/back-full.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-05-RESIDENT-APPROACH-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-06-ENTRY-THRESHOLD-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-07-FOYER-LIFT-CALL-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-08-LIFT-ENTRY-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-09-LIFT-ASCENT-COVER-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-10-LIFT-EXIT-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-11-APARTMENT-DOOR-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-12-APARTMENT-THRESHOLD-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-13-APARTMENT-HALL-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/storyboards/stage-01-opening-redesign-v2/frames/SB-V2-14-LIVING-REVEAL-DAY.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/production-assets/assets/official/floorplans/apartment-106.png",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": 30,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "omni_reference_task_type": "reference",
+        "priority": 0,
+        "ratio": "16:9",
+        "resolution": "720p",
+        "return_last_frame": true
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "时长：30秒\n比例：16:9\n分辨率：720p\n画风：高端写实房地产销售影片，色彩自然、清晰克制、真实住宅尺度\n连续性模式：严格字面一镜到底，摄影机从Brisbane上空到Apartment 106客厅全程只有一个连续机位，不得剪辑、溶解、闪白、黑帧、树叶擦镜、人物贴镜遮挡或利用运动模糊偷换空间。\n\n参考职责：\n@视频1只控制完整30秒摄影机路线、速度和门槛时序，不控制建筑外观。\n@图片1是Koya官方正立面的唯一建筑几何真相；所有远近视角必须保持同一栋建筑、相同楼层、阳台、木格栅、入口、车道和屋顶。\n@图片2是0秒高空构图；@图片3是同一栋楼的中空位置；@图片4是同一栋楼的低空位置；@图片5是同一栋楼的街面正立面。\n@图片6锁定唯一主角的身份、体型、棕色马尾、鼠尾草灰绿色长袖运动上衣、哑光黑色legging、白色跑鞋、黑色运动手表和左手不锈钢水瓶。\n@图片7锁定人物从街面走向入口的比例和方向。\n@图片8锁定官方入口到明亮foyer的同一玻璃门槛。\n@图片9锁定白天foyer、电梯位置和直线运动轴。\n@图片10锁定人物和摄影机跨入同一轿厢的门槛。\n@图片11锁定同一轿厢、同一机位和关闭的同一扇门。\n@图片12锁定同一轿厢重新开门并跨出到目标层。\n@图片13锁定短走廊和住宅门。\n@图片14锁定住宅门外地毯、门槛与门内木地板的连续关系。\n@图片15锁定Apartment 106紧凑入口hall的真实住宅尺度，采用自然35–40mm视角，不得放大。\n@图片16锁定Apartment 106厨房、餐厅、客厅和露台的合理尺度与白天材质。\n@图片17是Apartment 106官方平面图，是住宅内部邻接关系、入口、hall、厨房、餐厅、客厅与露台位置的最高优先级依据。\n\n0.0–3.0秒：\n运镜：高空广角镜头沿固定目标轴快速向前下方俯冲，同时平滑减小俯角，在3秒内自然落到街道人眼高度；全程无旋转、无绕飞、无遮挡。\n景别：Brisbane/Toowong高空大远景连续变为Koya低空全景和街面全景。\n主体：@图片1中的完整Koya从第0秒已经在画面中心可辨认，依次严格经过@图片2、@图片3、@图片4和@图片5的距离关系；建筑只变大，不消失、不变形、不换楼。\n动作：快速俯冲后自然刹车并抬平视线，中央入口始终是运动轴线。\n光影：晴朗Brisbane晚上午，5200–5600K中性日光、浅蓝天空、同一太阳方向，不得转为黄昏或夜晚。\n音效：高空风声快速收窄为街道远处车辆和城市环境声；一条极轻、现代、无歌词的高级氛围音乐从低频开始。\n\n3.0–4.5秒：\n运镜：眼平稳定向前轻推，不停机、不切镜头。\n景别：Koya完整正立面全景。\n主体：严格保持@图片1和@图片5的官方建筑几何，正门居中，Koya标识自然可见但不切特写。\n动作：短暂减速，让买家看清建筑后立即继续前进。\n光影：与前段完全相同的白天与白平衡。\n音效：风声降低，街道环境和近处脚步空间逐渐建立。\n\n4.5–7.0秒：\n运镜：摄影机快速稳定跟随，不必始终贴着人物，建筑与入口仍是画面主轴。\n景别：全景逐渐变为人物背面中全景。\n主体：@图片6中的唯一运动女性按@图片7的比例从画面前方进入，快步走向同一中央入口。\n动作：左手始终拿一只不锈钢水瓶，右手自由；人物不回头、不换衣、不换脸、不换手。\n光影：白天日光和建筑阴影方向连续。\n音效：白色跑鞋脚步、轻微衣料声和自然呼吸加入；音乐保持克制。\n\n7.0–9.5秒：\n运镜：同一摄影机紧随人物上台阶并亲自跨过玻璃入口门槛，不得利用门框遮满画面换空间。\n景别：人物背面中全景。\n主体：严格按@图片8的玻璃门、门框、地坪和明亮foyer关系。\n动作：人物右手推门，左手水瓶不换手；人物先跨过门槛，摄影机随后跨过，同一门框从镜头前方移动到两侧再移动到身后。\n光影：室外自然日光真实流入foyer深处；室内灯仅作4000–4500K中性补光，不得暗黄。\n音效：玻璃门五金声、脚步由室外硬地转为石材，并出现轻微室内混响。\n\n9.5–11.0秒：\n运镜：沿@图片9中央轴快速前推到电梯，速度略快于人物但不越过门槛。\n景别：foyer中全景。\n主体：同一人物、同一foyer、同一部电梯。\n动作：人物快步到达并用右手呼梯，电梯门立即自然打开，删除无意义等待。\n光影：入口日光仍从身后可感知，明确是白天。\n音效：石材脚步、呼梯按键轻响、电梯到达提示音和开门滑轨声。\n\n11.0–12.0秒：\n运镜：人物与摄影机连续跨入同一部电梯，严格参考@图片10。\n景别：中全景。\n主体：同一人物、同一金属门槛、浅色石材地面、浅暖木侧墙、黑色扶手和深铜色门。\n动作：必须同时看见foyer地面、门框、金属门槛和轿厢地面，证明摄影机亲自进入。\n光影：轿厢保持明亮中性色温，不进入夜景。\n音效：门槛脚步材质变化和轿厢短混响。\n\n12.0–14.0秒：\n运镜：摄影机已在同一轿厢、人物身后、面对同一扇门，机位不变。\n景别：轿厢内中全景。\n主体：严格参考@图片11的轿厢、人物和扶手位置。\n动作：门在0.7秒内关闭；随后约1.3秒只用轻微身体重心和低频机械声表达上行，压缩等待时间；不得换轿厢、换人物方向或换相机。\n光影：中性灯光稳定，不闪黑。\n音效：关门滑轨声、短促低频上行声和目的层提示音。\n\n14.0–15.0秒：\n运镜：从同一轿厢机位看同一扇门打开，人物和摄影机立即向前跨出，严格参考@图片12。\n景别：从轿厢内看目标层中全景。\n主体：画面两侧保留同一轿厢木墙与扶手，同时看见门框、门槛和目标层走廊。\n动作：人物先跨出，摄影机紧随，不得在门关闭期间跳到走廊。\n光影：目标层为明亮白天平衡照明，不得突然变暗。\n音效：开门声、提示音，脚步由石材转为短走廊地毯。\n\n15.0–17.0秒：\n运镜：同一摄影机在1.6米高度快速跟随，走廊很短，不做酒店式慢走。\n景别：人物背面中全景逐渐靠近住宅门。\n主体：参考@图片13的紧凑走廊和同一住宅门。\n动作：人物在两秒内抵达门口并自然用右手握住门把，左手水瓶不变。\n光影：明亮中性照明、浅暖木和米白墙面。\n音效：短促地毯脚步和门锁轻响。\n\n17.0–19.0秒：\n运镜：人物开门，摄影机继续前进并亲自跨过住宅门槛，不切镜头。\n景别：人物背面中全景。\n主体：严格参考@图片14的门外地毯、门框、金属门槛、门内浅暖木地板和窄entry/hall。\n动作：右手推门，左手持瓶；门外和门内地面必须同框，门框沿画面边缘后移。\n光影：住宅内部有清晰的晚上午自然光，不得直接跳到巨大客厅。\n音效：门锁与合页声、脚步由地毯转为木地板，室内环境更安静。\n\n19.0–22.0秒：\n运镜：采用自然35–40mm视角，在紧凑entry/hall内快速前推，摄影机距离人物较近。\n景别：人物背面中景。\n主体：严格参考@图片15并服从@图片17官方平面图；hall只够正常住宅通行，左右储物及湿区门紧凑排列，厨房在短距离后开始出现。\n动作：人物继续快步，岛台前缘逐渐出现；不得出现虚构玄关柜、超宽走廊、巨大MPR或额外房间。\n光影：自然日光从客厅与露台方向引导前进。\n音效：木地板脚步、轻微衣料和室内安静底噪。\n\n22.0–30.0秒：\n运镜：同一摄影机从hall自然进入开放式厨房、餐厅与客厅，速度逐渐放缓并轻微向露台方向推进，不环绕、不切镜头。\n景别：中全景自然展开为客餐厅全景。\n主体：严格参考@图片16并服从@图片17平面图：紧凑线性厨房在内墙，合理尺寸石材岛台最多三至四张吧椅，餐桌最多六座，普通公寓尺度沙发与茶几，客厅和露台玻璃在外侧；不得做成顶层豪宅宴会厅。\n动作：人物走到客厅与露台之间，逐渐变为画面次要元素；空间和白天生活感成为主角，最后稳定在厨房—餐厅—客厅—露台的可信连续关系。\n光影：明亮柔和的晚上午自然光、浅橡木、暖白、浅石材和自然绿色；不夸张城市天际线，不转黄昏。\n音效：脚步渐慢，室内空气感、远处城市环境与极轻氛围音乐自然展开，在30秒稳定收束，不做预告片重击。\n\n全局强制约束：\n全片只有一个连续摄影机和一名女性。不得剪辑、拼接、跳切、闪白、黑帧、溶解、树叶擦镜、柱子遮挡、贴脸遮挡或运动模糊掩盖空间替换。建筑从第0秒起始终是@图片1中的同一Koya，不增加或减少楼层、阳台、格栅、入口或屋顶。人物全程保持@图片6身份与服装，人体正常、两只手两条手臂、左手一只水瓶、右手负责开门和按钮、始终穿白色跑鞋，不复制人物、不变脸、不换衣、不换手。所有门槛必须由摄影机亲自跨过。电梯关门只压缩上行时间，摄影机始终留在同一轿厢。Apartment 106内部必须服从@图片17官方平面图与99平方米内部面积的可信住宅尺度，不放大hall、厨房、餐厅、客厅或MPR。全程白天、同一白平衡、无夜景、无黄昏、无强橙青、无塑料CG感。禁止任何字幕、价格、门牌号、乱码、Logo特写和水印。无旁白、无对白、无歌词；原生音频必须连续匹配高空、街道、入口、foyer、电梯、走廊和住宅的空间变化。"
+  }
+}

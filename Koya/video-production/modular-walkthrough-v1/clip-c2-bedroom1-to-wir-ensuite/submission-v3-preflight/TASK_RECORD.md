@@ -1,0 +1,26 @@
+# Clip C2 V3 Seedance task record
+
+- Package fingerprint: `efae57867cb3579fd13326dc285e744318d4f1ba85a8aab64d6932689dd0ee4a`
+- User approval: `确认提交主卧 C2 V3，V6 单任务单输出，指纹 efae57867cb3，参考估算 CNY 16.163388，实际按完成 tokens 结`
+- Submitted at: 2026-08-27 (Australia/Brisbane)
+- Task ID: `cgt-20260827214141-8xgfg`
+- Initial status: `queued`
+- Task count: 1
+- Output count: 1
+- Endpoint: `ep-20260812221158-hb576`
+- Resolved model: `doubao-seedance-2-5-260628`
+- Mode: `video_editing`
+- Input: one explicit `reference_video`, delivered by the verified byte-identical HTTPS URL recorded in `PREFLIGHT_PACKAGE.json`
+- Requested parameters: inherit five-second duration; adaptive ratio; 1080p; generated audio; no watermark
+- Retry authorisation: none
+- Terminal status: `succeeded`
+- Completion tokens: `488025`
+- Actual calculated cost: `CNY 16.163388`
+- Output: `outputs/cgt-20260827214141-8xgfg.mp4`
+- Output SHA-256: `ad23443976852e08ae40f6fede28de6f8ffad0d92a5f75670ce29a7fc526e648`
+- Technical result: 1920x1080, 16:9, HEVC Main 10, 24 fps, 121 video frames, 5.056 s container duration, AAC stereo audio
+- Review state: `USER_ACCEPTED`
+- User acceptance: after viewing the exact generated output, the user stated that this version is correct and successful.
+- Non-blocking review note: at approximately 1.2-1.9 seconds, the WIR camera-left recess has a dark timber/shelving-like reading. The earlier automated review treated this as a second wardrobe bank, but the user accepted the exact visual result; retain this only as review history, not as a rejection.
+- Retry submitted: no
+- Merge status: eligible for the approved walkthrough assembly

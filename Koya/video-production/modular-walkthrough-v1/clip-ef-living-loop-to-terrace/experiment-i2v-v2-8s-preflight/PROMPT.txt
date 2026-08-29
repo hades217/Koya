@@ -1,0 +1,17 @@
+Use the supplied first frame as the exact opening composition and preserve the same Apartment 106 Living room, east sliding bay and visible Terrace throughout. Create one continuous photorealistic first-person camera take with zero edits. This is an eight-second physical walk from the visible Living position through the already open sliding bay onto the same visible Terrace. Do not invent or visit the MPR, Kitchen or any unseen room in this task.
+
+Camera path and timing, total 8.0 seconds:
+0.0–0.6 seconds: retain the exact opening composition so the broad Living room, sofa, timber floor, continuous black-framed glazing and already open east bay are readable.
+0.6–3.6 seconds: walk forward briskly and naturally along the clear timber-floor path toward that same open bay. Translate approximately 2.0 metres with almost unchanged heading and no more than five degrees of yaw. The sofa must leave the left foreground through true parallax while the same mullions, open bay and Terrace grow naturally larger.
+3.6–5.0 seconds: approach the threshold without slowing excessively. Keep interior oak floor, the black sliding track, both fixed jambs and pale Terrace tile visible together. The near jamb must pass the camera edge through physical occlusion and parallax.
+5.0–6.2 seconds: cross through empty air in the already open bay from oak floor over the same black track onto the pale Terrace tile. Do not pass through glass, a frame, a wall or furniture.
+6.2–7.4 seconds: continue approximately 1.2 metres onto the same Terrace at a natural walking pace. Maintain the same daylight and exterior planting; retain the opening and a narrow Living continuity cue at frame-left.
+7.4–8.0 seconds: decelerate once and settle on the Terrace in a stable buyer-facing view along the outdoor depth. Do not turn back, spin, snap or reveal an unrelated view.
+
+Immutable scene: keep the same broad Living proportions, sofa, continuous grouped south/east glazing, black mullions, single open east sliding bay, timber floor, black threshold track, pale Terrace tiles, exterior planting, daylight direction and exposure. Keep every wall, opening, frame and furnishing fixed.
+
+Allowed changes: realistic stabilized human walking micro-motion, subtle daylight response on glass, restrained leaf movement outside, photographic material texture, quiet interior room tone, soft footsteps transitioning from oak to track to tile, and a light distant Brisbane daytime breeze. No music and no speech.
+
+Forbidden: no cut, dissolve, crossfade, morph, teleport, time jump, camera switch, room replacement, static-image zoom, crop-only animation, wall or glass crossing, extra door, hinged door, duplicated opening, moving mullion, moving sofa, widening or narrowing the room, fisheye, ultra-wide distortion, night transition, people, hands, text, logo or watermark. Do not invent the MPR, Kitchen, another room, another Terrace or a skyline.
+
+Endpoint: finish outside on the same visible Terrace, approximately 1.2 metres beyond the threshold, looking along its depth while retaining the same open Living bay at the left edge for continuity.

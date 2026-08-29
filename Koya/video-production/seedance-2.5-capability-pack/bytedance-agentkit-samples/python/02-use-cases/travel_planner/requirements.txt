@@ -1,0 +1,8 @@
+tos>=2.8.7
+veadk-python[extensions]==1.0.10
+google-adk==2.2.0
+volcengine-python-sdk>=4.0.33
+agentkit-sdk-python==0.8.1
+urllib3<2.0.0
+cozeloop==0.1.21
+litellm==1.83.14

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="node_modules/gsap/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #d8cdbb; }
+      #root, #route-reference { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #world-canvas { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; }
+      #lens-finish { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 43%, transparent 62%, rgba(43,31,21,.13) 100%), linear-gradient(to bottom, rgba(255,247,228,.035), rgba(74,54,38,.035)); }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-z7xn" id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-wh87" id="route-reference" class="clip" data-start="0" data-duration="5" data-track-index="1">
+        <canvas data-hf-id="hf-shnj" id="world-canvas" width="1920" height="1080" aria-label="Apartment 106 Living and Dining hub to compact MPR continuous structural reference"></canvas>
+        <div data-hf-id="hf-qgcb" id="lens-finish"></div>
+      </div>
+    </div>
+    <script>
+      const canvas=document.getElementById("world-canvas");
+      const gl=canvas.getContext("webgl",{antialias:true,alpha:false,preserveDrawingBuffer:true});
+      if(!gl)throw new Error("WebGL is required for this deterministic reference scene");
+      const vertexSource=`attribute vec3 aPosition;attribute vec3 aColor;attribute vec3 aNormal;uniform mat4 uViewProjection;varying vec3 vColor;varying vec3 vNormal;varying float vDepth;void main(){vec4 clip=uViewProjection*vec4(aPosition,1.0);gl_Position=clip;vColor=aColor;vNormal=aNormal;vDepth=clip.z/clip.w;}`;
+      const fragmentSource=`precision mediump float;varying vec3 vColor;varying vec3 vNormal;varying float vDepth;void main(){vec3 light=normalize(vec3(.45,.94,.36));float diffuse=max(dot(normalize(vNormal),light),0.0);float shade=.67+diffuse*.46;float fog=smoothstep(.83,1.0,vDepth);vec3 daylight=vec3(.87,.84,.78);gl_FragColor=vec4(mix(vColor*shade,daylight,fog*.24),1.0);}`;
+      function compileShader(type,source){const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));return shader;}
+      const program=gl.createProgram();gl.attachShader(program,compileShader(gl.VERTEX_SHADER,vertexSource));gl.attachShader(program,compileShader(gl.FRAGMENT_SHADER,fragmentSource));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+      const vertices=[],colors=[],normals=[];const tone=(c,m)=>c.map(v=>Math.max(0,Math.min(1,v*m)));
+      function triangle(a,b,c,color,normal){vertices.push(...a,...b,...c);colors.push(...color,...color,...color);normals.push(...normal,...normal,...normal);}
+      function quad(a,b,c,d,color,normal){triangle(a,b,c,color,normal);triangle(a,c,d,color,normal);}
+      function box(cx,cy,cz,sx,sy,sz,base){const x0=cx-sx/2,x1=cx+sx/2,y0=cy-sy/2,y1=cy+sy/2,z0=cz-sz/2,z1=cz+sz/2;quad([x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1],tone(base,.98),[0,0,1]);quad([x1,y0,z0],[x0,y0,z0],[x0,y1,z0],[x1,y1,z0],tone(base,.90),[0,0,-1]);quad([x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0],tone(base,.84),[-1,0,0]);quad([x1,y0,z1],[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],tone(base,.92),[1,0,0]);quad([x0,y1,z1],[x1,y1,z1],[x1,y1,z0],[x0,y1,z0],tone(base,1.06),[0,1,0]);quad([x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],tone(base,.72),[0,-1,0]);}
+      const wall=[.91,.88,.82],wallWarm=[.84,.79,.71],oak=[.56,.40,.27],paleOak=[.74,.63,.49],linen=[.86,.82,.74],cream=[.95,.92,.85],cocoa=[.39,.27,.21],stone=[.78,.73,.64],green=[.26,.39,.23];
+
+      // Fixed public-room and MPR shell. Plan north is negative z; east is positive x.
+      box(1.30,-.05,2.00,8.20,.10,6.80,paleOak);for(let x=-2.65;x<=5.20;x+=.22)box(x,.008,2.00,.014,.016,6.55,[.45,.33,.23]);box(1.30,2.76,2.00,8.20,.08,6.80,wall);
+      // Compact MPR: 2.55 m x 2.70 m; its east wall has the only door at the northeast corner.
+      box(-2.55,1.38,2.15,.14,2.76,2.70,wallWarm);box(-1.28,1.38,3.47,2.68,2.76,.14,wallWarm);box(-1.28,1.38,.83,2.68,2.76,.14,wallWarm);
+      box(.04,1.38,2.93,.14,2.76,1.08,wallWarm);box(.04,2.43,1.43,.14,.66,1.92,wallWarm);box(.04,1.38,.94,.14,2.76,.20,wallWarm);
+      box(.10,1.17,1.00,.12,2.34,.18,cocoa);box(.10,1.17,1.95,.12,2.34,.18,cocoa);box(.10,2.30,1.48,.12,.10,1.10,cocoa);
+      // Door leaf is open inside against the north wall, matching the floor-plan swing.
+      box(-.46,1.08,.92,1.05,2.18,.07,paleOak);box(-.89,1.04,.98,.10,.10,.10,cocoa);
+      // Public landmarks: Dining, single island, Living edge.
+      box(2.30,.38,2.62,1.70,.10,1.05,oak);box(2.30,.76,2.62,.78,.74,.78,oak);
+      for(const [x,z]of[[1.35,2.62],[3.25,2.62],[2.30,1.84],[2.30,3.40]]){box(x,.44,z,.55,.10,.55,paleOak);box(x,.25,z,.08,.50,.08,oak);}
+      box(2.55,.48,.18,2.95,.96,.82,stone);box(2.55,.46,.22,2.70,.82,.70,oak);box(2.55,.98,.18,3.08,.08,.94,cream);
+      for(const x of[1.65,2.35,3.05]){box(x,.45,.77,.52,.10,.48,cocoa);box(x,.23,.77,.07,.48,.07,oak);}
+      box(4.55,.42,2.95,1.48,.76,.62,linen);box(4.70,.78,2.78,.48,.38,.28,cocoa);box(4.12,.015,2.76,2.20,.03,1.55,[.72,.67,.59]);
+      // Compact MPR furniture: a small daybed and desk, never a full third bedroom.
+      box(-2.18,.32,2.50,.62,.58,1.58,linen);box(-2.15,.62,2.50,.18,.64,1.62,cream);box(-1.43,.46,3.08,1.62,.08,.48,paleOak);box(-1.43,.25,3.28,1.55,.48,.08,oak);
+      box(-1.42,.38,2.62,.48,.08,.48,oak);box(-1.42,.20,2.62,.07,.44,.07,oak);box(-1.43,1.42,3.38,.82,.90,.035,[.70,.61,.49]);box(-.48,1.58,.90,.72,.16,.30,paleOak);box(-.48,1.77,.90,.18,.28,.18,green);
+      for(const [x,z]of[[-1.95,1.42],[-.70,2.70],[1.00,1.10],[3.40,1.12]])box(x,2.70,z,.19,.025,.19,[1,.94,.78]);
+
+      function makeBuffer(values,name){const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW);const location=gl.getAttribLocation(program,name);gl.enableVertexAttribArray(location);gl.vertexAttribPointer(location,3,gl.FLOAT,false,0,0);}
+      makeBuffer(vertices,"aPosition");makeBuffer(colors,"aColor");makeBuffer(normals,"aNormal");const matrixLocation=gl.getUniformLocation(program,"uViewProjection");
+      function perspective(fov,aspect,near,far){const f=1/Math.tan(fov/2),nf=1/(near-far);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0]);}
+      function normalize(v){const n=Math.hypot(v[0],v[1],v[2])||1;return[v[0]/n,v[1]/n,v[2]/n];}function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
+      function lookAt(eye,target){const z=normalize([eye[0]-target[0],eye[1]-target[1],eye[2]-target[2]]),x=normalize(cross([0,1,0],z)),y=cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-(x[0]*eye[0]+x[1]*eye[1]+x[2]*eye[2]),-(y[0]*eye[0]+y[1]*eye[1]+y[2]*eye[2]),-(z[0]*eye[0]+z[1]*eye[1]+z[2]*eye[2]),1]);}
+      function multiply(a,b){const out=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)out[c*4+r]=a[r]*b[c*4]+a[4+r]*b[c*4+1]+a[8+r]*b[c*4+2]+a[12+r]*b[c*4+3];return out;}
+      const lerp=(a,b,t)=>a+(b-a)*t,smooth=t=>t*t*(3-2*t);function segment(v,a,b){return smooth(Math.max(0,Math.min(1,(v-a)/(b-a))));}
+      const projection=perspective(55*Math.PI/180,1920/1080,.06,30);
+      function cameraAt(progress){let x,z,yaw,lookY=1.52;if(progress<.11){const s=segment(progress,0,.11);x=lerp(4.10,3.72,s);z=lerp(3.05,2.82,s);yaw=lerp(-1.34,-1.72,s);}else if(progress<.43){const s=segment(progress,.11,.43);x=lerp(3.72,.88,s);z=lerp(2.82,1.58,s);yaw=lerp(-1.72,-1.58,s);}else if(progress<.54){const s=segment(progress,.43,.54);x=lerp(.88,.48,s);z=lerp(1.58,1.51,s);yaw=lerp(-1.58,-1.57,s);}else if(progress<.66){const s=segment(progress,.54,.66);x=lerp(.48,-.18,s);z=lerp(1.51,1.44,s);yaw=lerp(-1.57,-2.08,s);lookY=lerp(1.52,1.22,s);}else if(progress<.78){const s=segment(progress,.66,.78);x=lerp(-.18,-.24,s);z=lerp(1.44,1.45,s);yaw=lerp(-2.08,-2.29,s);lookY=lerp(1.22,1.02,s);}else{const s=segment(progress,.78,1);x=lerp(-.24,-.26,s);z=lerp(1.45,1.46,s);yaw=lerp(-2.29,-2.27,s);lookY=1.02;}const moving=progress<.78,bob=moving?.014*Math.sin(progress*Math.PI*8):0,eye=[x,1.58+bob,z],direction=[Math.sin(yaw),0,-Math.cos(yaw)];return{eye,target:[x+direction[0]*2.25,lookY,z+direction[2]*2.25]};}
+      function draw(progress){gl.viewport(0,0,canvas.width,canvas.height);gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.clearColor(.85,.82,.75,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const camera=cameraAt(progress);gl.uniformMatrix4fv(matrixLocation,false,multiply(projection,lookAt(camera.eye,camera.target)));gl.drawArrays(gl.TRIANGLES,0,vertices.length/3);}
+      const state={progress:0};draw(0);const timeline=gsap.timeline({paused:true});timeline.to(state,{progress:1,duration:5,ease:"none",onUpdate:()=>draw(state.progress)},0);timeline.fromTo("#lens-finish",{x:-1},{x:1,duration:5,ease:"none"},0);window.__timelines["main"]=timeline;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 2065853,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-first-frame.png",
+      "provenance": "Apartment 106 V7 plan-rebuild storyboard frame 05; exact visible Living-to-Terrace opening composition",
+      "provider_url": "unavailable",
+      "role": "first_frame",
+      "same_scene_id": "koya-106-public-zone-v7-frame-05-single-visible-scene",
+      "sha256": "ece6e45c5045f8906abe5bc3881512e258e3f8d27e4c305e4cac6a11904eac55"
+    }
+  ],
+  "mode": "first_frame_image_to_video",
+  "output_count": 1,
+  "output_directory": "outputs",
+  "package_sha256": "c6f6062b91f5f778633675add9a96a551c06cf84a5cc205b8ea5ec167c7e9a10",
+  "parameters": {
+    "duration": 8,
+    "generate_audio": true,
+    "ratio": "inherit_first_frame_1672x941_effectively_16_9",
+    "resolution": "1080p",
+    "return_last_frame": true,
+    "seed": null,
+    "watermark": false
+  },
+  "price": {
+    "source": "live account pricing read-back on 2026-08-29 returned V2V and NV2V charge items but no I2V, FLF2V or T2V charge item",
+    "status": "unavailable",
+    "unit": "unavailable",
+    "unit_price": null
+  },
+  "prompt": {
+    "bytes": 3133,
+    "path": "PROMPT.txt",
+    "sha256": "080b3098396fad87a2f31394fec32971e40a277ee4003df5838abaf8d79cdeb2"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "cgt-20260826201457-2wj85",
+  "status": "succeeded",
+  "model": "doubao-seedance-2-5-260628",
+  "package_fingerprint": "41ebb0a24f75d74ac815324717c8797ca76c959064b64d9e0e7eb13f4f12dd20",
+  "local_path": "outputs/cgt-20260826201457-2wj85.mp4",
+  "ratio": "16:9",
+  "resolution": "1080p",
+  "duration_requested_seconds": 5,
+  "generate_audio": true,
+  "usage": {
+    "completion_tokens": 488025,
+    "total_tokens": 488025
+  },
+  "price": {
+    "unit_price_cny_per_thousand_v2v1080_completion_tokens": 0.03312,
+    "actual_cost_cny": 16.163388
+  }
+}

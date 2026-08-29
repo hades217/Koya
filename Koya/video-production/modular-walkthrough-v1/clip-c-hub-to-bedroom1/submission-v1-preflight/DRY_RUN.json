@@ -1,0 +1,61 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "SOURCE OF TRUTH\nUse the submitted five-second reference video as the sole temporal camera and architectural geometry controller. Preserve its single fixed apartment shell, the same Bedroom 1 doorway, the exact forward translation, doorway crossing, in-room right turn, bed placement, left-side WIR opening, right-side terrace glazing, camera height, lens behaviour and final pose. Produce one uninterrupted physically continuous take.\n\nCAMERA PATH AND TIMING\n0.00–0.70 seconds: from the Apartment 106 Living hub, smoothly reorient toward the already-visible Bedroom 1 doorway on the left side of the console wall.\n0.70–2.00 seconds: advance briskly toward that same doorway; both jambs enlarge continuously with natural parallax.\n2.00–2.75 seconds: pass physically between the same jambs and enter Bedroom 1. The camera must not pass through either wall.\n2.75–3.40 seconds: only after the camera is fully inside, make one fast, decisive right turn and reveal the complete bed from its foot.\n3.40–4.30 seconds: continue the same rightward pan beyond the bed to reveal the east/right wall and full-height terrace glazing.\n4.30–5.00 seconds: settle into the final sales-view composition, retaining part of the bed on the left while the right wall and terrace glazing remain clearly readable.\n\nIMMUTABLE GEOMETRY\nKeep exactly one Bedroom 1 doorway. Keep the bed head against the north wall and its foot facing south. Keep the WIR opening west/left of the bedroom. Keep terrace glazing east/right. Keep the same room width, wall lengths, ceiling height, console-wall relationship, clear circulation and Level 1 spatial scale already present in the reference video.\n\nALLOWED VISUAL TRANSFORMATION\nReplace the simplified blockout surfaces with highly photorealistic, natural premium Brisbane apartment finishes: warm off-white walls, warm oak timber flooring, restrained pale-timber joinery, a low fluted timber console and neutral artwork in the Living hub; inside the bedroom, a cream upholstered bed and headboard, soft neutral bedding, restrained dusty-mauve and brown throw, two pale-timber round bedside tables, dark sculptural bedside lamps, a neutral textured rug, sheer white curtains and slim dark terrace frames. Use neutral bright Brisbane daytime, soft directional daylight, realistic shadows and a leafy Level 1 outlook. The result should resemble real residential cinematography, not an architectural game render.\n\nAUDIO\nGenerate continuous understated natural interior sound: soft first-person walking footfalls aligned with the forward movement, subtle room tone and faint exterior daytime ambience near the glazing. No speech, no narration, no dramatic sound effects and no audible cut.\n\nFORBIDDEN EVENTS\nZero cuts, dissolves, crossfades, teleports, scene replacements, static-image push-ins, time-of-day changes, wall penetration, architectural morphing, extra doors, duplicated WIR, added corridor, moved bed, extra windows, enlarged hotel-scale room, fisheye or ultra-wide distortion. Do not insert a person, hands, reflections of an operator, text, logo or watermark. Do not stop the right turn early on the bed. Do not replace the Level 1 outlook with a skyline or high-rise view.\n\nENDPOINT CONTRACT\nThe final frame remains physically inside Bedroom 1 at the foot-of-bed circulation area, facing farther right/east than the full-bed reveal. A meaningful part of the same bed remains on the left as the continuity cue; the right wall and terrace glazing are the clear inspection target. Camera motion eases to a stable hold without snapping back.",
+            "type": "text"
+          },
+          {
+            "reference": "reference_video:@inputs/00-reference-motion.mp4",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": -1,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "ratio": "adaptive",
+        "resolution": "1080p"
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "SOURCE OF TRUTH\nUse the submitted five-second reference video as the sole temporal camera and architectural geometry controller. Preserve its single fixed apartment shell, the same Bedroom 1 doorway, the exact forward translation, doorway crossing, in-room right turn, bed placement, left-side WIR opening, right-side terrace glazing, camera height, lens behaviour and final pose. Produce one uninterrupted physically continuous take.\n\nCAMERA PATH AND TIMING\n0.00–0.70 seconds: from the Apartment 106 Living hub, smoothly reorient toward the already-visible Bedroom 1 doorway on the left side of the console wall.\n0.70–2.00 seconds: advance briskly toward that same doorway; both jambs enlarge continuously with natural parallax.\n2.00–2.75 seconds: pass physically between the same jambs and enter Bedroom 1. The camera must not pass through either wall.\n2.75–3.40 seconds: only after the camera is fully inside, make one fast, decisive right turn and reveal the complete bed from its foot.\n3.40–4.30 seconds: continue the same rightward pan beyond the bed to reveal the east/right wall and full-height terrace glazing.\n4.30–5.00 seconds: settle into the final sales-view composition, retaining part of the bed on the left while the right wall and terrace glazing remain clearly readable.\n\nIMMUTABLE GEOMETRY\nKeep exactly one Bedroom 1 doorway. Keep the bed head against the north wall and its foot facing south. Keep the WIR opening west/left of the bedroom. Keep terrace glazing east/right. Keep the same room width, wall lengths, ceiling height, console-wall relationship, clear circulation and Level 1 spatial scale already present in the reference video.\n\nALLOWED VISUAL TRANSFORMATION\nReplace the simplified blockout surfaces with highly photorealistic, natural premium Brisbane apartment finishes: warm off-white walls, warm oak timber flooring, restrained pale-timber joinery, a low fluted timber console and neutral artwork in the Living hub; inside the bedroom, a cream upholstered bed and headboard, soft neutral bedding, restrained dusty-mauve and brown throw, two pale-timber round bedside tables, dark sculptural bedside lamps, a neutral textured rug, sheer white curtains and slim dark terrace frames. Use neutral bright Brisbane daytime, soft directional daylight, realistic shadows and a leafy Level 1 outlook. The result should resemble real residential cinematography, not an architectural game render.\n\nAUDIO\nGenerate continuous understated natural interior sound: soft first-person walking footfalls aligned with the forward movement, subtle room tone and faint exterior daytime ambience near the glazing. No speech, no narration, no dramatic sound effects and no audible cut.\n\nFORBIDDEN EVENTS\nZero cuts, dissolves, crossfades, teleports, scene replacements, static-image push-ins, time-of-day changes, wall penetration, architectural morphing, extra doors, duplicated WIR, added corridor, moved bed, extra windows, enlarged hotel-scale room, fisheye or ultra-wide distortion. Do not insert a person, hands, reflections of an operator, text, logo or watermark. Do not stop the right turn early on the bed. Do not replace the Level 1 outlook with a skyline or high-rise view.\n\nENDPOINT CONTRACT\nThe final frame remains physically inside Bedroom 1 at the foot-of-bed circulation area, facing farther right/east than the full-bed reveal. A meaningful part of the same bed remains on the left as the continuity cue; the right wall and terrace glazing are the clear inspection target. Camera motion eases to a stable hold without snapping back."
+  }
+}

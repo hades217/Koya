@@ -1,0 +1,14 @@
+dotenv
+flask
+flask-socketio
+python-socketio
+requests
+httpx
+Authlib
+PyJWT
+veadk-python==1.0.10
+agentkit-sdk-python==0.8.1
+google-adk==2.2.0
+urllib3<2.0.0
+volcengine-python-sdk>=4.0.33
+litellm

@@ -1,0 +1,61 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "SOURCE OF TRUTH\nUse the submitted eight-second V6 reference video as the sole temporal camera and architectural geometry controller. Preserve its one fixed Apartment 106 Living, Dining, Kitchen, MPR opening and Terrace shell, its exact camera height, rectilinear lens, brisk first-person walking rhythm, threshold crossing and endpoint. Produce one uninterrupted physically continuous take. The official Apartment 106 floor plan controls topology. No whole-room still image is attached to this provider request.\n\nCAMERA PATH AND TIMING\n0.00-0.55 seconds: begin at the Living and Dining hub with the compact four-seat Dining area readable and make only a brief glance toward the MPR's existing public opening. Do not enter MPR, invent a door, stop, introduce a person or spin in place.\n0.55-1.65 seconds: translate shallowly around Dining while turning clockwise toward the north Kitchen line. Dining and the single island remain visible together long enough to prove one connected room.\n1.65-2.55 seconds: continue past exactly one island and the fixed Kitchen cabinetry. Maintain real walking parallax and a clear aisle; do not pass through the island or duplicate it.\n2.55-3.35 seconds: continue the same clockwise move toward the internal north TV wall. The TV wall remains internal below Bedroom 1 and never replaces exterior glazing.\n3.35-4.30 seconds: continue across the sofa and the full-height south and east wrap glazing, revealing the real width and openness of the same Living room.\n4.30-5.35 seconds: align with the same existing open east glazed bay along the clear route north of the sofa. Keep the bay, jambs and adjacent glazed leaves continuously visible.\n5.35-6.35 seconds: walk toward the same threshold. The jambs and floor track enlarge through true forward parallax; do not cross glass, a wall, furniture or a closed panel.\n6.35-7.15 seconds: physically cross the existing open sliding-door track from interior oak floor to exterior Terrace tile in one continuous movement.\n7.15-8.00 seconds: remain on the same Terrace, sweep briefly across its open side, then turn back through the same opening to retain a readable connection to Living, Dining and Kitchen. Ease into one stable sales view without a snap or black frame.\n\nIMMUTABLE GEOMETRY\nKeep the Apartment 106 public-zone topology and proportions fixed. Keep the compact MPR and its one existing public opening; the camera only glances at it. Keep one compact four-seat Dining setting, one Kitchen island, one north Kitchen line, one internal north TV wall, the sofa orientation, the continuous full-height south facade glazing, the full-height east glazing, one openable east bay and the wrap Terrace. Every wall, opening, frame, track, floor transition, furnishing and landmark must remain in the same place throughout. Do not enlarge or narrow Living, turn glazing into a wall, move the TV wall, create a column, create an extra door, or redesign the floor plan.\n\nALLOWED VISUAL TRANSFORMATION\nReplace only the simplified blockout surfaces with highly photorealistic premium Brisbane apartment finishes consistent with Koya's restrained official interior language: warm off-white walls, warm natural oak interior flooring, refined pale-timber joinery, light stone island and benchtops, neutral tactile upholstery, slim dark glazing frames, pale exterior Terrace tiles and understated landscaping. Use stable bright neutral Brisbane daytime, soft directional daylight, physically credible shadows, natural exposure, realistic glass reflections and subtle stabilised first-person walking micro-motion. Preserve buyer-readable depth and the Living room's genuine width. The result must resemble real residential cinematography, not a game render, architectural-design animation, glossy synthetic CGI or a static image being enlarged.\n\nAUDIO\nGenerate continuous understated natural audio aligned to the route: soft first-person footsteps on oak, a subtle threshold/track footfall change, quiet interior room tone, faint HVAC, then restrained daytime Brisbane birds and light breeze on the Terrace. No speech, narration, music, dramatic effects or audible edit.\n\nFORBIDDEN EVENTS\nZero cuts, dissolves, crossfades, morphs, teleports, scene replacements, room swaps, static-image push-ins, time jumps, alternate cameras, moving walls, moving glazing, moving furniture, duplicated rooms, duplicated island, extra doors, extra openings, invented columns, wall penetration, glass penetration, furniture penetration, a closed threshold, MPR entry, a large third-bedroom-like MPR, a narrow tunnel-like Living room, a solid south or east exterior wall, TV placed on exterior glazing, fisheye, ultra-wide distortion, floating game-camera motion, daylight change, night lighting, flicker or exposure jumps. Do not add a person, hands, operator reflection, text, logo or watermark.\n\nENDPOINT CONTRACT\nThe final camera is physically outside on the same wrap Terrace after crossing the one visible east Living opening, looking back through that same opening so Living, Dining and Kitchen remain spatially connected. Motion settles once. Do not end inside, on a different balcony, against a wall, on black, or after any cut, dissolve or snap-back.",
+            "type": "text"
+          },
+          {
+            "reference": "reference_video:https://fly-profit-respect-solve.trycloudflare.com/00-reference-motion-v6.mp4",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": -1,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "ratio": "adaptive",
+        "resolution": "1080p"
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "SOURCE OF TRUTH\nUse the submitted eight-second V6 reference video as the sole temporal camera and architectural geometry controller. Preserve its one fixed Apartment 106 Living, Dining, Kitchen, MPR opening and Terrace shell, its exact camera height, rectilinear lens, brisk first-person walking rhythm, threshold crossing and endpoint. Produce one uninterrupted physically continuous take. The official Apartment 106 floor plan controls topology. No whole-room still image is attached to this provider request.\n\nCAMERA PATH AND TIMING\n0.00-0.55 seconds: begin at the Living and Dining hub with the compact four-seat Dining area readable and make only a brief glance toward the MPR's existing public opening. Do not enter MPR, invent a door, stop, introduce a person or spin in place.\n0.55-1.65 seconds: translate shallowly around Dining while turning clockwise toward the north Kitchen line. Dining and the single island remain visible together long enough to prove one connected room.\n1.65-2.55 seconds: continue past exactly one island and the fixed Kitchen cabinetry. Maintain real walking parallax and a clear aisle; do not pass through the island or duplicate it.\n2.55-3.35 seconds: continue the same clockwise move toward the internal north TV wall. The TV wall remains internal below Bedroom 1 and never replaces exterior glazing.\n3.35-4.30 seconds: continue across the sofa and the full-height south and east wrap glazing, revealing the real width and openness of the same Living room.\n4.30-5.35 seconds: align with the same existing open east glazed bay along the clear route north of the sofa. Keep the bay, jambs and adjacent glazed leaves continuously visible.\n5.35-6.35 seconds: walk toward the same threshold. The jambs and floor track enlarge through true forward parallax; do not cross glass, a wall, furniture or a closed panel.\n6.35-7.15 seconds: physically cross the existing open sliding-door track from interior oak floor to exterior Terrace tile in one continuous movement.\n7.15-8.00 seconds: remain on the same Terrace, sweep briefly across its open side, then turn back through the same opening to retain a readable connection to Living, Dining and Kitchen. Ease into one stable sales view without a snap or black frame.\n\nIMMUTABLE GEOMETRY\nKeep the Apartment 106 public-zone topology and proportions fixed. Keep the compact MPR and its one existing public opening; the camera only glances at it. Keep one compact four-seat Dining setting, one Kitchen island, one north Kitchen line, one internal north TV wall, the sofa orientation, the continuous full-height south facade glazing, the full-height east glazing, one openable east bay and the wrap Terrace. Every wall, opening, frame, track, floor transition, furnishing and landmark must remain in the same place throughout. Do not enlarge or narrow Living, turn glazing into a wall, move the TV wall, create a column, create an extra door, or redesign the floor plan.\n\nALLOWED VISUAL TRANSFORMATION\nReplace only the simplified blockout surfaces with highly photorealistic premium Brisbane apartment finishes consistent with Koya's restrained official interior language: warm off-white walls, warm natural oak interior flooring, refined pale-timber joinery, light stone island and benchtops, neutral tactile upholstery, slim dark glazing frames, pale exterior Terrace tiles and understated landscaping. Use stable bright neutral Brisbane daytime, soft directional daylight, physically credible shadows, natural exposure, realistic glass reflections and subtle stabilised first-person walking micro-motion. Preserve buyer-readable depth and the Living room's genuine width. The result must resemble real residential cinematography, not a game render, architectural-design animation, glossy synthetic CGI or a static image being enlarged.\n\nAUDIO\nGenerate continuous understated natural audio aligned to the route: soft first-person footsteps on oak, a subtle threshold/track footfall change, quiet interior room tone, faint HVAC, then restrained daytime Brisbane birds and light breeze on the Terrace. No speech, narration, music, dramatic effects or audible edit.\n\nFORBIDDEN EVENTS\nZero cuts, dissolves, crossfades, morphs, teleports, scene replacements, room swaps, static-image push-ins, time jumps, alternate cameras, moving walls, moving glazing, moving furniture, duplicated rooms, duplicated island, extra doors, extra openings, invented columns, wall penetration, glass penetration, furniture penetration, a closed threshold, MPR entry, a large third-bedroom-like MPR, a narrow tunnel-like Living room, a solid south or east exterior wall, TV placed on exterior glazing, fisheye, ultra-wide distortion, floating game-camera motion, daylight change, night lighting, flicker or exposure jumps. Do not add a person, hands, operator reflection, text, logo or watermark.\n\nENDPOINT CONTRACT\nThe final camera is physically outside on the same wrap Terrace after crossing the one visible east Living opening, looking back through that same opening so Living, Dining and Kitchen remain spatially connected. Motion settles once. Do not end inside, on a different balcony, against a wall, on black, or after any cut, dissolve or snap-back."
+  }
+}

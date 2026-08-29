@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2934" height="1800" viewBox="0 0 2934 1800">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0877ff"/>
+    </marker>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <image href="/Users/lightman/Documents/sites/Koya/Koya/video-production/modular-walkthrough-v1/route-audit-v2/apartment-106-plan-untouched-crop.png" x="0" y="0" width="2934" height="1800"/>
+  <path d="M 1850 1050 C 1860 1020, 1875 995, 1885 975 C 1890 945, 1890 915, 1890 885 C 1890 855, 1890 835, 1890 815"
+        fill="none" stroke="#0877ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" filter="url(#shadow)"/>
+  <g font-family="Verdana" font-size="32" font-weight="700" text-anchor="middle">
+    <g><circle cx="1850" cy="1050" r="34" fill="#ffffff" stroke="#0877ff" stroke-width="10"/><text x="1850" y="1061" fill="#0877ff">C0</text></g>
+    <g><circle cx="1885" cy="975" r="34" fill="#ffffff" stroke="#0877ff" stroke-width="10"/><text x="1885" y="986" fill="#0877ff">C1</text></g>
+    <g><circle cx="1890" cy="885" r="34" fill="#ffffff" stroke="#0877ff" stroke-width="10"/><text x="1890" y="896" fill="#0877ff">C2</text></g>
+    <g><circle cx="1890" cy="815" r="34" fill="#ffffff" stroke="#0877ff" stroke-width="10"/><text x="1890" y="826" fill="#0877ff">C3</text></g>
+  </g>
+  <g font-family="Verdana" fill="#ffffff" filter="url(#shadow)">
+    <rect x="108" y="1518" width="1210" height="188" rx="28" fill="#14202e" fill-opacity="0.92"/>
+    <text x="158" y="1585" font-size="42" font-weight="700">CLIP C - LIVING HUB TO BEDROOM 1</text>
+    <text x="158" y="1644" font-size="31">One threshold. No exit shot. No Bath/Laundry double-door ambiguity.</text>
+  </g>
+</svg>

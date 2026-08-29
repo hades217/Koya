@@ -1,0 +1,65 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 3711326,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "duration": "5.000000",
+            "format_name": "mov,mp4,m4a,3gp,3g2,mj2"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "codec_type": "video",
+              "height": 1080,
+              "r_frame_rate": "30/1",
+              "width": 1920
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "inputs/00-reference-motion-v6.mp4",
+      "provenance": "continuous 5.000-second V6 render from the Apartment 106 Bedroom 1-WIR-Ensuite fixed WebGL shell and camera path; all 150 frames inspected",
+      "provider_url": "https://relatives-simple-incentive-lewis.trycloudflare.com/00-reference-motion-v6.mp4",
+      "role": "reference_video",
+      "same_scene_id": "koya-106-bedroom1-wir-ensuite-fixed-shell-v6",
+      "sha256": "9271a811c3cf593524e8ea0c2518e41cdaaffad408cb633493a305ea37dfa71e"
+    }
+  ],
+  "mode": "video_editing",
+  "output_count": 1,
+  "output_directory": "outputs",
+  "package_sha256": "efae57867cb3579fd13326dc285e744318d4f1ba85a8aab64d6932689dd0ee4a",
+  "parameters": {
+    "duration": -1,
+    "generate_audio": true,
+    "ratio": "adaptive",
+    "resolution": "1080p",
+    "seed": "unavailable",
+    "watermark": false
+  },
+  "price": {
+    "estimated_completion_tokens": 488025,
+    "estimated_total_cny": 16.163388,
+    "exact_total_before_generation": "unavailable",
+    "failure_billing_status": "unavailable",
+    "source": "live account pricing read-back on 2026-08-27 plus the immediately preceding same-endpoint five-second 1080p generated-audio V2V task",
+    "status": "available_unit_price_estimated_total",
+    "unit": "CNY per thousand V2V1080 completion tokens",
+    "unit_price": 0.03312
+  },
+  "prompt": {
+    "bytes": 4492,
+    "path": "PROMPT.txt",
+    "sha256": "59ed24ecf1c926539ff97f54f428ba7b3aa5ffc604a28879d44a99fef0d10bab"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

@@ -1,0 +1,13 @@
+{
+  "name": "terrace-design-v2-planlocked-shell",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npx --yes hyperframes@0.8.17 check",
+    "preview": "npx --yes hyperframes@0.8.17 preview"
+  },
+  "dependencies": {
+    "gsap": "^3.14.2",
+    "three": "^0.181.2"
+  }
+}

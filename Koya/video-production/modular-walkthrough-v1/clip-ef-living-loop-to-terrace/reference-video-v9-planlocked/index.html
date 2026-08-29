@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #d9e2e4; }
+      #root, #scene { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #world { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; }
+      #lens { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 47%, transparent 76%, rgba(42,31,23,.08) 100%); }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-m2ef" id="root" data-composition-id="main" data-no-timeline="" data-duration="8" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-0kyv" id="scene" class="clip" data-start="0" data-duration="8" data-track-index="1">
+        <canvas data-hf-id="hf-jiwe" id="world" width="1920" height="1080" aria-label="Apartment 106 V9 plan-locked fixed public-zone reference"></canvas>
+        <div data-hf-id="hf-un31" id="lens"></div>
+      </div>
+    </div>
+    <script type="module">
+      import * as THREE from "./node_modules/three/build/three.module.js";
+
+      const canvas = document.getElementById("world");
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+      renderer.setSize(1920, 1080, false);
+      renderer.setPixelRatio(1);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.04;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xd9e5e7);
+      scene.fog = new THREE.Fog(0xd9e5e7, 24, 50);
+
+      // A moderate rectilinear lens. The room scale is carried by geometry and translation,
+      // not by an extreme wide-angle lens.
+      const camera = new THREE.PerspectiveCamera(55, 1920 / 1080, 0.06, 70);
+      camera.up.set(0, 1, 0);
+
+      scene.add(new THREE.HemisphereLight(0xeaf4f6, 0x806c59, 2.4));
+      scene.add(new THREE.AmbientLight(0xfffbf3, 1.05));
+      const sun = new THREE.DirectionalLight(0xfff2dc, 3.1);
+      sun.position.set(-5, 12, 9);
+      sun.castShadow = true;
+      sun.shadow.mapSize.set(2048, 2048);
+      sun.shadow.camera.left = -20;
+      sun.shadow.camera.right = 20;
+      sun.shadow.camera.top = 16;
+      sun.shadow.camera.bottom = -16;
+      scene.add(sun);
+
+      let seed = 1060901;
+      const random = () => {
+        seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+        let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+      const noiseTexture = (base, fleck, repeatX=3, repeatY=3, count=3600) => {
+        const c = document.createElement("canvas"); c.width = c.height = 256;
+        const g = c.getContext("2d"); g.fillStyle = base; g.fillRect(0,0,256,256);
+        g.fillStyle = fleck;
+        for (let i=0; i<count; i++) { g.globalAlpha=.015+random()*.045; g.fillRect(random()*256,random()*256,.3+random()*1.4,.3+random()*1.4); }
+        g.globalAlpha=1;
+        const t = new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace;
+        t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(repeatX,repeatY); return t;
+      };
+      const mat = (color, roughness=.78, metalness=0, map=null) => new THREE.MeshStandardMaterial({color,roughness,metalness,map});
+      const wallTex=noiseTexture("#eee9e1","#bdb4a9",3,3,4800);
+      const oakTex=noiseTexture("#bd956d","#735038",7,1,2800);
+      const stoneTex=noiseTexture("#ddd7cf","#948b81",2,2,5600);
+      const wall=mat(0xf0ebe3,.92,0,wallTex);
+      const warmWall=mat(0xe9e2d8,.94,0,wallTex);
+      const oak=mat(0xae8058,.72,0,oakTex);
+      const paleOak=mat(0xc9aa84,.76,0,oakTex);
+      const stone=mat(0xd8d1c8,.72,0,stoneTex);
+      const linen=mat(0xe7dfd4,.98);
+      const cocoa=mat(0x594034,.94);
+      const black=mat(0x171717,.42,.25);
+      const bronze=mat(0x4a4038,.52,.32);
+      const green=mat(0x4f7548,.98);
+      const terraceTile=mat(0xd7d3cc,.92);
+      const glass=new THREE.MeshPhysicalMaterial({color:0xb8d2d7,roughness:.06,transmission:.76,transparent:true,opacity:.28,metalness:0,side:THREE.DoubleSide,clearcoat:.28});
+      const ceiling=new THREE.MeshStandardMaterial({color:0xf3eee8,roughness:1,emissive:0x332e29,emissiveIntensity:.18,side:THREE.DoubleSide});
+
+      const world = new THREE.Group(); scene.add(world);
+      const box=(name,x,y,z,w,h,d,material,parent=world)=>{
+        const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);
+        mesh.name=name; mesh.position.set(x,y,z); mesh.castShadow=true; mesh.receiveShadow=true; parent.add(mesh); return mesh;
+      };
+      const cylinder=(name,x,y,z,r,h,material,parent=world,segments=24)=>{
+        const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,segments),material);
+        mesh.name=name; mesh.position.set(x,y,z); mesh.castShadow=true; mesh.receiveShadow=true; parent.add(mesh); return mesh;
+      };
+
+      // Plan-locked public envelope: 15 x 6.8 normalized units (2.21:1).
+      box("public-floor",7.5,-.055,3.4,15,.11,6.8,paleOak);
+      for(let z=.12; z<6.72; z+=.20) box("oak-joint",7.5,.004,z,14.96,.009,.012,oak);
+      box("public-ceiling",7.5,2.80,3.4,15,.12,6.8,ceiling);
+
+      // Compact west MPR. Its east-facing public opening is broad and column-free.
+      box("mpr-west-wall",.04,1.36,4.38,.08,2.72,4.66,warmWall);
+      box("mpr-north-wall",1.48,1.36,2.05,2.88,2.72,.10,warmWall);
+      box("mpr-east-return",2.96,1.36,2.45,.12,2.72,.80,warmWall);
+      box("mpr-opening-lintel",2.96,2.64,4.58,.12,.16,3.46,warmWall);
+      box("mpr-opening-south-jamb",2.96,1.36,6.28,.12,2.72,.10,warmWall);
+      const curvePath=new THREE.QuadraticBezierCurve3(new THREE.Vector3(2.96,2.22,2.84),new THREE.Vector3(2.96,2.64,2.84),new THREE.Vector3(2.96,2.64,3.26));
+      const curve=new THREE.Mesh(new THREE.TubeGeometry(curvePath,20,.065,10,false),warmWall); curve.name="mpr-rounded-return"; world.add(curve);
+      box("mpr-rug",1.38,.02,4.65,1.72,.035,1.42,mat(0xaaa095,.98));
+      box("mpr-desk",.52,.73,4.55,.66,.08,1.20,paleOak);
+      box("mpr-desk-leg",.52,.37,4.55,.08,.72,1.02,oak);
+      box("mpr-chair",1.38,.48,4.56,.54,.10,.50,linen);
+      box("mpr-art",.09,1.60,4.55,.03,1.02,.90,mat(0x8b8176,.9));
+
+      // North Kitchen and exactly one island.
+      box("kitchen-north-wall",5.55,1.38,.08,5.45,2.76,.14,warmWall);
+      box("kitchen-left-tall",3.14,1.31,.40,.78,2.52,.62,oak);
+      box("kitchen-right-tall",7.98,1.31,.40,.82,2.52,.62,oak);
+      box("kitchen-base",5.56,.52,.40,3.90,1.04,.64,oak);
+      box("kitchen-counter",5.56,1.08,.40,4.06,.10,.76,stone);
+      for(const x of[3.72,4.36,5.00,5.64,6.28,6.92,7.50]) box("kitchen-upper",x,2.04,.40,.58,.92,.56,linen);
+      box("kitchen-splashback",5.58,1.53,.12,3.90,.76,.025,stone);
+      box("fridge",7.98,1.38,.72,.62,2.32,.08,bronze);
+      box("cooktop",6.20,1.14,.41,.78,.025,.45,black);
+      box("sink",4.50,1.14,.41,.66,.025,.40,bronze);
+      const tap=cylinder("tap",4.50,1.43,.38,.026,.56,black,world,18); tap.rotation.z=Math.PI/2;
+      box("island-base",5.62,.47,1.72,3.04,.94,.92,oak);
+      box("island-stone",5.62,.98,1.72,3.22,.10,1.06,stone);
+      box("island-waterfall-west",4.06,.49,1.72,.10,.98,1.04,stone);
+      box("island-waterfall-east",7.18,.49,1.72,.10,.98,1.04,stone);
+      for(const x of[4.72,5.62,6.52]) { box("stool-seat",x,.49,2.43,.50,.10,.42,cocoa); cylinder("stool-leg",x,.245,2.43,.035,.49,bronze); }
+
+      // Dining remains compact and leaves generous circulation on every side.
+      box("dining-top",5.25,.77,4.64,1.65,.10,1.08,paleOak);
+      box("dining-pedestal",5.25,.40,4.64,.48,.74,.48,oak);
+      cylinder("dining-vase",5.25,.92,4.64,.10,.24,stone);
+      for(const [x,z,yaw] of [[4.20,4.64,Math.PI/2],[6.30,4.64,-Math.PI/2],[5.25,3.88,0],[5.25,5.40,Math.PI]]) {
+        const chair=new THREE.Group(); chair.position.set(x,0,z); chair.rotation.y=yaw; world.add(chair);
+        box("dining-chair-seat",0,.48,0,.48,.10,.46,linen,chair);
+        box("dining-chair-back",0,.79,.20,.48,.64,.08,paleOak,chair);
+        for(const lx of[-.18,.18]) for(const lz of[-.16,.16]) cylinder("chair-leg",lx,.24,lz,.024,.48,bronze,chair,12);
+      }
+
+      // Solid north TV wall below Bedroom 1. The wall ends before the east glazing.
+      box("living-tv-wall",11.15,1.38,1.50,7.18,2.76,.14,warmWall);
+      box("tv-console",11.45,.33,1.70,2.20,.54,.42,oak);
+      box("tv-screen",11.45,1.43,1.575,1.72,.92,.045,black);
+      box("soundbar",11.45,.79,1.58,1.02,.06,.07,black);
+      cylinder("tv-vase",12.38,.74,1.55,.09,.25,stone,world,22);
+
+      // Broad Living: furniture occupies less than half the available width.
+      const sofa=new THREE.Group(); sofa.position.set(11.65,0,5.22); world.add(sofa);
+      box("sofa-base",0,.26,0,3.00,.46,.78,linen,sofa);
+      box("sofa-back",0,.66,.30,3.00,.52,.18,linen,sofa);
+      for(const x of[-.98,0,.98]) box("sofa-cushion",x,.56,-.04,.82,.19,.54,linen,sofa);
+      box("sofa-return",-1.20,.28,-.58,.54,.50,1.18,linen,sofa);
+      box("sofa-arm",1.45,.52,0,.12,.56,.76,linen,sofa);
+      box("cocoa-cushion",.78,.84,.16,.48,.42,.14,cocoa,sofa);
+      box("living-rug",11.20,.018,4.02,5.42,.035,2.30,mat(0xbdb5aa,.98));
+      box("coffee-table",10.82,.31,3.78,1.34,.10,.72,stone);
+      box("coffee-base",10.82,.17,3.78,.52,.27,.34,oak);
+
+      // Continuous grouped south glazing.
+      box("south-head",9.00,2.65,6.79,12.00,.10,.14,black);
+      box("south-track",9.00,.06,6.79,12.00,.08,.14,black);
+      const southFrames=[3.00,4.00,5.00,6.00,7.00,8.00,9.00,10.00,11.00,12.00,13.00,14.00,15.00];
+      for(const x of southFrames) box("south-frame",x,1.38,6.79,.055,2.62,.10,black);
+      for(let x=3.50; x<15; x+=1.00) box("south-glass",x,1.38,6.79,.92,2.50,.025,glass);
+
+      // East grouped glazing. The middle 2.4-unit bay is physically empty/retracted.
+      box("east-head",14.99,2.65,4.15,.14,.10,5.30,black);
+      box("east-track",14.99,.055,4.15,.14,.08,5.30,black);
+      for(const z of[1.50,2.42,3.34,5.76,6.78]) box("east-frame",14.99,1.38,z,.10,2.62,.055,black);
+      box("east-glass-north-a",14.99,1.38,1.96,.025,2.50,.82,glass);
+      box("east-glass-north-b",14.99,1.38,2.88,.025,2.50,.82,glass);
+      box("east-stacked-leaf",14.93,1.38,6.23,.10,2.50,.84,glass);
+
+      // Wrap Terrace continues east and south, with a clear walking band.
+      box("east-terrace",16.80,-.06,4.18,3.50,.12,5.90,terraceTile);
+      box("south-terrace",10.30,-.06,8.30,13.00,.12,3.02,terraceTile);
+      for(let z=1.35; z<7.08; z+=.52) box("east-tile-joint",16.80,.008,z,3.44,.012,.014,mat(0xaaa49a,.98));
+      for(let x=3.82; x<16.82; x+=.52) box("south-tile-joint",x,.008,8.30,.014,.012,2.96,mat(0xaaa49a,.98));
+      box("east-balustrade-top",18.50,1.08,4.18,.08,.08,5.78,black);
+      box("east-balustrade-glass",18.48,.64,4.18,.025,.82,5.66,glass);
+      box("south-balustrade-top",10.30,1.08,9.78,12.90,.08,.08,black);
+      box("south-balustrade-glass",10.30,.64,9.76,12.78,.82,.025,glass);
+      for(const z of[2.10,3.30,4.50,5.70,6.75]) { cylinder("east-pot",18.05,.20,z,.17,.40,stone); cylinder("east-plant",18.05,.49,z,.23,.24,green); }
+      for(const x of[5.0,6.6,8.2,9.8,11.4,13.0,14.6,16.2]) { cylinder("south-pot",x,.20,9.30,.17,.40,stone); cylinder("south-plant",x,.49,9.30,.23,.24,green); }
+
+      // Ceiling details clarify the full room span rather than visually lowering the ceiling.
+      box("air-slot",6.10,2.715,1.12,5.10,.018,.10,black);
+      for(const [x,z] of [[3.5,3.0],[5.2,3.0],[7.0,3.0],[8.8,3.0],[10.7,3.0],[12.7,3.0],[14.1,3.0],[3.8,5.6],[6.2,5.6],[8.6,5.6],[11.0,5.6],[13.5,5.6]]) {
+        cylinder("downlight",x,2.71,z,.045,.018,mat(0xfff1d4,.3),world,20);
+        const light=new THREE.PointLight(0xffe7c6,.13,3.5,2); light.position.set(x,2.62,z); world.add(light);
+      }
+
+      // Abstract suburban depth only; no claimed project outlook.
+      const treeGeometry=new THREE.DodecahedronGeometry(.58,1);
+      for(let i=0;i<22;i++) {
+        const tree=new THREE.Mesh(treeGeometry,mat(i%2?0x52764b:0x6d8a62,.98));
+        tree.position.set(21+(i%5)*1.7,.8+(i%3)*.18,-1+(i*1.64)%12);
+        tree.scale.set(1+(i%3)*.16,.9+(i%4)*.11,1+(i%2)*.18); scene.add(tree);
+      }
+
+      const eyeKeys=[
+        {t:0.00,v:[7.55,1.55,5.92]},
+        {t:0.80,v:[7.30,1.55,5.72]},
+        {t:1.60,v:[7.20,1.55,6.08]},
+        {t:2.40,v:[8.70,1.55,4.72]},
+        {t:3.20,v:[10.20,1.55,3.72]},
+        {t:4.00,v:[12.10,1.55,3.52]},
+        {t:4.80,v:[15.20,1.55,4.15]},
+        {t:5.25,v:[16.05,1.55,4.55]},
+        {t:5.80,v:[16.55,1.55,4.92]},
+        {t:6.35,v:[16.78,1.55,4.82]},
+        {t:8.00,v:[16.72,1.55,4.62]}
+      ];
+      const targetKeys=[
+        {t:0.00,v:[1.30,1.18,4.65]},
+        {t:0.80,v:[5.45,1.18,.58]},
+        {t:1.60,v:[10.30,1.20,2.55]},
+        {t:2.40,v:[12.15,1.12,4.95]},
+        {t:3.20,v:[14.90,1.18,4.45]},
+        {t:4.00,v:[15.80,1.18,4.35]},
+        {t:4.80,v:[17.00,1.16,4.60]},
+        {t:5.25,v:[17.10,1.02,7.65]},
+        {t:5.80,v:[14.70,1.08,6.35]},
+        {t:6.35,v:[10.20,1.16,4.28]},
+        {t:8.00,v:[8.85,1.18,4.05]}
+      ];
+      const lerp=(a,b,u)=>a+(b-a)*u;
+      const smooth=u=>u*u*(3-2*u);
+      const sample=(keys,time,eased=false)=>{
+        let i=0; while(i<keys.length-2 && time>keys[i+1].t) i++;
+        const a=keys[i],b=keys[i+1],span=Math.max(.001,b.t-a.t);
+        let u=Math.max(0,Math.min(1,(time-a.t)/span)); if(eased) u=smooth(u);
+        return [lerp(a.v[0],b.v[0],u),lerp(a.v[1],b.v[1],u),lerp(a.v[2],b.v[2],u)];
+      };
+      function renderAt(time) {
+        const eye=sample(eyeKeys,time,false),target=sample(targetKeys,time,true);
+        const moving=time>.08 && time<7.35;
+        const bob=moving ? .008*Math.sin((time-.08)*Math.PI*3.6) : 0;
+        camera.position.set(eye[0],eye[1]+bob,eye[2]);
+        camera.lookAt(target[0],target[1]+bob*.25,target[2]);
+        renderer.render(scene,camera);
+      }
+      window.addEventListener("hf-seek",event=>renderAt(event.detail.time));
+      renderAt(window.__hfThreeTime || 0);
+      window.__koyaV9={scene,camera,renderer,renderAt};
+    </script>
+  </body>
+</html>

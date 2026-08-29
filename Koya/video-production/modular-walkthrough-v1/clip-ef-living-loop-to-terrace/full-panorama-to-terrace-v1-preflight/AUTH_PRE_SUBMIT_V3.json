@@ -1,0 +1,53 @@
+{
+  "active_profile": {
+    "is_default": true,
+    "name": "platform_cn-beijing_accountwide",
+    "owner_trn": "trn:iam::2129380310:root",
+    "project": "账号全部资源",
+    "region": "cn-beijing",
+    "type": "platform"
+  },
+  "ark_api_key": {
+    "key": "ark-****521f",
+    "status": "active"
+  },
+  "auth_method": "sso",
+  "control_plane_auth": {
+    "last_login_method": "volc_sso_browser",
+    "login_command": "arkcli auth login volc-sso",
+    "reason": "identity_sts_valid",
+    "status": "ok",
+    "sts_expires_at_ms": 1787987751608,
+    "tenant": "volc"
+  },
+  "identity_type": "enterprise",
+  "logged_in": true,
+  "profiles_summary": [
+    {
+      "name": "platform_cn-beijing_accountwide",
+      "display_name": "控制台按量",
+      "tenant": "volc",
+      "type": "platform",
+      "region": "cn-beijing",
+      "project": "账号全部资源",
+      "is_default": true,
+      "api_key_count": 1,
+      "default_api_key": "ark***************************************521f"
+    }
+  ],
+  "project_name": "账号全部资源",
+  "volc_sso": {
+    "expired": false,
+    "id_token_expires_at": "2026-08-29T17:15:51+10:00",
+    "id_token_remaining": "0h 14m",
+    "identity": {
+      "account_id": "2129380310",
+      "is_root": true,
+      "name": "6952手机用户#lZhAln",
+      "trn": "trn:iam::2129380310:root",
+      "verified": true
+    },
+    "remaining": "0h 14m",
+    "token": "eyJh****"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schema_version": "preview.v1",
+  "dry_run": true,
+  "mode": "client_preview",
+  "command": "arkcli +gen",
+  "product": "volc",
+  "scope": {},
+  "effects": {
+    "network": "blocked",
+    "filesystem": "read_only",
+    "subprocess": "blocked"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "kind": "api_request",
+      "name": "CreateContentsGenerationsTasks",
+      "plane": "data",
+      "protocol": "arkruntime",
+      "target": "CreateContentsGenerationsTasks",
+      "endpoint": "/contents/generations/tasks",
+      "method": "POST",
+      "payload": {
+        "content": [
+          {
+            "text": "生成一条30秒、16:9、720p、带原生环境声音的高端写实房地产销售影片。\n\n核心任务：single uninterrupted take; zero edits。全片只有一个真实连续摄影机和一名运动型白人女性，从Brisbane/Toowong高空连续俯冲到同一栋Koya，跟随她穿过入口、foyer、同一台电梯、Level 1短走廊、Apartment 106门槛，最后进入开放式厨房、餐厅和客厅。摄影机必须亲自跨过每一道门槛，任何时刻都不得切镜头、换机位、瞬移或替换建筑。\n\n参考职责，必须严格区分：\n@视频1只控制30秒内唯一摄影机的连续路线、速度、方向、跟拍距离、电梯同门进出以及所有门槛时序。只学习运动和空间连续性，不复制其低多边形、白模、人物模型或材质。\n@图片1控制Brisbane、河流、CBD、Toowong与目标地块的白天世界关系。Koya从第一帧就在同一个世界和地块上，接近过程中不得消失或替换。\n@图片2是Koya官方立面的唯一建筑外观与几何真相：保持相同总层数、阳台、圆角、木格栅、栏杆、中央入口、右侧车道与屋顶绿化。不得增加楼层、减少阳台或生成另一栋楼。\n@图片3锁定唯一人物：28岁运动型白人澳大利亚女性、深棕马尾、真实训练型身材、鼠尾草绿色长袖运动上衣、哑光黑色全长legging、白灰跑鞋、黑色运动手表；左手始终只有一只不锈钢水瓶，右手负责开门、按钮和门把。不得变脸、换衣、换手、复制人物或改变体型。\n@图片4控制白天玻璃入口门槛与紧凑单电梯foyer的概念外观。公共空间是概念设计，但前后必须物理相邻。\n@图片5控制人物和摄影机进入同一台电梯、同一金属门槛和同一轿厢的外观。\n@图片6控制同一轿厢、同一扇门重新打开并连续退出到Level 1短走廊。它不是新的镜头，也不是新的电梯。\n@图片7只控制室内的官方材质、色彩和合理公寓尺度：浅橡木、暖白、浅石材、紧凑厨房、普通餐桌与客厅。不得把它误当成Apartment 106的精确设计，不得做成顶层豪宅或宴会厅。\n@图片8是Apartment 106官方Level 1户型图，只控制入口、短hall、厨房、餐厅、客厅与露台的邻接和99平方米内部面积的可信尺度。平面图、文字、数字、Logo和线稿绝不能出现在视频画面中。\n\n严格时间与连续路线：\n0.0–3.0秒：从Brisbane/Toowong高空沿固定目标轴快速向前下方俯冲，真实视差经过河流、街区和建筑；同一栋Koya始终位于目标地块并持续变大。3秒内从高空自然落到街面高度，不旋转、不绕飞、不经过树叶或物体遮挡。\n3.0–5.0秒：在街面短暂减速，让买家清楚看见@图片2中的完整官方Koya和中央入口。摄影机不停机，随后获得@图片3中的女性，她已经在前方快步走向入口。\n5.0–8.5秒：摄影机以自然35–40mm视角稳定跟拍，不必始终正对人物；建筑和入口仍是主轴。人物左手水瓶不变，右手自然摆动。\n8.5–11.0秒：人物用右手打开玻璃门，摄影机紧随并亲自跨过同一入口门槛。门外地面、金属门槛和门内石材地面连续同框；门框自然移动到摄影机两侧和身后，绝不能遮满画面偷换空间。进入同一紧凑foyer后快速到达单电梯。\n11.0–12.2秒：电梯门打开，人物先跨过金属门槛，摄影机紧随进入同一轿厢。必须同时看见foyer、门框、门槛和轿厢地面，证明摄影机亲自进入。\n12.2–15.2秒：摄影机进入后在人物右后方自然侧移并转身面对同一扇门，绝不能穿过人物。门约0.7秒关闭。closed elevator doors compress travel time only, never location。摄影机始终留在同一轿厢，人物、木墙、扶手、灯光和相机位置保持连续；以轻微重心、机械低频和提示音表达快速上到Level 1。随后同一扇门重新打开。\n15.2–17.5秒：人物和摄影机从原门连续走出同一轿厢；两侧仍短暂看见同一轿厢内壁、门框和门槛。Level 1走廊很短，摄影机快速跟随到Apartment 106门口，不做酒店式慢走。\n17.5–19.5秒：人物右手开门、左手水瓶不变。摄影机亲自跨过住宅门槛，门外地毯、金属门槛与门内浅木地板连续同框；不得用门板、人物后背、黑帧或模糊遮满画面。\n19.5–22.0秒：在紧凑entry/hall内快速前进并自然转向客餐厅。hall只够正常住宅通行，厨房在短距离后出现；不得生成超宽走廊、巨大MPR、额外房间或虚构豪宅玄关。\n22.0–30.0秒：同一摄影机连续进入厨房、餐厅和客厅，逐渐减速并轻微朝露台方向推进。人物走向客厅与露台之间并逐渐成为次要元素；空间成为主角。保持紧凑线性厨房、合理石材岛台、最多六座餐桌、普通公寓沙发和外侧露台玻璃，最终稳定展示可信的厨房—餐厅—客厅—露台连续关系。\n\n全局强制约束：camera physically crosses every doorway behind the resident；camera enters and remains inside the same elevator cabin；closed elevator doors compress travel time only, never location。禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、architecture morph、树叶擦镜、柱子擦镜、贴脸遮挡、人物后背遮满画面、过度运动模糊和静态图片Ken Burns放大。不得把参考图片逐张当作镜头播放；必须把它们融合进@视频1定义的一个连续三维世界。全程保持晴朗Brisbane晚上午、5200–5600K中性日光、同一太阳方向和同一白平衡；禁止黄昏、夜景、橙青电影色、塑料CG感、字幕、价格、门牌号特写、乱码、水印、旁白、对白和歌词。\n\n原生音频必须无缝连续：高空风声收窄为街道车辆与城市底噪，随后是跑鞋脚步、玻璃门五金、石材脚步与foyer混响、电梯提示音和滑轨、短促低频上行、地毯脚步、门锁、木地板脚步、安静住宅空气感与极轻现代无歌词氛围音乐。声音空间必须随摄影机连续移动，不能用音频断点掩盖剪辑。",
+            "type": "text"
+          },
+          {
+            "reference": "reference_video:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/stage-01-camera-control-30s-v4-1080p.mp4",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/01-world-start-16x9.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/02-official-facade-16x9.jpg",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/03-character-back-16x9.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/04-entry-foyer-16x9.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/05-lift-entry-16x9.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/06-lift-exit-16x9.png",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/07-official-living-16x9.jpg",
+            "type": "asset_reference"
+          },
+          {
+            "reference": "reference_image:@/Users/lightman/Documents/sites/Koya/Koya/video-production/seedance-2.5-submission-v3/references/08-apartment-106-plan-16x9.png",
+            "type": "asset_reference"
+          }
+        ],
+        "duration": 30,
+        "generate_audio": true,
+        "model": "ep-20260812221158-hb576",
+        "omni_reference_task_type": "reference",
+        "priority": 0,
+        "ratio": "16:9",
+        "resolution": "720p",
+        "return_last_frame": true
+      },
+      "fidelity": "partial"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "steps[0].payload.content",
+      "reason": "execution parses roles and materializes asset references into image_url/video_url/audio_url content items",
+      "source": "input"
+    },
+    {
+      "path": "scope.data_plane",
+      "reason": "execution resolves profile, API key, base URL, and endpoint routing without exposing credentials",
+      "source": "profile"
+    }
+  ],
+  "summary": {
+    "modality": "video",
+    "modality_source": "explicit",
+    "model": "ep-20260812221158-hb576",
+    "prompt": "生成一条30秒、16:9、720p、带原生环境声音的高端写实房地产销售影片。\n\n核心任务：single uninterrupted take; zero edits。全片只有一个真实连续摄影机和一名运动型白人女性，从Brisbane/Toowong高空连续俯冲到同一栋Koya，跟随她穿过入口、foyer、同一台电梯、Level 1短走廊、Apartment 106门槛，最后进入开放式厨房、餐厅和客厅。摄影机必须亲自跨过每一道门槛，任何时刻都不得切镜头、换机位、瞬移或替换建筑。\n\n参考职责，必须严格区分：\n@视频1只控制30秒内唯一摄影机的连续路线、速度、方向、跟拍距离、电梯同门进出以及所有门槛时序。只学习运动和空间连续性，不复制其低多边形、白模、人物模型或材质。\n@图片1控制Brisbane、河流、CBD、Toowong与目标地块的白天世界关系。Koya从第一帧就在同一个世界和地块上，接近过程中不得消失或替换。\n@图片2是Koya官方立面的唯一建筑外观与几何真相：保持相同总层数、阳台、圆角、木格栅、栏杆、中央入口、右侧车道与屋顶绿化。不得增加楼层、减少阳台或生成另一栋楼。\n@图片3锁定唯一人物：28岁运动型白人澳大利亚女性、深棕马尾、真实训练型身材、鼠尾草绿色长袖运动上衣、哑光黑色全长legging、白灰跑鞋、黑色运动手表；左手始终只有一只不锈钢水瓶，右手负责开门、按钮和门把。不得变脸、换衣、换手、复制人物或改变体型。\n@图片4控制白天玻璃入口门槛与紧凑单电梯foyer的概念外观。公共空间是概念设计，但前后必须物理相邻。\n@图片5控制人物和摄影机进入同一台电梯、同一金属门槛和同一轿厢的外观。\n@图片6控制同一轿厢、同一扇门重新打开并连续退出到Level 1短走廊。它不是新的镜头，也不是新的电梯。\n@图片7只控制室内的官方材质、色彩和合理公寓尺度：浅橡木、暖白、浅石材、紧凑厨房、普通餐桌与客厅。不得把它误当成Apartment 106的精确设计，不得做成顶层豪宅或宴会厅。\n@图片8是Apartment 106官方Level 1户型图，只控制入口、短hall、厨房、餐厅、客厅与露台的邻接和99平方米内部面积的可信尺度。平面图、文字、数字、Logo和线稿绝不能出现在视频画面中。\n\n严格时间与连续路线：\n0.0–3.0秒：从Brisbane/Toowong高空沿固定目标轴快速向前下方俯冲，真实视差经过河流、街区和建筑；同一栋Koya始终位于目标地块并持续变大。3秒内从高空自然落到街面高度，不旋转、不绕飞、不经过树叶或物体遮挡。\n3.0–5.0秒：在街面短暂减速，让买家清楚看见@图片2中的完整官方Koya和中央入口。摄影机不停机，随后获得@图片3中的女性，她已经在前方快步走向入口。\n5.0–8.5秒：摄影机以自然35–40mm视角稳定跟拍，不必始终正对人物；建筑和入口仍是主轴。人物左手水瓶不变，右手自然摆动。\n8.5–11.0秒：人物用右手打开玻璃门，摄影机紧随并亲自跨过同一入口门槛。门外地面、金属门槛和门内石材地面连续同框；门框自然移动到摄影机两侧和身后，绝不能遮满画面偷换空间。进入同一紧凑foyer后快速到达单电梯。\n11.0–12.2秒：电梯门打开，人物先跨过金属门槛，摄影机紧随进入同一轿厢。必须同时看见foyer、门框、门槛和轿厢地面，证明摄影机亲自进入。\n12.2–15.2秒：摄影机进入后在人物右后方自然侧移并转身面对同一扇门，绝不能穿过人物。门约0.7秒关闭。closed elevator doors compress travel time only, never location。摄影机始终留在同一轿厢，人物、木墙、扶手、灯光和相机位置保持连续；以轻微重心、机械低频和提示音表达快速上到Level 1。随后同一扇门重新打开。\n15.2–17.5秒：人物和摄影机从原门连续走出同一轿厢；两侧仍短暂看见同一轿厢内壁、门框和门槛。Level 1走廊很短，摄影机快速跟随到Apartment 106门口，不做酒店式慢走。\n17.5–19.5秒：人物右手开门、左手水瓶不变。摄影机亲自跨过住宅门槛，门外地毯、金属门槛与门内浅木地板连续同框；不得用门板、人物后背、黑帧或模糊遮满画面。\n19.5–22.0秒：在紧凑entry/hall内快速前进并自然转向客餐厅。hall只够正常住宅通行，厨房在短距离后出现；不得生成超宽走廊、巨大MPR、额外房间或虚构豪宅玄关。\n22.0–30.0秒：同一摄影机连续进入厨房、餐厅和客厅，逐渐减速并轻微朝露台方向推进。人物走向客厅与露台之间并逐渐成为次要元素；空间成为主角。保持紧凑线性厨房、合理石材岛台、最多六座餐桌、普通公寓沙发和外侧露台玻璃，最终稳定展示可信的厨房—餐厅—客厅—露台连续关系。\n\n全局强制约束：camera physically crosses every doorway behind the resident；camera enters and remains inside the same elevator cabin；closed elevator doors compress travel time only, never location。禁止cut、edit、jump cut、alternate angle、teleport、dissolve、crossfade、flash、black frame、architecture morph、树叶擦镜、柱子擦镜、贴脸遮挡、人物后背遮满画面、过度运动模糊和静态图片Ken Burns放大。不得把参考图片逐张当作镜头播放；必须把它们融合进@视频1定义的一个连续三维世界。全程保持晴朗Brisbane晚上午、5200–5600K中性日光、同一太阳方向和同一白平衡；禁止黄昏、夜景、橙青电影色、塑料CG感、字幕、价格、门牌号特写、乱码、水印、旁白、对白和歌词。\n\n原生音频必须无缝连续：高空风声收窄为街道车辆与城市底噪，随后是跑鞋脚步、玻璃门五金、石材脚步与foyer混响、电梯提示音和滑轨、短促低频上行、地毯脚步、门锁、木地板脚步、安静住宅空气感与极轻现代无歌词氛围音乐。声音空间必须随摄影机连续移动，不能用音频断点掩盖剪辑。"
+  }
+}

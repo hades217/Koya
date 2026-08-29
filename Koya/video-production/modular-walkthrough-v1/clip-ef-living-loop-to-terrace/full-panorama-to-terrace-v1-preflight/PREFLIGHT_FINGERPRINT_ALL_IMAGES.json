@@ -1,0 +1,323 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "inputs": [
+    {
+      "bytes": 2164345,
+      "index": 0,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/00-master-public-zone-lock.png",
+      "provenance": "V7 plan-rebuilt public-zone master lock",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/00-master-public-zone-lock.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "7c7e32ea154100a1dc8ba891b6bbe15b3a3d98b6175409e70f636bbfa09f4215"
+    },
+    {
+      "bytes": 1859116,
+      "index": 1,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/01-mpr-dining-opening.png",
+      "provenance": "V7 MPR and Dining storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/01-mpr-dining-opening.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "bbcc062237718b052ae746d6a828a08f5f9bf688cbe1939c28dbd018f343e31e"
+    },
+    {
+      "bytes": 1797057,
+      "index": 2,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/02-dining-single-island-kitchen.png",
+      "provenance": "V7 Dining and single-island Kitchen storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/02-dining-single-island-kitchen.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "8e23b68b9c782a827581bb1b4647854d4f7d9b03e520bcf2fb5db5723c72c7e4"
+    },
+    {
+      "bytes": 2160526,
+      "index": 3,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/03-tv-wall-living-width.png",
+      "provenance": "V7 internal TV wall and Living width storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/03-tv-wall-living-width.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "d7cac55298cb7464b2a3d2aa975523466af99d70526efa0357255995df57b1b3"
+    },
+    {
+      "bytes": 2340770,
+      "index": 4,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/04-wrap-glazing-sliding-bay.png",
+      "provenance": "V7 sofa and wrap-glazing storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/04-wrap-glazing-sliding-bay.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "818e85e32ccd7a00546ae0de2a2d763a5e63fafd55a432e41ffca81cf740df5d"
+    },
+    {
+      "bytes": 2065853,
+      "index": 5,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/05-align-east-sliding-bay.png",
+      "provenance": "V7 east sliding-bay alignment storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/05-align-east-sliding-bay.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "ece6e45c5045f8906abe5bc3881512e258e3f8d27e4c305e4cac6a11904eac55"
+    },
+    {
+      "bytes": 1926191,
+      "index": 6,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/06-threshold-approach.png",
+      "provenance": "V7 east-threshold approach storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/06-threshold-approach.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "5153f7526be5ed71bf2bbedc3c823c996b89be2273895b23a0cb2dbf57d7a681"
+    },
+    {
+      "bytes": 2047942,
+      "index": 7,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/07-cross-east-threshold.png",
+      "provenance": "V7 east-threshold crossing storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/07-cross-east-threshold.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "f2057bff4f0268357b15794b0f02db08ee24df2e9f311ba86478646a08797e77"
+    },
+    {
+      "bytes": 2189923,
+      "index": 8,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/08-terrace-arrival.png",
+      "provenance": "V7 Terrace arrival storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/08-terrace-arrival.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "99411967ada9add57a81d8df13dd11ee138f1fc60e301fb5d51944e5f4b7f55c"
+    },
+    {
+      "bytes": 2072972,
+      "index": 9,
+      "media": {
+        "probe": {
+          "format": {
+            "format_name": "png_pipe"
+          },
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "png",
+              "codec_type": "video",
+              "height": 941,
+              "r_frame_rate": "25/1",
+              "width": 1672
+            }
+          ]
+        },
+        "status": "ok"
+      },
+      "path": "../living-panorama-storyboard-v2/rendered-storyboard-v7-plan-rebuild/09-terrace-lookback-endpoint.png",
+      "provenance": "V7 Terrace lookback endpoint storyboard",
+      "provider_url": "https://liable-metabolism-effectiveness-scenes.trycloudflare.com/09-terrace-lookback-endpoint.png",
+      "role": "reference_image",
+      "same_scene_id": "unavailable",
+      "sha256": "5ff979687d6379a467bcd2db36eda657a27b41f43ce74f8446b0b160c96ab202"
+    }
+  ],
+  "mode": "multimodal_to_video",
+  "output_count": 1,
+  "output_directory": "outputs/clip-ef-all-images-v3",
+  "package_sha256": "59f650fa4abc9c98acec91394e415f67177ff664e85a380883fb556e3b935b1b",
+  "parameters": {
+    "continuity_control": "owner_authorized_ordered_manifest_best_effort",
+    "duration": 8,
+    "generate_audio": true,
+    "owner_waiver": "Require continuous output without reference_video; reject after frame QA if continuity fails",
+    "ratio": "16:9_requested_in_prompt_no_explicit_flag",
+    "reference_video": "omitted_by_explicit_owner_instruction",
+    "resolution": "1080p",
+    "return_last_frame": true,
+    "watermark": false
+  },
+  "price": {
+    "account_overdue": false,
+    "source": "live provider catalog exposes V2V rates but no exact ten-image multimodal-to-video total",
+    "status": "unavailable"
+  },
+  "prompt": {
+    "bytes": 3836,
+    "path": "PROMPT_ZH_ALL_IMAGES.txt",
+    "sha256": "b3145ff0655b62d37439b665fb1af453f762ab55ea74d054d963f428a10a862b"
+  },
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "schema_version": "seedance-preflight-fingerprint.v2",
+  "task_count": 1
+}

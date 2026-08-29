@@ -1,0 +1,44 @@
+.DS_Store
+Thumbs.db
+
+# Dependencies and package-manager caches
+**/node_modules/
+**/.pnpm-store/
+**/.yarn/cache/
+
+# Build and framework output
+**/.next/
+**/.nuxt/
+**/.turbo/
+**/dist/
+**/build/
+**/.cache/
+**/coverage/
+
+# Python environments and caches
+**/.venv/
+**/venv/
+**/__pycache__/
+**/.pytest_cache/
+**/*.pyc
+
+# Local secrets
+**/.env
+**/.env.local
+**/.env.*.local
+**/*.pem
+**/*.key
+
+# Editor and OS state
+**/.idea/
+**/.vscode/
+**/*.swp
+
+# Rebuildable high-resolution experiments
+Koya/interactive-apartment-tour/output/superres-test/
+
+# Local preview/process state
+**/.hyperframes/
+**/.thumbnails/
+*.log
+

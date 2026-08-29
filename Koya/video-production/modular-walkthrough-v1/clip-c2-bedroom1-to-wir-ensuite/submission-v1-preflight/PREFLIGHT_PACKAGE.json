@@ -1,0 +1,36 @@
+{
+  "endpoint": "ep-20260812221158-hb576",
+  "resolved_model": "doubao-seedance-2-5-260628",
+  "mode": "video_editing",
+  "task_count": 1,
+  "output_count": 1,
+  "prompt_file": "PROMPT.txt",
+  "inputs": [
+    {
+      "path": "inputs/00-reference-motion.mp4",
+      "provider_url": "https://dealers-catherine-hull-police.trycloudflare.com/00-reference-motion.mp4",
+      "role": "reference_video",
+      "provenance": "continuous 5.000-second render from the Apartment 106 master-suite fixed WebGL shell and camera path; local and remote bytes verified identical on 2026-08-26",
+      "same_scene_id": "koya-106-master-suite-fixed-shell-v1"
+    }
+  ],
+  "parameters": {
+    "duration": -1,
+    "ratio": "adaptive",
+    "resolution": "1080p",
+    "generate_audio": true,
+    "watermark": false,
+    "seed": "unavailable"
+  },
+  "price": {
+    "status": "available_unit_price_estimated_total",
+    "source": "live account pricing read-back on 2026-08-26 plus prior same-endpoint five-second 1080p V2V usage",
+    "unit_price": 0.03312,
+    "unit": "CNY per thousand V2V1080 completion tokens",
+    "estimated_completion_tokens": 488025,
+    "estimated_total_cny": 16.163388,
+    "exact_total_before_generation": "unavailable",
+    "failure_billing_status": "unavailable"
+  },
+  "output_directory": "outputs"
+}

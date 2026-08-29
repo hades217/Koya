@@ -1,0 +1,43 @@
+{
+  "resource_id": "ep-20260812221158-hb576",
+  "resource_region": "cn-beijing",
+  "resource_kind": "endpoint",
+  "data_plane": "platform",
+  "endpoint_status": "Running",
+  "endpoint_model_type": "FoundationModel",
+  "model_id": "doubao-seedance-2-5-260628",
+  "model_name": "doubao-seedance-2-5",
+  "model_version": "260628",
+  "input_modalities": [
+    "text",
+    "image",
+    "video",
+    "audio"
+  ],
+  "output_modalities": [
+    "video"
+  ],
+  "task_types": [
+    {
+      "key": "multimodal_to_video",
+      "label": "多模态生视频"
+    },
+    {
+      "key": "video_editing",
+      "label": "视频编辑"
+    },
+    {
+      "key": "video_extension",
+      "label": "视频延长"
+    }
+  ],
+  "supported_apis": [
+    "/v3/contents/generations"
+  ],
+  "supported_workflows": [
+    "gen"
+  ],
+  "generation_modality": "video",
+  "requires_user_intent": false,
+  "resolution_source": "endpoint_and_model_metadata"
+}
