@@ -1,6 +1,6 @@
 # Entry Hall panorama V2 manifest
 
-- Status: `local_qa_candidate`
+- Status: `rejected_not_for_tour`
 - Evidence class: `concept_floorplan_grounded`
 - Camera: immediately inside the Apartment 106 entry threshold, 1.6 m concept eye height, facing inward
 - Topology authority: `Koya/production-assets/assets/official/floorplans/apartment-106.png`
@@ -15,4 +15,6 @@
 - Master: `entry-panorama-master-v2.png`, 4096 x 2048
 - Delivery: `entry-panorama-v2-4k.webp`, 4096 x 2048; `entry-panorama-v2-8k.webp`, 8192 x 4096
 - Known limitation: independently generated cubefaces are concept reconstruction, not a measured scan; seams and exact dimensions require interactive review
+- Rejection reason: independent cubefaces did not preserve one shared shell across their edges; left/right continuity and doorway placement became inconsistent after spherical assembly
+- Tour decision: removed from the Entry stop; do not publish or restore without a deterministic single-shell rebuild
 - Disclosure: Concept Design / Artist Impression; furniture, finishes and fittings are illustrative
