@@ -70,9 +70,10 @@ export default function PanoramaViewer({ src, midResSrc, highResSrc, yaw, pitch 
     resize();
 
     const loader = new THREE.TextureLoader();
-    const preferredSrc = highResSrc && renderer.capabilities.maxTextureSize >= 12288
+    const isMobileViewport = window.innerWidth <= 768;
+    const preferredSrc = !isMobileViewport && highResSrc && renderer.capabilities.maxTextureSize >= 12288
       ? highResSrc
-      : midResSrc && renderer.capabilities.maxTextureSize >= 10240
+      : !isMobileViewport && midResSrc && renderer.capabilities.maxTextureSize >= 8192
         ? midResSrc
         : src;
     let texture: THREE.Texture | null = null;
