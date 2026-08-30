@@ -3,7 +3,7 @@
 import { type WheelEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PanoramaViewer from './PanoramaViewer';
 
-type SceneView = { label: string; image: string; panorama360?: boolean; midResImage?: string; highResImage?: string };
+type SceneView = { label: string; image: string; panorama360?: boolean; midResImage?: string; highResImage?: string; initialYaw?: number };
 
 type TourStop = {
   id: string;
@@ -28,7 +28,7 @@ type VideoTour = {
 };
 
 const stops: TourStop[] = [
-  { id: 'entry', label: 'Entry hall', eyebrow: 'Arrival', views: [{ label: 'Floor-plan audited entry', image: '/tour/entry-floorplan-audited-v2.png' }, { label: 'Toward the kitchen axis', image: '/tour/entry-kitchen-turn-audited-v1.png' }], x: 4, y: 13, connections: ['bath', 'hub'], note: 'The camera starts immediately inside the Apartment 106 front door. Storage, Laundry and Bath remain on the viewer-left side of the inward hall; the viewer-right wall remains solid. The rejected stitched panorama has been removed pending a single-shell 360° rebuild.' },
+  { id: 'entry', label: 'Entry hall', eyebrow: 'Arrival', views: [{ label: 'Fixed-shell 360° panorama', image: '/tour/panoramas/entry-fixed-shell-v3-4k.webp', midResImage: '/tour/panoramas/entry-fixed-shell-v3-8k.webp', panorama360: true, initialYaw: 180 }, { label: 'Floor-plan audited entry', image: '/tour/entry-floorplan-audited-v2.png' }, { label: 'Toward the kitchen axis', image: '/tour/entry-kitchen-turn-audited-v1.png' }], x: 4, y: 13, connections: ['bath', 'hub'], note: 'The camera starts immediately inside the Apartment 106 front door. The initial view faces inward: full-height storage, then separate Laundry and Main Bath openings remain on the viewer-left; the viewer-right wall remains uninterrupted. Turn around to see the single main entry door. This fixed-shell panorama is a floor-plan-grounded AI concept, not a measured 360° survey.' },
   { id: 'bath', label: 'Bath & laundry', eyebrow: 'Service rooms', views: [{ label: 'Threshold', image: '/tour/bath-threshold.png' }, { label: 'Main bath', image: '/tour/bath.png' }], x: 23, y: 31, connections: ['entry', 'bedroom2'], note: 'Separate bath and laundry sit beside the hall.' },
   { id: 'bedroom2', label: 'Bedroom 2', eyebrow: 'Private room', views: [{ label: 'Enhanced 360° panorama', image: '/tour/panoramas/bedroom2-panorama-4k.webp', midResImage: '/tour/panoramas/bedroom2-panorama-8k.webp', panorama360: true }, { label: 'Threshold', image: '/tour/bedroom2-threshold.png' }, { label: 'Room view', image: '/tour/bedroom2.png' }], x: 21, y: 68, connections: ['bath', 'mpr'], note: 'Bedroom 2 opens from the western circulation edge. The panorama is a floor-plan-grounded AI concept, not a measured 360° survey.' },
   { id: 'mpr', label: 'Multipurpose room', eyebrow: 'Flexible space', views: [{ label: 'Enhanced 360° panorama', image: '/tour/panoramas/mpr-panorama-4k.webp', midResImage: '/tour/panoramas/mpr-panorama-8k.webp', panorama360: true }, { label: 'From dining', image: '/tour/mpr-threshold.png' }, { label: 'Room view', image: '/tour/mpr.png' }], x: 35, y: 67, connections: ['bedroom2', 'hub'], note: 'The compact MPR connects through the large dining-side opening. The panorama is a floor-plan-grounded AI concept, not a measured 360° survey.' },
@@ -112,10 +112,13 @@ export default function Home() {
   const guidedPhase = [...selectedTour.phases].reverse().find((phase) => videoProgress >= phase.at) ?? selectedTour.phases[0];
 
   const changeView = useCallback((direction: number) => {
-    setViewIndex((current) => (current + direction + active.views.length) % active.views.length);
-    setPan(0);
+    setViewIndex((current) => {
+      const next = (current + direction + active.views.length) % active.views.length;
+      setPan(active.views[next]?.initialYaw ?? 0);
+      return next;
+    });
     setPitch(0);
-  }, [active.views.length]);
+  }, [active.views]);
 
   const scrubTo = useCallback((requestedTime: number) => {
     const video = videoRef.current;
@@ -159,10 +162,11 @@ export default function Home() {
   }, []);
 
   function goTo(id: string) {
+    const nextStop = stops.find((stop) => stop.id === id);
     setGuidedMode(false);
     setActiveId(id);
     setViewIndex(0);
-    setPan(0);
+    setPan(nextStop?.views[0]?.initialYaw ?? 0);
     setPitch(0);
     setInfoOpen(false);
     setVisited((current) => new Set(current).add(id));
@@ -187,8 +191,12 @@ export default function Home() {
         }
       });
     } else {
+      const nextStop = stops.find((stop) => stop.id === guidedPhase.activeId);
       setGuidedMode(false);
       setActiveId(guidedPhase.activeId);
+      setViewIndex(0);
+      setPan(nextStop?.views[0]?.initialYaw ?? 0);
+      setPitch(0);
     }
     setInfoOpen(false);
   }
@@ -402,7 +410,7 @@ export default function Home() {
           <button onClick={() => changeView(-1)} aria-label="Previous view">‹</button>
           <div>
             {active.views.map((view, index) => (
-              <button key={view.label} className={index === viewIndex ? 'active' : ''} onClick={() => { setViewIndex(index); setPan(0); }} aria-label={`Show ${view.label}`} />
+              <button key={view.label} className={index === viewIndex ? 'active' : ''} onClick={() => { setViewIndex(index); setPan(view.initialYaw ?? 0); setPitch(0); }} aria-label={`Show ${view.label}`} />
             ))}
           </div>
           <span>{activeView.label}</span>
