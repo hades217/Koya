@@ -41,7 +41,7 @@ const stops: TourStop[] = [
 
 const videoTours: VideoTour[] = [
   {
-    id: 'entry', label: 'Arrival & entry', route: 'Koya arrival → foyer → lift → Apartment 106 door → Entry Hall', status: 'QA passed · Literal arrival and apartment entry',
+    id: 'arrival', label: 'Arrival', route: 'Koya arrival → foyer → lift → Apartment 106 door', status: 'QA passed · Building arrival sequence',
     src: '/tour/videos/full-arrival-entry-qa-pass-scroll.mp4', poster: '/tour/videos/full-arrival-entry-poster.jpg', duration: 21.056,
     phases: [
       { at: 0, label: 'Koya arrival', activeId: 'entry' },
@@ -54,7 +54,7 @@ const videoTours: VideoTour[] = [
     ],
   },
   {
-    id: 'entry-hub-archive', label: 'Entry → Hub archive', route: 'Entry Hall → Kitchen → Living Hub', status: 'ARCHIVED · REJECTED by later floor-plan audit', rejected: true,
+    id: 'entry-room', label: 'Entry room', route: 'Inside Apartment 106 → Entry Hall → Living Hub', status: 'Standalone interior video · Concept geometry under review',
     src: '/tour/videos/entry-hub-archived-rejected-scroll.mp4', poster: '/tour/entry.png', duration: 10.041667,
     phases: [
       { at: 0, label: 'Entry Hall', activeId: 'entry' },
@@ -105,8 +105,8 @@ export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const [visited, setVisited] = useState(() => new Set(['entry']));
   const [guidedMode, setGuidedMode] = useState(true);
-  const [selectedTourId, setSelectedTourId] = useState('entry');
-  const [videoDuration, setVideoDuration] = useState(21.056);
+  const [selectedTourId, setSelectedTourId] = useState('entry-room');
+  const [videoDuration, setVideoDuration] = useState(10.041667);
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
