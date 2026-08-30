@@ -99,11 +99,13 @@ export default function Home() {
   const [videoDuration, setVideoDuration] = useState(5.041667);
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const [panoramaFov, setPanoramaFov] = useState(88);
   const dragStart = useRef({ x: 0, y: 0, pan: 0, pitch: 0 });
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const targetVideoTime = useRef(0);
   const scrubFrame = useRef<number | null>(null);
+  const videoDragStart = useRef({ y: 0, time: 0 });
   const active = useMemo(() => stops.find((stop) => stop.id === activeId) ?? stops[0], [activeId]);
   const activeView = active.views[viewIndex] ?? active.views[0];
   const selectedTour = useMemo(() => videoTours.find((tour) => tour.id === selectedTourId) ?? videoTours[0], [selectedTourId]);
@@ -181,6 +183,7 @@ export default function Home() {
           videoRef.current.currentTime = 0;
           targetVideoTime.current = 0;
           setVideoProgress(0);
+          setVideoPlaying(false);
         }
       });
     } else {
@@ -197,6 +200,7 @@ export default function Home() {
     setVideoDuration(nextTour.duration);
     setVideoProgress(0);
     setVideoReady(false);
+    setVideoPlaying(false);
     setActiveId(nextTour.phases[0].activeId);
     setVisited((current) => new Set(current).add(nextTour.phases[0].activeId));
     targetVideoTime.current = 0;
@@ -213,13 +217,24 @@ export default function Home() {
   }
 
   function startDrag(clientX: number, clientY: number) {
-    if (guidedMode) return;
+    if (guidedMode) {
+      videoRef.current?.pause();
+      setVideoPlaying(false);
+      videoDragStart.current = { y: clientY, time: targetVideoTime.current };
+      setIsDragging(true);
+      return;
+    }
     setIsDragging(true);
     dragStart.current = { x: clientX, y: clientY, pan, pitch };
   }
 
   function moveDrag(clientX: number, clientY: number) {
-    if (!isDragging || guidedMode) return;
+    if (!isDragging) return;
+    if (guidedMode) {
+      const travel = (videoDragStart.current.y - clientY) / Math.max(window.innerHeight, 480);
+      scrubTo(videoDragStart.current.time + travel * videoDuration);
+      return;
+    }
     if (activeView.panorama360) {
       const degrees = (clientX - dragStart.current.x) / Math.max(window.innerWidth, 480) * panoramaFov;
       setPan(dragStart.current.pan + degrees);
@@ -232,6 +247,22 @@ export default function Home() {
     const sensitivity = wideView ? 110 : 44;
     const delta = (clientX - dragStart.current.x) / Math.max(window.innerWidth, 480) * sensitivity;
     setPan(Math.max(-limit, Math.min(limit, dragStart.current.pan + delta)));
+  }
+
+  async function toggleVideoPlayback() {
+    const video = videoRef.current;
+    if (!video || !videoReady) return;
+    if (video.paused) {
+      try {
+        await video.play();
+        setVideoPlaying(true);
+      } catch {
+        setVideoPlaying(false);
+      }
+    } else {
+      video.pause();
+      setVideoPlaying(false);
+    }
   }
 
   async function toggleFullscreen() {
@@ -248,7 +279,7 @@ export default function Home() {
         onPointerMove={(event) => moveDrag(event.clientX, event.clientY)}
         onPointerUp={() => setIsDragging(false)}
         onPointerCancel={() => setIsDragging(false)}
-        aria-label={guidedMode ? 'Scroll-controlled Bedroom 1 to Ensuite video' : `${active.label}, ${activeView.label}, interactive concept view`}
+        aria-label={guidedMode ? `Swipe-controlled ${selectedTour.label} video` : `${active.label}, ${activeView.label}, interactive concept view`}
       >
         {guidedMode ? (
           <video
@@ -259,6 +290,7 @@ export default function Home() {
             poster={selectedTour.poster}
             muted
             playsInline
+            disablePictureInPicture
             preload="auto"
             onLoadedMetadata={(event) => {
               const video = event.currentTarget;
@@ -266,9 +298,14 @@ export default function Home() {
               setVideoDuration(video.duration);
               targetVideoTime.current = 0;
               setVideoReady(true);
+              setVideoPlaying(false);
             }}
+            onPlay={() => setVideoPlaying(true)}
+            onPause={() => setVideoPlaying(false)}
+            onEnded={() => setVideoPlaying(false)}
             onTimeUpdate={(event) => {
               const video = event.currentTarget;
+              if (scrubFrame.current === null) targetVideoTime.current = video.currentTime;
               const progress = video.duration ? video.currentTime / video.duration : 0;
               setVideoProgress(progress);
               const phase = [...selectedTour.phases].reverse().find((item) => progress >= item.at) ?? selectedTour.phases[0];
@@ -320,6 +357,27 @@ export default function Home() {
           <div><i style={{ height: `${videoProgress * 100}%` }} /></div>
           <strong>{Math.round(videoProgress * 100)}%</strong>
           <small>{videoDuration.toFixed(1)}s</small>
+        </div>
+      )}
+
+      {guidedMode && (
+        <div className="video-transport" aria-label="Video playback controls">
+          <button type="button" onClick={toggleVideoPlayback} disabled={!videoReady} aria-label={videoPlaying ? 'Pause video' : 'Play video'}>
+            {videoPlaying ? 'Pause' : 'Play'}
+          </button>
+          <input
+            type="range"
+            min="0"
+            max="1000"
+            value={Math.round(videoProgress * 1000)}
+            onChange={(event) => {
+              videoRef.current?.pause();
+              setVideoPlaying(false);
+              scrubTo(Number(event.currentTarget.value) / 1000 * videoDuration);
+            }}
+            aria-label="Video timeline"
+          />
+          <span>{(videoProgress * videoDuration).toFixed(1)}s / {videoDuration.toFixed(1)}s</span>
         </div>
       )}
 
@@ -415,7 +473,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {guidedMode && <div className="scroll-hint">Scroll to scrub selected route <span>↓</span></div>}
+      {guidedMode && <div className="scroll-hint">Swipe up or down to scrub <span>↕</span></div>}
     </main>
   );
 }

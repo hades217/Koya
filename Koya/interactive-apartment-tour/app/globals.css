@@ -38,6 +38,11 @@ button { font: inherit; }
 .scroll-status > div i { position: absolute; left: 0; right: 0; top: 0; display: block; background: white; transition: height .45s cubic-bezier(.2,.8,.2,1); }
 .scroll-status strong { font: 600 10px/1 monospace; }
 .scroll-status small { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .72; }
+.video-transport { position: absolute; z-index: 10; left: 50%; bottom: 84px; display: grid; grid-template-columns: auto minmax(140px, 320px) auto; align-items: center; gap: 12px; width: min(620px, calc(100vw - 160px)); padding: 9px 12px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; background: rgba(20,16,13,.62); box-shadow: 0 8px 30px rgba(0,0,0,.22); backdrop-filter: blur(16px); transform: translateX(-50%); }
+.video-transport button { min-width: 58px; border: 0; border-radius: 999px; padding: 8px 12px; color: #2b251f; background: rgba(245,241,232,.94); font-size: 10px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+.video-transport button:disabled { opacity: .45; cursor: wait; }
+.video-transport input { width: 100%; accent-color: #f3efe5; cursor: ew-resize; touch-action: pan-x; }
+.video-transport span { min-width: 82px; font: 600 10px/1 monospace; text-align: right; white-space: nowrap; }
 .video-route-selector { position: absolute; z-index: 8; top: 92px; left: 50%; display: flex; gap: 6px; max-width: min(720px, calc(100vw - 180px)); padding: 6px; overflow-x: auto; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; background: rgba(22,18,14,.42); box-shadow: 0 8px 32px rgba(0,0,0,.16); backdrop-filter: blur(16px); scrollbar-width: none; transform: translateX(-50%); }
 .video-route-selector::-webkit-scrollbar { display: none; }
 .video-route-selector button { display: flex; align-items: center; gap: 8px; flex: none; padding: 9px 12px; border: 0; border-radius: 999px; color: rgba(255,255,255,.68); background: transparent; cursor: pointer; }
@@ -101,7 +106,7 @@ button { font: inherit; }
 .room-strip button { flex: none; border: 0; border-radius: 999px; padding: 8px 12px; color: rgba(255,255,255,.62); background: transparent; font-size: 11px; cursor: pointer; white-space: nowrap; }
 .room-strip button:hover, .room-strip button.active { color: white; background: rgba(255,255,255,.13); }
 .room-strip button i { display: inline-block; width: 5px; height: 5px; margin-right: 7px; border-radius: 50%; background: #9db3a2; vertical-align: 1px; }
-.scroll-hint { position: absolute; z-index: 9; left: 50%; bottom: 82px; display: flex; align-items: center; gap: 12px; padding: 9px 15px; border: 1px solid rgba(255,255,255,.26); border-radius: 999px; color: rgba(255,255,255,.82); background: rgba(20,16,13,.48); box-shadow: 0 8px 30px rgba(0,0,0,.18); backdrop-filter: blur(14px); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; transform: translateX(-50%); pointer-events: none; }
+.scroll-hint { position: absolute; z-index: 9; left: 50%; bottom: 140px; display: flex; align-items: center; gap: 12px; padding: 9px 15px; border: 1px solid rgba(255,255,255,.26); border-radius: 999px; color: rgba(255,255,255,.82); background: rgba(20,16,13,.48); box-shadow: 0 8px 30px rgba(0,0,0,.18); backdrop-filter: blur(14px); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; transform: translateX(-50%); pointer-events: none; }
 .scroll-hint span { font-size: 16px; animation: scrollCue 1.5s ease-in-out infinite; }
 @keyframes scrollCue { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
 .guided .wayfinding { opacity: .32; transition: opacity .2s; }
@@ -127,7 +132,9 @@ button { font: inherit; }
   .scroll-status { top: 128px; right: 12px; }
   .scroll-status > div { height: 24vh; }
   .scroll-status > span { display: none; }
-  .scroll-hint { bottom: 76px; width: max-content; max-width: calc(100vw - 28px); font-size: 9px; }
+  .scroll-hint { bottom: 132px; width: max-content; max-width: calc(100vw - 28px); font-size: 9px; }
+  .video-transport { bottom: 76px; grid-template-columns: auto minmax(90px, 1fr); width: calc(100vw - 24px); gap: 8px; padding: 7px 8px; }
+  .video-transport span { display: none; }
   .video-route-selector { top: 70px; left: 12px; right: 12px; max-width: none; transform: none; }
   .panorama-controls { top: 148px; right: 12px; transform: none; }
   .video-guided .room-title { top: 40%; }
