@@ -40,4 +40,7 @@ has been removed from the active route.
 - browser source/duration read-back: PASS, exact web source loaded at 21.056 seconds
 - desktop vertical wheel: PASS from arrival through Apartment 106 approach and Entry Hall
 - mobile vertical drag: PASS, 0.000 to 10.247 seconds in one upward gesture
+- chapter chaining: PASS, further downward scroll at Entry end opens West rooms at 0.000 seconds
+- reverse chapter chaining: PASS, upward scroll at West rooms start restores Entry at 21.056 seconds
+- mobile chapter chaining: PASS, upward gesture at Entry end opens West rooms at 0.000 seconds
 - user visual acceptance: pending

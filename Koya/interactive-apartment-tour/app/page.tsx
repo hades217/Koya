@@ -93,6 +93,8 @@ const videoTours: VideoTour[] = [
   },
 ];
 
+const activeVideoTours = videoTours.filter((tour) => !tour.rejected);
+
 export default function Home() {
   const [activeId, setActiveId] = useState('entry');
   const [viewIndex, setViewIndex] = useState(0);
@@ -114,6 +116,8 @@ export default function Home() {
   const targetVideoTime = useRef(0);
   const scrubFrame = useRef<number | null>(null);
   const videoDragStart = useRef({ y: 0, time: 0 });
+  const videoDragRequested = useRef(0);
+  const pendingVideoEdge = useRef<'start' | 'end'>('start');
   const active = useMemo(() => stops.find((stop) => stop.id === activeId) ?? stops[0], [activeId]);
   const activeView = active.views[viewIndex] ?? active.views[0];
   const selectedTour = useMemo(() => videoTours.find((tour) => tour.id === selectedTourId) ?? videoTours[0], [selectedTourId]);
@@ -177,11 +181,14 @@ export default function Home() {
     const syncMetadata = () => {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
       video.pause();
+      const nextTime = pendingVideoEdge.current === 'end' ? video.duration : 0;
+      video.currentTime = nextTime;
       setVideoDuration(video.duration);
-      targetVideoTime.current = video.currentTime;
-      setVideoProgress(video.currentTime / video.duration);
+      targetVideoTime.current = nextTime;
+      setVideoProgress(nextTime / video.duration);
       setVideoReady(true);
       setVideoPlaying(false);
+      pendingVideoEdge.current = 'start';
     };
 
     if (video.readyState >= HTMLMediaElement.HAVE_METADATA) syncMetadata();
@@ -230,8 +237,13 @@ export default function Home() {
   }
 
   function chooseVideoTour(id: string) {
-    const nextTour = videoTours.find((tour) => tour.id === id);
+    const nextTour = activeVideoTours.find((tour) => tour.id === id);
     if (!nextTour || nextTour.id === selectedTourId) return;
+    pendingVideoEdge.current = 'start';
+    activateVideoTour(nextTour);
+  }
+
+  function activateVideoTour(nextTour: VideoTour) {
     setSelectedTourId(nextTour.id);
     setVideoDuration(nextTour.duration);
     setVideoProgress(0);
@@ -246,9 +258,20 @@ export default function Home() {
     }
   }
 
+  function changeVideoTour(direction: number, edge: 'start' | 'end') {
+    const currentIndex = activeVideoTours.findIndex((tour) => tour.id === selectedTourId);
+    const nextTour = activeVideoTours[currentIndex + direction];
+    if (!nextTour) return false;
+    pendingVideoEdge.current = edge;
+    activateVideoTour(nextTour);
+    return true;
+  }
+
   function handleWheel(event: WheelEvent<HTMLElement>) {
     if (!guidedMode) return;
     event.preventDefault();
+    if (event.deltaY > 0 && targetVideoTime.current >= videoDuration - .04 && changeVideoTour(1, 'start')) return;
+    if (event.deltaY < 0 && targetVideoTime.current <= .04 && changeVideoTour(-1, 'end')) return;
     scrubTo(targetVideoTime.current + event.deltaY * .0065);
   }
 
@@ -257,6 +280,7 @@ export default function Home() {
       videoRef.current?.pause();
       setVideoPlaying(false);
       videoDragStart.current = { y: clientY, time: targetVideoTime.current };
+      videoDragRequested.current = targetVideoTime.current;
       setIsDragging(true);
       return;
     }
@@ -268,7 +292,9 @@ export default function Home() {
     if (!isDragging) return;
     if (guidedMode) {
       const travel = (videoDragStart.current.y - clientY) / Math.max(window.innerHeight, 480);
-      scrubTo(videoDragStart.current.time + travel * videoDuration);
+      const requestedTime = videoDragStart.current.time + travel * videoDuration;
+      videoDragRequested.current = requestedTime;
+      scrubTo(requestedTime);
       return;
     }
     if (activeView.panorama360) {
@@ -283,6 +309,14 @@ export default function Home() {
     const sensitivity = wideView ? 110 : 44;
     const delta = (clientX - dragStart.current.x) / Math.max(window.innerWidth, 480) * sensitivity;
     setPan(Math.max(-limit, Math.min(limit, dragStart.current.pan + delta)));
+  }
+
+  function endDrag() {
+    if (guidedMode) {
+      if (videoDragRequested.current > videoDuration + .2) changeVideoTour(1, 'start');
+      else if (videoDragRequested.current < -.2) changeVideoTour(-1, 'end');
+    }
+    setIsDragging(false);
   }
 
   async function toggleVideoPlayback() {
@@ -313,7 +347,7 @@ export default function Home() {
         tabIndex={0}
         onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); startDrag(event.clientX, event.clientY); }}
         onPointerMove={(event) => moveDrag(event.clientX, event.clientY)}
-        onPointerUp={() => setIsDragging(false)}
+        onPointerUp={endDrag}
         onPointerCancel={() => setIsDragging(false)}
         aria-label={guidedMode ? `Swipe-controlled ${selectedTour.label} video` : `${active.label}, ${activeView.label}, interactive concept view`}
       >
@@ -328,14 +362,6 @@ export default function Home() {
             playsInline
             disablePictureInPicture
             preload="auto"
-            onLoadedMetadata={(event) => {
-              const video = event.currentTarget;
-              video.pause();
-              setVideoDuration(video.duration);
-              targetVideoTime.current = 0;
-              setVideoReady(true);
-              setVideoPlaying(false);
-            }}
             onPlay={() => setVideoPlaying(true)}
             onPause={() => setVideoPlaying(false)}
             onEnded={() => setVideoPlaying(false)}
@@ -419,7 +445,7 @@ export default function Home() {
 
       {guidedMode && (
         <nav className="video-route-selector" aria-label="Choose a local video route">
-          {videoTours.filter((tour) => !tour.rejected).map((tour) => (
+          {activeVideoTours.map((tour) => (
             <button key={tour.id} className={`${tour.id === selectedTourId ? 'active' : ''} ${tour.rejected ? 'rejected' : ''}`.trim()} onClick={() => chooseVideoTour(tour.id)}>
               <span>{tour.label}</span><small>{tour.duration.toFixed(tour.duration > 10 ? 0 : 1)}s</small>
             </button>
