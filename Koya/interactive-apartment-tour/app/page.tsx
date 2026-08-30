@@ -41,9 +41,17 @@ const stops: TourStop[] = [
 
 const videoTours: VideoTour[] = [
   {
-    id: 'entry', label: 'Entry', route: 'Apartment 106 door → compact Entry Hall', status: 'QA passed · Literal threshold crossing',
-    src: '/tour/videos/entry-threshold-qa-pass-scroll.mp4', poster: '/tour/entry.png', duration: 5.041667,
-    phases: [{ at: 0, label: 'Apartment 106 door', activeId: 'entry' }, { at: .42, label: 'Entry threshold', activeId: 'entry' }, { at: .76, label: 'Entry Hall', activeId: 'entry' }],
+    id: 'entry', label: 'Arrival & entry', route: 'Koya arrival → foyer → lift → Apartment 106 door → Entry Hall', status: 'QA passed · Literal arrival and apartment entry',
+    src: '/tour/videos/full-arrival-entry-qa-pass-scroll.mp4', poster: '/tour/videos/full-arrival-entry-poster.jpg', duration: 21.056,
+    phases: [
+      { at: 0, label: 'Koya arrival', activeId: 'entry' },
+      { at: .19, label: 'Building entrance', activeId: 'entry' },
+      { at: .38, label: 'Lift lobby', activeId: 'entry' },
+      { at: .57, label: 'Lift exit', activeId: 'entry' },
+      { at: .71, label: 'Apartment 106 approach', activeId: 'entry' },
+      { at: .84, label: 'Apartment 106 threshold', activeId: 'entry' },
+      { at: .95, label: 'Entry Hall', activeId: 'entry' },
+    ],
   },
   {
     id: 'entry-hub-archive', label: 'Entry → Hub archive', route: 'Entry Hall → Kitchen → Living Hub', status: 'ARCHIVED · REJECTED by later floor-plan audit', rejected: true,
@@ -96,7 +104,7 @@ export default function Home() {
   const [visited, setVisited] = useState(() => new Set(['entry']));
   const [guidedMode, setGuidedMode] = useState(true);
   const [selectedTourId, setSelectedTourId] = useState('entry');
-  const [videoDuration, setVideoDuration] = useState(5.041667);
+  const [videoDuration, setVideoDuration] = useState(21.056);
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
