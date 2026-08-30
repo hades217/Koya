@@ -5,7 +5,7 @@
 - Space: Apartment 106 Entry Hall
 - Camera: fixed point immediately inside the main entry door, approximately 1.60 m eye height
 - Initial viewer direction: inward along the hall
-- Initial Three.js yaw: `180deg`
+- Initial Three.js yaw: `0deg` (browser-verified)
 - Survey claim: none; this is not a measured 360 capture
 
 ## Topology lock
@@ -53,5 +53,5 @@ Automated panorama inspection on the 8K asset:
 - dimensions: PASS, 8192x4096
 - wrap-edge RMSE: `381.618 (0.00582312)`
 - visual cardinal-direction QA: PASS for inward hall, wet-area side, solid-wall side, and main entry door
-- interactive browser acceptance: pending user review in the local 360 viewer
-
+- interactive browser QA: PASS at 1440x900; initial inward yaw and actual 8192x4096 texture load verified
+- user acceptance: pending review in the local 360 viewer
