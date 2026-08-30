@@ -28,7 +28,7 @@ type VideoTour = {
 };
 
 const stops: TourStop[] = [
-  { id: 'entry', label: 'Entry hall', eyebrow: 'Arrival', views: [{ label: 'Fixed-shell 360° panorama', image: '/tour/panoramas/entry-fixed-shell-v3-4k.webp', midResImage: '/tour/panoramas/entry-fixed-shell-v3-8k.webp', panorama360: true, initialYaw: 0 }, { label: 'Floor-plan audited entry', image: '/tour/entry-floorplan-audited-v2.png' }, { label: 'Toward the kitchen axis', image: '/tour/entry-kitchen-turn-audited-v1.png' }], x: 4, y: 13, connections: ['bath', 'hub'], note: 'The camera starts immediately inside the Apartment 106 front door. The initial view faces inward: full-height storage, then separate Laundry and Main Bath openings remain on the viewer-left; the viewer-right wall remains uninterrupted. Turn around to see the single main entry door. This fixed-shell panorama is a floor-plan-grounded AI concept, not a measured 360° survey.' },
+  { id: 'entry', label: 'Entry hall', eyebrow: 'Arrival', views: [{ label: 'Entry node · facing inward', image: '/tour/entry-floorplan-audited-v2.png' }, { label: 'Forward node · kitchen axis', image: '/tour/entry-kitchen-turn-audited-v1.png' }], x: 4, y: 13, connections: ['bath', 'hub'], note: 'The Entry free-explore fallback uses floor-plan-audited nodes only. The inconsistent generated 360° view has been removed. Use the default vertical-scroll Entry video for the literal threshold movement.' },
   { id: 'bath', label: 'Bath & laundry', eyebrow: 'Service rooms', views: [{ label: 'Threshold', image: '/tour/bath-threshold.png' }, { label: 'Main bath', image: '/tour/bath.png' }], x: 23, y: 31, connections: ['entry', 'bedroom2'], note: 'Separate bath and laundry sit beside the hall.' },
   { id: 'bedroom2', label: 'Bedroom 2', eyebrow: 'Private room', views: [{ label: 'Enhanced 360° panorama', image: '/tour/panoramas/bedroom2-panorama-4k.webp', midResImage: '/tour/panoramas/bedroom2-panorama-8k.webp', panorama360: true }, { label: 'Threshold', image: '/tour/bedroom2-threshold.png' }, { label: 'Room view', image: '/tour/bedroom2.png' }], x: 21, y: 68, connections: ['bath', 'mpr'], note: 'Bedroom 2 opens from the western circulation edge. The panorama is a floor-plan-grounded AI concept, not a measured 360° survey.' },
   { id: 'mpr', label: 'Multipurpose room', eyebrow: 'Flexible space', views: [{ label: 'Enhanced 360° panorama', image: '/tour/panoramas/mpr-panorama-4k.webp', midResImage: '/tour/panoramas/mpr-panorama-8k.webp', panorama360: true }, { label: 'From dining', image: '/tour/mpr-threshold.png' }, { label: 'Room view', image: '/tour/mpr.png' }], x: 35, y: 67, connections: ['bedroom2', 'hub'], note: 'The compact MPR connects through the large dining-side opening. The panorama is a floor-plan-grounded AI concept, not a measured 360° survey.' },
@@ -86,15 +86,15 @@ const videoTours: VideoTour[] = [
 ];
 
 export default function Home() {
-  const [activeId, setActiveId] = useState('living');
+  const [activeId, setActiveId] = useState('entry');
   const [viewIndex, setViewIndex] = useState(0);
-  const [planOpen, setPlanOpen] = useState(true);
+  const [planOpen, setPlanOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [pan, setPan] = useState(0);
   const [pitch, setPitch] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [visited, setVisited] = useState(() => new Set(['living']));
-  const [guidedMode, setGuidedMode] = useState(false);
+  const [visited, setVisited] = useState(() => new Set(['entry']));
+  const [guidedMode, setGuidedMode] = useState(true);
   const [selectedTourId, setSelectedTourId] = useState('entry');
   const [videoDuration, setVideoDuration] = useState(5.041667);
   const [videoProgress, setVideoProgress] = useState(0);
@@ -160,6 +160,26 @@ export default function Home() {
   useEffect(() => () => {
     if (scrubFrame.current !== null) window.cancelAnimationFrame(scrubFrame.current);
   }, []);
+
+  useEffect(() => {
+    if (!guidedMode) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const syncMetadata = () => {
+      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      video.pause();
+      setVideoDuration(video.duration);
+      targetVideoTime.current = video.currentTime;
+      setVideoProgress(video.currentTime / video.duration);
+      setVideoReady(true);
+      setVideoPlaying(false);
+    };
+
+    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) syncMetadata();
+    else video.addEventListener('loadedmetadata', syncMetadata, { once: true });
+    return () => video.removeEventListener('loadedmetadata', syncMetadata);
+  }, [guidedMode, selectedTour.id]);
 
   function goTo(id: string) {
     const nextStop = stops.find((stop) => stop.id === id);
@@ -391,7 +411,7 @@ export default function Home() {
 
       {guidedMode && (
         <nav className="video-route-selector" aria-label="Choose a local video route">
-          {videoTours.map((tour) => (
+          {videoTours.filter((tour) => !tour.rejected).map((tour) => (
             <button key={tour.id} className={`${tour.id === selectedTourId ? 'active' : ''} ${tour.rejected ? 'rejected' : ''}`.trim()} onClick={() => chooseVideoTour(tour.id)}>
               <span>{tour.label}</span><small>{tour.duration.toFixed(tour.duration > 10 ? 0 : 1)}s</small>
             </button>
@@ -481,7 +501,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {guidedMode && <div className="scroll-hint">Swipe up or down to scrub <span>↕</span></div>}
+      {guidedMode && <div className="scroll-hint">Scroll or swipe vertically to move <span>↕</span></div>}
     </main>
   );
 }

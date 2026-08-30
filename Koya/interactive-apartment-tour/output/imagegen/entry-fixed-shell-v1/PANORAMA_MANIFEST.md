@@ -1,6 +1,6 @@
 # Apartment 106 Entry panorama manifest
 
-- Status: `local_qa_candidate`
+- Status: `rejected_not_for_tour`
 - Evidence class: `concept_floorplan_grounded`
 - Space: Apartment 106 Entry Hall
 - Camera: fixed point immediately inside the main entry door, approximately 1.60 m eye height
@@ -54,4 +54,5 @@ Automated panorama inspection on the 8K asset:
 - wrap-edge RMSE: `381.618 (0.00582312)`
 - visual cardinal-direction QA: PASS for inward hall, wet-area side, solid-wall side, and main entry door
 - interactive browser QA: PASS at 1440x900; initial inward yaw and actual 8192x4096 texture load verified
-- user acceptance: pending review in the local 360 viewer
+- user acceptance: rejected; left/right spatial continuity and translation behaviour were not acceptable
+- integration status: removed from the Entry tour on 2026-08-31; the default Entry experience now uses the QA-passed vertical-scroll video
