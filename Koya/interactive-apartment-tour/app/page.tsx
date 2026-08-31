@@ -32,18 +32,19 @@ type UnitOption = {
   summary: string;
   totalArea: string;
   tourAvailable: boolean;
+  planImage: string;
+  facts: string[];
 };
 type TourUnit = UnitOption & {
-  planImage: string;
   stops: TourStop[];
   videoTours: VideoTour[];
 };
 
 const units: UnitOption[] = [
-  { id: '106', label: 'Apartment 106', summary: '2 bed · 2 bath · 1 MPR', totalArea: '152 m²', tourAvailable: true },
-  { id: '102', label: 'Apartment 102', summary: '2 bed · 2 bath', totalArea: '104 m²', tourAvailable: false },
-  { id: '103', label: 'Apartment 103', summary: '1 bed · study · 1 bath', totalArea: '86 m²', tourAvailable: false },
-  { id: '104', label: 'Apartment 104', summary: '2 bed · 2 bath', totalArea: '106 m²', tourAvailable: false },
+  { id: '106', label: 'Apartment 106', summary: '2 bed · 2 bath · 1 MPR', totalArea: '152 m²', tourAvailable: true, planImage: '/tour/apartment-106-plan.png', facts: ['2 bed', '2 bath', '1 MPR', '2 car'] },
+  { id: '102', label: 'Apartment 102', summary: '2 bed · 2 bath', totalArea: '104 m²', tourAvailable: false, planImage: '/tour/floorplans/apartment-102.png', facts: ['2 bed', '2 bath', '1 car'] },
+  { id: '103', label: 'Apartment 103', summary: '1 bed · study · 1 bath', totalArea: '86 m²', tourAvailable: false, planImage: '/tour/floorplans/apartment-103.png', facts: ['1 bed', 'study', '1 bath', '1 car'] },
+  { id: '104', label: 'Apartment 104', summary: '2 bed · 2 bath', totalArea: '106 m²', tourAvailable: false, planImage: '/tour/floorplans/apartment-104.png', facts: ['2 bed', '2 bath', '1 car'] },
 ];
 
 const stops: TourStop[] = [
@@ -115,7 +116,6 @@ const videoTours: VideoTour[] = [
 const tourUnits: Record<string, TourUnit> = {
   '106': {
     ...units[0],
-    planImage: '/tour/apartment-106-plan.png',
     stops,
     videoTours,
   },
@@ -138,6 +138,7 @@ export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const [visited, setVisited] = useState(() => new Set(['entry']));
   const [guidedMode, setGuidedMode] = useState(true);
+  const [selectedUnitId, setSelectedUnitId] = useState('106');
   const [selectedTourId, setSelectedTourId] = useState('entry-room');
   const [videoDuration, setVideoDuration] = useState(10.041667);
   const [videoProgress, setVideoProgress] = useState(0);
@@ -153,6 +154,8 @@ export default function Home() {
   const videoDragStart = useRef({ y: 0, time: 0 });
   const videoDragRequested = useRef(0);
   const pendingVideoEdge = useRef<'start' | 'end'>('start');
+  const selectedUnit = useMemo(() => units.find((unit) => unit.id === selectedUnitId) ?? units[0], [selectedUnitId]);
+  const hasTour = selectedUnit.tourAvailable;
   const active = useMemo(() => activeUnit.stops.find((stop) => stop.id === activeId) ?? activeUnit.stops[0], [activeId]);
   const activeView = panoramaViewFor(active) ?? panoramaViewFor(defaultPanoramaStop) ?? defaultPanoramaStop.views[0];
   const selectedTour = useMemo(() => activeUnit.videoTours.find((tour) => tour.id === selectedTourId) ?? activeUnit.videoTours[0], [selectedTourId]);
@@ -177,24 +180,34 @@ export default function Home() {
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (guidedMode && event.key === 'ArrowDown') scrubTo(targetVideoTime.current + .45);
-      else if (guidedMode && event.key === 'ArrowUp') scrubTo(targetVideoTime.current - .45);
-      else if (!guidedMode && event.key === 'ArrowLeft') setPan((value) => value - 30);
-      else if (!guidedMode && event.key === 'ArrowRight') setPan((value) => value + 30);
-      else if (!guidedMode && event.key === 'ArrowUp') setPitch((value) => Math.min(58, value + 22));
-      else if (!guidedMode && event.key === 'ArrowDown') setPitch((value) => Math.max(-58, value - 22));
+      if (hasTour && guidedMode && event.key === 'ArrowDown') scrubTo(targetVideoTime.current + .45);
+      else if (hasTour && guidedMode && event.key === 'ArrowUp') scrubTo(targetVideoTime.current - .45);
+      else if (hasTour && !guidedMode && event.key === 'ArrowLeft') setPan((value) => value - 30);
+      else if (hasTour && !guidedMode && event.key === 'ArrowRight') setPan((value) => value + 30);
+      else if (hasTour && !guidedMode && event.key === 'ArrowUp') setPitch((value) => Math.min(58, value + 22));
+      else if (hasTour && !guidedMode && event.key === 'ArrowDown') setPitch((value) => Math.max(-58, value - 22));
       if (event.key === 'Escape') { setInfoOpen(false); setPlanOpen(false); }
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [guidedMode, scrubTo]);
+  }, [guidedMode, hasTour, scrubTo]);
 
   useEffect(() => {
     function applyUrlState() {
       const params = new URLSearchParams(window.location.search);
+      const unitId = params.get('unit');
       const mode = params.get('mode');
       const tourId = params.get('tour');
       const roomId = params.get('room');
+      const requestedUnit = units.find((unit) => unit.id === unitId) ?? units[0];
+      setSelectedUnitId(requestedUnit.id);
+
+      if (!requestedUnit.tourAvailable) {
+        setGuidedMode(false);
+        setPlanOpen(true);
+        setUrlReady(true);
+        return;
+      }
 
       if (mode === 'panorama') {
         const panoramaStop = panoramaStops.find((stop) => stop.id === roomId) ?? defaultPanoramaStop;
@@ -222,7 +235,14 @@ export default function Home() {
   useEffect(() => {
     if (!urlReady) return;
     const url = new URL(window.location.href);
-    url.searchParams.set('unit', activeUnit.id);
+    url.searchParams.set('unit', selectedUnit.id);
+    if (!hasTour) {
+      url.searchParams.set('mode', 'floorplan');
+      url.searchParams.delete('tour');
+      url.searchParams.delete('room');
+      window.history.replaceState({}, '', url);
+      return;
+    }
     url.searchParams.set('mode', guidedMode ? 'video' : 'panorama');
     if (guidedMode) {
       url.searchParams.set('tour', selectedTour.id);
@@ -232,14 +252,14 @@ export default function Home() {
       url.searchParams.delete('tour');
     }
     window.history.replaceState({}, '', url);
-  }, [active.id, guidedMode, selectedTour.id, urlReady]);
+  }, [active.id, guidedMode, hasTour, selectedTour.id, selectedUnit.id, urlReady]);
 
   useEffect(() => () => {
     if (scrubFrame.current !== null) window.cancelAnimationFrame(scrubFrame.current);
   }, []);
 
   useEffect(() => {
-    if (!guidedMode) return;
+    if (!hasTour || !guidedMode) return;
     const video = videoRefs.current.get(selectedTour.id);
     if (!video) return;
     videoRef.current = video;
@@ -260,9 +280,27 @@ export default function Home() {
     if (video.readyState >= HTMLMediaElement.HAVE_METADATA) syncMetadata();
     else video.addEventListener('loadedmetadata', syncMetadata, { once: true });
     return () => video.removeEventListener('loadedmetadata', syncMetadata);
-  }, [guidedMode, selectedTour.id]);
+  }, [guidedMode, hasTour, selectedTour.id]);
+
+  function chooseUnit(id: string) {
+    const nextUnit = units.find((unit) => unit.id === id);
+    if (!nextUnit || nextUnit.id === selectedUnit.id) return;
+    videoRef.current?.pause();
+    setVideoPlaying(false);
+    setSelectedUnitId(nextUnit.id);
+    setPlanOpen(true);
+    setInfoOpen(false);
+    setGuidedMode(false);
+    if (nextUnit.tourAvailable) {
+      setActiveId(defaultPanoramaStop.id);
+      setPan(panoramaViewFor(defaultPanoramaStop)?.initialYaw ?? 0);
+      setPitch(0);
+      setVisited((current) => new Set(current).add(defaultPanoramaStop.id));
+    }
+  }
 
   function goTo(id: string) {
+    if (!hasTour) return;
     const nextStop = panoramaStops.find((stop) => stop.id === id);
     if (!nextStop) return;
     videoRef.current?.pause();
@@ -275,6 +313,7 @@ export default function Home() {
   }
 
   function showVideoMode() {
+    if (!hasTour) return;
     setGuidedMode(true);
     setActiveId(selectedTour.phases[0].activeId);
     setPan(0);
@@ -285,6 +324,7 @@ export default function Home() {
   }
 
   function showPanoramaMode() {
+    if (!hasTour) return;
     videoRef.current?.pause();
     const phaseStop = panoramaStops.find((stop) => stop.id === guidedPhase.activeId);
     const nextStop = phaseStop ?? defaultPanoramaStop;
@@ -404,7 +444,7 @@ export default function Home() {
   }
 
   return (
-    <main className={`tour-shell ${guidedMode ? 'guided video-guided' : 'free'}`} onWheel={handleWheel}>
+    <main className={`tour-shell ${hasTour ? (guidedMode ? 'guided video-guided' : 'free') : 'unit-floorplan'}`} onWheel={handleWheel}>
       <section
         className={`scene ${isDragging ? 'dragging' : ''}`}
         tabIndex={0}
@@ -412,9 +452,19 @@ export default function Home() {
         onPointerMove={(event) => moveDrag(event.clientX, event.clientY)}
         onPointerUp={endDrag}
         onPointerCancel={() => setIsDragging(false)}
-        aria-label={guidedMode ? `Swipe-controlled ${selectedTour.label} video` : `${active.label}, interactive 360 degree concept panorama`}
+        aria-label={!hasTour ? `${selectedUnit.label} official floor plan` : guidedMode ? `Swipe-controlled ${selectedTour.label} video` : `${active.label}, interactive 360 degree concept panorama`}
       >
-        {guidedMode ? activeVideoTours.map((tour, index) => {
+        {!hasTour ? (
+          <div className="unit-floorplan-preview">
+            <img src={selectedUnit.planImage} alt={`${selectedUnit.label} official floor plan`} draggable={false} />
+            <div>
+              <span>Official floor plan</span>
+              <h1>{selectedUnit.label}</h1>
+              <p>{selectedUnit.summary} · {selectedUnit.totalArea}</p>
+              <small>Video and 360° media have not been produced for this apartment yet.</small>
+            </div>
+          </div>
+        ) : guidedMode ? activeVideoTours.map((tour, index) => {
           const isActive = tour.id === selectedTour.id;
           const preload = index === selectedTourIndex || index === selectedTourIndex + 1
             ? 'auto'
@@ -461,25 +511,25 @@ export default function Home() {
           />
         )}
         <div className="scene-shade" />
-        {guidedMode && !videoReady && <div className="video-loading">Preparing local walkthrough…</div>}
+        {hasTour && guidedMode && !videoReady && <div className="video-loading">Preparing local walkthrough…</div>}
       </section>
 
       <header className="topbar">
         <div className="brand" aria-label="Koya">
           <span className="brand-mark">koya</span>
           <span className="brand-rule" />
-          <span className="brand-subtitle">{activeUnit.label} · interactive concept</span>
+          <span className="brand-subtitle">{selectedUnit.label} · {hasTour ? 'interactive concept' : 'floor plan'}</span>
         </div>
         <div className="top-actions">
-          <button className={`glass-button mode-toggle ${guidedMode ? 'active' : ''}`} onClick={showVideoMode}>Video</button>
-          <button className={`glass-button mode-toggle ${!guidedMode ? 'active' : ''}`} onClick={showPanoramaMode}>360° panorama</button>
+          <button className={`glass-button mode-toggle ${hasTour && guidedMode ? 'active' : ''}`} onClick={showVideoMode} disabled={!hasTour}>Video</button>
+          <button className={`glass-button mode-toggle ${hasTour && !guidedMode ? 'active' : ''}`} onClick={showPanoramaMode} disabled={!hasTour}>360° panorama</button>
           <button className="glass-button" onClick={toggleFullscreen} aria-label="Toggle fullscreen">Full screen</button>
           <button className="glass-button" onClick={() => setInfoOpen((value) => !value)} aria-expanded={infoOpen}>About</button>
           <button className="glass-button plan-toggle" onClick={() => setPlanOpen((value) => !value)} aria-expanded={planOpen}>Floor plan</button>
         </div>
       </header>
 
-      {guidedMode && (
+      {hasTour && guidedMode && (
         <div className="scroll-status" aria-live="polite">
           <span>Video scrub</span>
           <div><i style={{ height: `${videoProgress * 100}%` }} /></div>
@@ -488,7 +538,7 @@ export default function Home() {
         </div>
       )}
 
-      {guidedMode && (
+      {hasTour && guidedMode && (
         <div className="video-transport" aria-label="Video playback controls">
           <button type="button" onClick={toggleVideoPlayback} disabled={!videoReady} aria-label={videoPlaying ? 'Pause video' : 'Play video'}>
             {videoPlaying ? 'Pause' : 'Play'}
@@ -509,7 +559,7 @@ export default function Home() {
         </div>
       )}
 
-      {guidedMode && (
+      {hasTour && guidedMode && (
         <nav className="video-route-selector" aria-label="Choose a local video route">
           {activeVideoTours.map((tour) => (
             <button key={tour.id} className={`${tour.id === selectedTourId ? 'active' : ''} ${tour.rejected ? 'rejected' : ''}`.trim()} onClick={() => chooseVideoTour(tour.id)}>
@@ -519,13 +569,13 @@ export default function Home() {
         </nav>
       )}
 
-      <div className="room-title" aria-live="polite">
+      {hasTour && <div className="room-title" aria-live="polite">
         <span>{guidedMode ? `${selectedTour.status} · scroll controlled` : active.eyebrow}</span>
         <h1>{guidedMode ? guidedPhase.label : active.label}</h1>
         <p>{guidedMode ? `${(videoProgress * videoDuration).toFixed(1)}s / ${videoDuration.toFixed(1)}s · ${selectedTour.route}` : `${activeView.label} · drag to turn · drag vertically to look up or down`}</p>
-      </div>
+      </div>}
 
-      {!guidedMode && (
+      {hasTour && !guidedMode && (
         <div className="panorama-controls" aria-label="Panorama field of view controls">
           <button onClick={() => setPanoramaFov((value) => Math.min(120, value + 8))} aria-label="Zoom out panorama">−</button>
           <span>{panoramaFov}°</span>
@@ -536,13 +586,13 @@ export default function Home() {
       {infoOpen && (
         <aside className="info-card">
           <button onClick={() => setInfoOpen(false)} aria-label="Close information">×</button>
-          <span>{guidedMode ? selectedTour.status : 'Concept Design / Artist Impression'}</span>
-          <p>{guidedMode ? selectedTour.route : active.note}</p>
-          <small>{guidedMode ? (selectedTour.rejected ? 'Archived visual comparison only. A later floor-plan audit invalidated this clip as Apartment 106 spatial truth; it must not be used as final sales material.' : 'The selected route uses an existing local video and preserves its recorded QA status. Routes are separate review branches, not one claimed seamless complete tour.') : 'Layout follows the Apartment 106 marketing plan. Furniture, finishes and outlook are illustrative. These are concept panoramas, not measured 360° surveys.'}</small>
+          <span>{!hasTour ? 'Official marketing floor plan' : guidedMode ? selectedTour.status : 'Concept Design / Artist Impression'}</span>
+          <p>{!hasTour ? `${selectedUnit.label} · ${selectedUnit.summary} · ${selectedUnit.totalArea}` : guidedMode ? selectedTour.route : active.note}</p>
+          <small>{!hasTour ? 'This apartment can be selected and reviewed now. Its room videos and 360° panoramas are not yet available.' : guidedMode ? (selectedTour.rejected ? 'Archived visual comparison only. A later floor-plan audit invalidated this clip as Apartment 106 spatial truth; it must not be used as final sales material.' : 'The selected route uses an existing local video and preserves its recorded QA status. Routes are separate review branches, not one claimed seamless complete tour.') : 'Layout follows the Apartment 106 marketing plan. Furniture, finishes and outlook are illustrative. These are concept panoramas, not measured 360° surveys.'}</small>
         </aside>
       )}
 
-      {!guidedMode && (
+      {hasTour && !guidedMode && (
         <nav className="wayfinding" aria-label="Connected rooms">
           {active.connections.filter((id) => panoramaStops.some((stop) => stop.id === id)).map((id) => {
             const destination = panoramaStops.find((stop) => stop.id === id)!;
@@ -556,14 +606,14 @@ export default function Home() {
         </nav>
       )}
 
-      <aside className={`plan-card ${planOpen ? 'open' : ''}`} aria-label={`${activeUnit.label} floor plan navigation`}>
+      <aside className={`plan-card ${planOpen ? 'open' : ''}`} aria-label={`${selectedUnit.label} floor plan navigation`}>
         <div className="plan-heading">
-          <div><span>Level 1 · {panoramaStops.filter((stop) => visited.has(stop.id)).length} of {panoramaStops.length} panoramas visited</span><strong>{activeUnit.label} floor plan</strong></div>
+          <div><span>{hasTour ? `Level 1 · ${panoramaStops.filter((stop) => visited.has(stop.id)).length} of ${panoramaStops.length} panoramas visited` : 'Official floor plan · media tour coming later'}</span><strong>{selectedUnit.label} floor plan</strong></div>
           <button onClick={() => setPlanOpen(false)} aria-label="Close floor plan">×</button>
         </div>
         <div className="plan-canvas">
-          <img src={activeUnit.planImage} alt={`${activeUnit.label} floor plan`} draggable={false} />
-          {panoramaStops.map((stop) => (
+          <img className={hasTour ? '' : 'contain'} src={selectedUnit.planImage} alt={`${selectedUnit.label} floor plan`} draggable={false} />
+          {hasTour && panoramaStops.map((stop) => (
             <button
               key={stop.id}
               className={`plan-dot ${stop.id === activeId ? 'active' : ''} ${visited.has(stop.id) ? 'visited' : ''}`}
@@ -579,22 +629,22 @@ export default function Home() {
             <button
               key={unit.id}
               type="button"
-              className={unit.id === activeUnit.id ? 'active' : ''}
-              disabled={!unit.tourAvailable}
-              title={unit.tourAvailable ? `${unit.label} interactive tour` : `${unit.label} tour coming later`}
+              className={unit.id === selectedUnit.id ? 'active' : ''}
+              onClick={() => chooseUnit(unit.id)}
+              title={unit.tourAvailable ? `${unit.label} interactive tour` : `${unit.label} floor plan; media tour coming later`}
             >
               <strong>{unit.id}</strong>
-              <small>{unit.tourAvailable ? 'Live' : 'Coming'}</small>
+              <small>{unit.tourAvailable ? 'Tour live' : 'Plan only'}</small>
             </button>
           ))}
         </div>
-        <div className="plan-footer"><span>2 bed</span><span>2 bath</span><span>1 MPR</span><span>{activeUnit.totalArea} total</span></div>
+        <div className="plan-footer">{selectedUnit.facts.map((fact) => <span key={fact}>{fact}</span>)}<span>{selectedUnit.totalArea} total</span></div>
       </aside>
 
       <footer className="tour-footer">
-        <span className="progress">{guidedMode ? `${(videoProgress * videoDuration).toFixed(1)}s` : `${String(panoramaStops.findIndex((stop) => stop.id === activeId) + 1).padStart(2, '0')} / ${String(panoramaStops.length).padStart(2, '0')}`}</span>
+        <span className="progress">{!hasTour ? selectedUnit.id : guidedMode ? `${(videoProgress * videoDuration).toFixed(1)}s` : `${String(panoramaStops.findIndex((stop) => stop.id === activeId) + 1).padStart(2, '0')} / ${String(panoramaStops.length).padStart(2, '0')}`}</span>
         <div className="room-strip" role="list" aria-label="All rooms">
-          {guidedMode ? activeVideoTours.map((tour) => (
+          {!hasTour ? <span className="floorplan-status">{selectedUnit.summary} · {selectedUnit.totalArea} · Video and 360° coming later</span> : guidedMode ? activeVideoTours.map((tour) => (
             <button key={tour.id} className={tour.id === selectedTourId ? 'active' : ''} onClick={() => chooseVideoTour(tour.id)}>
               {tour.label}
             </button>
@@ -606,7 +656,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {guidedMode && <div className="scroll-hint">Scroll or swipe vertically to move <span>↕</span></div>}
+      {hasTour && guidedMode && <div className="scroll-hint">Scroll or swipe vertically to move <span>↕</span></div>}
     </main>
   );
 }
