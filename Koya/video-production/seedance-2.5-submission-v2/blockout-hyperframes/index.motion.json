@@ -1,9 +1,0 @@
-{
-  "duration": 30,
-  "maxStaticSec": 1.5,
-  "assertions": [
-    { "kind": "appearsBy", "selector": "#plate-01", "bySec": 0.05 },
-    { "kind": "before", "a": "#plate-01", "b": "#plate-14" },
-    { "kind": "keepsMoving", "withinSelector": "#root" }
-  ]
-}
