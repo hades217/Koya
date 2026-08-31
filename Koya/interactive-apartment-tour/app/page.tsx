@@ -26,6 +26,25 @@ type VideoTour = {
   rejected?: boolean;
   phases: { at: number; label: string; activeId: string }[];
 };
+type UnitOption = {
+  id: string;
+  label: string;
+  summary: string;
+  totalArea: string;
+  tourAvailable: boolean;
+};
+type TourUnit = UnitOption & {
+  planImage: string;
+  stops: TourStop[];
+  videoTours: VideoTour[];
+};
+
+const units: UnitOption[] = [
+  { id: '106', label: 'Apartment 106', summary: '2 bed · 2 bath · 1 MPR', totalArea: '152 m²', tourAvailable: true },
+  { id: '102', label: 'Apartment 102', summary: '2 bed · 2 bath', totalArea: '104 m²', tourAvailable: false },
+  { id: '103', label: 'Apartment 103', summary: '1 bed · study · 1 bath', totalArea: '86 m²', tourAvailable: false },
+  { id: '104', label: 'Apartment 104', summary: '2 bed · 2 bath', totalArea: '106 m²', tourAvailable: false },
+];
 
 const stops: TourStop[] = [
   { id: 'entry', label: 'Entry hall', eyebrow: 'Arrival', views: [{ label: 'Entry node · facing inward', image: '/tour/entry-floorplan-audited-v2.png' }, { label: 'Forward node · kitchen axis', image: '/tour/entry-kitchen-turn-audited-v1.png' }], x: 4, y: 13, connections: ['bath', 'hub'], note: 'The Entry free-explore fallback uses floor-plan-audited nodes only. The inconsistent generated 360° view has been removed. Use the default vertical-scroll Entry video for the literal threshold movement.' },
@@ -93,8 +112,17 @@ const videoTours: VideoTour[] = [
   },
 ];
 
-const activeVideoTours = videoTours.filter((tour) => !tour.rejected);
-const panoramaStops = stops.filter((stop) => stop.views.some((view) => view.panorama360));
+const tourUnits: Record<string, TourUnit> = {
+  '106': {
+    ...units[0],
+    planImage: '/tour/apartment-106-plan.png',
+    stops,
+    videoTours,
+  },
+};
+const activeUnit = tourUnits['106'];
+const activeVideoTours = activeUnit.videoTours.filter((tour) => !tour.rejected);
+const panoramaStops = activeUnit.stops.filter((stop) => stop.views.some((view) => view.panorama360));
 const defaultPanoramaStop = panoramaStops.find((stop) => stop.id === 'living') ?? panoramaStops[0];
 
 function panoramaViewFor(stop: TourStop) {
@@ -125,9 +153,9 @@ export default function Home() {
   const videoDragStart = useRef({ y: 0, time: 0 });
   const videoDragRequested = useRef(0);
   const pendingVideoEdge = useRef<'start' | 'end'>('start');
-  const active = useMemo(() => stops.find((stop) => stop.id === activeId) ?? stops[0], [activeId]);
+  const active = useMemo(() => activeUnit.stops.find((stop) => stop.id === activeId) ?? activeUnit.stops[0], [activeId]);
   const activeView = panoramaViewFor(active) ?? panoramaViewFor(defaultPanoramaStop) ?? defaultPanoramaStop.views[0];
-  const selectedTour = useMemo(() => videoTours.find((tour) => tour.id === selectedTourId) ?? videoTours[0], [selectedTourId]);
+  const selectedTour = useMemo(() => activeUnit.videoTours.find((tour) => tour.id === selectedTourId) ?? activeUnit.videoTours[0], [selectedTourId]);
   const selectedTourIndex = activeVideoTours.findIndex((tour) => tour.id === selectedTour.id);
   const guidedPhase = [...selectedTour.phases].reverse().find((phase) => videoProgress >= phase.at) ?? selectedTour.phases[0];
 
@@ -172,8 +200,10 @@ export default function Home() {
         const panoramaStop = panoramaStops.find((stop) => stop.id === roomId) ?? defaultPanoramaStop;
         setGuidedMode(false);
         setActiveId(panoramaStop.id);
+        setVisited((current) => new Set(current).add(panoramaStop.id));
         setPan(panoramaViewFor(panoramaStop)?.initialYaw ?? 0);
         setPitch(0);
+        setPlanOpen(window.innerWidth > 760);
       } else {
         const tour = activeVideoTours.find((item) => item.id === tourId) ?? activeVideoTours.find((item) => item.id === 'entry-room') ?? activeVideoTours[0];
         setGuidedMode(true);
@@ -192,6 +222,7 @@ export default function Home() {
   useEffect(() => {
     if (!urlReady) return;
     const url = new URL(window.location.href);
+    url.searchParams.set('unit', activeUnit.id);
     url.searchParams.set('mode', guidedMode ? 'video' : 'panorama');
     if (guidedMode) {
       url.searchParams.set('tour', selectedTour.id);
@@ -263,6 +294,7 @@ export default function Home() {
     setPitch(0);
     setVideoPlaying(false);
     setInfoOpen(false);
+    setPlanOpen(window.innerWidth > 760);
     setVisited((current) => new Set(current).add(nextStop.id));
   }
 
@@ -436,7 +468,7 @@ export default function Home() {
         <div className="brand" aria-label="Koya">
           <span className="brand-mark">koya</span>
           <span className="brand-rule" />
-          <span className="brand-subtitle">Apartment 106 · interactive concept</span>
+          <span className="brand-subtitle">{activeUnit.label} · interactive concept</span>
         </div>
         <div className="top-actions">
           <button className={`glass-button mode-toggle ${guidedMode ? 'active' : ''}`} onClick={showVideoMode}>Video</button>
@@ -524,13 +556,13 @@ export default function Home() {
         </nav>
       )}
 
-      <aside className={`plan-card ${planOpen ? 'open' : ''}`} aria-label="Apartment 106 floor plan navigation">
+      <aside className={`plan-card ${planOpen ? 'open' : ''}`} aria-label={`${activeUnit.label} floor plan navigation`}>
         <div className="plan-heading">
-          <div><span>Level 1 · {panoramaStops.filter((stop) => visited.has(stop.id)).length} of {panoramaStops.length} panoramas visited</span><strong>Apartment 106</strong></div>
+          <div><span>Level 1 · {panoramaStops.filter((stop) => visited.has(stop.id)).length} of {panoramaStops.length} panoramas visited</span><strong>{activeUnit.label} floor plan</strong></div>
           <button onClick={() => setPlanOpen(false)} aria-label="Close floor plan">×</button>
         </div>
         <div className="plan-canvas">
-          <img src="/tour/apartment-106-plan.png" alt="Apartment 106 floor plan" draggable={false} />
+          <img src={activeUnit.planImage} alt={`${activeUnit.label} floor plan`} draggable={false} />
           {panoramaStops.map((stop) => (
             <button
               key={stop.id}
@@ -542,7 +574,21 @@ export default function Home() {
             ><span /></button>
           ))}
         </div>
-        <div className="plan-footer"><span>2 bed</span><span>2 bath</span><span>1 MPR</span><span>152 m² total</span></div>
+        <div className="unit-strip" aria-label="Apartment floor plans">
+          {units.map((unit) => (
+            <button
+              key={unit.id}
+              type="button"
+              className={unit.id === activeUnit.id ? 'active' : ''}
+              disabled={!unit.tourAvailable}
+              title={unit.tourAvailable ? `${unit.label} interactive tour` : `${unit.label} tour coming later`}
+            >
+              <strong>{unit.id}</strong>
+              <small>{unit.tourAvailable ? 'Live' : 'Coming'}</small>
+            </button>
+          ))}
+        </div>
+        <div className="plan-footer"><span>2 bed</span><span>2 bath</span><span>1 MPR</span><span>{activeUnit.totalArea} total</span></div>
       </aside>
 
       <footer className="tour-footer">
