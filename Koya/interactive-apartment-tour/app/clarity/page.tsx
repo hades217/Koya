@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 const oldImage = '/tour/local-clarity/living-front-1254.png';
@@ -18,7 +19,7 @@ export default function ClarityComparison() {
         </div>
         <nav>
           <button onClick={() => setZoom((value) => value === 1 ? 2 : 1)}>{zoom === 1 ? '放大 2×' : '恢复全图'}</button>
-          <a href="/">返回看房</a>
+          <Link href="/">返回看房</Link>
         </nav>
       </header>
 
