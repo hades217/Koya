@@ -65,7 +65,7 @@ const videoTours: VideoTour[] = [
   },
   {
     id: 'west-rooms', label: 'West rooms', route: 'Entry → wet area → Bedroom 2 → Kitchen → MPR', status: 'Internal QA · Review master',
-    src: '/tour/videos/west-rooms-review-scroll.mp4', poster: '/tour/entry.png', duration: 56.666667,
+    src: '/tour/videos/west-rooms-review-seek-optimized.mp4', poster: '/tour/entry.png', duration: 56.666667,
     phases: [
       { at: 0, label: 'Arrival & entry', activeId: 'entry' },
       { at: .37, label: 'Bath & laundry', activeId: 'bath' },
@@ -141,14 +141,9 @@ export default function Home() {
     const tick = () => {
       const currentVideo = videoRef.current;
       if (!currentVideo) { scrubFrame.current = null; return; }
-      const difference = targetVideoTime.current - currentVideo.currentTime;
-      if (Math.abs(difference) < .015) {
-        currentVideo.currentTime = targetVideoTime.current;
-        scrubFrame.current = null;
-        return;
-      }
-      currentVideo.currentTime += difference * .34;
-      scrubFrame.current = window.requestAnimationFrame(tick);
+      const nextTime = targetVideoTime.current;
+      if (Math.abs(nextTime - currentVideo.currentTime) >= .015) currentVideo.currentTime = nextTime;
+      scrubFrame.current = null;
     };
     scrubFrame.current = window.requestAnimationFrame(tick);
   }, []);
