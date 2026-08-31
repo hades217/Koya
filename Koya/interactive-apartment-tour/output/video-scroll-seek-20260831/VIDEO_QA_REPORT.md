@@ -1,6 +1,6 @@
 # Scroll video seek optimisation QA
 
-Status: `accepted_local_for_web_delivery`
+Status: `published`
 
 ## Problem diagnosis
 
@@ -34,6 +34,11 @@ The scroll controller now coalesces input into at most one direct seek per anima
 - `west-rooms-seek-optimized-contact-sheet.jpg`
 - Six checkpoints cover the complete route and show no re-encode-induced geometry or framing change.
 
-## Remaining gate
+## Public verification
 
-Public GitHub Pages HTTP Range and interactive forward/backward seek must be verified after deployment before status can become `published`.
+- URL: `https://hades217.github.io/Koya/`
+- GitHub Pages deployment run: `33348253722` — build and deploy passed.
+- Public JavaScript selects `west-rooms-review-seek-optimized.mp4`.
+- Public media byte-range request: HTTP `206`, `video/mp4`.
+- Browser forward scroll reached 8.32 seconds with `readyState = 4`.
+- Browser reverse scroll returned to 4.16 seconds with `readyState = 4` and no stuck seeking state.
