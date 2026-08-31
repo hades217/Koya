@@ -94,10 +94,15 @@ const videoTours: VideoTour[] = [
 ];
 
 const activeVideoTours = videoTours.filter((tour) => !tour.rejected);
+const panoramaStops = stops.filter((stop) => stop.views.some((view) => view.panorama360));
+const defaultPanoramaStop = panoramaStops.find((stop) => stop.id === 'living') ?? panoramaStops[0];
+
+function panoramaViewFor(stop: TourStop) {
+  return stop.views.find((view) => view.panorama360);
+}
 
 export default function Home() {
   const [activeId, setActiveId] = useState('entry');
-  const [viewIndex, setViewIndex] = useState(0);
   const [planOpen, setPlanOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [pan, setPan] = useState(0);
@@ -111,26 +116,20 @@ export default function Home() {
   const [videoReady, setVideoReady] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [panoramaFov, setPanoramaFov] = useState(88);
+  const [urlReady, setUrlReady] = useState(false);
   const dragStart = useRef({ x: 0, y: 0, pan: 0, pitch: 0 });
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoRefs = useRef(new Map<string, HTMLVideoElement>());
   const targetVideoTime = useRef(0);
   const scrubFrame = useRef<number | null>(null);
   const videoDragStart = useRef({ y: 0, time: 0 });
   const videoDragRequested = useRef(0);
   const pendingVideoEdge = useRef<'start' | 'end'>('start');
   const active = useMemo(() => stops.find((stop) => stop.id === activeId) ?? stops[0], [activeId]);
-  const activeView = active.views[viewIndex] ?? active.views[0];
+  const activeView = panoramaViewFor(active) ?? panoramaViewFor(defaultPanoramaStop) ?? defaultPanoramaStop.views[0];
   const selectedTour = useMemo(() => videoTours.find((tour) => tour.id === selectedTourId) ?? videoTours[0], [selectedTourId]);
+  const selectedTourIndex = activeVideoTours.findIndex((tour) => tour.id === selectedTour.id);
   const guidedPhase = [...selectedTour.phases].reverse().find((phase) => videoProgress >= phase.at) ?? selectedTour.phases[0];
-
-  const changeView = useCallback((direction: number) => {
-    setViewIndex((current) => {
-      const next = (current + direction + active.views.length) % active.views.length;
-      setPan(active.views[next]?.initialYaw ?? 0);
-      return next;
-    });
-    setPitch(0);
-  }, [active.views]);
 
   const scrubTo = useCallback((requestedTime: number) => {
     const video = videoRef.current;
@@ -152,17 +151,57 @@ export default function Home() {
     function onKeyDown(event: KeyboardEvent) {
       if (guidedMode && event.key === 'ArrowDown') scrubTo(targetVideoTime.current + .45);
       else if (guidedMode && event.key === 'ArrowUp') scrubTo(targetVideoTime.current - .45);
-      else if (activeView.panorama360 && event.key === 'ArrowLeft') setPan((value) => value - 30);
-      else if (activeView.panorama360 && event.key === 'ArrowRight') setPan((value) => value + 30);
-      else if (activeView.panorama360 && event.key === 'ArrowUp') setPitch((value) => Math.min(58, value + 22));
-      else if (activeView.panorama360 && event.key === 'ArrowDown') setPitch((value) => Math.max(-58, value - 22));
-      else if (event.key === 'ArrowLeft') changeView(-1);
-      else if (event.key === 'ArrowRight') changeView(1);
+      else if (!guidedMode && event.key === 'ArrowLeft') setPan((value) => value - 30);
+      else if (!guidedMode && event.key === 'ArrowRight') setPan((value) => value + 30);
+      else if (!guidedMode && event.key === 'ArrowUp') setPitch((value) => Math.min(58, value + 22));
+      else if (!guidedMode && event.key === 'ArrowDown') setPitch((value) => Math.max(-58, value - 22));
       if (event.key === 'Escape') { setInfoOpen(false); setPlanOpen(false); }
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [activeView.panorama360, changeView, guidedMode, scrubTo]);
+  }, [guidedMode, scrubTo]);
+
+  useEffect(() => {
+    function applyUrlState() {
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get('mode');
+      const tourId = params.get('tour');
+      const roomId = params.get('room');
+
+      if (mode === 'panorama') {
+        const panoramaStop = panoramaStops.find((stop) => stop.id === roomId) ?? defaultPanoramaStop;
+        setGuidedMode(false);
+        setActiveId(panoramaStop.id);
+        setPan(panoramaViewFor(panoramaStop)?.initialYaw ?? 0);
+        setPitch(0);
+      } else {
+        const tour = activeVideoTours.find((item) => item.id === tourId) ?? activeVideoTours.find((item) => item.id === 'entry-room') ?? activeVideoTours[0];
+        setGuidedMode(true);
+        setSelectedTourId(tour.id);
+        setVideoDuration(tour.duration);
+        setActiveId(tour.phases[0].activeId);
+      }
+      setUrlReady(true);
+    }
+
+    applyUrlState();
+    window.addEventListener('popstate', applyUrlState);
+    return () => window.removeEventListener('popstate', applyUrlState);
+  }, []);
+
+  useEffect(() => {
+    if (!urlReady) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('mode', guidedMode ? 'video' : 'panorama');
+    if (guidedMode) {
+      url.searchParams.set('tour', selectedTour.id);
+      url.searchParams.delete('room');
+    } else {
+      url.searchParams.set('room', active.id);
+      url.searchParams.delete('tour');
+    }
+    window.history.replaceState({}, '', url);
+  }, [active.id, guidedMode, selectedTour.id, urlReady]);
 
   useEffect(() => () => {
     if (scrubFrame.current !== null) window.cancelAnimationFrame(scrubFrame.current);
@@ -170,8 +209,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!guidedMode) return;
-    const video = videoRef.current;
+    const video = videoRefs.current.get(selectedTour.id);
     if (!video) return;
+    videoRef.current = video;
 
     const syncMetadata = () => {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
@@ -181,7 +221,7 @@ export default function Home() {
       setVideoDuration(video.duration);
       targetVideoTime.current = nextTime;
       setVideoProgress(nextTime / video.duration);
-      setVideoReady(true);
+      setVideoReady(video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA);
       setVideoPlaying(false);
       pendingVideoEdge.current = 'start';
     };
@@ -192,43 +232,38 @@ export default function Home() {
   }, [guidedMode, selectedTour.id]);
 
   function goTo(id: string) {
-    const nextStop = stops.find((stop) => stop.id === id);
+    const nextStop = panoramaStops.find((stop) => stop.id === id);
+    if (!nextStop) return;
+    videoRef.current?.pause();
     setGuidedMode(false);
     setActiveId(id);
-    setViewIndex(0);
-    setPan(nextStop?.views[0]?.initialYaw ?? 0);
+    setPan(panoramaViewFor(nextStop)?.initialYaw ?? 0);
     setPitch(0);
     setInfoOpen(false);
     setVisited((current) => new Set(current).add(id));
   }
 
-  function toggleGuidedMode() {
-    if (!guidedMode) {
-      setGuidedMode(true);
-      setActiveId(selectedTour.phases[0].activeId);
-      setViewIndex(0);
-      setPan(0);
-      setPitch(0);
-      setPlanOpen(false);
-      setVisited((current) => new Set(current).add('bedroom1'));
-      window.requestAnimationFrame(() => {
-        if (videoRef.current) {
-          videoRef.current.pause();
-          videoRef.current.currentTime = 0;
-          targetVideoTime.current = 0;
-          setVideoProgress(0);
-          setVideoPlaying(false);
-        }
-      });
-    } else {
-      const nextStop = stops.find((stop) => stop.id === guidedPhase.activeId);
-      setGuidedMode(false);
-      setActiveId(guidedPhase.activeId);
-      setViewIndex(0);
-      setPan(nextStop?.views[0]?.initialYaw ?? 0);
-      setPitch(0);
-    }
+  function showVideoMode() {
+    setGuidedMode(true);
+    setActiveId(selectedTour.phases[0].activeId);
+    setPan(0);
+    setPitch(0);
+    setPlanOpen(false);
+    setVideoPlaying(false);
     setInfoOpen(false);
+  }
+
+  function showPanoramaMode() {
+    videoRef.current?.pause();
+    const phaseStop = panoramaStops.find((stop) => stop.id === guidedPhase.activeId);
+    const nextStop = phaseStop ?? defaultPanoramaStop;
+    setGuidedMode(false);
+    setActiveId(nextStop.id);
+    setPan(panoramaViewFor(nextStop)?.initialYaw ?? 0);
+    setPitch(0);
+    setVideoPlaying(false);
+    setInfoOpen(false);
+    setVisited((current) => new Set(current).add(nextStop.id));
   }
 
   function chooseVideoTour(id: string) {
@@ -239,6 +274,7 @@ export default function Home() {
   }
 
   function activateVideoTour(nextTour: VideoTour) {
+    videoRef.current?.pause();
     setSelectedTourId(nextTour.id);
     setVideoDuration(nextTour.duration);
     setVideoProgress(0);
@@ -344,33 +380,45 @@ export default function Home() {
         onPointerMove={(event) => moveDrag(event.clientX, event.clientY)}
         onPointerUp={endDrag}
         onPointerCancel={() => setIsDragging(false)}
-        aria-label={guidedMode ? `Swipe-controlled ${selectedTour.label} video` : `${active.label}, ${activeView.label}, interactive concept view`}
+        aria-label={guidedMode ? `Swipe-controlled ${selectedTour.label} video` : `${active.label}, interactive 360 degree concept panorama`}
       >
-        {guidedMode ? (
-          <video
-            key={selectedTour.id}
-            ref={videoRef}
-            className="scrub-video"
-            src={selectedTour.src}
-            poster={selectedTour.poster}
-            muted
-            playsInline
-            disablePictureInPicture
-            preload="auto"
-            onPlay={() => setVideoPlaying(true)}
-            onPause={() => setVideoPlaying(false)}
-            onEnded={() => setVideoPlaying(false)}
-            onTimeUpdate={(event) => {
-              const video = event.currentTarget;
-              if (scrubFrame.current === null) targetVideoTime.current = video.currentTime;
-              const progress = video.duration ? video.currentTime / video.duration : 0;
-              setVideoProgress(progress);
-              const phase = [...selectedTour.phases].reverse().find((item) => progress >= item.at) ?? selectedTour.phases[0];
-              setActiveId(phase.activeId);
-              setVisited((current) => new Set(current).add(phase.activeId));
-            }}
-          />
-        ) : activeView.panorama360 ? (
+        {guidedMode ? activeVideoTours.map((tour, index) => {
+          const isActive = tour.id === selectedTour.id;
+          const preload = index === selectedTourIndex || index === selectedTourIndex + 1
+            ? 'auto'
+            : index === selectedTourIndex - 1 ? 'metadata' : 'none';
+          return (
+            <video
+              key={tour.id}
+              ref={(node) => {
+                if (node) videoRefs.current.set(tour.id, node);
+                else videoRefs.current.delete(tour.id);
+              }}
+              className={`scrub-video ${isActive ? 'active' : 'inactive'}`}
+              src={tour.src}
+              poster={tour.poster}
+              muted
+              playsInline
+              disablePictureInPicture
+              preload={preload}
+              aria-hidden={!isActive}
+              onCanPlay={() => { if (isActive) setVideoReady(true); }}
+              onPlay={() => { if (isActive) setVideoPlaying(true); }}
+              onPause={() => { if (isActive) setVideoPlaying(false); }}
+              onEnded={() => { if (isActive) setVideoPlaying(false); }}
+              onTimeUpdate={(event) => {
+                if (!isActive) return;
+                const video = event.currentTarget;
+                if (scrubFrame.current === null) targetVideoTime.current = video.currentTime;
+                const progress = video.duration ? video.currentTime / video.duration : 0;
+                setVideoProgress(progress);
+                const phase = [...tour.phases].reverse().find((item) => progress >= item.at) ?? tour.phases[0];
+                setActiveId(phase.activeId);
+                setVisited((current) => new Set(current).add(phase.activeId));
+              }}
+            />
+          );
+        }) : (
           <PanoramaViewer
             src={activeView.image}
             midResSrc={activeView.midResImage}
@@ -378,16 +426,6 @@ export default function Home() {
             yaw={pan}
             pitch={pitch}
             horizontalFov={panoramaFov}
-          />
-        ) : (
-          <div
-            key={`${active.id}-${viewIndex}`}
-            className={`scene-image ${activeView.label.startsWith('HD detail') ? 'scene-image-native' : ''}`}
-            style={{
-              backgroundImage: `url(${activeView.image})`,
-              backgroundPosition: `${50 - pan}% center`,
-              transform: activeView.label.startsWith('HD detail') ? 'scale(1)' : 'scale(1.08)',
-            }}
           />
         )}
         <div className="scene-shade" />
@@ -401,7 +439,8 @@ export default function Home() {
           <span className="brand-subtitle">Apartment 106 · interactive concept</span>
         </div>
         <div className="top-actions">
-          <button className={`glass-button mode-toggle ${guidedMode ? 'active' : ''}`} onClick={toggleGuidedMode}>{guidedMode ? 'Free explore' : 'Video tours'}</button>
+          <button className={`glass-button mode-toggle ${guidedMode ? 'active' : ''}`} onClick={showVideoMode}>Video</button>
+          <button className={`glass-button mode-toggle ${!guidedMode ? 'active' : ''}`} onClick={showPanoramaMode}>360° panorama</button>
           <button className="glass-button" onClick={toggleFullscreen} aria-label="Toggle fullscreen">Full screen</button>
           <button className="glass-button" onClick={() => setInfoOpen((value) => !value)} aria-expanded={infoOpen}>About</button>
           <button className="glass-button plan-toggle" onClick={() => setPlanOpen((value) => !value)} aria-expanded={planOpen}>Floor plan</button>
@@ -451,23 +490,10 @@ export default function Home() {
       <div className="room-title" aria-live="polite">
         <span>{guidedMode ? `${selectedTour.status} · scroll controlled` : active.eyebrow}</span>
         <h1>{guidedMode ? guidedPhase.label : active.label}</h1>
-        <p>{guidedMode ? `${(videoProgress * videoDuration).toFixed(1)}s / ${videoDuration.toFixed(1)}s · ${selectedTour.route}` : `${activeView.label} · ${activeView.panorama360 ? 'drag to turn · drag vertically to look up or down' : 'drag for a wider view'}`}</p>
+        <p>{guidedMode ? `${(videoProgress * videoDuration).toFixed(1)}s / ${videoDuration.toFixed(1)}s · ${selectedTour.route}` : `${activeView.label} · drag to turn · drag vertically to look up or down`}</p>
       </div>
 
-      {!guidedMode && active.views.length > 1 && (
-        <div className="view-switcher" aria-label="Change view direction">
-          <button onClick={() => changeView(-1)} aria-label="Previous view">‹</button>
-          <div>
-            {active.views.map((view, index) => (
-              <button key={view.label} className={index === viewIndex ? 'active' : ''} onClick={() => { setViewIndex(index); setPan(view.initialYaw ?? 0); setPitch(0); }} aria-label={`Show ${view.label}`} />
-            ))}
-          </div>
-          <span>{activeView.label}</span>
-          <button onClick={() => changeView(1)} aria-label="Next view">›</button>
-        </div>
-      )}
-
-      {!guidedMode && activeView.panorama360 && (
+      {!guidedMode && (
         <div className="panorama-controls" aria-label="Panorama field of view controls">
           <button onClick={() => setPanoramaFov((value) => Math.min(120, value + 8))} aria-label="Zoom out panorama">−</button>
           <span>{panoramaFov}°</span>
@@ -480,14 +506,14 @@ export default function Home() {
           <button onClick={() => setInfoOpen(false)} aria-label="Close information">×</button>
           <span>{guidedMode ? selectedTour.status : 'Concept Design / Artist Impression'}</span>
           <p>{guidedMode ? selectedTour.route : active.note}</p>
-          <small>{guidedMode ? (selectedTour.rejected ? 'Archived visual comparison only. A later floor-plan audit invalidated this clip as Apartment 106 spatial truth; it must not be used as final sales material.' : 'The selected route uses an existing local video and preserves its recorded QA status. Routes are separate review branches, not one claimed seamless complete tour.') : 'Layout follows the Apartment 106 marketing plan. Furniture, finishes and outlook are illustrative. This prototype uses reviewed still viewpoints, not a measured 360° survey.'}</small>
+          <small>{guidedMode ? (selectedTour.rejected ? 'Archived visual comparison only. A later floor-plan audit invalidated this clip as Apartment 106 spatial truth; it must not be used as final sales material.' : 'The selected route uses an existing local video and preserves its recorded QA status. Routes are separate review branches, not one claimed seamless complete tour.') : 'Layout follows the Apartment 106 marketing plan. Furniture, finishes and outlook are illustrative. These are concept panoramas, not measured 360° surveys.'}</small>
         </aside>
       )}
 
       {!guidedMode && (
         <nav className="wayfinding" aria-label="Connected rooms">
-          {active.connections.map((id) => {
-            const destination = stops.find((stop) => stop.id === id)!;
+          {active.connections.filter((id) => panoramaStops.some((stop) => stop.id === id)).map((id) => {
+            const destination = panoramaStops.find((stop) => stop.id === id)!;
             return (
               <button key={id} onClick={() => goTo(id)} aria-label={`Go to ${destination.label}`}>
                 <span className="wayfinding-arrow">↑</span>
@@ -500,12 +526,12 @@ export default function Home() {
 
       <aside className={`plan-card ${planOpen ? 'open' : ''}`} aria-label="Apartment 106 floor plan navigation">
         <div className="plan-heading">
-          <div><span>Level 1 · {visited.size} of {stops.length} visited</span><strong>Apartment 106</strong></div>
+          <div><span>Level 1 · {panoramaStops.filter((stop) => visited.has(stop.id)).length} of {panoramaStops.length} panoramas visited</span><strong>Apartment 106</strong></div>
           <button onClick={() => setPlanOpen(false)} aria-label="Close floor plan">×</button>
         </div>
         <div className="plan-canvas">
           <img src="/tour/apartment-106-plan.png" alt="Apartment 106 floor plan" draggable={false} />
-          {stops.map((stop) => (
+          {panoramaStops.map((stop) => (
             <button
               key={stop.id}
               className={`plan-dot ${stop.id === activeId ? 'active' : ''} ${visited.has(stop.id) ? 'visited' : ''}`}
@@ -520,9 +546,13 @@ export default function Home() {
       </aside>
 
       <footer className="tour-footer">
-        <span className="progress">{guidedMode ? `${(videoProgress * videoDuration).toFixed(1)}s` : `${String(stops.findIndex((stop) => stop.id === activeId) + 1).padStart(2, '0')} / ${String(stops.length).padStart(2, '0')}`}</span>
+        <span className="progress">{guidedMode ? `${(videoProgress * videoDuration).toFixed(1)}s` : `${String(panoramaStops.findIndex((stop) => stop.id === activeId) + 1).padStart(2, '0')} / ${String(panoramaStops.length).padStart(2, '0')}`}</span>
         <div className="room-strip" role="list" aria-label="All rooms">
-          {stops.map((stop) => (
+          {guidedMode ? activeVideoTours.map((tour) => (
+            <button key={tour.id} className={tour.id === selectedTourId ? 'active' : ''} onClick={() => chooseVideoTour(tour.id)}>
+              {tour.label}
+            </button>
+          )) : panoramaStops.map((stop) => (
             <button key={stop.id} className={`${stop.id === activeId ? 'active' : ''} ${visited.has(stop.id) ? 'visited' : ''}`} onClick={() => goTo(stop.id)}>
               {visited.has(stop.id) && <i aria-hidden="true" />}{stop.label}
             </button>
