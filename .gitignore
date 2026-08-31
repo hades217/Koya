@@ -11,6 +11,7 @@ Thumbs.db
 **/.nuxt/
 **/.turbo/
 **/dist/
+**/pages-dist/
 **/build/
 **/.cache/
 **/coverage/
@@ -41,4 +42,3 @@ Koya/interactive-apartment-tour/output/superres-test/
 **/.hyperframes/
 **/.thumbnails/
 *.log
-
