@@ -2781,7 +2781,7 @@ fn legacy_koya_manifest_fixture() -> ProjectManifest {
             created_at: timestamp,
             unit_ids: vec!["106".into()],
             public_url: Some(
-                "https://hades217.github.io/Koya/?unit=106&mode=panorama&room=living".into(),
+                "https://hades217.github.io/Koya/?unit=106&mode=video&tour=entry-room".into(),
             ),
             verified_at: Some(timestamp),
             supersedes_release_id: None,
@@ -2813,7 +2813,7 @@ fn legacy_koya_manifest_fixture() -> ProjectManifest {
             deployment: "ready".into(),
         },
         tour_preview_url: Some(
-            "https://hades217.github.io/Koya/?unit=106&mode=panorama&room=living".into(),
+            "https://hades217.github.io/Koya/?unit=106&mode=video&tour=entry-room".into(),
         ),
     }
 }

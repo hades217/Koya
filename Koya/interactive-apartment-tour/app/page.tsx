@@ -74,13 +74,12 @@ const videoTours: VideoTour[] = [
     ],
   },
   {
-    id: 'entry-room', label: 'Entry room', route: 'Inside Apartment 106 → Entry Hall → Living Hub', status: 'Standalone interior video · Concept geometry under review',
-    src: '/tour/videos/entry-hub-archived-rejected-scroll.mp4', poster: '/tour/entry.png', duration: 10.041667,
+    id: 'entry-room', label: 'Apartment entry', route: 'Apartment 106 door → Entry threshold → Entry Hall', status: 'QA passed · Standalone apartment-entry sequence',
+    src: '/tour/videos/entry-threshold-qa-pass-scroll.mp4', poster: '/tour/entry.png', duration: 5.041667,
     phases: [
-      { at: 0, label: 'Entry Hall', activeId: 'entry' },
-      { at: .32, label: 'Hall turn', activeId: 'entry' },
-      { at: .56, label: 'Kitchen passage', activeId: 'hub' },
-      { at: .82, label: 'Living Hub', activeId: 'living' },
+      { at: 0, label: 'Apartment 106 door', activeId: 'entry' },
+      { at: .28, label: 'Entry threshold', activeId: 'entry' },
+      { at: .62, label: 'Entry Hall', activeId: 'entry' },
     ],
   },
   {
@@ -136,11 +135,12 @@ export default function Home() {
   const [pan, setPan] = useState(0);
   const [pitch, setPitch] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [fullscreenActive, setFullscreenActive] = useState(false);
   const [visited, setVisited] = useState(() => new Set(['entry']));
   const [guidedMode, setGuidedMode] = useState(true);
   const [selectedUnitId, setSelectedUnitId] = useState('106');
   const [selectedTourId, setSelectedTourId] = useState('entry-room');
-  const [videoDuration, setVideoDuration] = useState(10.041667);
+  const [videoDuration, setVideoDuration] = useState(5.041667);
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
@@ -186,11 +186,28 @@ export default function Home() {
       else if (hasTour && !guidedMode && event.key === 'ArrowRight') setPan((value) => value + 30);
       else if (hasTour && !guidedMode && event.key === 'ArrowUp') setPitch((value) => Math.min(58, value + 22));
       else if (hasTour && !guidedMode && event.key === 'ArrowDown') setPitch((value) => Math.max(-58, value - 22));
-      if (event.key === 'Escape') { setInfoOpen(false); setPlanOpen(false); }
+      if (event.key === 'Escape') {
+        setInfoOpen(false);
+        setPlanOpen(false);
+        if (window.parent !== window) window.parent.postMessage({ type: 'koya-tour:immersive-request', active: false }, '*');
+      }
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [guidedMode, hasTour, scrubTo]);
+
+  useEffect(() => {
+    function syncNativeFullscreen() { setFullscreenActive(Boolean(document.fullscreenElement)); }
+    function syncEmbeddedFullscreen(event: MessageEvent) {
+      if (event.source === window.parent && event.data?.type === 'koya-tour:immersive-state') setFullscreenActive(Boolean(event.data.active));
+    }
+    document.addEventListener('fullscreenchange', syncNativeFullscreen);
+    window.addEventListener('message', syncEmbeddedFullscreen);
+    return () => {
+      document.removeEventListener('fullscreenchange', syncNativeFullscreen);
+      window.removeEventListener('message', syncEmbeddedFullscreen);
+    };
+  }, []);
 
   useEffect(() => {
     function applyUrlState() {
@@ -439,6 +456,10 @@ export default function Home() {
   }
 
   async function toggleFullscreen() {
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: 'koya-tour:immersive-request', active: 'toggle' }, '*');
+      return;
+    }
     if (document.fullscreenElement) await document.exitFullscreen();
     else await document.documentElement.requestFullscreen();
   }
@@ -523,7 +544,7 @@ export default function Home() {
         <div className="top-actions">
           <button className={`glass-button mode-toggle ${hasTour && guidedMode ? 'active' : ''}`} onClick={showVideoMode} disabled={!hasTour}>Video</button>
           <button className={`glass-button mode-toggle ${hasTour && !guidedMode ? 'active' : ''}`} onClick={showPanoramaMode} disabled={!hasTour}>360° panorama</button>
-          <button className="glass-button" onClick={toggleFullscreen} aria-label="Toggle fullscreen">Full screen</button>
+          <button className="glass-button" onClick={toggleFullscreen} aria-label="Toggle fullscreen" aria-pressed={fullscreenActive}>{fullscreenActive ? 'Exit full screen' : 'Full screen'}</button>
           <button className="glass-button" onClick={() => setInfoOpen((value) => !value)} aria-expanded={infoOpen}>About</button>
           <button className="glass-button plan-toggle" onClick={() => setPlanOpen((value) => !value)} aria-expanded={planOpen}>Floor plan</button>
         </div>
