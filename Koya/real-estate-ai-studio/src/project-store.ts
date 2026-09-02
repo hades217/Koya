@@ -130,7 +130,7 @@ export async function createProject(input: CreateProjectInput): Promise<ProjectR
     assets: [],
     generationJobs: [],
     creativeJobs: [],
-    enabledSkillIds: [],
+    enabledSkillIds: ['property-project-intake', 'offplan-evidence-audit', 'floorplan-concept-planning', 'panorama-production'],
     releases: [],
     approvalEvents: [],
     qaRecords: [],

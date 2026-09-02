@@ -2887,6 +2887,9 @@ fn create_project(app: AppHandle, input: CreateProjectInput) -> Result<ProjectRe
     if root.exists() {
         return Err("A project with this identifier already exists".into());
     }
+    for skill_id in DEFAULT_PROJECT_SKILL_IDS {
+        ensure_bundled_skill_installed(&app, skill_id)?;
+    }
     create_project_directories(&root, &unit_ids)?;
     let mut manifest = ProjectManifest {
         schema_version: CURRENT_SCHEMA_VERSION,
@@ -2931,7 +2934,10 @@ fn create_project(app: AppHandle, input: CreateProjectInput) -> Result<ProjectRe
         assets: vec![],
         generation_jobs: vec![],
         creative_jobs: vec![],
-        enabled_skill_ids: vec![],
+        enabled_skill_ids: DEFAULT_PROJECT_SKILL_IDS
+            .iter()
+            .map(|skill_id| (*skill_id).to_string())
+            .collect(),
         releases: vec![],
         approval_events: vec![],
         qa_records: vec![],
@@ -3010,6 +3016,13 @@ fn duplicate_project_structure(
     if root.exists() {
         return Err("A project with this identifier already exists".into());
     }
+    for skill_id in DEFAULT_PROJECT_SKILL_IDS {
+        ensure_bundled_skill_installed(&app, skill_id)?;
+    }
+    manifest.enabled_skill_ids = DEFAULT_PROJECT_SKILL_IDS
+        .iter()
+        .map(|skill_id| (*skill_id).to_string())
+        .collect();
     let unit_ids = manifest
         .units
         .iter()
@@ -8799,8 +8812,24 @@ struct BundledSkill {
     content: &'static str,
 }
 
+const DEFAULT_PROJECT_SKILL_IDS: &[&str] = &[
+    "property-project-intake",
+    "offplan-evidence-audit",
+    "floorplan-concept-planning",
+    "panorama-production",
+];
+
 fn bundled_skills() -> Vec<BundledSkill> {
     vec![
+        BundledSkill {
+            id: "property-project-intake",
+            name: "Project Intake Guide",
+            description:
+                "Guide non-technical property teams from uploaded files to the next evidence-safe production step.",
+            category: "Project intake",
+            capabilities: &["Chat upload guidance", "Input tier", "Next-step routing"],
+            content: include_str!("../skills/property-project-intake/SKILL.md"),
+        },
         BundledSkill {
             id: "offplan-evidence-audit",
             name: "Evidence Audit",
@@ -8888,6 +8917,36 @@ fn valid_skill_id(value: &str) -> bool {
         })
 }
 
+fn ensure_bundled_skill_installed(app: &AppHandle, skill_id: &str) -> Result<(), String> {
+    if !valid_skill_id(skill_id) {
+        return Err("Invalid Skill identifier.".into());
+    }
+    let skill = bundled_skills()
+        .into_iter()
+        .find(|item| item.id == skill_id)
+        .ok_or_else(|| "This Skill is not in the approved Estate Studio catalog.".to_string())?;
+    let root = skills_root(app)?;
+    let target = root.join(skill.id);
+    fs::create_dir_all(&target).map_err(|error| format!("Unable to install Skill: {error}"))?;
+    fs::write(target.join("SKILL.md"), skill.content)
+        .map_err(|error| format!("Unable to install Skill: {error}"))?;
+    let mut registry = read_skill_registry(&root);
+    if let Some(installed) = registry
+        .installed
+        .iter_mut()
+        .find(|item| item.id == skill.id)
+    {
+        installed.version = "1.0.0".into();
+    } else {
+        registry.installed.push(InstalledSkill {
+            id: skill.id.into(),
+            version: "1.0.0".into(),
+            installed_at: unix_time(),
+        });
+    }
+    write_skill_registry(&root, &registry)
+}
+
 fn loaded_skill_context(app: &AppHandle, manifest: &ProjectManifest) -> Result<String, String> {
     let root = skills_root(app)?;
     let registry = read_skill_registry(&root);
@@ -8948,30 +9007,7 @@ fn install_marketplace_skill(
     if !valid_skill_id(&skill_id) {
         return Err("Invalid Skill identifier.".into());
     }
-    let skill = bundled_skills()
-        .into_iter()
-        .find(|item| item.id == skill_id)
-        .ok_or_else(|| "This Skill is not in the approved Estate Studio catalog.".to_string())?;
-    let root = skills_root(&app)?;
-    let target = root.join(skill.id);
-    fs::create_dir_all(&target).map_err(|error| format!("Unable to install Skill: {error}"))?;
-    fs::write(target.join("SKILL.md"), skill.content)
-        .map_err(|error| format!("Unable to install Skill: {error}"))?;
-    let mut registry = read_skill_registry(&root);
-    if let Some(installed) = registry
-        .installed
-        .iter_mut()
-        .find(|item| item.id == skill.id)
-    {
-        installed.version = "1.0.0".into();
-    } else {
-        registry.installed.push(InstalledSkill {
-            id: skill.id.into(),
-            version: "1.0.0".into(),
-            installed_at: unix_time(),
-        });
-    }
-    write_skill_registry(&root, &registry)?;
+    ensure_bundled_skill_installed(&app, &skill_id)?;
     list_skill_marketplace(app)
 }
 
@@ -11711,6 +11747,9 @@ mod tests {
     #[test]
     fn marketplace_skill_ids_and_frontmatter_are_unique() {
         let skills = bundled_skills();
+        assert!(DEFAULT_PROJECT_SKILL_IDS
+            .iter()
+            .all(|default_id| skills.iter().any(|skill| skill.id == *default_id)));
         let mut ids = skills.iter().map(|skill| skill.id).collect::<Vec<_>>();
         ids.sort();
         ids.dedup();
