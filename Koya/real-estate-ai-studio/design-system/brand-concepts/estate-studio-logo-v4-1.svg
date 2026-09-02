@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 176" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio refined logo concept v4.1</title>
+  <desc id="desc">A refined line portrait of Aster beside a lighter rounded lowercase Estate Studio wordmark.</desc>
+  <g transform="translate(16 8)" fill="none" stroke="#2E2926" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 63V47c0-10 8-18 18-18h15v89H52c-10 0-18-8-18-18Z" fill="#EEE7DD"/>
+    <path d="M45 45v58M54 42v64" stroke="#CFC5BA" stroke-width="3"/>
+    <path d="M67 118V26l88 27v65Z" fill="#FFFDF9"/>
+    <circle cx="98" cy="75" r="4" fill="#2E2926" stroke="none"/>
+    <circle cx="129" cy="75" r="4" fill="#2E2926" stroke="none"/>
+    <path d="M49 118h120v31c0 6-5 11-11 11H60c-6 0-11-5-11-11Z" fill="#FFFDF9"/>
+    <path d="M109 125c2.2 8.2 4.8 10.8 13 13-8.2 2.2-10.8 4.8-13 13-2.2-8.2-4.8-10.8-13-13 8.2-2.2 10.8-4.8 13-13Z" fill="#6767D9" stroke="none"/>
+  </g>
+  <text x="220" y="107" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, -apple-system, sans-serif" font-size="59" font-weight="550" letter-spacing="-1.9">estate studio</text>
+</svg>

@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio professional palette research v3</title>
+  <desc id="desc">Three non-green brand palette directions on warm neutral interfaces: Iris and Persimmon, Cobalt and Tangerine, and Mulberry and Apricot.</desc>
+  <rect width="1440" height="1040" fill="#F2EEE6"/>
+
+  <text x="72" y="76" fill="#292735" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="38" font-weight="500">Estate Studio · professional colour study</text>
+  <text x="72" y="111" fill="#6F6A66" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="3">V3 · NO GREEN BRAND LAYER · WARM NEUTRAL FOUNDATION</text>
+  <rect x="1150" y="54" width="218" height="44" rx="22" fill="#FFFDF9" stroke="#DED9D0"/>
+  <circle cx="1180" cy="76" r="6" fill="#C83C3C"/>
+  <text x="1198" y="81" fill="#6F403C" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="1.4">GREEN RETIRED</text>
+
+  <!-- Candidate A -->
+  <g transform="translate(72 158)">
+    <rect width="1296" height="248" rx="22" fill="#FFFDF9" stroke="#DED9D0"/>
+    <rect width="10" height="248" rx="5" fill="#5B5BD6"/>
+    <text x="42" y="46" fill="#6F6A66" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2.4">01 · RECOMMENDED FOR REVIEW</text>
+    <text x="42" y="91" fill="#292735" font-family="Iowan Old Style, Georgia, serif" font-size="34">Iris / Persimmon</text>
+    <text x="42" y="123" fill="#6F6A66" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14">Distinctive, authored, contemporary. Colour carries identity; ink stays softly violet.</text>
+
+    <g transform="translate(42 153)">
+      <rect width="74" height="52" rx="9" fill="#5B5BD6"/><rect x="84" width="74" height="52" rx="9" fill="#5151CD"/>
+      <rect x="168" width="74" height="52" rx="9" fill="#E9E8FF"/><rect x="252" width="74" height="52" rx="9" fill="#E54D2E"/>
+      <rect x="336" width="74" height="52" rx="9" fill="#292735"/>
+      <text x="0" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">5B5BD6</text>
+      <text x="84" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">5151CD</text>
+      <text x="168" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">E9E8FF</text>
+      <text x="252" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">E54D2E</text>
+      <text x="336" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">292735</text>
+    </g>
+
+    <g transform="translate(568 43)">
+      <g transform="scale(1.22)">
+        <path fill="#5151CD" d="M18 24 42 12v96L18 96Z"/>
+        <path fill="#7C7CE4" d="M46 12h58L80 38H46Z"/>
+        <path fill="#5B5BD6" d="M46 82h34l24 26H46Z"/>
+        <path fill="#E54D2E" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+      </g>
+      <text x="142" y="66" fill="#292735" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="500" letter-spacing="5">ESTATE</text>
+      <text x="142" y="101" fill="#292735" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="500" letter-spacing="5">STUDIO</text>
+      <rect x="463" y="38" width="182" height="52" rx="26" fill="#5B5BD6"/>
+      <text x="505" y="70" fill="#FFFDF9" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700">Open project</text>
+    </g>
+  </g>
+
+  <!-- Candidate B -->
+  <g transform="translate(72 430)">
+    <rect width="1296" height="248" rx="22" fill="#FFFDF9" stroke="#D8DCE8"/>
+    <rect width="10" height="248" rx="5" fill="#3E63DD"/>
+    <text x="42" y="46" fill="#6F6A66" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2.4">02 · OPERATIONAL / TRUSTED</text>
+    <text x="42" y="91" fill="#242B3D" font-family="Iowan Old Style, Georgia, serif" font-size="34">Cobalt / Tangerine</text>
+    <text x="42" y="123" fill="#6F6A66" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14">Dependable but not generic. Tangerine adds one precise human signal.</text>
+
+    <g transform="translate(42 153)">
+      <rect width="74" height="52" rx="9" fill="#3E63DD"/><rect x="84" width="74" height="52" rx="9" fill="#3451B2"/>
+      <rect x="168" width="74" height="52" rx="9" fill="#E6EDFE"/><rect x="252" width="74" height="52" rx="9" fill="#F76B15"/>
+      <rect x="336" width="74" height="52" rx="9" fill="#242B3D"/>
+      <text x="0" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">3E63DD</text>
+      <text x="84" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">3451B2</text>
+      <text x="168" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">E6EDFE</text>
+      <text x="252" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">F76B15</text>
+      <text x="336" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">242B3D</text>
+    </g>
+
+    <g transform="translate(568 43)">
+      <g transform="scale(1.22)">
+        <path fill="#3451B2" d="M18 24 42 12v96L18 96Z"/>
+        <path fill="#6E8FFF" d="M46 12h58L80 38H46Z"/>
+        <path fill="#3E63DD" d="M46 82h34l24 26H46Z"/>
+        <path fill="#F76B15" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+      </g>
+      <text x="142" y="66" fill="#242B3D" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="500" letter-spacing="5">ESTATE</text>
+      <text x="142" y="101" fill="#242B3D" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="500" letter-spacing="5">STUDIO</text>
+      <rect x="463" y="38" width="182" height="52" rx="26" fill="#3E63DD"/>
+      <text x="505" y="70" fill="#FFFDF9" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700">Open project</text>
+    </g>
+  </g>
+
+  <!-- Candidate C -->
+  <g transform="translate(72 702)">
+    <rect width="1296" height="248" rx="22" fill="#FFFDF9" stroke="#E3D8DF"/>
+    <rect width="10" height="248" rx="5" fill="#AB4ABA"/>
+    <text x="42" y="46" fill="#746972" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2.4">03 · EDITORIAL / PROPERTY</text>
+    <text x="42" y="91" fill="#322936" font-family="Iowan Old Style, Georgia, serif" font-size="34">Mulberry / Apricot</text>
+    <text x="42" y="123" fill="#746972" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14">Warm and editorial, for a design-led property identity.</text>
+
+    <g transform="translate(42 153)">
+      <rect width="74" height="52" rx="9" fill="#AB4ABA"/><rect x="84" width="74" height="52" rx="9" fill="#9C2BAD"/>
+      <rect x="168" width="74" height="52" rx="9" fill="#F9E8F9"/><rect x="252" width="74" height="52" rx="9" fill="#E86F3A"/>
+      <rect x="336" width="74" height="52" rx="9" fill="#322936"/>
+      <text x="0" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">AB4ABA</text>
+      <text x="84" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">9C2BAD</text>
+      <text x="168" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">F9E8F9</text>
+      <text x="252" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">E86F3A</text>
+      <text x="336" y="72" fill="#857F79" font-family="Menlo, monospace" font-size="9">322936</text>
+    </g>
+
+    <g transform="translate(568 43)">
+      <g transform="scale(1.22)">
+        <path fill="#9C2BAD" d="M18 24 42 12v96L18 96Z"/>
+        <path fill="#CF91D8" d="M46 12h58L80 38H46Z"/>
+        <path fill="#AB4ABA" d="M46 82h34l24 26H46Z"/>
+        <path fill="#E86F3A" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+      </g>
+      <text x="142" y="66" fill="#322936" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="500" letter-spacing="5">ESTATE</text>
+      <text x="142" y="101" fill="#322936" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="500" letter-spacing="5">STUDIO</text>
+      <rect x="463" y="38" width="182" height="52" rx="26" fill="#AB4ABA"/>
+      <text x="505" y="70" fill="#FFFDF9" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700">Open project</text>
+    </g>
+  </g>
+
+  <text x="72" y="1002" fill="#6F6A66" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="12">Research board only · no production UI or mascot colours changed</text>
+</svg>

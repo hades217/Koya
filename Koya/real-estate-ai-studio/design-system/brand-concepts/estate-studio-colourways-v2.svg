@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio logo colour exploration v2</title>
+  <desc id="desc">Four brighter colour directions using the approved architectural E symbol.</desc>
+  <rect width="1200" height="820" fill="#F7F7F4"/>
+  <text x="72" y="78" fill="#20282C" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="38" font-weight="300">Estate Studio · colour study</text>
+  <text x="72" y="112" fill="#6C767A" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14" letter-spacing="3">SAME MARK · BRIGHTER BRAND PRESENCE</text>
+
+  <g transform="translate(72 166)">
+    <rect width="500" height="250" rx="12" fill="#FCFCFA" stroke="#D9DEDC"/>
+    <g transform="translate(38 36) scale(1.42)">
+      <path fill="#176F73" d="M18 24 42 12v96L18 96Z"/>
+      <path fill="#35A1A2" d="M46 12h58L80 38H46Z"/>
+      <path fill="#278B90" d="M46 82h34l24 26H46Z"/>
+      <path fill="#FF7A59" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+    </g>
+    <text x="226" y="108" fill="#203038" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">ESTATE</text>
+    <text x="226" y="144" fill="#203038" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">STUDIO</text>
+    <text x="38" y="222" fill="#176F73" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="2">01 · SUNLIT TEAL — RECOMMENDED</text>
+  </g>
+
+  <g transform="translate(628 166)">
+    <rect width="500" height="250" rx="12" fill="#FCFCFA" stroke="#D9DEDC"/>
+    <g transform="translate(38 36) scale(1.42)">
+      <path fill="#3157C8" d="M18 24 42 12v96L18 96Z"/>
+      <path fill="#6486E8" d="M46 12h58L80 38H46Z"/>
+      <path fill="#486CD8" d="M46 82h34l24 26H46Z"/>
+      <path fill="#56D2C4" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+    </g>
+    <text x="226" y="108" fill="#202A42" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">ESTATE</text>
+    <text x="226" y="144" fill="#202A42" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">STUDIO</text>
+    <text x="38" y="222" fill="#3157C8" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="2">02 · COBALT CURRENT</text>
+  </g>
+
+  <g transform="translate(72 462)">
+    <rect width="500" height="250" rx="12" fill="#FCFCFA" stroke="#D9DEDC"/>
+    <g transform="translate(38 36) scale(1.42)">
+      <path fill="#176A4D" d="M18 24 42 12v96L18 96Z"/>
+      <path fill="#45A879" d="M46 12h58L80 38H46Z"/>
+      <path fill="#2C8B62" d="M46 82h34l24 26H46Z"/>
+      <path fill="#B8DC72" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+    </g>
+    <text x="226" y="108" fill="#20332A" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">ESTATE</text>
+    <text x="226" y="144" fill="#20332A" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">STUDIO</text>
+    <text x="38" y="222" fill="#176A4D" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="2">03 · BOTANICAL SIGNAL</text>
+  </g>
+
+  <g transform="translate(628 462)">
+    <rect width="500" height="250" rx="12" fill="#FCFCFA" stroke="#D9DEDC"/>
+    <g transform="translate(38 36) scale(1.42)">
+      <path fill="#C94F42" d="M18 24 42 12v96L18 96Z"/>
+      <path fill="#F08A67" d="M46 12h58L80 38H46Z"/>
+      <path fill="#DF684F" d="M46 82h34l24 26H46Z"/>
+      <path fill="#F2C95D" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+    </g>
+    <text x="226" y="108" fill="#392421" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">ESTATE</text>
+    <text x="226" y="144" fill="#392421" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="300" letter-spacing="6">STUDIO</text>
+    <text x="38" y="222" fill="#C94F42" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="2">04 · TERRACOTTA SUN</text>
+  </g>
+
+  <text x="72" y="774" fill="#6C767A" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="13">The mascot palette remains unchanged. Colour is being evaluated on the logo only.</text>
+</svg>

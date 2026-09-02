@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>Property tour</title>
+  <link rel="stylesheet" href="tour.css" />
+</head>
+<body>
+  <main id="app" aria-busy="true">
+    <canvas id="panorama" aria-label="Interactive 360 degree room panorama" tabindex="0"></canvas>
+    <img id="still-fallback" alt="Room still image fallback" hidden />
+    <video id="room-video" playsinline controls hidden></video>
+    <div id="loading" role="status">Loading property tour…</div>
+    <header><div><span id="company"></span><h1 id="project-name"></h1></div><div class="view-actions"><button id="reset-view" type="button">Reset view</button><button id="fullscreen" type="button" aria-pressed="false">Fullscreen</button></div></header>
+    <aside id="room-panel"><p id="unit-label"></p><h2 id="room-name"></h2><p id="room-status"></p><nav id="adjacent-rooms" aria-label="Adjacent rooms"></nav></aside>
+    <section id="floorplan-panel"><img id="floorplan" alt="Unit floor plan" /><div id="hotspots"></div></section>
+    <footer><label>Unit<select id="unit-select"></select></label><nav id="room-tabs" aria-label="Rooms"></nav><div id="mode-tabs"><button data-mode="panorama">360°</button><button data-mode="video">Video</button><button data-mode="still">Still</button></div></footer>
+    <details id="disclosure"><summary>Project disclosure</summary><p></p></details>
+    <p id="runtime-status" class="sr-only" role="status" aria-live="polite"></p>
+    <div id="fatal" role="alert" hidden></div>
+  </main>
+  <script src="tour-manifest.js"></script>
+  <script type="module" src="tour.js"></script>
+</body>
+</html>

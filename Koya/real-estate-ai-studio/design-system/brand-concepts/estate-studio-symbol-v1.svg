@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio symbol concept</title>
+  <desc id="desc">An architectural letter E shaped like an open doorway with a four-point intelligence aperture.</desc>
+  <g fill="#24343B">
+    <path d="M18 24 42 12v96L18 96Z"/>
+    <path d="M46 12h58L80 38H46Z"/>
+    <path d="M46 82h34l24 26H46Z"/>
+  </g>
+  <path fill="#607D88" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio refined app icon concept v4.1</title>
+  <desc id="desc">A refined line portrait of Aster on a warm paper app tile.</desc>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="#F6F1E9"/>
+  <g transform="translate(31 25) scale(1.13)" fill="none" stroke="#2E2926" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 71V49c0-11 9-20 20-20h14v101H42c-11 0-20-9-20-20Z" fill="#E8DFD4"/>
+    <path d="M34 47v65M44 43v73" stroke="#CFC5BA" stroke-width="3.5"/>
+    <path d="M56 130V26l98 31v73Z" fill="#FFFDF9"/>
+    <circle cx="91" cy="82" r="5" fill="#2E2926" stroke="none"/>
+    <circle cx="126" cy="82" r="5" fill="#2E2926" stroke="none"/>
+    <path d="M36 130h134v35c0 7-5 12-12 12H48c-7 0-12-5-12-12Z" fill="#FFFDF9"/>
+    <path d="M103 139c2.8 10.2 5.8 13.2 16 16-10.2 2.8-13.2 5.8-16 16-2.8-10.2-5.8-13.2-16-16 10.2-2.8 13.2-5.8 16-16Z" fill="#6767D9" stroke="none"/>
+  </g>
+</svg>

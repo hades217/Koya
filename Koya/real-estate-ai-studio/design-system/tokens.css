@@ -1,0 +1,52 @@
+:root {
+  color-scheme: light;
+
+  --font-ui: "Sweet Sans Pro", "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+  --font-project: "Pilot", Didot, "Bodoni 72", "Bodoni MT", serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --ui-canvas: #f4f4f1;
+  --ui-surface: #fcfcfa;
+  --ui-surface-muted: #eef1f0;
+  --ui-ink: #20282c;
+  --ui-ink-muted: #6c767a;
+  --ui-line: #d9dedc;
+  --ui-sidebar: #24343b;
+  --ui-sidebar-active: #354d56;
+  --ui-accent: #607d88;
+
+  --brand-koya-ink: #38261d;
+  --brand-koya-black: #1f1a16;
+  --brand-koya-ivory: #f3f0e8;
+  --brand-koya-stone: #cbc4b9;
+  --brand-koya-botanical: #66746b;
+
+  --status-success: #356248;
+  --status-success-bg: #e2ece5;
+  --status-warning: #8a5b22;
+  --status-warning-bg: #f3ebdd;
+  --status-danger: #93483f;
+  --status-danger-bg: #f3e4e1;
+  --status-info: #486b7b;
+  --status-info-bg: #e3ecef;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-tag: 2px;
+  --radius-control: 4px;
+  --radius-card: 8px;
+
+  --shadow-hover: 0 12px 28px rgba(27, 39, 44, .08);
+  --shadow-modal: 0 28px 72px rgba(20, 28, 32, .20);
+
+  --duration-standard: 160ms;
+  --duration-panel: 220ms;
+  --ease-standard: cubic-bezier(.2, .8, .2, 1);
+}

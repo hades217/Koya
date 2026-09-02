@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 140" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio horizontal logo - sunlit teal</title>
+  <desc id="desc">Bright architectural symbol paired with a refined dark wordmark.</desc>
+  <g transform="translate(14 10) scale(.92)">
+    <path fill="#176F73" d="M18 24 42 12v96L18 96Z"/>
+    <path fill="#35A1A2" d="M46 12h58L80 38H46Z"/>
+    <path fill="#278B90" d="M46 82h34l24 26H46Z"/>
+    <path fill="#FF7A59" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+  </g>
+  <text x="150" y="86" fill="#203038" font-family="Sweet Sans Pro, Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="42" font-weight="300" letter-spacing="12">ESTATE STUDIO</text>
+</svg>

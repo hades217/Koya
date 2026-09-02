@@ -1,0 +1,9 @@
+node_modules
+gateway/.data/
+dist
+src-tauri/target
+*.log
+src-tauri/tauri.release.generated.conf.json
+src-tauri/tauri.windows.release.generated.conf.json
+test/fixtures/generated/
+.DS_Store

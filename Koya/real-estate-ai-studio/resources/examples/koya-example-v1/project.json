@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 30,
+  "projectId": "koya-example",
+  "name": "Koya",
+  "company": "Koya",
+  "companyProfile": { "id": "koya", "name": "Koya" },
+  "location": "Australia",
+  "locale": "en-AU",
+  "measurementUnits": "metric",
+  "accessMode": "public",
+  "disclosure": "Off-the-plan concept experience. Plans, areas, finishes and imagery remain subject to approved project documentation and contract disclosure.",
+  "workflowMode": "advanced",
+  "status": "Internal example · Public tour reference",
+  "readiness": 86,
+  "readOnly": true,
+  "createdAt": 1788131200,
+  "updatedAt": 1788131200,
+  "units": [
+    { "id": "102", "label": "Apartment 102", "summary": "2 bed · 2 bath · 104 m²", "status": "Floor plan only", "tourAvailable": false, "floorplanAssetId": "reference-floorplan-102", "rooms": [], "roomGraphLocked": false },
+    { "id": "103", "label": "Apartment 103", "summary": "1 bed · study · 86 m²", "status": "Floor plan only", "tourAvailable": false, "floorplanAssetId": "reference-floorplan-103", "rooms": [], "roomGraphLocked": false },
+    { "id": "104", "label": "Apartment 104", "summary": "2 bed · 2 bath · 106 m²", "status": "Floor plan only", "tourAvailable": false, "floorplanAssetId": "reference-floorplan-104", "rooms": [], "roomGraphLocked": false },
+    {
+      "id": "106",
+      "label": "Apartment 106",
+      "summary": "2 bed · 2 bath · MPR · 152 m²",
+      "status": "Interactive tour reference",
+      "tourAvailable": true,
+      "floorplanAssetId": "reference-floorplan-106",
+      "roomGraphLocked": true,
+      "rooms": [
+        { "id": "living-room", "name": "Living room", "status": "approved", "panoramaStatus": "ready", "hotspotX": 72, "hotspotY": 68, "adjacentRoomIds": ["kitchen-dining", "private-terrace"], "videoAssetId": "koya-living-terrace-reference-video" },
+        { "id": "kitchen-dining", "name": "Kitchen & dining", "status": "approved", "panoramaStatus": "ready", "hotspotX": 57, "hotspotY": 56, "adjacentRoomIds": ["living-room", "multipurpose-room", "bedroom-1"] },
+        { "id": "bedroom-1", "name": "Bedroom 1", "status": "approved", "panoramaStatus": "ready", "hotspotX": 78, "hotspotY": 33, "adjacentRoomIds": ["kitchen-dining"] },
+        { "id": "bedroom-2", "name": "Bedroom 2", "status": "approved", "panoramaStatus": "ready", "hotspotX": 28, "hotspotY": 68, "adjacentRoomIds": ["multipurpose-room"] },
+        { "id": "multipurpose-room", "name": "Multipurpose room", "status": "approved", "panoramaStatus": "ready", "hotspotX": 42, "hotspotY": 50, "adjacentRoomIds": ["kitchen-dining", "bedroom-2"] },
+        { "id": "private-terrace", "name": "Private terrace", "status": "approved", "panoramaStatus": "ready", "hotspotX": 91, "hotspotY": 68, "adjacentRoomIds": ["living-room"] }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "koya-living-terrace-reference-video",
+      "name": "living-terrace-reference-scroll.mp4",
+      "category": "videos",
+      "evidenceClass": "concept_style_only",
+      "status": "accepted",
+      "importedAt": 1788131200,
+      "relativePath": "sources/videos/living-terrace-reference-scroll.mp4",
+      "sizeBytes": 2222053,
+      "checksumSha256": "12495424f1c015335f268e00271f9d5c1063cfd867bb3563663b55d5c07aca59",
+      "mimeType": "video/mp4",
+      "sourceOwner": "Koya internal production workspace",
+      "usagePermission": "Internal read-only example; structural reference only; commercial redistribution unavailable",
+      "originalRelativePath": "sources/videos/living-terrace-reference-scroll.mp4",
+      "derivativeRelativePaths": [],
+      "unitId": "106",
+      "width": 1280,
+      "height": 720,
+      "reviewEvents": [
+        {
+          "id": "asset-review-koya-living-terrace-reference-video-1788131200",
+          "fromStatus": "imported",
+          "toStatus": "accepted",
+          "actor": "local_user",
+          "notes": "Loaded as the existing QA-passed structural reference used by the Koya interactive tour.",
+          "createdAt": 1788131200
+        }
+      ]
+    }
+  ],
+  "generationJobs": [],
+  "creativeJobs": [
+    {
+      "id": "koya-apartment-106-poster",
+      "kind": "poster",
+      "posterMode": "a4_sales_sheet",
+      "a4DocumentType": "unit_sales_sheet",
+      "title": "Apartment 106 A4 sales sheet",
+      "campaignName": "Apartment 106 launch",
+      "unitId": "106",
+      "audience": "Prospective owner-occupiers",
+      "objective": "Invite buyers to explore the interactive apartment tour",
+      "headline": "Apartment 106",
+      "subheadline": "2 bed · 2 bath · MPR · 152 m²",
+      "body": "A project-branded introduction to the interactive experience.",
+      "callToAction": "Explore the interactive tour",
+      "projectHighlights": [],
+      "format": "a4_portrait",
+      "width": 2480,
+      "height": 3508,
+      "visualDirection": "Editorial typography, warm stone palette and generous whitespace.",
+      "evidenceAssetIds": [],
+      "scenes": [],
+      "warnings": ["Internal example only; final legal copy and distribution require client approval."],
+      "status": "preview_ready",
+      "workflow": "deterministic_svg",
+      "outputRelativePath": "creative/sales-sheets/koya-apartment-106-poster/document.md",
+      "createdAt": 1788131200,
+      "updatedAt": 1788131200
+    }
+  ],
+  "enabledSkillIds": [],
+  "releases": [
+    { "id": "koya-public-v1", "version": 1, "status": "public_verified", "accessMode": "public", "createdAt": 1788131200, "unitIds": ["106"], "publicUrl": "https://hades217.github.io/Koya/?unit=106&mode=panorama&room=living" }
+  ],
+  "approvalEvents": [],
+  "qaRecords": [],
+  "usageLedger": [],
+  "backgroundJobs": [],
+  "designSpec": {
+    "status": "approved",
+    "direction": "Quiet editorial property identity translated from the Koya interactive website: warm ivory fields, near-black architectural ink, restrained terracotta accent, serif display typography and generous negative space.",
+    "sourceBasis": [
+      "Koya interactive tour website",
+      "Koya approved project palette",
+      "Apartment 106 interactive experience"
+    ],
+    "colours": {
+      "paper": "#f3efe5",
+      "ink": "#241f1a",
+      "accent": "#a96d45",
+      "muted": "#817d76",
+      "botanical": "#5f7567"
+    },
+    "typography": {
+      "display": "Didot, \"Bodoni 72\", Georgia, serif",
+      "body": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif"
+    },
+    "layout": {
+      "page": "A4 portrait",
+      "marginMm": 18,
+      "grid": "Editorial asymmetric grid; large display title; thin rules; compact uppercase metadata",
+      "imageTreatment": "Use approved project imagery at natural colour with a neutral dark scrim only when text contrast requires it"
+    }
+  },
+  "brand": { "primary": "#2f241d", "accent": "#b66d45" },
+  "modules": { "tour": "ready", "creative": "in_progress", "deployment": "ready" },
+  "tourPreviewUrl": "https://hades217.github.io/Koya/?unit=106&mode=panorama&room=living",
+  "examplePolicy": {
+    "version": 1,
+    "distributionStatus": "internal_only",
+    "bundledCustomerMedia": false,
+    "commercialDistributionApproval": "unavailable"
+  }
+}

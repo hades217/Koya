@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Aster">
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="#F6F1E9"/>
+  <g fill="none" stroke="#2E2926" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M11 29V18c0-4 3-7 7-7h5v31h-5c-4 0-7-3-7-7Z" fill="#E8DFD4"/>
+    <path d="M15 18v18M19 16v22" stroke="#CFC5BA" stroke-width="1.4"/>
+    <path d="M23 42V10l30 9.5V42Z" fill="#FFFDF9"/>
+    <circle cx="34" cy="28" r="1.7" fill="#2E2926" stroke="none"/>
+    <circle cx="44.5" cy="28" r="1.7" fill="#2E2926" stroke="none"/>
+    <path d="M16.5 42h41v10.5c0 2.2-1.8 4-4 4h-33c-2.2 0-4-1.8-4-4Z" fill="#FFFDF9"/>
+    <path d="M37 44c.9 3.3 1.7 4.1 5 5-3.3.9-4.1 1.7-5 5-.9-3.3-1.7-4.1-5-5 3.3-.9 4.1-1.7 5-5Z" fill="#6767D9" stroke="none"/>
+  </g>
+</svg>

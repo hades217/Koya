@@ -1,0 +1,48 @@
+{
+  "name": "real-estate-ai-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 1420",
+    "tauri:dev:qa": "tauri dev --config src-tauri/tauri.qa.conf.json",
+    "tauri:qa:app": "tauri build --debug --bundles app --config src-tauri/tauri.qa.conf.json",
+    "tauri:qa:dmg": "tauri build --debug --bundles dmg --config src-tauri/tauri.qa.conf.json",
+    "tauri:qa:verify": "node scripts/verify-qa-macos.mjs",
+    "tauri:qa": "npm run tauri:qa:dmg && npm run tauri:qa:app && npm run tauri:qa:verify",
+    "build": "tsc && vite build",
+    "test": "npm run test:browser-projects && npm run test:runtime && npm run test:gateway && npm run test:rust",
+    "test:browser-projects": "node --test test/browser-projects.test.mjs",
+    "test:runtime": "node --test test/static-runtime.test.mjs",
+    "test:gateway": "npm --prefix gateway test",
+    "test:rust": "cargo test --manifest-path src-tauri/Cargo.toml --lib",
+    "verify": "npm run build && npm test",
+    "fixtures:tier-b": "node scripts/create-tier-b-fixtures.mjs",
+    "preview": "vite preview --port 1420",
+    "release:config": "node scripts/prepare-release-config.mjs",
+    "tauri:release": "node scripts/prepare-release-config.mjs --build",
+    "macos:release:preflight": "node scripts/macos-release.mjs --preflight",
+    "macos:release": "node scripts/macos-release.mjs --build",
+    "macos:release:verify": "node scripts/macos-release.mjs --verify",
+    "windows:release:preflight": "node scripts/windows-release.mjs --preflight",
+    "windows:release": "node scripts/windows-release.mjs --build",
+    "windows:release:verify": "node scripts/windows-release.mjs --verify",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "2.11.1",
+    "@tauri-apps/plugin-dialog": "^2.7.2",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "typescript": "5.9.3",
+    "vite": "8.2.2"
+  }
+}

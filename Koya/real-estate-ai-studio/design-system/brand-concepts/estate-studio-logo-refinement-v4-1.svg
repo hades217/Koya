@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio logo shape refinement v4.1</title>
+  <desc id="desc">The refined Aster mascot-first logo shown as a primary wordmark, app icon, navigation identity, and small-size mark.</desc>
+  <rect width="1400" height="900" fill="#F4EFE7"/>
+  <text x="72" y="76" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="38" font-weight="600">Same idea. Better shape.</text>
+  <text x="72" y="111" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="14">V4.1 · lighter linework · asymmetric folded head · shallower body · quieter wordmark</text>
+
+  <g transform="translate(72 158)">
+    <rect width="1256" height="270" rx="22" fill="#FFFDF9" stroke="#DED7CE"/>
+    <text x="42" y="48" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="2">REFINED PRIMARY</text>
+    <g transform="translate(42 68)">
+      <g fill="none" stroke="#2E2926" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M34 63V47c0-10 8-18 18-18h15v89H52c-10 0-18-8-18-18Z" fill="#EEE7DD"/><path d="M45 45v58M54 42v64" stroke="#CFC5BA" stroke-width="3"/><path d="M67 118V26l88 27v65Z" fill="#FFFDF9"/>
+        <circle cx="98" cy="75" r="4" fill="#2E2926" stroke="none"/><circle cx="129" cy="75" r="4" fill="#2E2926" stroke="none"/><path d="M49 118h120v31c0 6-5 11-11 11H60c-6 0-11-5-11-11Z" fill="#FFFDF9"/><path d="M109 125c2.2 8.2 4.8 10.8 13 13-8.2 2.2-10.8 4.8-13 13-2.2-8.2-4.8-10.8-13-13 8.2-2.2 10.8-4.8 13-13Z" fill="#6767D9" stroke="none"/>
+      </g>
+      <text x="204" y="107" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, -apple-system, sans-serif" font-size="59" font-weight="550" letter-spacing="-1.9">estate studio</text>
+    </g>
+    <g transform="translate(1000 84)"><rect width="184" height="112" rx="16" fill="#F6F1E9"/><text x="24" y="39" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">SHAPE NOTES</text><text x="24" y="66" fill="#5F5853" font-family="system-ui, -apple-system, sans-serif" font-size="12">5px outline</text><text x="24" y="87" fill="#5F5853" font-family="system-ui, -apple-system, sans-serif" font-size="12">2 quiet ribs</text><text x="24" y="108" fill="#5F5853" font-family="system-ui, -apple-system, sans-serif" font-size="12">rounded base</text></g>
+  </g>
+
+  <g transform="translate(72 460)">
+    <rect width="392" height="350" rx="22" fill="#FFFDF9" stroke="#DED7CE"/>
+    <text x="36" y="48" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="2">APP ICON</text>
+    <rect x="36" y="78" width="220" height="220" rx="52" fill="#F6F1E9"/>
+    <g transform="translate(60 96) scale(.92)" fill="none" stroke="#2E2926" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 71V49c0-11 9-20 20-20h14v101H42c-11 0-20-9-20-20Z" fill="#E8DFD4"/><path d="M34 47v65M44 43v73" stroke="#CFC5BA" stroke-width="3.5"/><path d="M56 130V26l98 31v73Z" fill="#FFFDF9"/><circle cx="91" cy="82" r="5" fill="#2E2926" stroke="none"/><circle cx="126" cy="82" r="5" fill="#2E2926" stroke="none"/><path d="M36 130h134v35c0 7-5 12-12 12H48c-7 0-12-5-12-12Z" fill="#FFFDF9"/><path d="M103 139c2.8 10.2 5.8 13.2 16 16-10.2 2.8-13.2 5.8-16 16-2.8-10.2-5.8-13.2-16-16 10.2-2.8 13.2-5.8 16-16Z" fill="#6767D9" stroke="none"/></g>
+    <text x="280" y="154" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="20" font-weight="600">Aster</text><text x="280" y="181" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="12">not a house</text><text x="280" y="202" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="12">not a letter</text>
+  </g>
+
+  <g transform="translate(496 460)">
+    <rect width="832" height="350" rx="22" fill="#FFFDF9" stroke="#DED7CE"/>
+    <text x="36" y="48" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="2">REAL UI SCALES</text>
+    <rect x="36" y="78" width="760" height="72" rx="13" fill="#FAF7F2" stroke="#E4DED6"/>
+    <g transform="translate(55 89) scale(.28)" fill="none" stroke="#2E2926" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M34 63V47c0-10 8-18 18-18h15v89H52c-10 0-18-8-18-18Z" fill="#EEE7DD"/><path d="M67 118V26l88 27v65Z" fill="#FFFDF9"/><circle cx="98" cy="75" r="5" fill="#2E2926" stroke="none"/><circle cx="129" cy="75" r="5" fill="#2E2926" stroke="none"/><path d="M49 118h120v31c0 6-5 11-11 11H60c-6 0-11-5-11-11Z" fill="#FFFDF9"/></g>
+    <text x="112" y="122" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="19" font-weight="550">estate studio</text><circle cx="637" cy="114" r="5" fill="#6767D9"/><text x="651" y="119" fill="#6F6863" font-family="system-ui, -apple-system, sans-serif" font-size="12">Property AI ready</text>
+    <line x1="36" y1="192" x2="796" y2="192" stroke="#E4DED6"/>
+    <text x="36" y="232" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="25" font-weight="600">Small-size simplification</text>
+    <g transform="translate(36 258)"><rect width="42" height="42" rx="10" fill="#F6F1E9" stroke="#DED7CE"/><path d="M11 25V12l20 6v7Z" fill="#FFFDF9" stroke="#2E2926" stroke-width="2.2" stroke-linejoin="round"/><circle cx="19" cy="20" r="1.5" fill="#2E2926"/><circle cx="26" cy="20" r="1.5" fill="#2E2926"/><path d="M9 25h25v10H9Z" fill="#FFFDF9" stroke="#2E2926" stroke-width="2.2" stroke-linejoin="round"/><path d="M22 27c.7 2.5 1.5 3.3 4 4-2.5.7-3.3 1.5-4 4-.7-2.5-1.5-3.3-4-4 2.5-.7 3.3-1.5 4-4Z" fill="#6767D9"/></g>
+    <g transform="translate(104 264)"><rect width="154" height="32" rx="16" fill="#2E2926"/><text x="38" y="21" fill="#FFFDF9" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600">Open project</text></g>
+    <text x="290" y="284" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="12">Detail reduces cleanly instead of becoming a tiny illustration.</text>
+  </g>
+  <text x="72" y="860" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="12">Shape refinement only · colour system and production app remain unchanged</text>
+</svg>

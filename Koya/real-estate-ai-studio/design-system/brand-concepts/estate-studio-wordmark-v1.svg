@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 140" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio horizontal logo concept</title>
+  <desc id="desc">Estate Studio architectural symbol paired with a light uppercase wordmark.</desc>
+  <g transform="translate(14 10) scale(.92)">
+    <g fill="#24343B">
+      <path d="M18 24 42 12v96L18 96Z"/>
+      <path d="M46 12h58L80 38H46Z"/>
+      <path d="M46 82h34l24 26H46Z"/>
+    </g>
+    <path fill="#607D88" d="M65 48c2.1 7.9 4.1 9.9 12 12-7.9 2.1-9.9 4.1-12 12-2.1-7.9-4.1-9.9-12-12 7.9-2.1 9.9-4.1 12-12Z"/>
+  </g>
+  <text x="150" y="86" fill="#20282C" font-family="Sweet Sans Pro, Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="42" font-weight="300" letter-spacing="12">ESTATE STUDIO</text>
+</svg>

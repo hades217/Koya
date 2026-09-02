@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Estate Studio QA",
+  "identifier": "com.landiq.estatestudio.qa",
+  "bundle": {
+    "macOS": {
+      "signingIdentity": "-",
+      "hardenedRuntime": false
+    }
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Estate Studio QA",
+        "width": 1440,
+        "height": 940,
+        "minWidth": 1100,
+        "minHeight": 720,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estate Studio Design System v0.1</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; color: var(--ui-ink); background: var(--ui-canvas); font-family: var(--font-ui); font-weight: 400; }
+      .shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
+      aside { padding: 32px 24px; color: white; background: var(--ui-sidebar); }
+      .mark { display: flex; align-items: center; gap: 12px; }
+      .monogram { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.35); font-family: var(--font-project); font-size: 24px; }
+      .mark strong { display: block; font-weight: 500; }
+      .mark span, .nav-label, .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: .18em; }
+      .mark span { color: rgba(255,255,255,.48); }
+      .nav-label { margin: 52px 0 14px; color: rgba(255,255,255,.35); }
+      nav { display: grid; gap: 6px; }
+      nav div { padding: 12px; color: rgba(255,255,255,.68); border-radius: var(--radius-control); }
+      nav .active { color: white; background: var(--ui-sidebar-active); box-shadow: inset 2px 0 var(--ui-accent); }
+      main { padding: 56px 64px 80px; }
+      .masthead { max-width: 860px; padding-bottom: 44px; border-bottom: 1px solid var(--ui-line); }
+      .eyebrow { margin: 0 0 14px; color: var(--ui-accent); font-weight: 500; }
+      h1 { margin: 0 0 14px; font-size: 54px; line-height: 1; font-weight: 300; letter-spacing: -.04em; }
+      .intro { max-width: 680px; margin: 0; color: var(--ui-ink-muted); font-size: 15px; line-height: 1.65; }
+      section { margin-top: 48px; }
+      h2 { margin: 0 0 20px; font-size: 28px; font-weight: 300; letter-spacing: -.025em; }
+      .swatches { display: grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 12px; }
+      .swatch { overflow: hidden; border: 1px solid var(--ui-line); border-radius: var(--radius-card); background: var(--ui-surface); }
+      .swatch i { display: block; height: 82px; background: var(--colour); }
+      .swatch div { padding: 12px; }
+      .swatch strong, .swatch span { display: block; }
+      .swatch strong { font-size: 12px; font-weight: 500; }
+      .swatch span { margin-top: 4px; color: var(--ui-ink-muted); font-family: var(--font-mono); font-size: 10px; }
+      .type-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; }
+      .panel { padding: 28px; border: 1px solid var(--ui-line); border-radius: var(--radius-card); background: var(--ui-surface); }
+      .display { margin: 6px 0 18px; font-size: 48px; line-height: 1.04; font-weight: 300; letter-spacing: -.04em; }
+      .project-name { margin: 8px 0 18px; color: var(--brand-koya-ink); font-family: var(--font-project); font-size: 46px; line-height: 1; font-style: italic; font-weight: 400; }
+      .sample-body { max-width: 540px; color: var(--ui-ink-muted); font-size: 14px; line-height: 1.6; }
+      .component-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+      button { min-height: 40px; padding: 0 16px; border-radius: var(--radius-control); font: inherit; font-size: 12px; cursor: default; }
+      .primary { color: white; border: 1px solid var(--ui-sidebar); background: var(--ui-sidebar); }
+      .secondary { color: var(--ui-ink); border: 1px solid var(--ui-line); background: var(--ui-surface); }
+      .tertiary { color: var(--ui-accent); border: 1px solid transparent; background: transparent; }
+      .statuses { display: flex; flex-wrap: wrap; gap: 8px; }
+      .status { padding: 6px 9px; border-radius: var(--radius-tag); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+      .success { color: var(--status-success); background: var(--status-success-bg); }
+      .warning { color: var(--status-warning); background: var(--status-warning-bg); }
+      .danger { color: var(--status-danger); background: var(--status-danger-bg); }
+      .info { color: var(--status-info); background: var(--status-info-bg); }
+      .project-card { overflow: hidden; padding: 0; }
+      .project-image { height: 150px; background: linear-gradient(135deg, #80908a, #d7d2c7); }
+      .project-copy { padding: 20px; }
+      .project-copy .project-name { margin: 3px 0 10px; font-size: 32px; }
+      .chat { display: grid; grid-template-rows: auto 1fr auto; min-height: 330px; padding: 0; }
+      .chat header, .composer { padding: 16px; }
+      .chat header { border-bottom: 1px solid var(--ui-line); }
+      .chat header strong { display: block; font-weight: 500; }
+      .chat header span { color: var(--ui-ink-muted); font-size: 11px; }
+      .message { align-self: start; margin: 18px; padding: 14px; border: 1px solid var(--ui-line); border-radius: var(--radius-control); background: white; font-size: 13px; line-height: 1.5; }
+      .composer { margin: 0 16px 16px; color: var(--ui-ink-muted); border: 1px solid var(--ui-line); border-radius: var(--radius-control); background: white; font-size: 12px; }
+      .note { margin-top: 48px; padding: 18px 20px; color: var(--ui-ink-muted); border-left: 2px solid var(--ui-accent); background: var(--ui-surface-muted); font-size: 13px; line-height: 1.55; }
+      @media (max-width: 1000px) { .shell { grid-template-columns: 1fr; } aside { display: none; } main { padding: 36px 24px; } .swatches { grid-template-columns: repeat(2, 1fr); } .type-grid, .component-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside>
+        <div class="mark"><div class="monogram">E</div><div><strong>Estate Studio</strong><span>Design system · v0.1</span></div></div>
+        <p class="nav-label">Foundation</p>
+        <nav><div class="active">Overview</div><div>Colour</div><div>Typography</div><div>Components</div><div>Imagery</div></nav>
+      </aside>
+      <main>
+        <header class="masthead">
+          <p class="eyebrow">Review draft · not connected to production</p>
+          <h1>Quiet property intelligence.</h1>
+          <p class="intro">A neutral product system with a controlled project-brand layer. Koya provides the editorial discipline, typography and image quality - not a brown wash across the interface.</p>
+        </header>
+
+        <section>
+          <h2>Product neutrals</h2>
+          <div class="swatches">
+            <article class="swatch" style="--colour:var(--ui-canvas)"><i></i><div><strong>Canvas</strong><span>#F4F4F1</span></div></article>
+            <article class="swatch" style="--colour:var(--ui-surface)"><i></i><div><strong>Surface</strong><span>#FCFCFA</span></div></article>
+            <article class="swatch" style="--colour:var(--ui-ink)"><i></i><div><strong>Ink</strong><span>#20282C</span></div></article>
+            <article class="swatch" style="--colour:var(--ui-sidebar)"><i></i><div><strong>Sidebar</strong><span>#24343B</span></div></article>
+            <article class="swatch" style="--colour:var(--ui-accent)"><i></i><div><strong>Accent</strong><span>#607D88</span></div></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Koya project profile</h2>
+          <div class="swatches">
+            <article class="swatch" style="--colour:var(--brand-koya-ink)"><i></i><div><strong>Koya ink</strong><span>#38261D</span></div></article>
+            <article class="swatch" style="--colour:var(--brand-koya-black)"><i></i><div><strong>Koya black</strong><span>#1F1A16</span></div></article>
+            <article class="swatch" style="--colour:var(--brand-koya-ivory)"><i></i><div><strong>Koya ivory</strong><span>#F3F0E8</span></div></article>
+            <article class="swatch" style="--colour:var(--brand-koya-stone)"><i></i><div><strong>Koya stone</strong><span>#CBC4B9</span></div></article>
+            <article class="swatch" style="--colour:var(--brand-koya-botanical)"><i></i><div><strong>Botanical</strong><span>#66746B</span></div></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Typography roles</h2>
+          <div class="type-grid">
+            <article class="panel"><p class="eyebrow">Sweet Sans role</p><p class="display">Property projects</p><p class="sample-body">Light, calm and operational. Used for navigation, page hierarchy, data, forms and conversation.</p></article>
+            <article class="panel"><p class="eyebrow">Pilot role · project only</p><p class="project-name">Koya</p><p class="sample-body">A controlled editorial signature for the project name and approved campaign output.</p></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Core components</h2>
+          <div class="component-grid">
+            <article class="panel"><p class="eyebrow">Actions</p><div class="buttons"><button class="primary">Primary action</button><button class="secondary">Secondary</button><button class="tertiary">Text action</button></div></article>
+            <article class="panel"><p class="eyebrow">Semantic states</p><div class="statuses"><span class="status success">Ready</span><span class="status warning">Review</span><span class="status danger">Blocked</span><span class="status info">Running</span></div></article>
+            <article class="panel project-card"><div class="project-image"></div><div class="project-copy"><p class="eyebrow">Project identity</p><p class="project-name">Koya</p><p class="sample-body">Approved image, project title and restrained metadata.</p></div></article>
+          </div>
+        </section>
+
+        <section>
+          <h2>AI workspace boundary</h2>
+          <article class="panel chat"><header><strong>Property AI</strong><span>Current project context</span></header><div class="message">I am ready to help with this workspace.</div><div class="composer">Ask about the current project...</div></article>
+        </section>
+
+        <p class="note"><strong>Approval boundary:</strong> this specimen is a design-system proposal only. It does not modify the production App. Once approved, the implementation should replace legacy values with these tokens rather than append another theme override.</p>
+      </main>
+    </div>
+  </body>
+</html>

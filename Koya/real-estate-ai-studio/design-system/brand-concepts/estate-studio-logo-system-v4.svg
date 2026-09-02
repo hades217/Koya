@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 920" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio identity revision v4</title>
+  <desc id="desc">A mascot-first identity system using a minimal line portrait of Aster, a rounded lowercase wordmark, and a separate app icon.</desc>
+  <rect width="1400" height="920" fill="#F4EFE7"/>
+  <text x="72" y="75" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="38" font-weight="600">Aster becomes the brand.</text>
+  <text x="72" y="110" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="14">Identity revision v4 · one memorable character, one quiet wordmark, no architectural monogram</text>
+  <g transform="translate(72 160)">
+    <rect width="1256" height="285" rx="20" fill="#FFFDF9" stroke="#DED7CE"/>
+    <text x="42" y="48" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="2">PRIMARY WORDMARK</text>
+    <g transform="translate(44 75)">
+      <g fill="none" stroke="#2E2926" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M38 65V45c0-9 7-16 16-16h14v88H54c-9 0-16-7-16-16Z" fill="#F0EAE1"/><path d="M68 117V28l88 28v61Z" fill="#FFFDF9"/>
+        <circle cx="97" cy="77" r="4.5" fill="#2E2926" stroke="none"/><circle cx="130" cy="77" r="4.5" fill="#2E2926" stroke="none"/>
+        <path d="M52 117h118v38H52Z" fill="#FFFDF9"/><path d="M111 126c2.6 9.6 5.4 12.4 15 15-9.6 2.6-12.4 5.4-15 15-2.6-9.6-5.4-12.4-15-15 9.6-2.6 12.4-5.4 15-15Z" fill="#6767D9" stroke="none"/>
+      </g>
+      <text x="216" y="110" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, -apple-system, sans-serif" font-size="62" font-weight="600" letter-spacing="-2.4">estate studio</text>
+    </g>
+    <text x="936" y="238" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12">Warm ink #2E2926</text><circle cx="1088" cy="234" r="8" fill="#6767D9"/><text x="1107" y="238" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12">Aperture only</text>
+  </g>
+  <g transform="translate(72 477)">
+    <rect width="600" height="360" rx="20" fill="#FFFDF9" stroke="#DED7CE"/>
+    <text x="38" y="48" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="2">APP ICON · SEPARATE ASSET</text>
+    <rect x="38" y="82" width="210" height="210" rx="48" fill="#F6F1E9"/>
+    <g transform="translate(62 100) scale(.9)" fill="none" stroke="#2E2926" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 70V47c0-10 8-18 18-18h16v99H36c-10 0-18-8-18-18Z" fill="#E7DED2"/><path d="M52 128V28l98 31v69Z" fill="#FFFDF9"/>
+      <circle cx="84" cy="83" r="5" fill="#2E2926" stroke="none"/><circle cx="121" cy="83" r="5" fill="#2E2926" stroke="none"/>
+      <path d="M34 128h132v46H34Z" fill="#FFFDF9"/><path d="M100 137c3 11 6 14 17 17-11 3-14 6-17 17-3-11-6-14-17-17 11-3 14-6 17-17Z" fill="#6767D9" stroke="none"/>
+    </g>
+    <text x="286" y="127" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="27" font-weight="600">Recognisable at 32px</text>
+    <text x="286" y="163" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="14">No letters squeezed into a tile.</text><text x="286" y="188" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="14">No gradient, shadow, roof or doorway.</text><text x="286" y="213" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="14">The character carries recognition.</text>
+    <g transform="translate(286 246)"><rect width="36" height="36" rx="8" fill="#F6F1E9" stroke="#DED7CE"/><circle cx="14" cy="17" r="2" fill="#2E2926"/><circle cx="23" cy="17" r="2" fill="#2E2926"/><path d="M18 22c1 3 2 4 5 5-3 1-4 2-5 5-1-3-2-4-5-5 3-1 4-2 5-5Z" fill="#6767D9"/></g><text x="337" y="270" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12">32px recognition check</text>
+  </g>
+  <g transform="translate(704 477)">
+    <rect width="624" height="360" rx="20" fill="#FFFDF9" stroke="#DED7CE"/>
+    <text x="38" y="48" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="2">QUIET PRODUCT HEADER</text>
+    <rect x="38" y="82" width="548" height="68" rx="12" fill="#FAF7F2" stroke="#E4DED6"/>
+    <g transform="translate(55 94) scale(.26)" fill="none" stroke="#2E2926" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M38 65V45c0-9 7-16 16-16h14v88H54c-9 0-16-7-16-16Z" fill="#F0EAE1"/><path d="M68 117V28l88 28v61Z" fill="#FFFDF9"/><circle cx="97" cy="77" r="6" fill="#2E2926" stroke="none"/><circle cx="130" cy="77" r="6" fill="#2E2926" stroke="none"/><path d="M52 117h118v38H52Z" fill="#FFFDF9"/></g>
+    <text x="112" y="123" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="19" font-weight="600">estate studio</text><rect x="452" y="98" width="116" height="36" rx="18" fill="#2E2926"/><text x="483" y="121" fill="#FFFDF9" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600">New project</text>
+    <text x="38" y="206" fill="#2E2926" font-family="SF Pro Rounded, ui-rounded, system-ui, sans-serif" font-size="31" font-weight="600">Under-designed on purpose.</text><text x="38" y="242" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="14">The mascot is the only ornament. The interface can stay quiet.</text><line x1="38" y1="286" x2="586" y2="286" stroke="#E4DED6"/><text x="38" y="320" fill="#8B827B" font-family="system-ui, -apple-system, sans-serif" font-size="12">NO OLD E · NO ARCHITECTURE METAPHOR · NO LOGO GRADIENT</text>
+  </g>
+  <text x="72" y="884" fill="#77706B" font-family="system-ui, -apple-system, sans-serif" font-size="12">Concept review only · production logo and app remain unchanged</text>
+</svg>

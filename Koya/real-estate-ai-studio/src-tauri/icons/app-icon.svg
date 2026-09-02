@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Estate Studio">
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="#F6F1E9"/>
+  <g fill="none" stroke="#2E2926" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M90 254v-82c0-42 34-76 76-76h44v302h-44c-42 0-76-34-76-76Z" fill="#E8DFD4"/>
+    <path d="M130 165v180M166 148v214" stroke="#CFC5BA" stroke-width="11"/>
+    <path d="M210 398V86l222 70v242Z" fill="#FFFDF9"/>
+    <circle cx="288" cy="258" r="14" fill="#2E2926" stroke="none"/>
+    <circle cx="370" cy="258" r="14" fill="#2E2926" stroke="none"/>
+    <path d="M134 398h320v58c0 20-16 36-36 36H170c-20 0-36-16-36-36Z" fill="#FFFDF9"/>
+    <path d="M294 406c7 27 15 35 42 42-27 7-35 15-42 42-7-27-15-35-42-42 27-7 35-15 42-42Z" fill="#6767D9" stroke="none"/>
+  </g>
+</svg>

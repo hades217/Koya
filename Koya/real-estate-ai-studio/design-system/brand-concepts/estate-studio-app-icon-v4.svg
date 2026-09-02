@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Estate Studio app icon concept v4</title>
+  <desc id="desc">A minimal line portrait of the Aster property AI mascot on a warm paper tile.</desc>
+  <rect x="8" y="8" width="240" height="240" rx="54" fill="#F6F1E9"/>
+  <g transform="translate(32 26) scale(1.12)" fill="none" stroke="#2E2926" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 70V47c0-10 8-18 18-18h16v99H36c-10 0-18-8-18-18Z" fill="#E7DED2"/>
+    <path d="M52 128V28l98 31v69Z" fill="#FFFDF9"/>
+    <circle cx="84" cy="83" r="5" fill="#2E2926" stroke="none"/>
+    <circle cx="121" cy="83" r="5" fill="#2E2926" stroke="none"/>
+    <path d="M34 128h132v46H34Z" fill="#FFFDF9"/>
+    <path d="M100 137c3 11 6 14 17 17-11 3-14 6-17 17-3-11-6-14-17-17 11-3 14-6 17-17Z" fill="#6767D9" stroke="none"/>
+  </g>
+</svg>
