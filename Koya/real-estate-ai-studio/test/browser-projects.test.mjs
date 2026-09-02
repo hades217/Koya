@@ -13,6 +13,16 @@ test('browser, desktop and bundled example use one current project schema', () =
 
   assert.equal(desktopVersion, CURRENT_PROJECT_SCHEMA_VERSION);
   assert.equal(example.schemaVersion, CURRENT_PROJECT_SCHEMA_VERSION);
+  assert.equal(
+    example.tourPreviewUrl,
+    '/embedded-tour/index.html?unit=106&mode=video&tour=entry-room',
+    'the bundled demo must open its packaged tour instead of depending on a public URL',
+  );
+  assert.equal(
+    example.releases.at(-1)?.publicUrl,
+    'https://hades217.github.io/Koya/?unit=106&mode=video&tour=entry-room',
+    'the verified public release remains separate from the local desktop preview',
+  );
 });
 
 test('legacy browser projects migrate to the current manifest without mutating stored input', () => {

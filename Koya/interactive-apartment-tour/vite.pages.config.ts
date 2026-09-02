@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/postcss';
 import { defineConfig } from 'vite';
 
-const pagesBase = '/Koya/';
+const pagesBase = process.env.KOYA_TOUR_BASE ?? '/Koya/';
 
 export default defineConfig({
   root: 'github-pages',

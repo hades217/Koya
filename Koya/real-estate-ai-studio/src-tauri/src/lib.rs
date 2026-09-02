@@ -2813,7 +2813,7 @@ fn legacy_koya_manifest_fixture() -> ProjectManifest {
             deployment: "ready".into(),
         },
         tour_preview_url: Some(
-            "https://hades217.github.io/Koya/?unit=106&mode=video&tour=entry-room".into(),
+            "/embedded-tour/index.html?unit=106&mode=video&tour=entry-room".into(),
         ),
     }
 }
@@ -10823,6 +10823,17 @@ mod tests {
         assert_eq!(manifest.units.len(), 4);
         assert_eq!(manifest.design_spec.status, "approved");
         assert_eq!(manifest.design_spec.colours.paper, "#f3efe5");
+        assert_eq!(
+            manifest.tour_preview_url.as_deref(),
+            Some("/embedded-tour/index.html?unit=106&mode=video&tour=entry-room")
+        );
+        assert_eq!(
+            manifest
+                .releases
+                .last()
+                .and_then(|release| release.public_url.as_deref()),
+            Some("https://hades217.github.io/Koya/?unit=106&mode=video&tour=entry-room")
+        );
         let living_video = manifest
             .assets
             .iter()

@@ -135,7 +135,7 @@
   },
   "brand": { "primary": "#2f241d", "accent": "#b66d45" },
   "modules": { "tour": "ready", "creative": "in_progress", "deployment": "ready" },
-  "tourPreviewUrl": "https://hades217.github.io/Koya/?unit=106&mode=video&tour=entry-room",
+  "tourPreviewUrl": "/embedded-tour/index.html?unit=106&mode=video&tour=entry-room",
   "examplePolicy": {
     "version": 1,
     "distributionStatus": "internal_only",
