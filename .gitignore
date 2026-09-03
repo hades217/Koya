@@ -15,6 +15,10 @@ Thumbs.db
 **/build/
 **/.cache/
 **/coverage/
+**/target/
+**/.vinext/
+**/.wrangler/
+**/*.tsbuildinfo
 
 # Python environments and caches
 **/.venv/
@@ -36,9 +40,14 @@ Thumbs.db
 **/*.swp
 
 # Rebuildable high-resolution experiments
-Koya/interactive-apartment-tour/output/superres-test/
+apps/interactive-apartment-tour/output/superres-test/
 
 # Local preview/process state
 **/.hyperframes/
 **/.thumbnails/
 *.log
+
+# Repository-local agent and scratch state
+/.autonomous/
+/output/
+/tmp/

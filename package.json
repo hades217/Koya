@@ -1,0 +1,15 @@
+{
+  "name": "koya-estate-studio-workspace",
+  "private": true,
+  "workspaces": [
+    "apps/interactive-apartment-tour",
+    "apps/real-estate-ai-studio",
+    "apps/real-estate-ai-studio/gateway"
+  ],
+  "scripts": {
+    "check:repo": "node scripts/check-repository-layout.mjs",
+    "build:tour": "npm --prefix apps/interactive-apartment-tour run build:pages",
+    "verify:studio": "npm --prefix apps/real-estate-ai-studio run verify",
+    "verify": "npm run check:repo && npm run build:tour && npm run verify:studio"
+  }
+}

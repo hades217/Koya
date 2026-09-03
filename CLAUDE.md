@@ -2,7 +2,7 @@
 
 For all Koya Seedance, property-video, Apartment 106, storyboard, reference-media, and walkthrough work, you MUST read and obey:
 
-- `Koya/video-production/SEEDANCE_2_5_RULES.md`
+- `projects/koya/video-production/SEEDANCE_2_5_RULES.md`
 
 Do not rely only on general video-generation knowledge. The project rules define the required evidence, mode selection, approval gate, ArkCLI workflow, cost controls, continuity QA, and failure handling.
 

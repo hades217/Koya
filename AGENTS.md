@@ -6,7 +6,7 @@ These rules apply to every task under `/Users/lightman/Documents/sites/Koya`.
 
 Before planning, generating, extending, editing, polling, downloading, stitching, or approving any Seedance asset, read and follow:
 
-- `Koya/video-production/SEEDANCE_2_5_RULES.md`
+- `projects/koya/video-production/SEEDANCE_2_5_RULES.md`
 
 The Seedance rules are mandatory and override generic video-production defaults whenever the work concerns Koya property imagery, Apartment 106, spatial walkthroughs, storyboards, reference images, reference videos, or paid generation.
 
