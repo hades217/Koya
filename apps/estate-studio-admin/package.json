@@ -1,0 +1,11 @@
+{
+  "name": "estate-studio-admin",
+  "private": true,
+  "scripts": {
+    "dev": "python3 server.py --local-preview",
+    "start": "python3 server.py",
+    "verify": "python3 -m unittest discover -s tests -v && node --check public/app.js && node --check public/membership.js",
+    "setup": "python3 server.py --setup-admin",
+    "backup": "python3 server.py --backup"
+  }
+}

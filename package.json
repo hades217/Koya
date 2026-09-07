@@ -4,9 +4,12 @@
   "workspaces": [
     "apps/interactive-apartment-tour",
     "apps/real-estate-ai-studio",
-    "apps/real-estate-ai-studio/gateway"
+    "apps/real-estate-ai-studio/gateway",
+    "apps/estate-studio-admin"
   ],
   "scripts": {
+    "dev:admin": "npm --prefix apps/estate-studio-admin run dev",
+    "verify:admin": "npm --prefix apps/estate-studio-admin run verify",
     "check:repo": "node scripts/check-repository-layout.mjs",
     "build:tour": "npm --prefix apps/interactive-apartment-tour run build:pages",
     "verify:studio": "npm --prefix apps/real-estate-ai-studio run verify",
